@@ -169,6 +169,7 @@
                 <!--                all-products-->
                 <div class="manage-all-products-tab manage-products-flex-tab">
                     <table class="manage-products-table">
+                        <tbody>
                         <tr class="head-table">
                             <th><input type="checkbox" name=""></th>
                             <th>Sản phẩm</th>
@@ -180,59 +181,114 @@
                             <th>Hành động</th>
                         </tr>
                         <tr class="row-table">
-                            <td><input type="checkbox" name=""></td>
-                            <td class="product-name-col">
-                                <div class="product-name-container">
-                                    <div class="container-img">
-                                        <img src="" alt="">
-                                    </div>
-                                    <div class="container-info">
-                                        <div class="name-block">
-                                            <input type="text" value="" name="product-name" class="product-name"
-                                                   disabled>
-                                            <i class="fa-solid fa-pen-clip"></i>
+                                <td><input type="checkbox" name=""></td>
+                                <td class="product-name-col">
+                                    <div class="product-name-container">
+                                        <div class="container-img">
+                                            <img src="" alt="">
                                         </div>
-                                        <div class="id-block">
-                                            <p class="product-id">ID: 0123456789</p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
+                                        <div class="container-info">
+                                            <div class="name-block">
+                                                <input type="text" value="" name="product-name" class="product-name"
+                                                       disabled>
+                                                <i class="fa-solid fa-pen-clip"></i>
+                                            </div>
+                                            <div class="id-block">
+                                                <p class="product-id">ID: 0123456789</p>
+                                                <i class="fa-regular fa-copy copy-icon"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="product-type-col">
-                                <p class="product-type">Tất cả biến thể</p>
-                            </td>
-                            <td class="product-quantity-col">
-                                <div class="quantity-block">
-                                    <input type="number" value="" name="product-quantity"
-                                           class="product-quantity" disabled>
-                                    <i class="fa-solid fa-pen-clip"></i>
-                                </div>
-                            </td>
-                            <td class="uint-price-col">
-                                <div class="unit-price-block">
-                                    <input type="number" value="" name="product-unit-price"
-                                           class="product-unit-price" disabled>
-                                    <i class="fa-solid fa-pen-clip"></i>
-                                </div>
-                            </td>
-                            <td class="update-date-col">
-                                <p class="product-update-date">26/10/2022 00:10</p>
-                            </td>
-                            <td class="product-status-col">
-                                <select name="product-status" id="" class="product-status">
-                                    <option class="delete-option" value="-1">Đã xóa</option>
-                                    <option class="upcoming-option" value="0">Sắp mở bán</option>
-                                    <option class="selling-option" value="1" selected>Đang bán</option>
-                                    <option class="stop-selling-option" value="2">Dừng kinh doanh</option>
-                                </select>
-                            </td>
-                            <td class="proceed">
-                                <p class="edit-proceed">Chỉnh sửa</p>
-                                <p class="delete-proceed">Xóa</p>
-                                <p class="add-type-proceed">Thêm loại</p>
-                            </td>
-                        </tr>
+                                </td>
+                                <td class="product-type-col">
+                                    <p class="product-type">Tất cả biến thể</p>
+                                </td>
+                                <td class="product-quantity-col">
+                                    <div class="quantity-block">
+                                        <input type="number" value="" name="product-quantity"
+                                               class="product-quantity" disabled>
+                                        <i class="fa-solid fa-pen-clip"></i>
+                                    </div>
+                                </td>
+                                <td class="uint-price-col">
+                                    <div class="unit-price-block">
+                                        <input type="number" value="" name="product-unit-price"
+                                               class="product-unit-price" disabled>
+                                        <i class="fa-solid fa-pen-clip"></i>
+                                    </div>
+                                </td>
+                                <td class="update-date-col">
+                                    <p class="product-update-date">26/10/2022 00:10</p>
+                                </td>
+                                <td class="product-status-col">
+                                    <select name="product-status"  class="product-status">
+                                        <option class="delete-option" value="-1">Đã xóa</option>
+                                        <option class="upcoming-option" value="0">Sắp mở bán</option>
+                                        <option class="selling-option" value="1" selected>Đang bán</option>
+                                        <option class="stop-selling-option" value="2">Dừng kinh doanh</option>
+                                    </select>
+                                </td>
+                                <td class="proceed">
+                                    <p class="edit-proceed">Chỉnh sửa</p>
+                                    <p class="delete-proceed">Xóa</p>
+                                    <p class="add-type-proceed">Thêm loại</p>
+                                </td>
+                            </tr>
+                        <tr class="row-empty"></tr>
+                        <tr class="row-table">
+                                <td><input type="checkbox" name=""></td>
+                                <td class="product-name-col">
+                                    <div class="product-name-container">
+                                        <div class="container-img">
+                                            <img src="" alt="">
+                                        </div>
+                                        <div class="container-info">
+                                            <div class="name-block">
+                                                <input type="text" value="" name="product-name" class="product-name"
+                                                       disabled>
+                                                <i class="fa-solid fa-pen-clip"></i>
+                                            </div>
+                                            <div class="id-block">
+                                                <p class="product-id">ID: 0123456789</p>
+                                                <i class="fa-regular fa-copy copy-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="product-type-col">
+                                    <p class="product-type">Tất cả biến thể</p>
+                                </td>
+                                <td class="product-quantity-col">
+                                    <div class="quantity-block">
+                                        <input type="number" value="" name="product-quantity"
+                                               class="product-quantity" disabled>
+                                        <i class="fa-solid fa-pen-clip"></i>
+                                    </div>
+                                </td>
+                                <td class="uint-price-col">
+                                    <div class="unit-price-block">
+                                        <input type="number" value="" name="product-unit-price"
+                                               class="product-unit-price" disabled>
+                                        <i class="fa-solid fa-pen-clip"></i>
+                                    </div>
+                                </td>
+                                <td class="update-date-col">
+                                    <p class="product-update-date">26/10/2022 00:10</p>
+                                </td>
+                                <td class="product-status-col">
+                                    <select name="product-status" id="" class="product-status">
+                                        <option class="delete-option" value="-1">Đã xóa</option>
+                                        <option class="upcoming-option" value="0">Sắp mở bán</option>
+                                        <option class="selling-option" value="1" selected>Đang bán</option>
+                                        <option class="stop-selling-option" value="2">Dừng kinh doanh</option>
+                                    </select>
+                                </td>
+                                <td class="proceed">
+                                    <p class="edit-proceed">Chỉnh sửa</p>
+                                    <p class="delete-proceed">Xóa</p>
+                                    <p class="add-type-proceed">Thêm loại</p>
+                                </td>
+                            </tr>
                         <tr class="row-table">
                             <td><input type="checkbox" name=""></td>
                             <td class="product-name-col">
@@ -287,6 +343,7 @@
                                 <p class="add-type-proceed">Thêm loại</p>
                             </td>
                         </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>

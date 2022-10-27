@@ -295,3 +295,6 @@ body{
 #admin-content .manage-products-flex-tab .manage-products-table .head-table{
     background-color: var(--primaryColor);
 }
+#admin-content .manage-products-flex-tab .manage-products-table .row-empty{
+    margin-top: 2rem;
+}
