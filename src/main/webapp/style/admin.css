@@ -53,6 +53,18 @@ body{
 #admin-content i{
     color: var(--grey);
 }
+#admin-content .id-text{
+    display: inline-block;
+    font-size: 0.8em;
+    margin: 0;
+}
+#admin-content .copy-icon:hover{
+    cursor: pointer;
+}
+#admin-content .flex-item:hover{
+    cursor: pointer;
+    color: var(--buttonHover);
+}
 /*content-left*/
 #admin-content .container #leftContainer{
     float: left;
@@ -146,6 +158,7 @@ body{
 #admin-content .container #rightContainer .right-tab{
     display: none;
     min-height: 34rem;
+    margin-bottom: 2rem;
 }
 #admin-content .container #rightContainer .right-tab.active-right-tab{
     display: block;
@@ -256,14 +269,14 @@ body{
 }
 
 /*manage-product*/
-#admin-content .container #rightContainer .manage-products{
+#admin-content .container #rightContainer .right-tab{
 
 }
-#admin-content .container #rightContainer .manage-products .tab-name{
+#admin-content .container #rightContainer .right-tab .tab-name{
     display: inline-block;
     color: black;
 }
-#admin-content .container #rightContainer .manage-products .add-new-product{
+#admin-content .container #rightContainer .right-tab .add-new-product{
     float: right;
     border-radius: 3px;
     border: none;
@@ -271,53 +284,59 @@ body{
     font-weight: bold;
     margin-top: 10px;
 }
-#admin-content .container #rightContainer .manage-products .add-new-product:hover{
+#admin-content .container #rightContainer .right-tab .add-new-product:hover{
     background-color: var(--buttonHover);
 }
-#admin-content .container #rightContainer .manage-products .flex-manage-products{
+#admin-content .container #rightContainer .right-tab .flex-manage-products{
 
 }
-#admin-content .container #rightContainer .manage-products .flex-manage-products .flex-item{
+#admin-content .container #rightContainer .right-tab .flex-manage-products .flex-item,
+#admin-content .container #rightContainer .right-tab .flex-manage-orders .flex-item{
     padding: 0px 5px 5px 0;
-    margin-right: 70px;
+    margin-right: 3rem;
 }
-#admin-content .container #rightContainer .manage-products .flex-manage-products .flex-item:hover{
+#admin-content .container #rightContainer .right-tab .flex-manage-products .flex-item:hover{
     cursor: pointer;
     color: var(--buttonHover);
 }
-#admin-content .container #rightContainer .manage-products .flex-manage-products .flex-item.active-tab{
-    border-bottom: 1px solid var(--active);
-}
-#admin-content .container #rightContainer .manage-products .flex-manage-products .flex-item.active-tab p{
+#admin-content .container #rightContainer .right-tab .flex-manage-products .flex-item.active-tab p,
+#admin-content .container #rightContainer .right-tab .flex-manage-orders .flex-item.active-tab p{
     color: var(--active);
     font-weight: bold;
 }
-#admin-content .container #rightContainer .manage-products .flex-manage-products .flex-item.active-tab{
+#admin-content .container #rightContainer .right-tab .flex-manage-products .flex-item.active-tab,
+#admin-content .container #rightContainer .right-tab .flex-manage-orders .flex-item.active-tab{
     border-bottom: 2px solid var(--active);
 }
-#admin-content .container #rightContainer .manage-products .flex-manage-products .flex-item p{
+#admin-content .container #rightContainer .right-tab .flex-manage-products .flex-item p,
+#admin-content .container #rightContainer .right-tab .flex-manage-orders .flex-item p{
     margin: 0;
 }
 
-#admin-content .container #rightContainer .manage-products .flex-manage-products .flex-item:hover p .quantity{
+#admin-content .container #rightContainer .right-tab .flex-manage-products .flex-item:hover p .quantity{
     color: var(--buttonHover);
 }
-#admin-content .container #rightContainer .manage-products .flex-manage-products .flex-item.active-tab p .quantity{
+#admin-content .container #rightContainer .right-tab .flex-manage-products .flex-item.active-tab p .quantity,
+#admin-content .container #rightContainer .right-tab .flex-manage-orders .flex-item.active-tab p .quantity{
     color: var(--active);
 }
-#admin-content .manage-products-filter-container{
+#admin-content .manage-products-filter-container,
+#admin-content .manage-orders-filter-container{
     width: 100%;
     background-color: var(--white);
     border-radius: 5px;
     margin-top: 15px;
 }
-#admin-content .manage-products-filter-container .filter-container{
+#admin-content .manage-products-filter-container .filter-container,
+#admin-content .manage-orders-filter-container .filter-container{
     padding: 20px;
 }
-#admin-content .manage-products-filter-container .filter-container .input-filter{
+#admin-content .manage-products-filter-container .filter-container .input-filter,
+#admin-content .manage-orders-filter-container .filter-container .input-filter{
     height: 30px;
 }
-#admin-content .manage-products-filter-container .filter-container .input-filter .id-product-filter-div{
+#admin-content .manage-products-filter-container .filter-container .input-filter .id-product-filter-div,
+#admin-content .manage-orders-filter-container .filter-container .input-filter .id-order-filter-div{
     width: 35%;
     height: 100%;
     border-radius: 5px;
@@ -325,17 +344,20 @@ body{
     display: inline-block;
     margin-right: 5px;
 }
-#admin-content .manage-products-filter-container .filter-container .input-filter .id-product-filter-div .id-product-filter{
+#admin-content .manage-products-filter-container .filter-container .input-filter .id-product-filter-div .id-product-filter,
+#admin-content .manage-orders-filter-container .filter-container .input-filter .id-order-filter-div .id-order-filter{
     border: none;
     height: 92%;
     border-radius: 5px;
     width: 83%;
     padding-left: 15px;
 }
-#admin-content .manage-products-filter-container .filter-container .input-filter .id-product-filter-div .id-product-filter:focus{
+#admin-content .manage-products-filter-container .filter-container .input-filter .id-product-filter-div .id-product-filter:focus,
+#admin-content .manage-orders-filter-container .filter-container .input-filter .id-order-filter-div .id-order-filter:focus{
     outline: none;
 }
-#admin-content .manage-products-filter-container .filter-container .input-filter .id-product-filter-div button{
+#admin-content .manage-products-filter-container .filter-container .input-filter .id-product-filter-div button,
+#admin-content .manage-orders-filter-container .filter-container .input-filter .id-order-filter-div button{
     border: none;
     width: 10%;
     height: 95%;
@@ -343,25 +365,31 @@ body{
     background-color: var(--white);
     text-align: center;
 }
-#admin-content .manage-products-filter-container .filter-container .input-filter .id-product-filter-div button:hover{
+#admin-content .manage-products-filter-container .filter-container .input-filter .id-product-filter-div button:hover,
+#admin-content .manage-orders-filter-container .filter-container .input-filter .id-order-filter-div button:hover{
     cursor: pointer;
 }
-#admin-content .manage-products-filter-container .filter-container .input-filter select{
+#admin-content .manage-products-filter-container .filter-container .input-filter select,
+#admin-content .manage-orders-filter-container .filter-container .input-filter select{
     margin-right: 5px;
     border-color: var(--grey);
     height: calc(100% + 2px);
     border-radius: 5px;
 }
-#admin-content .manage-products-filter-container .filter-container .input-filter .price-filter-select{
+#admin-content .manage-products-filter-container .filter-container .input-filter .price-filter-select,
+#admin-content .manage-orders-filter-container .filter-container .input-filter .price-filter-select{
     width: 15%;
 }
-#admin-content .manage-products-filter-container .filter-container .input-filter .category-filter-select{
+#admin-content .manage-products-filter-container .filter-container .input-filter .category-filter-select,
+#admin-content .manage-orders-filter-container .filter-container .input-filter .category-filter-select{
     width: 18%;
 }
-#admin-content .manage-products-filter-container .filter-container .input-filter .other-filter-select{
+#admin-content .manage-products-filter-container .filter-container .input-filter .other-filter-select,
+#admin-content .manage-orders-filter-container .filter-container .input-filter .other-filter-select{
     width: 20%;
 }
-#admin-content .manage-products-filter-container .filter-container .input-filter .reset-filter-button{
+#admin-content .manage-products-filter-container .filter-container .input-filter .reset-filter-button,
+#admin-content .manage-orders-filter-container .filter-container .input-filter .reset-filter-button{
     border: 2px solid var(--active);
     border-radius: 5px;
     height: 100%;
@@ -369,18 +397,22 @@ body{
     background-color: var(--white);
     color: var(--active);
 }
-#admin-content .manage-products-filter-container .filter-container .input-filter .reset-filter-button:hover {
+#admin-content .manage-products-filter-container .filter-container .input-filter .reset-filter-button:hover,
+#admin-content .manage-orders-filter-container .filter-container .input-filter .reset-filter-button:hover {
     border-color: var(--buttonHover);
     color: var(--buttonHover);
     cursor: pointer;
 }
-#admin-content .manage-products-filter-container .filter-container .manage-products-tools-container{
+#admin-content .manage-products-filter-container .filter-container .manage-products-tools-container,
+#admin-content .manage-orders-filter-container .filter-container .manage-orders-tools-container{
     margin-top: 10px;
 }
-#admin-content .manage-products-filter-container .filter-container .manage-products-tools-container p{
+#admin-content .manage-products-filter-container .filter-container .manage-products-tools-container p,
+#admin-content .manage-orders-filter-container .filter-container .manage-orders-tools-container p{
     display: inline-block;
 }
-#admin-content .manage-products-filter-container .filter-container .manage-products-tools-container .tool-button{
+#admin-content .manage-products-filter-container .filter-container .manage-products-tools-container .tool-button,
+#admin-content .manage-orders-filter-container .filter-container .manage-orders-tools-container .tool-button{
     border: 2px solid var(--active);
     border-radius: 5px;
     height: 100%;
@@ -390,7 +422,8 @@ body{
     margin-left: 15px;
     cursor: pointer;
 }
-#admin-content .manage-products-filter-container .filter-container .manage-products-tools-container .tool-button:disabled{
+#admin-content .manage-products-filter-container .filter-container .manage-products-tools-container .tool-button:disabled,
+#admin-content .manage-orders-filter-container .filter-container .manage-orders-tools-container .tool-button:disabled{
     border-color: var(--grey);
     color: var(--grey);
     cursor: unset;
@@ -398,41 +431,69 @@ body{
 #admin-content .table-manage-product-div{
 
 }
-#admin-content .table-manage-product-div .table-row-div-product .manage-products-table{
+#admin-content .table-manage-product-div .table-row-div-product .manage-products-table,
+#admin-content .manage-order-table{
     border-radius: 5px;
     margin-bottom: 1rem;
     background-color: var(--white);
+    width: 100%;
 }
 #admin-content .table-manage-product-div table{
     width: 100%;
 }
 #admin-content .table-manage-product-div table tr td:nth-child(1),
-#admin-content .table-manage-product-div table tr th:nth-child(1){
+#admin-content .table-manage-product-div table tr th:nth-child(1),
+#admin-content .table-manage-order-div table tr td:nth-child(1),
+#admin-content .table-manage-order-div table tr th:nth-child(1){
     width: 3%;
 }
 #admin-content .table-manage-product-div table tr td:nth-child(2),
 #admin-content .table-manage-product-div table tr th:nth-child(2){
     width: 30%;
 }
+#admin-content .table-manage-order-div table tr td:nth-child(3),
+#admin-content .table-manage-order-div table tr th:nth-child(3){
+    width: 25%;
+}
 #admin-content .table-manage-product-div table tr td:nth-child(3),
 #admin-content .table-manage-product-div table tr th:nth-child(3){
     width: 10%;
+}
+#admin-content .table-manage-order-div table tr td:nth-child(2),
+#admin-content .table-manage-order-div table tr th:nth-child(2){
+    width: 20%;
 }
 #admin-content .table-manage-product-div table tr td:nth-child(4),
 #admin-content .table-manage-product-div table tr th:nth-child(4){
     width: 8%;
 }
+#admin-content .table-manage-order-div table tr td:nth-child(4),
+#admin-content .table-manage-order-div table tr th:nth-child(4){
+    width: 10%;
+}
 #admin-content .table-manage-product-div table tr td:nth-child(5),
 #admin-content .table-manage-product-div table tr th:nth-child(5){
     width: 12%;
+}
+#admin-content .table-manage-order-div table tr td:nth-child(5),
+#admin-content .table-manage-order-div table tr th:nth-child(5){
+    width: 14%;
 }
 #admin-content .table-manage-product-div table tr td:nth-child(6),
 #admin-content .table-manage-product-div table tr th:nth-child(6){
     width: 13%;
 }
+#admin-content .table-manage-order-div table tr td:nth-child(6),
+#admin-content .table-manage-order-div table tr th:nth-child(6){
+    width: 14%;
+}
 #admin-content .table-manage-product-div table tr td:nth-child(7),
 #admin-content .table-manage-product-div table tr th:nth-child(7){
     width: 13%;
+}
+#admin-content .table-manage-order-div table tr td:nth-child(7),
+#admin-content .table-manage-order-div table tr th:nth-child(7){
+    width: 14%;
 }
 #admin-content .table-manage-product-div table tr td:nth-child(8),
 #admin-content .table-manage-product-div table tr th:nth-child(8){
@@ -457,12 +518,22 @@ body{
 #admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table .product-name-container{
     width: 100%;
 }
-#admin-content .manage-products-table i{
+#admin-content .manage-products-table i,
+#admin-content .manage-order-table i{
     color: var(--active);
     font-size: 0.7em;
 }
 #admin-content .manage-products-table i:hover{
     cursor: pointer;
+}
+#admin-content .manage-orders .manage-order-table .row-table .product-name-col .container-img{
+    display: inline-block;
+}
+#admin-content .manage-orders .manage-order-table .row-table .product-name-col img{
+    width: 3rem;
+}
+#admin-content .manage-orders .manage-order-table .row-table .product-name-col .container-info{
+    display: inline-block;
 }
 #admin-content .manage-products-table .row-table .product-name-container .container-img{
     width: 15%;
@@ -482,7 +553,7 @@ body{
 #admin-content .manage-products-table .row-table .product-name-container .container-info .name-block{
     width: 100%;
 }
-#admin-content .manage-products-table .row-table .product-name-container .container-info .name-block .product-name{
+#admin-content   .row-table .product-name-container .container-info .name-block .product-name{
     width: 90%;
     resize: none;
     border: none;
@@ -504,7 +575,7 @@ body{
 #admin-content .manage-products-table .row-table .product-name-container .container-info .id-block{
     width: 100%;
 }
-#admin-content .manage-products-table .row-table .product-name-container .container-info .id-block .product-id{
+#admin-content .row-table .container-info .id-block .product-id{
     display: inline-block;
     font-size: 0.8em;
     margin: 0;
@@ -546,22 +617,27 @@ body{
     padding: 5px 10px;
     margin: auto;
 }
-#admin-content .manage-products-table .row-table .product-status-col .delete-p{
+#admin-content .row-table .product-status-col .delete-p{
     color: var(--red);
     background-color: #ff8080;
 }
-#admin-content .manage-products-table .row-table .product-status-col .upcoming-p{
+#admin-content .row-table .product-status-col .upcoming-p{
     color: var(--yellow);
     background-color: #ffff7c;
 }
-#admin-content .manage-products-table .row-table .product-status-col .selling-p{
+#admin-content .row-table .product-status-col .selling-p{
     color: var(--green);
     background-color: #cfffcf;
 }
-#admin-content .manage-products-table .row-table .product-status-col .stop-selling-p{
+#admin-content .row-table .product-status-col .stop-selling-p{
     color: orange;
     background-color: #fdd182;
 }
+#admin-content .row-table .product-status-col .cancel-request{
+    color: saddlebrown;
+    background-color: #ffe7c3;
+}
+
 #admin-content .manage-products-table .row-table .product-status-col p{
     display: none;
 }
@@ -579,48 +655,53 @@ body{
     color: var(--buttonHover);
     cursor: pointer;
 }
-#admin-content .manage-products-table .row-table-end .min-product{
+#admin-content .row-table-end .min-product{
     display: none;
 }
-#admin-content .manage-products-table .row-table-end .show-all-type-product .icon-up{
+#admin-content .row-table-end .show-all-type-product .icon-up{
     display: none;
 }
-#admin-content .manage-products-table .row-table-end i{
+#admin-content .row-table-end i{
     color: var(--black2);
 }
-#admin-content .manage-products-table .row-table-end .show-all-type-product:hover{
+#admin-content #rightContainer table tr:nth-child(2) td{
+    border-top: 1px solid var(--grey3);
+}
+#admin-content .row-table-end .show-all-type-product:hover{
     color: var(--buttonHover);
     cursor: pointer;
 }
-#admin-content .manage-products-table .row-table-end .show-all-type-product:hover i{
+#admin-content .row-table-end .show-all-type-product:hover i{
     color: var(--buttonHover);
 }
-#admin-content .manage-products-table .row-table-end td{
+#admin-content .row-table-end td{
     border-top: 1px solid var(--grey3);
 }
-#admin-content .manage-products-table .row-table-end{
+#admin-content .row-table-end{
     height: 2.5rem;
 }
 #admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table-end td{
     vertical-align: inherit;
 }
-#admin-content .manage-products-table .row-table-child{
+#admin-content .row-table-child{
     display: none;
 }
 #admin-content .manage-products-flex-tab .manage-products-table{
     border-spacing: 0;
 }
-#admin-content #rightContainer .manage-products-flex-tab{
+#admin-content #rightContainer .manage-products-flex-tab,
+#admin-content #rightContainer .manage-orders-flex-tab{
     display: none;
 }
-#admin-content #rightContainer .manage-products-flex-tab.active-product-tab{
+#admin-content #rightContainer .manage-products-flex-tab.active-product-tab,
+#admin-content #rightContainer .manage-orders-flex-tab.active-order-tab{
     display: block;
     min-height: 20rem;
 }
-#admin-content #rightContainer .manage-products .row-table-main.price-hide,
-#admin-content #rightContainer .manage-products .row-table-main.category-hide,
-#admin-content #rightContainer .manage-products .row-table-end.price-hide,
-#admin-content #rightContainer .manage-products .row-table-end.category-hide{
+#admin-content #rightContainer .right-tab.row-table-main.price-hide,
+#admin-content #rightContainer .right-tab.row-table-main.category-hide,
+#admin-content #rightContainer .right-tab.row-table-end.price-hide,
+#admin-content #rightContainer .right-tab.row-table-end.category-hide{
     display: none;
 }
 
@@ -650,4 +731,75 @@ body{
     border: 1px solid var(--grey);
     padding: 0.5em 0.3em;
     width: 90%;
+}
+#admin-content #rightContainer .add-new-product .right-tab-container form .add-new-product-table tr td:last-child button{
+    border-radius: 3px;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-right: 3rem;
+    min-width: 4rem;
+}
+#admin-content #rightContainer .add-new-product .right-tab-container form .add-new-product-table tr td:last-child button:hover{
+    cursor: pointer;
+    background-color: var(--buttonHover);
+}
+#admin-content #rightContainer .manage-order-table .row-table .order-id-col p{
+    display: inline-block;
+}
+#admin-content #rightContainer .manage-order-table .row-table .product-status-col .status{
+    display: none;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    width: fit-content;
+    padding: 5px 10px;
+    margin-right: auto;
+    margin-left: auto;
+}
+#admin-content #rightContainer .manage-order-table .row-table .product-status-col .status.active-status{
+    display: block;
+}
+#admin-content #rightContainer .manage-order-table-head{
+    margin: 0.5rem 0;
+    width: 100%;
+}
+#admin-content #rightContainer .manage-order-table tr:first-child td{
+    vertical-align: top;
+    horiz-align: center;
+}
+#admin-content #rightContainer .manage-order-table tr:first-child td>div:first-child{
+    margin: auto;
+    width: fit-content;
+}
+#admin-content #rightContainer .manage-order-table tr .proceed .proceed-div p{
+    color: var(--active);
+    margin-bottom: 0.7em;
+}
+#admin-content #rightContainer .manage-order-table tr .proceed .proceed-div p:hover{
+    color: var(--buttonHover);
+    cursor: pointer;
+}
+#admin-content #rightContainer .manage-order-table tr .product-type-col{
+    width: 10%;
+}
+#admin-content #rightContainer .manage-order-table tr .product-type-col p{
+    text-align: center;
+}
+#admin-content #rightContainer .manage-order-table tr .product-quantity-col{
+    width: 14%;
+}
+#admin-content #rightContainer .manage-order-table tr .product-quantity-col p{
+   text-align: center;
+}
+#admin-content #rightContainer .manage-order-table tr .product-price-col p{
+    text-align: center;
+}
+#admin-content #rightContainer .manage-order-table .row-table-child .product-name-container .container-info{
+    width: 80%;
+    vertical-align: top;
+}
+#admin-content #rightContainer .manage-order-table .row-table-child .product-name-container .product-name{
+    margin-top: 0.3em;
 }
