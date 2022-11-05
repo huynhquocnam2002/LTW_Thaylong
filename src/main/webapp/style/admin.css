@@ -690,11 +690,13 @@ body{
     border-spacing: 0;
 }
 #admin-content #rightContainer .manage-products-flex-tab,
-#admin-content #rightContainer .manage-orders-flex-tab{
+#admin-content #rightContainer .manage-orders-flex-tab,
+#admin-content #rightContainer .manage-vouchers-flex-tab{
     display: none;
 }
 #admin-content #rightContainer .manage-products-flex-tab.active-product-tab,
-#admin-content #rightContainer .manage-orders-flex-tab.active-order-tab{
+#admin-content #rightContainer .manage-orders-flex-tab.active-order-tab,
+#admin-content #rightContainer .manage-vouchers-flex-tab.active-voucher-tab{
     display: block;
     min-height: 20rem;
 }
@@ -852,6 +854,7 @@ body{
 #admin-content #rightContainer .manage-users .user-name-col .container-img{
     display: inline-block;
     margin-right: 0.5em;
+    margin-top: 0.5em;
 }
 #admin-content #rightContainer .manage-users .user-name-col .container-info{
     display: inline-block;
@@ -867,7 +870,7 @@ body{
     text-align: center;
 }
 #admin-content #rightContainer .manage-users .user-name-col .container-info .user-name{
-    margin-top: 0;
+    margin-top: 1em;
 }
 #admin-content #rightContainer .manage-users .manage-order-table-head th:nth-child(3),
 #admin-content #rightContainer .manage-users .manage-order-table td:nth-child(3){
@@ -879,4 +882,67 @@ body{
 }
 #admin-content #rightContainer .manage-users .number-phone-col .phone-number-p{
     display: inline-block;
+}
+#admin-content #rightContainer .manage-vouchers .user-name-col img{
+    width: 5rem;
+    height: 3rem;
+}
+#admin-content #rightContainer .manage-vouchers .user-name-col .container-info{
+    display: inline-block;
+    vertical-align: top;
+}
+#admin-content #rightContainer .manage-vouchers .user-name-col .container-img{
+    display: inline-block;
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+}
+#admin-content #rightContainer .manage-vouchers .ok-button{
+    display: none;
+}
+#admin-content #rightContainer .manage-vouchers .manage-order-table-head th:nth-child(2),
+#admin-content #rightContainer .manage-vouchers .manage-order-table td:nth-child(2){
+    width: 30%;
+}
+#admin-content #rightContainer .manage-vouchers .manage-order-table-head th:nth-child(3),
+#admin-content #rightContainer .manage-vouchers .manage-order-table td:nth-child(3){
+    width: 12%;
+}
+#admin-content #rightContainer .manage-vouchers .manage-order-table-head th:nth-child(4),
+#admin-content #rightContainer .manage-vouchers .manage-order-table td:nth-child(4){
+    width: 14%;
+}
+#admin-content #rightContainer .manage-vouchers .manage-order-table-head th:nth-child(5),
+#admin-content #rightContainer .manage-vouchers .manage-order-table td:nth-child(5){
+    width: 14%;
+}
+#admin-content #rightContainer .manage-vouchers .manage-order-table-head th:nth-child(6),
+#admin-content #rightContainer .manage-vouchers .manage-order-table td:nth-child(6){
+    width: 12%;
+}
+#admin-content #rightContainer .manage-vouchers .manage-order-table-head th:nth-child(7),
+#admin-content #rightContainer .manage-vouchers .manage-order-table td:nth-child(7){
+    width: 12%;
+}
+#admin-content #rightContainer .manage-vouchers .manage-order-table input{
+    background-color: var(--white);
+    border: none;
+    border-radius: 0.3em;
+    text-align: center;
+    margin-top: 0.5em;
+}
+#admin-content #rightContainer .manage-vouchers select{
+    display: none;
+}
+#admin-content #rightContainer .manage-vouchers .discount-div .product-unit-price{
+    width: 4rem;
+    text-align: right;
+}
+#admin-content #rightContainer .manage-vouchers .proceed p{
+    margin: 0 0 0.6em 0;
+}
+#admin-content #rightContainer .manage-vouchers i{
+    cursor: pointer;
+}
+#admin-content #rightContainer .manage-turnover .input-filter{
+    height: unset;
 }

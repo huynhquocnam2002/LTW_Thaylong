@@ -35,8 +35,10 @@ const list_right_tab_item = document.querySelectorAll('#admin-content #rightCont
 const change_info_home_button = document.querySelector('#admin-content #rightContainer .info-table tr td .change-info')
 const list_orders_tab = document.querySelectorAll('#admin-content #rightContainer .manage-orders .manage-orders-flex-tab')
 const list_users_tab = document.querySelectorAll('#admin-content #rightContainer .manage-users .manage-orders-flex-tab')
+const list_vouchers_tab = document.querySelectorAll('#admin-content #rightContainer .manage-vouchers .manage-vouchers-flex-tab')
 const list_orders_tab_head = document.querySelectorAll('#admin-content #rightContainer .manage-orders .flex-item')
 const list_users_tab_head = document.querySelectorAll('#admin-content #rightContainer .manage-users .flex-item')
+const list_vouchers_tab_head = document.querySelectorAll('#admin-content #rightContainer .manage-vouchers .flex-item')
 const list_left_menu_item_show = document.querySelectorAll('#admin-content #leftContainer .list-tab .list-tab-li .menu-left-show')
 const change_pass_bt=document.querySelector('#changePassBT')
 const cancel_change_pass_bt=document.querySelector('#back')
@@ -267,6 +269,32 @@ function run() {
         }
     }
 
+    //change user tab
+    for (let i = 0; i < list_users_tab_head.length; i++) {
+        list_users_tab_head[i].onclick = function () {
+            let active_tab_head = document.querySelector('#admin-content #rightContainer .manage-users .active-tab')
+            let active_tab = document.querySelector('#admin-content #rightContainer .manage-users .active-order-tab')
+            active_tab_head.className = active_tab_head.className.slice(0, active_tab_head.className.indexOf('active-tab') - 1)
+            active_tab.className = active_tab.className.slice(0, active_tab.className.indexOf('active-order-tab') - 1)
+            list_users_tab_head[i].className += ' active-tab'
+            list_users_tab[i].className += ' active-order-tab'
+            activeToolButtonOrder()
+        }
+    }
+
+    //change voucher tab
+    for (let i = 0; i < list_vouchers_tab_head.length; i++) {
+        list_vouchers_tab_head[i].onclick = function () {
+            let active_tab_head = document.querySelector('#admin-content #rightContainer .manage-vouchers .active-tab')
+            let active_tab = document.querySelector('#admin-content #rightContainer .manage-vouchers .active-voucher-tab')
+            active_tab_head.className = active_tab_head.className.slice(0, active_tab_head.className.indexOf('active-tab') - 1)
+            active_tab.className = active_tab.className.slice(0, active_tab.className.indexOf('active-voucher-tab') - 1)
+            list_vouchers_tab_head[i].className += ' active-tab'
+            list_vouchers_tab[i].className += ' active-voucher-tab'
+            activeToolButtonOrder()
+        }
+    }
+
     //edit product by icon
     for (let i of list_edit_button) {
         i.onclick = function () {
@@ -405,8 +433,11 @@ function run() {
         } else if (list_orders_tab[i - list_product_tab.length] != undefined){
             let list_table = list_orders_tab[i - list_product_tab.length].querySelectorAll('.manage-order-table')
             list_quantity_product_in_tab[i].innerHTML = list_table.length + ''
-        } else{
-            let list_table = list_orders_tab[i - list_product_tab.length-list_orders_tab.length].querySelectorAll('.manage-order-table')
+        } else if (list_users_tab[i - list_product_tab.length-list_orders_tab.length]!=undefined){
+            let list_table = list_users_tab[i - list_product_tab.length-list_orders_tab.length].querySelectorAll('.manage-order-table')
+            list_quantity_product_in_tab[i].innerHTML = list_table.length + ''
+        } else {
+            let list_table = list_vouchers_tab[i -list_users_tab.length- list_product_tab.length-list_orders_tab.length].querySelectorAll('.manage-order-table')
             list_quantity_product_in_tab[i].innerHTML = list_table.length + ''
         }
     }
