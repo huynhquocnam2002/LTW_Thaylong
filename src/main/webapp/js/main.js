@@ -30,11 +30,16 @@ const price_filter_input = document.querySelector('#admin-content #rightContaine
 const category_filter_input = document.querySelector('#admin-content #rightContainer .manage-products .category-filter-select')
 const sort_filter_input = document.querySelector('#admin-content #rightContainer .manage-products .other-filter-select')
 const reset_filter_button = document.querySelector('#admin-content #rightContainer .manage-products .reset-filter-button')
-const list_left_menu_item = document.querySelectorAll('#admin-content #leftContainer .list-tab .list-tab-li .tab-li-container-name')
+const list_left_menu_item = document.querySelectorAll('#admin-content #leftContainer .list-tab .list-tab-li .left-menu-item')
 const list_right_tab_item = document.querySelectorAll('#admin-content #rightContainer .right-tab')
 const change_info_home_button = document.querySelector('#admin-content #rightContainer .info-table tr td .change-info')
 const list_orders_tab = document.querySelectorAll('#admin-content #rightContainer .manage-orders .manage-orders-flex-tab')
+const list_users_tab = document.querySelectorAll('#admin-content #rightContainer .manage-users .manage-orders-flex-tab')
 const list_orders_tab_head = document.querySelectorAll('#admin-content #rightContainer .manage-orders .flex-item')
+const list_users_tab_head = document.querySelectorAll('#admin-content #rightContainer .manage-users .flex-item')
+const list_left_menu_item_show = document.querySelectorAll('#admin-content #leftContainer .list-tab .list-tab-li .menu-left-show')
+const change_pass_bt=document.querySelector('#changePassBT')
+const cancel_change_pass_bt=document.querySelector('#back')
 
 //show list child in left menu admin
 function showChild(li, num) {
@@ -92,6 +97,13 @@ function run() {
                     parent_li.className = parent_li.className.slice(0, parent_li.className.indexOf('tab-active') - 1)
             }
             list_left_menu_item[i].parentElement.parentElement.className += ' tab-active'
+            for (let j of list_left_menu_item) {
+                if (j.tagName == 'LI') if (j.className.indexOf('tab-active') != -1)
+                    j.className = j.className.slice(0, j.className.indexOf('tab-active') - 1)
+            }
+            if (list_left_menu_item[i].tagName == 'LI') {
+                list_left_menu_item[i].className += ' tab-active'
+            }
             for (let j of list_right_tab_item) {
                 if (j.className.indexOf('active-right-tab') != -1)
                     j.className = j.className.slice(0, j.className.indexOf('active-right-tab') - 1)
@@ -99,6 +111,24 @@ function run() {
             list_right_tab_item[i].className += ' active-right-tab'
 
         }
+    }
+    for (let i of list_left_menu_item_show){
+        i.onclick=function () {
+            showChild(i,2)
+            i.parentElement.parentElement.querySelector('ul li').click()
+        }
+    }
+    change_pass_bt.onclick=function () {
+        let activeTab=document.querySelector('.active-right-tab')
+        activeTab.className+=' hide'
+        let changePassTab=document.querySelector('.change-pass')
+        changePassTab.className+=' show'
+    }
+    cancel_change_pass_bt.onclick=function () {
+        let activeTab=document.querySelector('.active-right-tab.hide')
+        activeTab.className=activeTab.className.slice(0,activeTab.className.indexOf('hide')-1)
+        let changePassTab=document.querySelector('.change-pass')
+        changePassTab.className=changePassTab.className.slice(0,changePassTab.className.indexOf('show')-1)
     }
 
     //hide drop down left menu
@@ -372,9 +402,12 @@ function run() {
                 num += j.querySelectorAll('.row-table-child').length
             }
             list_quantity_product_in_tab[i].innerHTML = num + ''
-        } else {
-            let list_table = list_orders_tab[i-list_product_tab.length].querySelectorAll('.manage-order-table')
-            list_quantity_product_in_tab[i].innerHTML = list_table.length+''
+        } else if (list_orders_tab[i - list_product_tab.length] != undefined){
+            let list_table = list_orders_tab[i - list_product_tab.length].querySelectorAll('.manage-order-table')
+            list_quantity_product_in_tab[i].innerHTML = list_table.length + ''
+        } else{
+            let list_table = list_orders_tab[i - list_product_tab.length-list_orders_tab.length].querySelectorAll('.manage-order-table')
+            list_quantity_product_in_tab[i].innerHTML = list_table.length + ''
         }
     }
 
@@ -387,7 +420,6 @@ function run() {
             let parent = i.parentElement
             navigator.clipboard.writeText(parent.querySelector('.id-span').innerHTML + '')
         }
-
     }
     //tool: start sell
     tool_selling_button.onclick = function () {
@@ -719,21 +751,21 @@ function findOrderByNameOrId(input_text) {
     let manage_orders = document.querySelector('.manage-orders')
     let list_order = manage_orders.querySelectorAll('.active-order-tab .table-row-div-order .manage-order-table')
     for (let i of list_order) {
-        let isContainProductName=false,isContainProductId=false
-        let order_id=i.querySelector('.order-id .id-span').innerHTML
+        let isContainProductName = false, isContainProductId = false
+        let order_id = i.querySelector('.order-id .id-span').innerHTML
         let list_product_name = i.querySelectorAll('.product-name')
-        let list_product_id= i.querySelectorAll('.product-id .id-span')
-        let user_name=i.querySelector('.user-name').innerHTML
-        let user_id=i.querySelector('.user-id .id-span').innerHTML
-        for (let i of list_product_name){
-            if (i.innerHTML.indexOf(input_text)!=-1){
-                isContainProductName=true
+        let list_product_id = i.querySelectorAll('.product-id .id-span')
+        let user_name = i.querySelector('.user-name').innerHTML
+        let user_id = i.querySelector('.user-id .id-span').innerHTML
+        for (let i of list_product_name) {
+            if (i.innerHTML.indexOf(input_text) != -1) {
+                isContainProductName = true
                 break
             }
         }
-        for (let i of list_product_id){
-            if (i.innerHTML.indexOf(input_text)!=-1){
-                isContainProductId=true
+        for (let i of list_product_id) {
+            if (i.innerHTML.indexOf(input_text) != -1) {
+                isContainProductId = true
                 break
             }
         }

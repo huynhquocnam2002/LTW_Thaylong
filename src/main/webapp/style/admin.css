@@ -163,6 +163,9 @@ body{
 #admin-content .container #rightContainer .right-tab.active-right-tab{
     display: block;
 }
+#admin-content .container #rightContainer .right-tab.active-right-tab.hide{
+    display: none;
+}
 #admin-content #rightContainer .right-tab .tab-name{
     color: black;
     margin-bottom: 0.2rem;
@@ -664,9 +667,6 @@ body{
 #admin-content .row-table-end i{
     color: var(--black2);
 }
-#admin-content #rightContainer table tr:nth-child(2) td{
-    border-top: 1px solid var(--grey3);
-}
 #admin-content .row-table-end .show-all-type-product:hover{
     color: var(--buttonHover);
     cursor: pointer;
@@ -706,33 +706,33 @@ body{
 }
 
 /*add new product*/
-#admin-content #rightContainer .add-new-product .right-tab-container form{
+#admin-content #rightContainer .add-tab .right-tab-container form{
     width: 80%;
     margin: 2.5rem auto 0;
 }
-#admin-content #rightContainer .add-new-product .right-tab-container form .add-new-product-table{
+#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table{
     width: 100%;
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
-#admin-content #rightContainer .add-new-product .right-tab-container form .add-new-product-table tr{
+#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table tr{
     height: 2.5rem;
 }
-#admin-content #rightContainer .add-new-product .right-tab-container form .add-new-product-table tr td:first-child{
+#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table tr td:first-child{
     width: 28%;
     text-align: right;
     padding-right: 1.5rem;
 }
-#admin-content #rightContainer .add-new-product .right-tab-container form .add-new-product-table tr td:last-child{
+#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table tr td:last-child{
     width: 70%;
 }
-#admin-content #rightContainer .add-new-product .right-tab-container form .add-new-product-table tr td:last-child .input-field{
+#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table tr td:last-child .input-field{
     border-radius: 0.3em;
     border: 1px solid var(--grey);
     padding: 0.5em 0.3em;
     width: 90%;
 }
-#admin-content #rightContainer .add-new-product .right-tab-container form .add-new-product-table tr td:last-child button{
+#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table tr td:last-child button{
     border-radius: 3px;
     border: none;
     padding: 10px;
@@ -741,7 +741,7 @@ body{
     margin-right: 3rem;
     min-width: 4rem;
 }
-#admin-content #rightContainer .add-new-product .right-tab-container form .add-new-product-table tr td:last-child button:hover{
+#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table tr td:last-child button:hover{
     cursor: pointer;
     background-color: var(--buttonHover);
 }
@@ -802,4 +802,81 @@ body{
 }
 #admin-content #rightContainer .manage-order-table .row-table-child .product-name-container .product-name{
     margin-top: 0.3em;
+}
+#admin-content #rightContainer .right-tab .row-table-main .user-name-col img.category-img{
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+#admin-content #rightContainer .right-tab .row-table-main .user-name-col .input-category-img{
+    display: none;
+}
+#admin-content #rightContainer .manage-categorys .manage-order-table-head th:nth-child(3),
+#admin-content #rightContainer .manage-categorys .manage-order-table td:nth-child(3){
+    width: 15%;
+}
+#admin-content #rightContainer .manage-categorys .manage-order-table-head th:nth-child(2),
+#admin-content #rightContainer .manage-categorys .manage-order-table td:nth-child(2){
+    width: 15%;
+}
+#admin-content #rightContainer .manage-producer .manage-order-table-head th:nth-child(3),
+#admin-content #rightContainer .manage-producer .manage-order-table td:nth-child(3){
+    width: 15%;
+}
+#admin-content #rightContainer .manage-producer .manage-order-table-head th:nth-child(2),
+#admin-content #rightContainer .manage-producer .manage-order-table td:nth-child(2){
+    width: 15%;
+}
+#admin-content #rightContainer .right-tab .manage-order-table .unit-price-col .product-unit-price{
+    display: inline-block;
+}
+#admin-content #rightContainer .right-tab .manage-order-table .product-status-col .category-status{
+    display: none;
+}
+#admin-content #rightContainer .right-tab .manage-order-table .accept-proceed{
+    display: none;
+}
+#admin-content #rightContainer .add-new-category .right-tab-container form{
+    padding-top: 4rem;
+}
+#admin-content #rightContainer .add-new-producer .right-tab-container form{
+    padding-top: 4rem;
+}
+#admin-content #rightContainer .change-pass{
+    display: none;
+}
+#admin-content #rightContainer .change-pass.show{
+    display: block;
+}
+#admin-content #rightContainer .manage-users .user-name-col .container-img{
+    display: inline-block;
+    margin-right: 0.5em;
+}
+#admin-content #rightContainer .manage-users .user-name-col .container-info{
+    display: inline-block;
+    vertical-align: top;
+}
+#admin-content #rightContainer .manage-users .user-name-col img{
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+}
+#admin-content #rightContainer .manage-users .row-table-end .show-all-type-product{
+    text-align: center;
+}
+#admin-content #rightContainer .manage-users .user-name-col .container-info .user-name{
+    margin-top: 0;
+}
+#admin-content #rightContainer .manage-users .manage-order-table-head th:nth-child(3),
+#admin-content #rightContainer .manage-users .manage-order-table td:nth-child(3){
+    width: 10%;
+}
+#admin-content #rightContainer .manage-users .manage-order-table-head th:nth-child(2),
+#admin-content #rightContainer .manage-users .manage-order-table td:nth-child(2){
+    width: 25%;
+}
+#admin-content #rightContainer .manage-users .number-phone-col .phone-number-p{
+    display: inline-block;
 }
