@@ -934,7 +934,7 @@ body{
     display: none;
 }
 #admin-content #rightContainer .manage-vouchers .discount-div .product-unit-price{
-    width: 4rem;
+    width: 6rem;
     text-align: right;
 }
 #admin-content #rightContainer .manage-vouchers .proceed p{
@@ -945,4 +945,13 @@ body{
 }
 #admin-content #rightContainer .manage-turnover .input-filter{
     height: unset;
+}
+#admin-content #rightContainer .manage-turnover .container-img{
+    display: inline-block;
+}
+#admin-content #rightContainer .manage-turnover .container-img img{
+    width: 3rem;
+}
+#admin-content #rightContainer .manage-turnover .container-info{
+    display: inline-block;
 }
