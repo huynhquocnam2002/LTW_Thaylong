@@ -771,9 +771,25 @@ body{
     vertical-align: top;
     horiz-align: center;
 }
-#admin-content #rightContainer .manage-order-table tr:first-child td>div:first-child{
+#admin-content #rightContainer .manage-order-table .row-table-main tr:first-child td>div:first-child{
     margin: auto;
     width: fit-content;
+}
+#admin-content #rightContainer .manage-order-table .row-table-main td:first-child{
+    vertical-align: middle;
+}
+#admin-content #rightContainer .manage-order-table .row-table-main .update-date-col .product-update-date{
+    text-align: center;
+}
+#admin-content #rightContainer .manage-order-table .row-table-main .proceed p{
+    text-align: center;
+}
+#admin-content #rightContainer .manage-order-table .row-table-main td:first-child div{
+    width: fit-content;
+    margin: auto;
+}
+#admin-content #rightContainer .manage-order-table .row-table-main .user-name-col .product-name-container{
+    margin: 0;
 }
 #admin-content #rightContainer .manage-order-table tr .proceed .proceed-div p{
     color: var(--active);
