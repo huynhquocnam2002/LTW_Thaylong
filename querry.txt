@@ -1,0 +1,242 @@
+
+
+1------------------------
+
+SELECT * FROM SANPHAM WHERE TEN = 'BIEN' OR ID='BIEN'
+
+2------------------------
+
+SELECT * FROM SANPHAM INNER JOIN DANHMUC ON SANPHAM.IDDM = DANHMUC.IDDM
+
+3------------------------
+
+SELECT * FROM SANPHAM 
+
+4------------------------
+
+INSERT INTO GIOHANG
+VALUES (RANDOM,...)
+
+5------------------------
+
+SELECT IDUSER,MATKHAU FROM USER 
+
+
+
+6------------------------
+
+
+SELECT IDUSER,MATKHAU,GIOITINH,SODT,EMAIL FROM USER 
+7------------------------
+
+UPPDATE QUENMATKHAU
+SET MAKHAUMOI = "" ,NHAPLAIMATKHAU="";
+
+8------------------------
+
+UPDATE SANPHAM
+SET TEN='', LOAI='',SLCL='',PRICE='',STATUS=''
+
+9------------------------
+
+INSERT INTO SANPHAM
+VALUES (RANDOM,...)
+
+10------------------------
+
+SELECT * FROM SANPHAM
+11------------------------
+INSERT INTO OPTION
+VALUES (RANDOM,'','')
+
+12------------------------
+
+SELECT * FROM DONHANG
+
+
+13------------------------
+
+SELECT * FROM DONHANG WHERE STATUS = DANGGIAO OR DAGIAO OR DAHUY OR DAHOANTRA OR CHUATHANHTOAN
+
+14------------------------
+
+SELECT * FROM TRANGTHAIDONHANG WHERE NAME = 'HUY DON HANG';
+
+14.1-----------------------
+SELECT * FROM DONHANG WHERE ID='BIEN';
+
+15------------------------
+
+SELECT * FROM KHACHHANG ;
+
+16------------------------
+
+
+
+SELECT * FROM KHACHHANG  WHERE ID='BIEN' OR TEN='BIEN';
+17------------------------
+
+UPPDATE TRANGTHAIDONHANG
+
+SET ...;
+
+18------------------------
+SELECT * FROM DANHMUC 
+
+19------------------------
+
+UPPDATE DANHMUC
+
+SET IDDM='',TENDANHMUC='',STATUS='';
+
+20.-------------------------------
+INSERT INTO DANHMUC VALUES (RANDOM, 'TEN MOI', 1);
+
+20.1 ------------------------------
+SELECT * FROM DANHMUC WHERE ID=BIEN OR TENDANHMUC;
+
+21.-------------------------------
+SELECT * FROM VOUCHER;
+
+22.-------------------------------
+INSERT INTO VOUCHER VALUES (RAMDOM, IDLVC, GIATRIGIAM, NGAYBD, NGAYKT, 1);
+
+23.-------------------------------
+UPDATE VOUCHER SET FIELD=... WHERE ...
+
+24.-------------------------------
+UPDATE VOUCHER SET STATUS=... WHERE ...
+
+25.-------------------------------
+SELECT * FROM VOUCHER WHERE IDVC=... OR TEN=...
+
+26.-------------------------------
+SELECT * FROM DONHANG WHERE IDTTDH='THANHCONG'
+
+27.-------------------------------
+SELECT * FROM DONHANG WHERE IDTTDH='THANHCONG' ORDER BY TONGTIENDH
+
+28.-------------------------------
+SELECT * FROM CHINHSUA_DM
+SELECT * FROM CHINHSUA_NXS
+SELECT * FROM CHINHSUA_ANH_DH
+SELECT * FROM CHINHSUA_DK
+SELECT * FROM CHINHSUA_VC
+SELECT * FROM CS_VC_USER
+SELECT * FROM CHINHSUA_SP
+SELECT * FROM CHINHSUA_DH
+
+29.-------------------------------
+SELECT * FROM NHASX
+
+30.-------------------------------
+UPDATE NHASX FIELD=... WHERE ...
+
+31.-------------------------------
+INSERT INTO NHASX VALUES (RANDOM, TENNHASX, IMG)
+
+32.-------------------------------
+SELECT * FROM NHASX WHERE TENNHASX=... OR IDNSX=...
+
+33.-------------------------------
+34.-------------------------------
+35.-------------------------------
+36.-------------------------------
+37.-------------------------------
+38.-------------------------------
+
+33-38 KHUM LIÊN QUAN DATABASE
+
+câu 37: 
+select*
+from baiviet
+
+câu 38 :
+UPDATE baiviet
+SET noidung='........'
+where id='2'
+
+câu 39:
+- delete * from baiviet;
+
+- delete from baiviet
+where idbaiviet='2' ;
+
+câu 40;
+insert into baiviet(idbaiviet, enbaiviet, noidung1 , image , noidung2)
+value("......." , "....." , "...." , "......." , "....")
+
+câu 42:
+selec *
+from SanPham
+where (nếu có) 
+
+câu 43:
+insert into giohang (idgiohang , iduser, soluong)
+value("....." , "....." , "...")
+
+câu 44: 
+insert into donhang(iddonhang, iduser ,idttdh ,tongtiendh, iddcgh, tg_lapdon)
+value (random, ".....", "....." , "......" , "....." , ".....")
+
+câu 45: 
+insert in to danhgia(iddanhgia, iduser, idsp, noidung, tg_danhgia,numofstar)
+value ("", "", "" , "" , "")
+
+câu 46:
+select *
+from SanPham
+where SanPham.iddm = ""
+
+
+câu 47: 
+select *
+from SanPham
+where ngaythem = (select max(ngaythem)
+		from SanPham)
+
+câu 48: 
+select *
+from Giohang , User
+where Giohang.iduser = User.iduser
+
+câu 49: 
+update giohang
+set soluong +1
+where giohang.idsp = Sanpham.idsp and giohang.iduser = user.iduser
+
+câu 50: 
+select giohang.soluong * sanpham.dongia
+from sanpham , giohang
+where giohang.idsp = sanpham.idsp
+
+câu 51:
+delete from giohang
+where idsp='...' ;
+
+câu 52:
+select diachigiaohang.*
+from Diachigiaohang , user
+where  diachigiaohang.iduser = user.iduser
+
+câu 54:
+insert into Donhang
+values (random , " ........ " ," ........" ," ......"  ," ..." )
+
+câu 55: 
+select *
+from voucher , user_voucher, user
+where voucher.idvc = user_voucher.idvc
+and    user_vc.iduser = user.iduser
+
+câu 56: 
+select donhang.*
+from user , donhang
+where user.iddh = donhang.iddh
+and donhang.ngaythem = (select max(ngaythem) from donhang)
+
+
+
+
+
+
