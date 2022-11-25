@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Project_Cuoi_Ki:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>Project_Cuoi_Ki</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="Project_Cuoi_Ki-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Project_Cuoi_Ki:war exploded" />
+    </root>
+  </artifact>
+</component>

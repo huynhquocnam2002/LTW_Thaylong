@@ -1,0 +1,95 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <%--font awesome--%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Custom StyleSheet -->
+    <link rel="stylesheet" href="style/admin.css" />
+    <script src="js/main.js"></script>
+
+    <title>Admin JC Shop</title>
+
+</head>
+
+<body>
+    <section id="content" class="section">
+        <div class="container">
+            <div id="leftContainer">
+                <ul class="list-tab">
+                    <li class="list-tab-li home-li">
+                        <div class="tab-li-container">
+                            <i class="fa-solid fa-house"></i>
+                            <p class="li-container-text">Trang chủ</p>
+                        </div>
+                    </li>
+                    <li class="list-tab-li product-li tab-active">
+                        <div class="tab-li-container">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                            <p class="li-container-text">Sản phẩm</p>
+                            <i class="fa-sharp fa-solid fa-chevron-down"></i>
+                        </div>
+                        <ul class="list-child product-list-tab">
+                            <li class="list-child-item product-list-li-item tab-active">Quản lí sản phẩm</li>
+                            <li class="list-child-item product-list-li-item">Thêm sản phẩm mới</li>
+                            <li class="list-child-item product-list-li-item">Công cụ hàng loạt</li>
+                        </ul>
+                    </li>
+                    <li class="list-tab-li order-li">
+                        <div class="tab-li-container">
+                            <i class="fa-regular fa-file-lines"></i>
+                            <p class="li-container-text">Đơn hàng</p>
+                            <i class="fa-sharp fa-solid fa-chevron-down"></i>
+                        </div>
+                        <ul class="list-child order-list-tab">
+                            <li class="list-child-item order-list-li-item">Quản lí đơn hàng</li>
+                            <li class="list-child-item order-list-li-item">Quản lí yêu cầu hủy</li>
+                        </ul>
+                    </li>
+                    <li class="list-tab-li user-li">
+                        <div class="tab-li-container">
+                            <i class="fa-solid fa-user"></i>
+                            <p class="li-container-text">Tài khoản khách hàng</p>
+                        </div>
+                    </li>
+                    <li class="list-tab-li voucher-li">
+                        <div class="tab-li-container">
+                            <i class="fa-solid fa-bullhorn"></i>
+                            <p class="li-container-text">Voucher</p>
+                            <i class="fa-sharp fa-solid fa-chevron-down"></i>
+                        </div>
+                        <ul class="list-child order-list-tab">
+                            <li class="list-child-item voucher-list-li-item">Quản lí Voucher</li>
+                            <li class="list-child-item voucher-list-li-item">Thêm voucher mới</li>
+                            <li class="list-child-item voucher-list-li-item">Tăng voucher cho khách hàng</li>
+                        </ul>
+                    </li>
+                    <li class="list-tab-li turnover-li">
+                        <div class="tab-li-container">
+                            <i class="fa-regular fa-credit-card"></i>
+                            <p class="li-container-text">Doanh số</p>
+                        </div>
+                    </li>
+                    <li class="list-tab-li design-li">
+                        <div class="tab-li-container">
+                            <i class="fa-solid fa-shop"></i>
+                            <p class="li-container-text">Thiết kế trang web</p>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            <div id="rightContainer">
+
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

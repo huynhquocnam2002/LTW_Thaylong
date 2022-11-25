@@ -1,0 +1,128 @@
+:root {
+    --primaryColor: #f1f1f1;
+    --button: #f1f1f1;
+    --buttonHover: #BE1E2D;
+    --active: blue;
+    --black: #222;
+    --black2: #555;
+    --black3: #252525;
+    --black4: #000;
+    --black5: #212529;
+    --orange: #eb0028;
+    --white: #fff;
+    --grey: #959595;
+    --grey2: #666;
+    --grey3: #ccc;
+    --secondaryColor: #2b1f4d;
+    --yellow: #ffcc00;
+    --green: #59b210;
+    --blue: rgb(56, 10, 223);
+    --red: rgb(255,0,0);
+}
+body{
+    margin: 0;
+    font-family: Tahoma, serif;
+}
+#content{
+    font-size: 15px;
+}
+/*content*/
+#content .container{
+    width: 1200px;
+    overflow: auto;
+}
+/*content-left*/
+#content .container #leftContainer{
+    float: left;
+    width: 17%;
+}
+#content .container #leftContainer .list-tab{
+    list-style-type: none;
+}
+#content .container #leftContainer .list-tab .list-tab-li{
+
+}
+#content .container #leftContainer .list-tab .list-tab-li.tab-active{
+    color: var(--active);
+}
+#content .container #leftContainer .list-tab .list-tab-li .tab-li-container{
+    width: 95%;
+    margin: 0 2.5%;
+    font-size: 1.1em;
+}
+#content .container #leftContainer .list-tab .list-tab-li .tab-li-container .li-container-text{
+    font-weight: bold;
+}
+#content .container #leftContainer .list-tab .list-tab-li .tab-li-container .list-child{
+    list-style-type: none;
+}
+#content .container #leftContainer .list-tab .list-tab-li .tab-li-container .list-child .list-child-item{
+    width: 95%;
+    margin: 0 2.5%;
+    font-size: 1em;
+}
+
+#content .container #rightContainer{
+    float: right;
+    width: 80%;
+}
+
+/*footer*/
+.footer {
+    background-color: var(--black3);
+    padding: 6rem 1rem;
+    line-height: 3rem;
+}
+
+.footer-top__box span svg {
+    width: 1.6rem;
+    height: 1.6rem;
+    fill: var(--grey3);
+}
+
+.footer-top__box span {
+    margin-right: 1rem;
+}
+
+.footer__top {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    color: var(--grey3);
+}
+
+.footer-top__box a:link,
+.footer-top__box a:visited {
+    display: block;
+    color: var(--grey);
+    font-size: 1.4rem;
+    transition: 0.6s;
+}
+
+.footer-top__box a:hover {
+    color: var(--orange);
+}
+
+.footer-top__box div {
+    color: var(--grey);
+    font-size: 1.4rem;
+}
+
+.footer-top__box h3 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 998px) {
+    .footer__top {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 2rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .footer__top {
+        grid-template-columns: 1fr;
+        row-gap: 2rem;
+    }
+}
