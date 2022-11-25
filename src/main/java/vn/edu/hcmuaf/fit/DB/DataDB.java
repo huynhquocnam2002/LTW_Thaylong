@@ -27,8 +27,11 @@ public class DataDB {
         Set<Product> res = new HashSet<Product>();
         ResultSet rs = db.getStatement().executeQuery("select * from product");
         while (rs.next()) {
-            res.add(new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getLong(4), rs.getString(5), rs.getInt(6)));
+            res.add(new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
+                    rs.getString(4), rs.getInt(5), rs.getString(6),rs.getString(7),
+                    rs.getString(8),rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12)));
         }
+        //m chỉnh lại theo cấu trúc hồi nảy á là ok
         return res;
     }
 
@@ -44,7 +47,7 @@ public class DataDB {
         DataDB db= new DataDB();
         ResultSet rs = db.getStatement().executeQuery("select * from user where id='" + id+"'");
         if (!rs.first()) return null;
-        User res = new User(rs.getString(1), rs.getString(2), rs.getString(4), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7), rs.getDate(8), rs.getDate(10), rs.getInt(9));
+        User res = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getDate(8), rs.getDate(10), rs.getInt(9));
         return res;
     }
 
@@ -53,11 +56,13 @@ public class DataDB {
         Map<Product, Integer> res= new HashMap<Product, Integer>();
         ResultSet rs= db.getStatement().executeQuery("select product.*, cart.quantity from cart, product where cart.id_user='"+u.getId()+"' and cart.id_product=product.id");
         while (rs.next()){
-            res.put(new Product(rs.getString(1), rs.getString(2), rs.getString(4), rs.getLong(3), rs.getString(5), rs.getInt(6)),rs.getInt(7));
+            res.put(new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
+                    rs.getString(4), rs.getInt(5), rs.getString(6),rs.getString(7),
+                    rs.getString(8),rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12)),rs.getInt(13));
         }
         return res;
     }
-
+//má lỗi ở đâu bây "__ chịu lun:)))), được rồi đoóa, tét lại xem
     public static boolean register(String id, String phone, String pass) throws SQLException, ClassNotFoundException {
         DataDB db= new DataDB();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -67,6 +72,6 @@ public class DataDB {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-
+        System.out.println(getCartItems(getUserByPhone("0756123882")));
     }
 }
