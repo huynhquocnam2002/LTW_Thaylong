@@ -1,8 +1,5 @@
 package vn.edu.hcmuaf.fit.controller;
 
-import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -106,11 +103,5 @@ public class RegisterServlet extends HttpServlet {
         }
     }
 
-    private void sendSMS(String phone, String code) {
-        Twilio.init("AC478d1bb3a4d3ee5d8f022b775e045d4c", "4245ae687fcba67ae2e6d78409262259");
-        Message.creator(new PhoneNumber("+84359681217"),
-                new PhoneNumber("+19206894973"),
-                "Your verify code: " + code).create();
-    }
 
 }
