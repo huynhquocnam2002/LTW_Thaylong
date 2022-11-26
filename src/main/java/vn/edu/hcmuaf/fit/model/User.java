@@ -7,7 +7,7 @@ public class User {
     private String id,img,name, phone,email,pass,gender;
     private Date birthday,accountDate;
     private int status;//-1:locked; 0:non-active    ; 1:actived
-
+    //
     public User(String id, String img, String name, String phone, String email, String pass, String gender, Date birthday, Date accountDate, int status) {
         this.id = id;
         this.img = img;

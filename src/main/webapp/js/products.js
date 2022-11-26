@@ -1,3 +1,4 @@
+
 const getProducts = async () => {
   try {
     const results = await fetch("./data/products.json");
