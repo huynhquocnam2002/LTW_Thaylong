@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             try {
-                if (user.equals(DataDB.getUserByPhone(user.getPhone()))) {
+                if (user.equals(DataDB.getUserByEmail(user.getPhone()))) {
                     session.setMaxInactiveInterval(60);
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
@@ -35,7 +35,10 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         try {
-            User user = DataDB.getUserByPhone(request.getParameter("name"));
+            User user = DataDB.getUserByEmail(request.getParameter("name"));
+            if (user==null) {
+                request.getRequestDispatcher("login.jsp").forward(request,response);
+            }
             if (user.isPassword(request.getParameter("pass"))) {
                 session.setAttribute("user", user);
                 request.getRequestDispatcher("index.jsp").forward(request, response);
