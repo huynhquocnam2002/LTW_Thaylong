@@ -34,7 +34,7 @@ public class DataDB {
         //m chỉnh lại theo cấu trúc hồi nảy á là ok
         return res;
     }
-
+ //
     public static User getUserByPhone(String userName) throws SQLException, ClassNotFoundException {
         DataDB db= new DataDB();
         ResultSet rs = db.getStatement().executeQuery("select * from user where phone_number='" + userName+"'");

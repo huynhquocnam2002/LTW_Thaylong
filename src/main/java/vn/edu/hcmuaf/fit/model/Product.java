@@ -16,7 +16,7 @@ public class Product {
     private String ID_product;
 
     private Date add_date;
-
+ //
     private int quantity;
 
     private String detail;

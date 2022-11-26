@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
 
     <!-- Custom StyleSheet -->
-    <link rel="stylesheet" href="/css/styles.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
 
 
     <title>JC Phone Shop</title>
@@ -1067,32 +1067,33 @@
                 </div>
             </div>
         </section>
-    <% Set<Product> rs = DataDB.getProducts(); %>
+
+
         <section class="category__section section" id="category">
             <div class="tab__list">
                 <div class="title__container tabs">
                     <div class="section__titles category__titles ">
-                        <div class="section__title filter-btn active" data-id="All Products">
+                        <div class="section__title filter-btn active" id="All" name="All">
                             <span class="dot"></span>
                             <h1 class="primary__title">Tất cả</h1>
                         </div>
                     </div>
                     <div class="section__titles">
-                        <div class="section__title filter-btn" data-id="Trending Products">
+                        <div class="section__title filter-btn" id="hot" name="hot">
                             <span class="dot"></span>
                             <h1 class="primary__title">Xu hướng</h1>
                         </div>
                     </div>
 
                     <div class="section__titles">
-                        <div class="section__title filter-btn" data-id="Special Products">
+                        <div class="section__title filter-btn" id="new" name="new">
                             <span class="dot"></span>
-                            <h1 class="primary__title">Đặc biệt</h1>
+                            <h1 class="primary__title">Mới Nhất</h1>
                         </div>
                     </div>
 
                     <div class="section__titles">
-                        <div class="section__title filter-btn" data-id="Featured Products">
+                        <div class="section__title filter-btn" id="salerun" name="salerun">
                             <span class="dot"></span>
                             <h1 class="primary__title">Bán chạy</h1>
                         </div>
@@ -1100,9 +1101,22 @@
 
                 </div>
             </div>
+            <% Set<Product> rs = DataDB.getProducts(); String kindproduct ="all";%>
+
+            <script !src="">
+                const categoryContainer = document.getElementById("category");
+
+                if (categoryContainer) {
+                    categoryContainer.addEventListener("click", async e => {
+                        const filtername = document.querySelector(".filter-btn").valueOf();
+
+                        })}
+            </script>
+
             <div class="category__container" data-aos="fade-up" data-aos-duration="1200">
                 <div class="category__center">
-                    <%for(Product pr: rs){ %>
+                    <%for(Product pr: rs){
+                    if(kindproduct.equals("all")){%>
                     <div class="product category__products">
                         <div class="product__header">
                             <img src="<%=pr.getImg()%>" alt="product">
@@ -1156,7 +1170,62 @@
                             </li>
                         </ul>
                     </div>
-                    <%}%>
+                    <%}if(pr.getTag()!="all") { %>
+                    <div class="product category__products">
+                        <div class="product__header">
+                            <img src="<%=pr.getImg()%>" alt="product">
+                        </div>
+                        <div class="product__footer">
+                            <h3><%=pr.getName()%></h3>
+                            <div class="rating">
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                </svg>
+                            </div>
+                            <div class="product__price" style="color: red">
+
+                                <h4><%=pr.getPrice()+" VND"%></h4>
+                            </div>
+                            <a href="#" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                        </div>
+                        <ul>
+                            <li>
+                                <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
+                                    <svg>
+                                        <use xlink:href="./images/sprite.svg#icon-eye"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-tip="Add To Wishlist" data-place="left" href="#">
+                                    <svg>
+                                        <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-tip="Add To Compare" data-place="left" href="#">
+                                    <svg>
+                                        <use xlink:href="./images/sprite.svg#icon-loop2"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <%}}%>
                 </div>
             </div>
 
@@ -1595,8 +1664,8 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <!-- Custom JavaScript -->
-<%--<script src="phone_nam/js/products.js"></script>--%>
-<%--<script src="phone_nam/js/index.js"></script>--%>
+<script src="js/products.js"></script>
+<script src="js/index.js"></script>
 <script src="js/slider.js"></script>
 
 </body>
