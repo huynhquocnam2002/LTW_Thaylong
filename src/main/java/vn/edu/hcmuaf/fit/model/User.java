@@ -77,6 +77,12 @@ public class User {
         return birthday;
     }
 
+    public String getBirthdayString() {
+
+        return birthday.getDay()+"/"+birthday.getMonth()+"/"+ birthday.getYear();
+    }
+
+
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }

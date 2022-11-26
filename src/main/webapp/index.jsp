@@ -103,13 +103,13 @@
                     User user = (User) session.getAttribute("user");
                 %>
                 <div class="nav__icons">
-                    <a href="/html/user.html" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
+                    <a href="user.jsp" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
                         <img src="<%=user.getImg()%>"
                              style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%" alt="img">
                     </a>
 
                     <div class="nav__item_user" style="font-size: 1.2rem" id="nav__item_user1">
-                        <a href="html/user.html" class="nav__link scroll-link"
+                        <a href="user.jsp" class="nav__link scroll-link"
                            style="line-height: 2"><%=user.getName()%>
                         </a><br>
                         <a href="" class="nav__link scroll-link">Thành Viên</a>
@@ -1665,7 +1665,7 @@
 
 <!-- Custom JavaScript -->
 <script src="js/products.js"></script>
-<script src="js/index.js"></script>
+<%--<script src="js/index.js"></script>--%>
 <script src="js/slider.js"></script>
 
 </body>
