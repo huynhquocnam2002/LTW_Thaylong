@@ -142,7 +142,21 @@ public class DataDB {
         return res;
     }
 
+    public static Set<Product> getProductsKind(String name) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        Set<Product> res = new HashSet<Product>();
+        ResultSet rs = db.getStatement().executeQuery("select * from product where product.TAG ='" + name +"'");
+        while (rs.next()) {
+            res.add(new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
+                    rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
+                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12)));
+        }
+        //
+        return res;
+    }
+
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         System.out.println(getProductById("PR1").getName());
+        System.out.println(getProductsKind("hot"));
     }
 }
