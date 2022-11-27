@@ -62,11 +62,11 @@ public class DataDB {
         return res;
     }
 
-    public static boolean register(String id, String phone, String pass) throws SQLException, ClassNotFoundException {
+    public static boolean register(String id, String email, String pass) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDateTime now = LocalDateTime.now();
-        if (db.getStatement().executeUpdate("insert into user values ('" + id + "','image/user/none.png','user " + id + "','" + phone + "',null,'" + pass + "',null,null,0,'" + dtf.format(now) + "');") == 0)
+        if (db.getStatement().executeUpdate("insert into user values ('" + id + "','image/user/none.png','user " + id + "',null,'"+email+"','" + pass + "',null,null,0,'" + dtf.format(now) + "');") == 0)
             return false;
         return true;
     }
