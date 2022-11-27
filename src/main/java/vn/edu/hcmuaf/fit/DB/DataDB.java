@@ -114,6 +114,7 @@ public class DataDB {
 
     public static boolean changeInfoUser(String userId, String name, String email, String phone, String gender, String bday, String img) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
+
         int i = db.getStatement().executeUpdate("update user set name='" + name + "', email='" + email + "', phone_number='" + phone + "', gender='" + gender + "', birthday='" + bday + "',img='" + img + "' where id='" + userId + "';");
         if (i == 0)
             return false;
@@ -129,7 +130,19 @@ public class DataDB {
         return res;
     }
 
+    public static Product getProductById(String id) throws SQLException, ClassNotFoundException {
+        Product res=null;
+        DataDB db= new DataDB();
+        ResultSet rs= db.getStatement().executeQuery("select * from product where id='"+id+"';");
+        while (rs.next()){
+            res=new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
+                    rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
+                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12));
+        }
+        return res;
+    }
+
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        System.out.println(getVouchers("U1"));
+        System.out.println(getProductById("PR1").getName());
     }
 }
