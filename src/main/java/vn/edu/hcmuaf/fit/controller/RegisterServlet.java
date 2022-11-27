@@ -35,11 +35,11 @@ public class RegisterServlet extends HttpServlet {
                 }
             } else {
                 System.out.println(-1);
-                request.getRequestDispatcher("confirmRegister.jsp").forward(request, response);
+                request.getRequestDispatcher("verify.jsp").forward(request, response);
             }
         } else {
             System.out.println(1);
-            request.getRequestDispatcher("confirmRegister.jsp").forward(request, response);
+            request.getRequestDispatcher("verify.jsp").forward(request, response);
         }
     }
 
@@ -59,12 +59,11 @@ public class RegisterServlet extends HttpServlet {
                     while (!DataDB.register(Util.getRandomId(), email, pass)) ;
                     HttpSession session = request.getSession();
                     session.setAttribute("user", (User) DataDB.getUserByEmail(email));
-                    session.setMaxInactiveInterval(60 * 10);
                     Random rd = new Random();
-                    String confirmCode = rd.nextInt(10000) + "";
+                    String confirmCode = rd.nextInt(1000000) + "";
                     Util.sendEmail(email, confirmCode);
                     session.setAttribute("confirmCode", confirmCode);
-                    request.getRequestDispatcher("confirmRegister.jsp").forward(request, response);
+                    request.getRequestDispatcher("verify.jsp").forward(request, response);
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);

@@ -39,7 +39,7 @@
         <div class="login-contains">
             <h3>Đăng kí</h3>
             <div class="form">
-                <form action="/RegisterServlet" method="get">
+                <form action="/RegisterServlet" method="post">
                     <div class="field email">
                         <div class="form-text">
                             <input
@@ -51,7 +51,7 @@
                                     id="username"
                             />
                             <!-- required -->
-                            <label for="username" class="form-label"> Số điện thoại </label>
+                            <label for="username" class="form-label"> Email </label>
                             <i class="error error-icon fas fa-exclamation-circle"></i>
                         </div>
                         <div class="error error-txt">
@@ -166,7 +166,7 @@
         }; //calling checkPassword function on pass input keyup
         function checkEmail() {
             //checkEmail function
-            let pattern = /(84|0[3|5|7|8|9])+([0-9]{8})\b/; //pattern for validate email
+            let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; //pattern for validate email
             if (!eInput.value.match(pattern)) {
                 //if pattern not matched then add error and remove valid class
                 eField.classList.add("error");
@@ -174,7 +174,7 @@
                 let errorTxt = eField.querySelector(".error-txt");
                 //if email value is not empty then show please enter valid email else show Email can't be blank
                 eInput.value != ""
-                    ? (errorTxt.innerText = "Số điện thoại không đúng")
+                    ? (errorTxt.innerText = "Email không đúng")
                     : (errorTxt.innerText = "Tên đăng nhập không thể để trống");
             } else {
                 //if pattern matched then remove error and add valid class

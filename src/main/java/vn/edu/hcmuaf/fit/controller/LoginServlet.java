@@ -14,13 +14,13 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+        session.removeAttribute("user");
         User user = (User) session.getAttribute("user");
         if (user == null) {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             try {
-                if (user.equals(DataDB.getUserByEmail(user.getPhone()))) {
-                    session.setMaxInactiveInterval(60);
+                if (user.equals(DataDB.getUserByEmail(user.getEmail()))) {
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
             } catch (SQLException e) {
