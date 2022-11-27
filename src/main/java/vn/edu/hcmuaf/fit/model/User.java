@@ -78,8 +78,12 @@ public class User {
     }
 
     public String getBirthdayString() {
-        String st=birthday.toString();
-
+        String[] st=birthday.toString().split("-");
+        String rs="";
+        for (int i=st.length-1; i>=0; i--){
+            rs+=st[i];
+        }
+        return rs.substring(0,rs.length()-1);
     }
 
 

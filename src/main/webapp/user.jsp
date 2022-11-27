@@ -532,7 +532,7 @@
                                                             </td>
                                                             <td>
                                                                 <input type="text" name="birthDay" id="datepicker"
-                                                                       value="<%=user.getBirthday()%>">
+                                                                       value="<%=user.getBirthdayString()%>">
                                                             </td>
                                                         </tr>
                                                         <tr>

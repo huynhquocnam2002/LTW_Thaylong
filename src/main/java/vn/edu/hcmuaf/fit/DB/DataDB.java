@@ -1,9 +1,6 @@
 package vn.edu.hcmuaf.fit.DB;
 
-import vn.edu.hcmuaf.fit.model.Order;
-import vn.edu.hcmuaf.fit.model.Product;
-import vn.edu.hcmuaf.fit.model.User;
-import vn.edu.hcmuaf.fit.model.Voucher;
+import vn.edu.hcmuaf.fit.model.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -115,9 +112,21 @@ public class DataDB {
         return res;
     }
 
-    public static boolean changeInfoUser(String name, String email, String phone, String gender, String bday, String img) throws SQLException, ClassNotFoundException {
+    public static boolean changeInfoUser(String userId, String name, String email, String phone, String gender, String bday, String img) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        int i = db.getStatement().executeUpdate("update user set name='" + name + "', email='" + email + "', phone_number='" + phone + "', gender='" + gender + "', birthday='" + bday + "',img='" + img + "' where id='" + userId + "';");
+        if (i == 0)
+            return false;
+        else return true;
+    }
+
+    public static List<Category> getCategorys() throws SQLException, ClassNotFoundException {
         DataDB db= new DataDB();
-        int i= db.getStatement().executeUpdate("update user set name='"+name+"', email='"+email+"', phone_number='"+phone+"', gender='"+gender+"', birthday='"+bday+"'")
+        List<Category> res= new ArrayList<Category>();
+        ResultSet rs= db.getStatement().executeQuery("select * from category;");
+        while (rs.next())
+            res.add(new Category(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
+        return res;
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
