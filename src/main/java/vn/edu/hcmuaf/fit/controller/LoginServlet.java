@@ -42,7 +42,10 @@ public class LoginServlet extends HttpServlet {
             if (user.isPassword(request.getParameter("pass"))) {
                 session.setAttribute("user", user);
                 request.getRequestDispatcher("index.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("login.jsp").forward(request,response);
             }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {

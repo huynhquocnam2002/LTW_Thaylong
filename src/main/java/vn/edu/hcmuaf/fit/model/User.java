@@ -77,6 +77,16 @@ public class User {
         return birthday;
     }
 
+    public String getBirthdayString() {
+        String[] st=birthday.toString().split("-");
+        String rs="";
+        for (int i=st.length-1; i>=0; i--){
+            rs+=st[i];
+        }
+        return rs.substring(0,rs.length()-1);
+    }
+
+
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }

@@ -53,7 +53,7 @@
                             <!-- required -->
                             <label for="username" class="form-label">
                                 <!-- <span class="content-name">Tên đăng nhập</span> -->
-                                Tên đăng nhập
+                                Email
                             </label>
                             <i class="error error-icon fas fa-exclamation-circle"></i>
                         </div>

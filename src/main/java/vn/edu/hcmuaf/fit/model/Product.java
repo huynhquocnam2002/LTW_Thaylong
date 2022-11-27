@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Product {
     private String id;
@@ -22,8 +23,13 @@ public class Product {
     private String detail;
 
     private int status;
-    //đọc cmt gg meet đê
 
+    public Product(String id, String name, long price, String img) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.img=img;
+    }
 
     public Product(String id, String name, long price, String img, int ins, String category, String tag, String ID_product, int status, Date add_date, int quantity, String detail) {
         this.id = id;
@@ -135,4 +141,13 @@ public class Product {
     public void setIns(int ins) {
         this.ins = ins;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product product = (Product) o;
+        return getPrice() == product.getPrice() && getIns() == product.getIns() && getQuantity() == product.getQuantity() && getStatus() == product.getStatus() && Objects.equals(getId(), product.getId()) && Objects.equals(getName(), product.getName()) && Objects.equals(getImg(), product.getImg()) && Objects.equals(getCategory(), product.getCategory()) && Objects.equals(getTag(), product.getTag()) && Objects.equals(getID_product(), product.getID_product()) && Objects.equals(getAdd_date(), product.getAdd_date()) && Objects.equals(getDetail(), product.getDetail());
+    }
+
 }
