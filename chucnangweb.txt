@@ -1,0 +1,91 @@
+1. tìm kiếm sản phẩm có tên = "" hoặc id = ""
+2. sãn phẩm theo danh mục
+3. lấy ra tất cả các sản phẩm ( bất kì + lọc theo yêu cầu)
+4. thêm vào giỏ hàng
+5. đăng nhập
+6.đăng ký
+7. quên mật khẩu
+-- admin -- sản phẩm
+8. sửa thông tin của một sản phẩm ( tên, loại, số lượng còn lại, giá bán, trạng thái )
+9. thêm một sản phẩm
+10. lấy tất cả các sản phẩm
+11. thêm loại option cho sản phẩm
+-- admin -- đơn hàng
+12. lấy ra tất cả các đơn hàng
+13. lấy ra những đơn hàng có trạng thái( đang giao , đã giao , đã hủy, đã hoàn trả, chưa thanh toán)
+14.  chỉnh sửa trạng thái giao hàng(hủy đơn hàng)
+14.1 xem thông tin của một đơn hàng có id là ""
+-- admin -- user
+15. lấy ra tất cả thông tin khách hàng (ảnh,id, tên, số điện thoại, email, giới tính , ngày sinh,... trạng thái, ngày lập)
+16. lấy ra thông tin khách hàng có id hoặc tên =""
+17. sửa lại trạng thái khách hàng.
+
+-- admin -- danh mục
+18. lấy ra tất cả thông tin các danh mục
+19. sửa thông tin của các danh mục
+20. thêm danh mục mới
+20.1 tìm kiếm danh mục theo tên hoặc id
+
+-- admin -- voucher
+21. lấy ra thông tin của các voucher đang có
+22. thêm voucher
+23. chỉnh sửa trạng thái voucher
+24. sửa thông tin của các voucher
+25. tìm voucher theo tên hoặc theo id
+
+-- admin -- doanh số
+26. lấy ra những đơn hàng giao thành công
+27. sắp xếp theo giá trị của các đơn hàng thành công
+
+-- admin -- lịch sử chỉnh sửa
+28. lấy ra những chỉnh sửa của admin(chỉnh sửa / thêm / xóa)
+
+-- admin -- nhà sản xuất
+29. lấy ra tất cả thông tin các sản xuất
+30. sửa thông tin của các nhà sản xuất
+31. thêm nhà sản xuất mới
+32 tìm kiếm sản xuất theo tên hoặc id
+
+-- admin -- chỉnh sửa giao diện
+33. chỉnh sửa màu background
+34. chỉnh sửa font chữ - logo
+35. chỉnh sửa banner 
+36. chỉnh sửa màu chủ đạo
+
+-- admin -- quản lý bài viết
+37. lấy ra thông tin bài viết
+38. chỉnh sửa bài viết
+39. xóa bài viết
+40. thêm bài viết
+
+-- sản phẩm
+41. tăng số lượng sản phẩm
+42. lấy ra tất cả thông tin của một các sản phẩm
+43. thêm vào giỏ hàng
+44. mua ngay - tạo đơn hàng
+45. đánh giá số sao của người dung - nội dung bình luận
+46. sản phẩm liên quan
+47. sản phẩm mới nhất
+
+-- giỏ hàng
+48. lấy ra tất cả sản phẩm trong giỏ hàng của user
+49. tăng số lượng của đơn hàng
+50. tổng tiền của sản phẩm
+51. xóa sản phẩm trong giỏ hàng
+
+
+-- thanh toán
+52. lấy ra địa chỉ giao hàng
+53. phương thức thanh toán
+54. tạo đơn hàng
+55. lấy ra tất cả các voucher của user
+-- thành công
+56. lấy ra thông tin của đơn hàng(...., trạng thái)
+
+1-19 - Chương
+20-38 - Thuận
+39-56  Nam
+
+
+
+
