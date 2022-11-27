@@ -78,8 +78,8 @@ public class User {
     }
 
     public String getBirthdayString() {
+        String st=birthday.toString();
 
-        return birthday.getDay()+"/"+birthday.getMonth()+"/"+ birthday.getYear();
     }
 
 

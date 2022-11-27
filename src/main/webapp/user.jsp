@@ -179,7 +179,7 @@
                     </div>
                     <div>
                         <a href="/index.jsp">
-                            <button class="DangXuat">Đăng Xuất</button>
+                            <a href="/LogoutServlet"><button class="DangXuat">Đăng Xuất</button></a>
                         </a>
                     </div>
                 </div>
@@ -474,14 +474,14 @@
                                                 <p>Quản lí thông tin hồ sơ để bảo mật tài khoản</p>
                                             </div>
                                             <div class="bottom">
-                                                <form action="#logoJCTop" method="dialog">
+                                                <form action="/ChangeInfoUserServlet">
                                                     <table>
                                                         <tr>
                                                             <td>
                                                                 <label for="ten">Tên:</label>
                                                             </td>
                                                             <td>
-                                                                <input type="text" value="<%=user.getName()%>" id="ten">
+                                                                <input type="text" name="name" value="<%=user.getName()%>" id="ten">
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -499,7 +499,7 @@
                                                                 <label for="phone_number">Số điện thoại:</label>
                                                             </td>
                                                             <td>
-                                                                <input type="tel" name="phone_number"
+                                                                <input type="tel" name="phone"
                                                                        value="<%=user.getPhone()%>"
                                                                        pattern="[0]{1}[0-9]{9}"
                                                                        placeholder="gồm 10 số và bắt đầu bằng số 0"
@@ -513,15 +513,15 @@
                                                             </td>
                                                             <td>
                                                                 <%if (user.getGender().equals("nam")) {%>
-                                                                <input type="radio" name="gt" id="male" value="nam"
+                                                                <input type="radio" name="gender" id="male" value="nam"
                                                                        class="gt" checked><%} else {%>
-                                                                <input type="radio" name="gt" id="male" value="nam"
+                                                                <input type="radio" name="gender" id="male" value="nam"
                                                                        class="gt"><%}%>
                                                                 <label for="male">Nam</label>
                                                                 <%if (user.getGender().equals("nu")) {%>
-                                                                <input type="radio" name="gt" id="female" value="nu"
+                                                                <input type="radio" name="gender" id="female" value="nu"
                                                                        class="gt" checked><%} else {%>
-                                                                <input type="radio" name="gt" id="female" value="nu"
+                                                                <input type="radio" name="gender" id="female" value="nu"
                                                                        class="gt"><%}%>
                                                                 <label for="female">Nữ</label>
                                                             </td>
@@ -531,8 +531,8 @@
                                                                 <label for="datepicker">Ngày sinh:</label>
                                                             </td>
                                                             <td>
-                                                                <input type="text" name="date" id="datepicker"
-                                                                       value="<%=user.getBirthdayString()%>">
+                                                                <input type="text" name="birthDay" id="datepicker"
+                                                                       value="<%=user.getBirthday()%>">
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -545,10 +545,10 @@
                                                     </table>
                                                     <div class="chooseAvatar">
                                                         <img src="<%=user.getImg()%>" alt="" class="avatar">
-                                                        <input type="file" value="<%=user.getImg()%>"
+                                                        <input type="file" name="avatar" value="<%=user.getImg()%>"
                                                                accept="image/*"
                                                                id="file">
-                                                        <input type="button" class="fileBT" value="Chọn ảnh">
+                                                        <input type="button"  class="fileBT" value="Chọn ảnh">
                                                     </div>
                                                 </form>
                                             </div>

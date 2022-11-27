@@ -115,6 +115,10 @@ public class DataDB {
         return res;
     }
 
+    public static boolean changeInfoUser(String name, String email, String phone, String gender, String bday, String img) throws SQLException, ClassNotFoundException {
+        DataDB db= new DataDB();
+        int i= db.getStatement().executeUpdate("update user set name='"+name+"', email='"+email+"', phone_number='"+phone+"', gender='"+gender+"', birthday='"+bday+"'")
+    }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         System.out.println(getVouchers("U1"));
