@@ -35,11 +35,11 @@ public class RegisterServlet extends HttpServlet {
                 }
             } else {
                 System.out.println(-1);
-                request.getRequestDispatcher("confirmRegister.jsp").forward(request, response);
+                request.getRequestDispatcher("verify.jsp").forward(request, response);
             }
         } else {
             System.out.println(1);
-            request.getRequestDispatcher("confirmRegister.jsp").forward(request, response);
+            request.getRequestDispatcher("verify.jsp").forward(request, response);
         }
     }
 
