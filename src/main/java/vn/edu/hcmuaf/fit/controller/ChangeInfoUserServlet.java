@@ -14,8 +14,8 @@ public class ChangeInfoUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id= ((User) request.getSession().getAttribute("user")).getId();
         String name=request.getParameter("name");
-        String
-        boolean change= DataDB.changeInfoUser(id, )
+
+//        boolean change= DataDB.changeInfoUser(id, )
     }
 
     @Override
