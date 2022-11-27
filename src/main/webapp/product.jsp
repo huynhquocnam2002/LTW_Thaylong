@@ -8,12 +8,13 @@
 
 
 <%@ page import="vn.edu.hcmuaf.fit.DB.DBConnect" %>
+<%@ page import="vn.edu.hcmuaf.fit.DB.DataDB" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
-<%@ page import="vn.edu.hcmuaf.fit.controller.ProductDao" %>
+
 <%@ page import="vn.edu.hcmuaf.fit.model.Producer" %>
-<%@ page import="vn.edu.hcmuaf.fit.controller.ProducerDao" %>
+
 <%@ page import="vn.edu.hcmuaf.fit.model.Category" %>
-<%@ page import="vn.edu.hcmuaf.fit.controller.CategoryDao" %>
+
 
 
 <%--<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>--%>
@@ -151,27 +152,28 @@
 
   <div class="prefix">
 
-    <% CategoryDao cateDao = new CategoryDao();%>
+    <% DataDB data = new DataDB();%>
 
-    <% ProducerDao producerDao = new ProducerDao() ;%>
-
-    <% ProductDao productDao = new ProductDao();%>
 
     <ul>
       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10.633" viewBox="0 0 12 10.633"><path id="home" d="M13.2,9.061H12.1v3.965a.6.6,0,0,1-.661.661H8.793V9.721H6.15v3.965H3.507a.6.6,0,0,1-.661-.661V9.061h-1.1c-.4,0-.311-.214-.04-.494L7,3.259a.634.634,0,0,1,.936,0l5.3,5.307c.272.281.356.495-.039.495Z" transform="translate(-1.471 -3.053)" fill="#d70018"></path></svg>
       <li>Trang chủ <li class ="item"></li></li>
       <li>Phụ kiện <li class ="item"></li></li>
-      <li>  <%=cateDao.getCategorys().getName()%><li class ="item"></li></li>
+      <li>  <%=data.getCategorysObject().getName()%><li class ="item"></li></li>
 
-      <li>    <%=producerDao.getProducers().getName()%> <li class ="item"></li></li>
+      <li>  <%=data.getProducersOject().getName()%> <li class ="item"></li></li>
 
-      <li>  <%=productDao.getProducts().getName()%>   </li>
+
+      <li>        <%=data.getProductById("PR17").getName()%>    </li>
+
+
 
 
     </ul>
   </div>
 </div>
-<h2 id="section__title__product"> <%=productDao.getProducts().getName()%>  </h2>
+<h2 id="section__title__product"> <%=data.getProductById("PR17").getName()%> </h2>
+
 
 <section id="section-detailsProduct">
 
@@ -389,6 +391,7 @@
 
 
       </script>
+
       </li>
 
 
@@ -396,17 +399,21 @@
         <li>
 
 
+
           <span>Giá:</span>
-          <a href="#" class="new__price"><%= productDao.getProducts().getPrice()%> VNĐ</a>
+          <a href="#" class="new__price"> VNĐ</a>
+<%--          <%=data.getProductById("17").getPrice()%>--%>
         </li>
         <li>
           <span>Hãng:</span>
-          <a href="#"><%=producerDao.getProducers().getName()%></a>
+          <a href="#"></a>
+<%--          <%=data.getProducersOject().getName()%>--%>
         </li>
 
         <li>
           <span>Loại sản phẩm:</span>
-          <a href="#"> <%= cateDao.getCategorys().getName()%></a>
+          <a href="#"> </a>
+<%--          <%= data.getCategorysObject().getName()%>--%>
         </li>
         <li>
           <span>Hiện có:</span>
@@ -480,7 +487,7 @@
         <strong>Bảo hành </strong>
 
         <p style="color:#333333; font-size:14px;">Bảo hành:<b></b> chính hãng Energiner</p>
-
+<%--        <%=data.getProductById("17").getIns()%>--%>
 
 
       </div>

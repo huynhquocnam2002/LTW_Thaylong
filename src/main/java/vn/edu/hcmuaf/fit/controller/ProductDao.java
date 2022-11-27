@@ -15,6 +15,7 @@ public class ProductDao {
 
     public static   Product getProducts() throws SQLException, ClassNotFoundException {
 
+
         try {
 
 
