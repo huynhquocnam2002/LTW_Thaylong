@@ -25,12 +25,12 @@
 
     <!-- Custom StyleSheet -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="../jquery/jquery-ui-1.13.0.custom/jquery-ui.js"></script>
-    <script src="../js/mainUser.js"></script>
-    <link rel="stylesheet" href="../css/userstyles.css"/>
-    <link rel="stylesheet" href="../css/mainUser.css">
-    <link rel="stylesheet" href="../jquery/jquery-ui-user.css">
-    <link rel="stylesheet" href="../css/cssheader.css">
+    <script src="jquery/jquery-ui-1.13.0.custom/jquery-ui.js"></script>
+    <script src="js/mainUser.js"></script>
+    <link rel="stylesheet" href="css/userstyles.css"/>
+    <link rel="stylesheet" href="css/mainUser.css">
+    <link rel="stylesheet" href="jquery/jquery-ui-user.css">
+    <link rel="stylesheet" href="css/cssheader.css">
 
     <title>Phone Shop</title>
 </head>
@@ -474,7 +474,7 @@
                                                 <p>Quản lí thông tin hồ sơ để bảo mật tài khoản</p>
                                             </div>
                                             <div class="bottom">
-                                                <form action="/ChangeInfoUserServlet">
+                                                <form action="/ChangeInfoUserServlet" method="post" enctype="multipart/form-data">
                                                     <table>
                                                         <tr>
                                                             <td>
@@ -545,7 +545,7 @@
                                                     </table>
                                                     <div class="chooseAvatar">
                                                         <img src="<%=user.getImg()%>" alt="" class="avatar">
-                                                        <input type="file" name="avatar" value="<%=user.getImg()%>"
+                                                        <input type="file" name="avatar"  value="<%=user.getImg()%>"
                                                                accept="image/*"
                                                                id="file">
                                                         <input type="button"  class="fileBT" value="Chọn ảnh">
