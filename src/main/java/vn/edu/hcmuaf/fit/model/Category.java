@@ -2,15 +2,8 @@ package vn.edu.hcmuaf.fit.model;
 
 public class Category {
 
-
-    private String id;
-
-    private String name;
-
-    private String img;
-
+    private String id, name, img;
     private int status;
-
 
     public Category(String id, String name, String img, int status) {
         this.id = id;
@@ -49,15 +42,5 @@ public class Category {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", img='" + img + '\'' +
-                ", status=" + status +
-                '}';
     }
 }

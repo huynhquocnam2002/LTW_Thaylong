@@ -26,7 +26,6 @@ public class Order {
         return res;
     }
 
-    //chuong da o day nha baay
     public void addProduct(Map<Product, Integer> list){
         this.listPd=list;
         computeAmount();

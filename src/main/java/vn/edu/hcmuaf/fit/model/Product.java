@@ -3,7 +3,7 @@ package vn.edu.hcmuaf.fit.model;
 import java.util.Date;
 import java.util.Objects;
 
-public  class Product {
+public class Product {
     private String id;
     private String name;
     private long price;
@@ -14,7 +14,7 @@ public  class Product {
 
     private String tag;
 
-    private String ID_product;
+    private String ID_producer;
 
     private Date add_date;
  //
@@ -31,7 +31,7 @@ public  class Product {
         this.img=img;
     }
 
-    public Product(String id, String name, long price, String img, int ins, String category, String tag, String ID_product, int status, Date add_date, int quantity, String detail) {
+    public Product(String id, String name, long price, String img, int ins, String category, String tag, String ID_producer, int status, Date add_date, int quantity, String detail) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -39,7 +39,7 @@ public  class Product {
         this.ins = ins;
         this.category = category;
         this.tag = tag;
-        this.ID_product = ID_product;
+        this.ID_producer = ID_producer;
         this.add_date = add_date;
         this.quantity = quantity;
         this.detail = detail;
@@ -71,7 +71,7 @@ public  class Product {
     }
 
     public String getID_product() {
-        return ID_product;
+        return ID_producer;
     }
 
     public Date getAdd_date() {
@@ -114,8 +114,8 @@ public  class Product {
         this.tag = tag;
     }
 
-    public void setID_product(String ID_product) {
-        this.ID_product = ID_product;
+    public void setID_product(String ID_producer) {
+        this.ID_producer = ID_producer;
     }
 
     public void setAdd_date(Date add_date) {
