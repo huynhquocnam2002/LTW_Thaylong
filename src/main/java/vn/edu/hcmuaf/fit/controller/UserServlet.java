@@ -11,8 +11,10 @@ import java.io.IOException;
 public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user != null) request.getRequestDispatcher("user.jsp").forward(request, response);
+        else request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     @Override

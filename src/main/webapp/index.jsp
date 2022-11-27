@@ -104,13 +104,13 @@
                     User user = (User) session.getAttribute("user");
                 %>
                 <div class="nav__icons">
-                    <a href="user.jsp" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
+                    <a href="/UserServlet" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
                         <img src="<%=user.getImg()%>"
                              style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%" alt="img">
                     </a>
 
                     <div class="nav__item_user" style="font-size: 1.2rem" id="nav__item_user1">
-                        <a href="user.jsp" class="nav__link scroll-link"
+                        <a href="/UserServlet" class="nav__link scroll-link"
                            style="line-height: 2"><%=user.getName()%>
                         </a><br>
                         <a href="" class="nav__link scroll-link">Thành Viên</a>
@@ -1102,7 +1102,7 @@
 
                 </div>
             </div>
-            <% Set<Product> rs = DataDB.getProducts(); String kindproduct ="all";%>
+            <% Set<Product> rs = DataDB.getProducts();%>
 
             <script !src="">
                 const categoryContainer = document.getElementById("category");
@@ -1116,8 +1116,7 @@
 
             <div class="category__container" data-aos="fade-up" data-aos-duration="1200">
                 <div class="category__center">
-                    <%for(Product pr: rs){
-                    if(kindproduct.equals("all")){%>
+                    <%for(Product pr: rs){%>
                     <div class="product category__products">
                         <div class="product__header">
                             <img src="<%=pr.getImg()%>" alt="product">
@@ -1171,62 +1170,7 @@
                             </li>
                         </ul>
                     </div>
-                    <%}if(pr.getTag()!="all") { %>
-                    <div class="product category__products">
-                        <div class="product__header">
-                            <img src="<%=pr.getImg()%>" alt="product">
-                        </div>
-                        <div class="product__footer">
-                            <h3><%=pr.getName()%></h3>
-                            <div class="rating">
-                                <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                                </svg>
-                                <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                                </svg>
-                                <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                                </svg>
-                                <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                                </svg>
-                                <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
-                                </svg>
-                            </div>
-                            <div class="product__price" style="color: red">
-
-                                <h4><%=pr.getPrice()+" VND"%></h4>
-                            </div>
-                            <a href="#" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
-                        </div>
-                        <ul>
-                            <li>
-                                <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
-                                    <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-eye"></use>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                    <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a data-tip="Add To Compare" data-place="left" href="#">
-                                    <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-loop2"></use>
-                                    </svg>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <%}}%>
+                    <%}%>
                 </div>
             </div>
 
