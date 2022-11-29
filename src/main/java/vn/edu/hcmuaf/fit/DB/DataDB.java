@@ -214,7 +214,7 @@ public class DataDB {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        System.out.println(getProductById("PR17").getName());
+        System.out.println(getProductById("PR17").getIns());
 //        System.out.println(getProductsKind("hot"));
 
 //        System.out.println(getCategorysObject().getName());
