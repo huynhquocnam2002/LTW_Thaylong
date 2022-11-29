@@ -204,9 +204,9 @@
                                         <div class="hero__left">
                                             <h1>TÍNH NĂNG NỔI BẬT</h1>
 
-                                            <img src="  https://cdn2.cellphones.com.vn/358x/media/catalog/product/p/i/pin-sac-du-phong-anker-powercore-iii-sense-slim-a1244-10000mah.jpg
+                                            <img src="   <%=data.getProductById("PR17").getImg()%>
                                             "
-<%--                                                <%=data.getProductById("PR17").getImg()%>--%>
+
                                                  alt="img__product" id="image__detail__product">
 
                                             <div class="desktop">
@@ -360,6 +360,9 @@
                     </button>
                 </div>
             </div>
+
+<%--    Tang giam so luong         --%>
+<%--            js--%>
 
             <script>
 
