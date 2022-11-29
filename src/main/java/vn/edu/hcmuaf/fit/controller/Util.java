@@ -90,6 +90,12 @@ public class Util {
         return res.substring(0, res.length()-1);
     }
 
+    public static String createOTP(){
+        Random rd = new Random();
+        String confirmCode = rd.nextInt(1000000) + "";
+        return confirmCode;
+    }
+
 
     public static void main(String[] args) {
         Date d1 = new Date(2022, 11, 27);
