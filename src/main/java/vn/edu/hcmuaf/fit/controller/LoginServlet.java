@@ -36,20 +36,23 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             User user = DataDB.getUserByEmail(request.getParameter("name"));
-            if (user==null) {
-                request.getRequestDispatcher("login.jsp").forward(request,response);
-            }
-            if (user.isPassword(request.getParameter("pass"))) {
-                session.setAttribute("user", user);
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+            if (user == null) {
+                request.setAttribute("error", "Email hoặc mật khẩu không chính xác");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
-                request.getRequestDispatcher("login.jsp").forward(request,response);
+                if (user.isPassword(request.getParameter("pass"))) {
+                    session.setAttribute("user", user);
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("error", "Email hoặc mật khẩu không chính xác");
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                }
             }
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            } catch(SQLException e){
+                throw new RuntimeException(e);
+            } catch(ClassNotFoundException e){
+                throw new RuntimeException(e);
+            }
         }
     }
-}

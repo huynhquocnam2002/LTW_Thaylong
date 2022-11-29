@@ -12,7 +12,7 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
-    <title>Forget password</title>
+    <title>Confirm OTP</title>
 </head>
 
 <body>
@@ -41,7 +41,7 @@
         <div class="login-contains">
             <h3>Xác Nhận Tài Khoản</h3>
             <div class="form">
-                <form action="/RegisterServlet">
+                <form action="/VerifyRegisterServlet" method="post">
                     <div class="fiel_text">
                         <%User user= (User) session.getAttribute("user");%>
                         <label for="name" class="form-label"> đã gửi mã 6 chữ số đến email <%=user.getEmail()%></label> <br>
@@ -73,7 +73,7 @@
 
                     <div class="two-a">
                         <p class="left" href="">Chưa có mã xác nhận</p>
-                        <a class="right" href="#">gửi mã</a>
+                        <a class="right" href="/RegisterServlet">gửi mã</a>
                     </div>
                 </form>
             </div>

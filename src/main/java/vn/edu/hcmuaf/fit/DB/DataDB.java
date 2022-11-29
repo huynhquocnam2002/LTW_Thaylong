@@ -155,6 +155,13 @@ public class DataDB {
         return res;
     }
 
+    public static boolean changeUserPassword(String email, String pass) throws SQLException, ClassNotFoundException {
+        DataDB db= new DataDB();
+        int res=db.getStatement().executeUpdate("update user set password='"+pass+"' where email='"+email+"'");
+        if (res!=0) return true;
+        return false;
+    }
+
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         System.out.println(getProductById("PR1").getName());
         System.out.println(getProductsKind("hot"));
