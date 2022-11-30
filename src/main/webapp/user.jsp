@@ -1,14 +1,8 @@
-<%@ page import="vn.edu.hcmuaf.fit.model.User" %>
 <%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
 <%@ page import="vn.edu.hcmuaf.fit.DB.DataDB" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="vn.edu.hcmuaf.fit.controller.Util" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Voucher" %>
-<%@ page import="java.util.Date" %>
-<%@ page import="java.time.LocalDateTime" %>
-<%@ page import="java.util.Calendar" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.*" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,11 +14,9 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" rel="stylesheet"/>
 
-    <!-- Animate On Scroll -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
-
     <!-- Custom StyleSheet -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<%--    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>--%>
+    <script src="jquery/jquery-ui-1.13.0.custom/external/jquery/jquery.js"></script>
     <script src="jquery/jquery-ui-1.13.0.custom/jquery-ui.js"></script>
     <script src="js/mainUser.js"></script>
     <link rel="stylesheet" href="css/userstyles.css"/>
@@ -37,12 +29,11 @@
 
 <body>
 <%
-    User user = null;
-    if (session.getAttribute("user") == null)
-        request.getRequestDispatcher("/login.jsp").forward(request, response);
-    else {
-        user = (User) session.getAttribute("user");
-    }%>
+    User user = (User) session.getAttribute("user");
+    if (user == null) {
+        request.getRequestDispatcher("login.jsp").forward(request, response);
+    }
+%>
 <header id="header" class="header">
     <div class="navigation">
         <div class="container">
@@ -54,7 +45,7 @@
                 </div>
 
                 <div class="nav__logo">
-                    <a href="/phone_nam/homelogin.html" class="scroll-link">
+                    <a href="index.jsp" class="scroll-link">
                         JC SHOP
                     </a>
                 </div>
@@ -70,10 +61,10 @@
                     </div>
                     <ul class="nav__list">
                         <li class="nav__item">
-                            <a href="/phone_nam/homelogin.html" class="nav__link scroll-link">Trang chủ</a>
+                            <a href="index.jsp" class="nav__link scroll-link">Trang chủ</a>
                         </li>
                         <li class="nav__item">
-                            <a href="/phone_nam/homelogin.html" class="nav__link scroll-link">Sản phẩm</a>
+                            <a href="index.jsp#product" class="nav__link scroll-link">Sản phẩm</a>
                         </li>
                         <li class="nav__item_seach">
                             <input class="input_seach" id="input_seach" type="text" placeholder="seach...">
@@ -97,26 +88,27 @@
                 </div>
 
                 <div class="nav__icons">
-                    <a href="user.html" class="icon__item">
-                        <svg class="icon__user">
-                            <use xlink:href="./images/sprite.svg#icon-user"></use>
-                        </svg>
+                    <a href="/UserServlet" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
+                        <img src="<%=user.getImg()%>"
+                             style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%" alt="img">
                     </a>
                     <div class="nav__item_user" id="nav__item_user">
-                        <a href="#login" class="nav__link scroll-link">Hello Minh Thuận</a> <br>
-                        <!-- <a  href="#register" class="nav__link scroll-link">Đăng Ký</a><br> -->
-                        <a href="" class="nav__link scroll-link">Thành Viên</a>
+                        <a href="#" class="nav__link scroll-link" style="line-height: 2">Hello <%=user.getName()%>
+                        </a> <br>
+                        <a href="#"
+                           class="nav__link scroll-link"><%=user.getStatus() == 1 ? "Thành viên" : user.getStatus() == -1 ? "Đã khóa" : "Chưa kích hoạt"%>
+                        </a>
                     </div>
                 </div>
 
                 <div class="nav__icons" id="nav__item_giohang">
-                    <a href="/phone_chuong/cart.html" class="icon__item">
+                    <a href="cart.jsp" class="icon__item">
                         <svg class="icon__cart">
                             <use xlink:href="./images/sprite.svg#icon-shopping-basket"></use>
                         </svg>
-                        <span id="cart__total">4</span>
+                        <span id="cart__total"><%=DataDB.getCartItems(user).size()%></span>
                     </a>
-                    <a href="/phone_chuong/cart.html" class="nav__link_giohang">Giỏ Hàng</a>
+                    <a href="cart.jsp" class="nav__link_giohang">Giỏ Hàng</a>
                 </div>
             </nav>
         </div>
@@ -154,32 +146,34 @@
                 </div>
                 <div class="navbody">
                     <div class="item">
-                        <img src="../phone_thuan/images/account.png" alt="" class="itemIcon">
+                        <img src="image/images_thuan/account.png" alt="" class="itemIcon">
                         <div>
                             <p class="itemContent 1">Tài khoản của tôi</p>
                         </div>
                     </div>
                     <div class="item">
-                        <img src="../phone_thuan/images/donHang.png" alt="" class="itemIcon">
+                        <img src="image/images_thuan/donHang.png" alt="" class="itemIcon">
                         <div>
                             <p class="itemContent 2">Đơn mua</p>
                         </div>
                     </div>
                     <div class="item">
-                        <img src="../phone_thuan/images/notification.png" alt="" class="itemIcon">
+                        <img src="image/images_thuan/notification.png" alt="" class="itemIcon">
                         <div>
                             <p class="itemContent 3">Thông báo</p>
                         </div>
                     </div>
                     <div class="item">
-                        <img src="../phone_thuan/images/coupon.png" alt="" class="itemIcon">
+                        <img src="image/images_thuan/coupon.png" alt="" class="itemIcon">
                         <div>
                             <p class="itemContent 4">Kho Voucher</p>
                         </div>
                     </div>
                     <div>
                         <a href="/index.jsp">
-                            <a href="/LogoutServlet"><button class="DangXuat">Đăng Xuất</button></a>
+                            <a href="/LogoutServlet">
+                                <button class="DangXuat">Đăng Xuất</button>
+                            </a>
                         </a>
                     </div>
                 </div>
@@ -474,14 +468,16 @@
                                                 <p>Quản lí thông tin hồ sơ để bảo mật tài khoản</p>
                                             </div>
                                             <div class="bottom">
-                                                <form action="/ChangeInfoUserServlet" method="post" enctype="multipart/form-data">
+                                                <form action="/ChangeInfoUserServlet" method="post"
+                                                      enctype="multipart/form-data" id="info-form">
                                                     <table>
                                                         <tr>
                                                             <td>
                                                                 <label for="ten">Tên:</label>
                                                             </td>
                                                             <td>
-                                                                <input type="text" name="name" value="<%=user.getName()%>" id="ten">
+                                                                <input type="text" name="name"
+                                                                       value="<%=user.getName()%>" id="ten">
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -524,15 +520,21 @@
                                                                 <input type="radio" name="gender" id="female" value="nu"
                                                                        class="gt"><%}%>
                                                                 <label for="female">Nữ</label>
+                                                                <%if (user.getGender().equals("UKN")) {%>
+                                                                <input type="radio" name="gender" id="unset" value="nu"
+                                                                       class="gt" checked><%} else {%>
+                                                                <input type="radio" name="gender" id="unset" value="nu"
+                                                                       class="gt"><%}%>
+                                                                <label for="female">Ẩn</label>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <label for="datepicker">Ngày sinh:</label>
+                                                                <label for="birthDay">Ngày sinh:</label>
                                                             </td>
                                                             <td>
-                                                                <input type="text" name="birthDay" id="datepicker"
-                                                                       value="<%=user.getBirthdayString()%>">
+                                                                <input type="date" name="birthDay" id="birthDay"
+                                                                       value="<%=user.getBirthday()%>" style="width: 90%; padding: 7px; border-radius: 3px; border: 1px solid #c5c5c5">
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -545,99 +547,50 @@
                                                     </table>
                                                     <div class="chooseAvatar">
                                                         <img src="<%=user.getImg()%>" alt="" class="avatar">
-                                                        <input type="file" name="avatar"  value="<%=user.getImg()%>"
+                                                        <input type="file" name="avatar" value="<%=user.getImg()%>"
                                                                accept="image/*"
                                                                id="file">
-                                                        <input type="button"  class="fileBT" value="Chọn ảnh">
+                                                        <input type="button" class="fileBT" value="Chọn ảnh">
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
                                         <div id="tab3">
                                             <div class="thong_bao_control">
-                                                <button class="delete">Xóa tất cả thông báo</button>
-                                                <button class="readed">Đánh dấu đã đọc tất cả</button>
+                                                <form action="/AnnouncementServlet">
+                                                    <input type="hidden" name="method" value="deleteAll">
+                                                    <button class="delete">Xóa tất cả thông báo</button>
+                                                </form>
+                                                <form action="/AnnouncementServlet">
+                                                    <input type="hidden" name="method" value="readAll">
+                                                    <button class="readed">Đánh dấu đã đọc tất cả</button>
+                                                </form>
                                             </div>
+                                            <%List<Announcement> listAnm = DataDB.getAnnounmentByUserId(user.getId());%>
                                             <div class="thong-bao-container">
-                                                <div class="thong_bao_div unread">
-                                                    <img src="../phone_thuan/images/products/cucsac1.jpg"
+                                                <%for (Announcement a : listAnm) {%>
+                                                <div class="thong_bao_div <%=a.getStatus()==0?"unread":""%>">
+                                                    <img src="<%=a.getImg()%>"
                                                          alt="san_pham">
                                                     <div class="thong_bao_content">
-                                                        <p class="thong_bao_head">Giao hàng thành công</p>
-                                                        <p class="thong_bao_chitiet">Kiện hàng ABC123XYZ đã giao thành
-                                                            công
-                                                            đến bạn</p>
-                                                        <p class="thoi_gian">12:00 17/03/2021</p>
+                                                        <p class="thong_bao_head"><%=a.getName()%>
+                                                        </p>
+                                                        <p class="thong_bao_chitiet"><%=a.getContent()%>
+                                                        </p>
+                                                        <p class="thoi_gian"><%=a.getTimeString()%>
+                                                        </p>
                                                     </div>
                                                     <div class="thong_bao_bt">
-                                                        <button>Xem chi tiết đơn hàng</button>
+                                                        <form action="/AnnouncementServlet">
+                                                            <input type="hidden" name="method" value="read">
+                                                            <input type="hidden" name="orderId"
+                                                                   value="<%=a.getOrderID()%>">
+                                                            <input type="hidden" name="anmId" value="<%=a.getId()%>">
+                                                            <button>Xem chi tiết đơn hàng</button>
+                                                        </form>
                                                     </div>
                                                 </div>
-                                                <div class="thong_bao_div unread">
-                                                    <img src="../phone_thuan/images/products/cuongluc.jpg"
-                                                         alt="san_pham">
-                                                    <div class="thong_bao_content">
-                                                        <p class="thong_bao_head">Giao hàng thành công</p>
-                                                        <p class="thong_bao_chitiet">Kiện hàng ABC456XYZ đã giao thành
-                                                            công
-                                                            đến bạn</p>
-                                                        <p class="thoi_gian">11:50 17/03/2021</p>
-                                                    </div>
-                                                    <div class="thong_bao_bt">
-                                                        <button>Xem chi tiết đơn hàng</button>
-                                                    </div>
-                                                </div>
-                                                <div class="thong_bao_div unread">
-                                                    <img src="../phone_thuan/images/products/ap.png" alt="san_pham">
-                                                    <div class="thong_bao_content">
-                                                        <p class="thong_bao_head">Giao hàng thất bại</p>
-                                                        <p class="thong_bao_chitiet">Kiện hàng JOHNYDANG đã giao thất
-                                                            bại</p>
-                                                        <p class="thoi_gian">00:00 14/03/2021</p>
-                                                    </div>
-                                                    <div class="thong_bao_bt">
-                                                        <button>Xem chi tiết đơn hàng</button>
-                                                    </div>
-                                                </div>
-                                                <div class="thong_bao_div">
-                                                    <img src="../phone_thuan/images/products/gay2.jpg" alt="san_pham">
-                                                    <div class="thong_bao_content">
-                                                        <p class="thong_bao_head">Giao hàng thành công</p>
-                                                        <p class="thong_bao_chitiet">Kiện hàng KHOAPUG đã giao thành
-                                                            công
-                                                            đến bạn</p>
-                                                        <p class="thoi_gian">12:10 13/03/2021</p>
-                                                    </div>
-                                                    <div class="thong_bao_bt">
-                                                        <button>Xem chi tiết đơn hàng</button>
-                                                    </div>
-                                                </div>
-                                                <div class="thong_bao_div unread">
-                                                    <img src="../phone_thuan/images/products/tainghe5.jpg"
-                                                         alt="san_pham">
-                                                    <div class="thong_bao_content">
-                                                        <p class="thong_bao_head">Hủy đơn hàng thành công</p>
-                                                        <p class="thong_bao_chitiet">Đơn hàng NYSIEUXINHDEP đã được
-                                                            hủy</p>
-                                                        <p class="thoi_gian">03:00 17/03/2020</p>
-                                                    </div>
-                                                    <div class="thong_bao_bt">
-                                                        <button>Xem chi tiết đơn hàng</button>
-                                                    </div>
-                                                </div>
-                                                <div class="thong_bao_div">
-                                                    <img src="../phone_thuan/images/products/gay5.jpg" alt="san_pham">
-                                                    <div class="thong_bao_content">
-                                                        <p class="thong_bao_head">Đặt hàng thành công</p>
-                                                        <p class="thong_bao_chitiet">Đơn hàng LAPTOPUSAPRO đã được đặt
-                                                            thành
-                                                            công</p>
-                                                        <p class="thoi_gian">09:45 17/03/2019</p>
-                                                    </div>
-                                                    <div class="thong_bao_bt">
-                                                        <button>Xem chi tiết đơn hàng</button>
-                                                    </div>
-                                                </div>
+                                                <%}%>
                                             </div>
                                         </div>
                                         <div id="tab4">
@@ -673,25 +626,20 @@
                                                                     <p class="donToiThieu">Đơn tối
                                                                         thiểu <%=vouchers.get(i).getMinPrice()%>k
                                                                         VND</p>
-                                                                    <%if (vouchers.get(i).getStartDate().compareTo(new Date()) == 1) {%>
-                                                                    <p class="thoiGian">Có tác dụng
-                                                                        sau: <%=LocalDateTime.now().getDayOfMonth() - vouchers.get(i).getStartDate().getDate()%>
-                                                                        ngày</p><%} else {%>
-                                                                    <p class="thoiGian">Hết hạn
-                                                                        sau: <%=Util.minusDate(vouchers.get(i).getEndDate(), new java.sql.Date(new Date().getTime()))%>
-                                                                        ngày</p>
-                                                                    <%}%>
+                                                                    <p class="thoiGian"><%=vouchers.get(i).getVoucherDescription()%>
+                                                                    </p>
                                                                 </div>
                                                                 <div class="use">
                                                                     <p> Chi tiết ></p>
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <%if (i + 1 < vouchers.size()) {%>
+
                                                         <td>
+                                                            <%if (i + 1 < vouchers.size()) {%>
                                                             <div class="voucher">
                                                                 <div class="voucherIcon">
-                                                                    <%if (vouchers.get(i+1).getType().equals("Miễn phí vận chuyển")) {%>
+                                                                    <%if (vouchers.get(i + 1).getType().equals("Miễn phí vận chuyển")) {%>
                                                                     <img src="<%=vouchers.get(i+1).getImg()%>"
                                                                          alt="Voucher Giam Gia"
                                                                          style="border-color: #ffa400"><%} else {%>
@@ -705,454 +653,270 @@
                                                                     <p class="donToiThieu">Đơn tối
                                                                         thiểu <%=vouchers.get(i + 1).getMinPrice()%>k
                                                                         VND</p>
-                                                                    <%if (vouchers.get(i + 1).getStartDate().compareTo(new Date()) == 1) {%>
-                                                                    <p class="thoiGian">Có tác dụng
-                                                                        sau: <%=LocalDateTime.now().getDayOfMonth() - vouchers.get(i + 1).getStartDate().getDate()%>
-                                                                        ngày</p><%} else {%>
-                                                                    <p class="thoiGian">Hết hạn
-                                                                        sau: <%=Util.minusDate(vouchers.get(i).getEndDate(), new java.sql.Date(new Date().getTime()))%>
-                                                                        ngày</p>
-                                                                    <%}%>
+                                                                    <p class="thoiGian"><%=vouchers.get(i + 1).getVoucherDescription()%>
+                                                                    </p>
                                                                 </div>
                                                                 <div class="use">
                                                                     <p> Chi tiết ></p>
                                                                 </div>
                                                             </div>
+                                                            <%}%>
                                                         </td>
-                                                        <%}%>
+
                                                     </tr>
                                                     <%}%>
                                                 </table>
                                                 <%}%>
                                             </div>
                                             <div class="container 2">
+                                                <%
+                                                    List<Voucher> newest = DataDB.getNewestVouchers(user.getId());
+                                                    if (newest.size() != 0) {
+                                                %>
                                                 <table>
+                                                    <%for (int i = 0; i < newest.size(); i += 2) {%>
                                                     <tr>
                                                         <td>
                                                             <div class="voucher">
                                                                 <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/mienpivanchuyen.png"
+                                                                    <%if (newest.get(i).getType().equals("Miễn phí vận chuyển")) {%>
+                                                                    <img src="<%=newest.get(i).getImg()%>"
                                                                          alt="Voucher Giam Gia"
-                                                                         class="freeship">
+                                                                         style="border-color: #ffa400"><%} else {%>
+                                                                    <img src="<%=newest.get(i).getImg()%>"
+                                                                         alt="Voucher Giam Gia">
+                                                                    <%}%>
                                                                 </div>
                                                                 <div class="voucherInfo">
-                                                                    <p class="giaTri">Miễn phí vận chuyển</p>
-                                                                    <p class="donToiThieu">Đơn tối thiểu 10k VND</p>
-                                                                    <p class="thoiGian">Có hiệu lực sau: 7 ngày</p>
+                                                                    <p class="giaTri"><%=newest.get(i).getName()%>
+                                                                    </p>
+                                                                    <p class="donToiThieu">Đơn tối
+                                                                        thiểu <%=newest.get(i).getMinPrice()%>k
+                                                                        VND</p>
+                                                                    <p class="thoiGian"><%=newest.get(i).getVoucherDescription()%>
+                                                                    </p>
                                                                 </div>
                                                                 <div class="use">
-                                                                    <p>Dùng ngay ></p>
+                                                                    <p> Chi tiết ></p>
                                                                 </div>
                                                             </div>
                                                         </td>
+
                                                         <td>
+                                                            <%if (i + 1 < newest.size()) {%>
                                                             <div class="voucher">
                                                                 <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/mienpivanchuyen.png"
+                                                                    <%if (newest.get(i + 1).getType().equals("Miễn phí vận chuyển")) {%>
+                                                                    <img src="<%=newest.get(i+1).getImg()%>"
                                                                          alt="Voucher Giam Gia"
-                                                                         class="freeship">
+                                                                         style="border-color: #ffa400"><%} else {%>
+                                                                    <img src="<%=newest.get(i+1).getImg()%>"
+                                                                         alt="Voucher Giam Gia">
+                                                                    <%}%>
                                                                 </div>
                                                                 <div class="voucherInfo">
-                                                                    <p class="giaTri">Miễn phí vận chuyển</p>
-                                                                    <p class="donToiThieu">Cho mọi đơn hàng</p>
-                                                                    <p class="thoiGian">Có hiệu lực sau: 6 ngày</p>
+                                                                    <p class="giaTri"><%=newest.get(i + 1).getName()%>
+                                                                    </p>
+                                                                    <p class="donToiThieu">Đơn tối
+                                                                        thiểu <%=newest.get(i + 1).getMinPrice()%>k
+                                                                        VND</p>
+                                                                    <p class="thoiGian"><%=newest.get(i + 1).getVoucherDescription()%>
+                                                                    </p>
                                                                 </div>
                                                                 <div class="use">
-                                                                    <p>Dùng ngay ></p>
+                                                                    <p> Chi tiết ></p>
                                                                 </div>
                                                             </div>
+                                                            <%}%>
                                                         </td>
+
                                                     </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="voucher">
-                                                                <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/voucherGiamGia.png"
-                                                                         alt="Voucher Giam Gia">
-                                                                </div>
-                                                                <div class="voucherInfo">
-                                                                    <p class="giaTri">Giảm 10k VND </p>
-                                                                    <p class="donToiThieu">Đơn tối thiểu 10k VND</p>
-                                                                    <p class="thoiGian">Có tác dụng sau: 7 ngày</p>
-                                                                </div>
-                                                                <div class="use">
-                                                                    <p>Dùng ngay ></p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="voucher">
-                                                                <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/voucherGiamGia.png"
-                                                                         alt="Voucher Giam Gia">
-                                                                </div>
-                                                                <div class="voucherInfo">
-                                                                    <p class="giaTri">Giảm 10k VND </p>
-                                                                    <p class="donToiThieu">Đơn tối thiểu 10k VND</p>
-                                                                    <p class="thoiGian">Có tác dụng sau: 6 ngày</p>
-                                                                </div>
-                                                                <div class="use">
-                                                                    <p>Dùng ngay ></p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="voucher">
-                                                                <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/voucherGiamGia.png"
-                                                                         alt="Voucher Giam Gia">
-                                                                </div>
-                                                                <div class="voucherInfo">
-                                                                    <p class="giaTri">Giảm 10k VND </p>
-                                                                    <p class="donToiThieu">Đơn tối thiểu 10k VND</p>
-                                                                    <p class="thoiGian">Có tác dụng sau: 5 ngày</p>
-                                                                </div>
-                                                                <div class="use">
-                                                                    <p>Dùng ngay ></p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="voucher">
-                                                                <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/voucherGiamGia.png"
-                                                                         alt="Voucher Giam Gia">
-                                                                </div>
-                                                                <div class="voucherInfo">
-                                                                    <p class="giaTri">Giảm 10k VND </p>
-                                                                    <p class="donToiThieu">Đơn tối thiểu 10k VND</p>
-                                                                    <p class="thoiGian">Có tác dụng sau: 5 ngày</p>
-                                                                </div>
-                                                                <div class="use">
-                                                                    <p>Dùng ngay ></p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                    <%}%>
                                                 </table>
+                                                <%}%>
                                             </div>
                                             <div class="container 3">
+                                                <%
+                                                    List<Voucher> old = DataDB.getOldVouchers(user.getId());
+                                                    if (old.size() != 0) {
+                                                %>
                                                 <table>
+                                                    <%for (int i = 0; i < old.size(); i += 2) {%>
                                                     <tr>
                                                         <td>
                                                             <div class="voucher">
                                                                 <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/voucherGiamGia.png"
-                                                                         alt="Voucher Giam Gia">
-                                                                </div>
-                                                                <div class="voucherInfo">
-                                                                    <p class="giaTri">Giảm 10k VND </p>
-                                                                    <p class="donToiThieu">Đơn tối thiểu 10k VND</p>
-                                                                    <p class="thoiGian conLai">Còn tác dụng trong: 10
-                                                                        giờ 6
-                                                                        phút</p>
-                                                                </div>
-                                                                <div class="use">
-                                                                    <p>Dùng ngay ></p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="voucher">
-                                                                <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/voucherGiamGia.png"
-                                                                         alt="Voucher Giam Gia">
-                                                                </div>
-                                                                <div class="voucherInfo">
-                                                                    <p class="giaTri">Giảm 10k VND </p>
-                                                                    <p class="donToiThieu">Đơn tối thiểu 10k VND</p>
-                                                                    <p class="thoiGian conLai">Còn tác dụng trong: 1
-                                                                        ngày</p>
-                                                                </div>
-                                                                <div class="use">
-                                                                    <p>Dùng ngay ></p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="voucher">
-                                                                <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/mienpivanchuyen.png"
+                                                                    <%if (old.get(i).getType().equals("Miễn phí vận chuyển")) {%>
+                                                                    <img src="<%=old.get(i).getImg()%>"
                                                                          alt="Voucher Giam Gia"
-                                                                         class="freeship">
+                                                                         style="border-color: #ffa400"><%} else {%>
+                                                                    <img src="<%=old.get(i).getImg()%>"
+                                                                         alt="Voucher Giam Gia">
+                                                                    <%}%>
                                                                 </div>
                                                                 <div class="voucherInfo">
-                                                                    <p class="giaTri">Miễn phí vận chuyển</p>
-                                                                    <p class="donToiThieu">Đơn tối thiểu 10k VND</p>
-                                                                    <p class="thoiGian conLai">Còn hiệu lực trong: 3
-                                                                        ngày</p>
+                                                                    <p class="giaTri"><%=old.get(i).getName()%>
+                                                                    </p>
+                                                                    <p class="donToiThieu">Đơn tối
+                                                                        thiểu <%=old.get(i).getMinPrice()%>k
+                                                                        VND</p>
+                                                                    <p class="thoiGian"><%=old.get(i).getVoucherDescription()%>
+                                                                    </p>
                                                                 </div>
                                                                 <div class="use">
-                                                                    <p>Dùng ngay ></p>
+                                                                    <p> Chi tiết ></p>
                                                                 </div>
                                                             </div>
                                                         </td>
+
                                                         <td>
+                                                            <%if (i + 1 < old.size()) {%>
                                                             <div class="voucher">
                                                                 <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/mienpivanchuyen.png"
+                                                                    <%if (old.get(i + 1).getType().equals("Miễn phí vận chuyển")) {%>
+                                                                    <img src="<%=old.get(i+1).getImg()%>"
                                                                          alt="Voucher Giam Gia"
-                                                                         class="freeship">
+                                                                         style="border-color: #ffa400"><%} else {%>
+                                                                    <img src="<%=old.get(i+1).getImg()%>"
+                                                                         alt="Voucher Giam Gia">
+                                                                    <%}%>
                                                                 </div>
                                                                 <div class="voucherInfo">
-                                                                    <p class="giaTri">Miễn phí vận chuyển</p>
-                                                                    <p class="donToiThieu">Cho mọi đơn hàng</p>
-                                                                    <p class="thoiGian conLai">Còn hiệu lực trong: 5
-                                                                        ngày</p>
+                                                                    <p class="giaTri"><%=old.get(i + 1).getName()%>
+                                                                    </p>
+                                                                    <p class="donToiThieu">Đơn tối
+                                                                        thiểu <%=old.get(i + 1).getMinPrice()%>k
+                                                                        VND</p>
+                                                                    <p class="thoiGian"><%=old.get(i + 1).getVoucherDescription()%>
+                                                                    </p>
                                                                 </div>
                                                                 <div class="use">
-                                                                    <p>Dùng ngay ></p>
+                                                                    <p> Chi tiết ></p>
                                                                 </div>
                                                             </div>
+                                                            <%}%>
                                                         </td>
+
                                                     </tr>
+                                                    <%}%>
                                                 </table>
+                                                <%}%>
                                             </div>
                                             <div class="container 4">
+                                                <%
+                                                    List<Voucher> discount = DataDB.getDiscountVouchers(user.getId());
+                                                    if (discount.size() != 0) {
+                                                %>
                                                 <table>
+                                                    <%for (int i = 0; i < discount.size(); i += 2) {%>
                                                     <tr>
                                                         <td>
                                                             <div class="voucher">
                                                                 <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/voucherGiamGia.png"
+                                                                    <img src="<%=discount.get(i).getImg()%>"
                                                                          alt="Voucher Giam Gia">
                                                                 </div>
                                                                 <div class="voucherInfo">
-                                                                    <p class="giaTri">Giảm 10k VND </p>
-                                                                    <p class="donToiThieu">Đơn tối thiểu 10k VND</p>
-                                                                    <p class="thoiGian">Có tác dụng sau: 5 ngày</p>
+                                                                    <p class="giaTri"><%=discount.get(i).getName()%>
+                                                                    </p>
+                                                                    <p class="donToiThieu">Đơn tối
+                                                                        thiểu <%=discount.get(i).getMinPrice()%>k
+                                                                        VND</p>
+                                                                    <p class="thoiGian"><%=discount.get(i).getVoucherDescription()%>
+                                                                    </p>
                                                                 </div>
                                                                 <div class="use">
-                                                                    <p>Dùng ngay ></p>
+                                                                    <p> Chi tiết ></p>
                                                                 </div>
                                                             </div>
                                                         </td>
+
                                                         <td>
+                                                            <%if (i + 1 < discount.size()) {%>
                                                             <div class="voucher">
                                                                 <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/voucherGiamGia.png"
+                                                                    <img src="<%=discount.get(i+1).getImg()%>"
                                                                          alt="Voucher Giam Gia">
                                                                 </div>
                                                                 <div class="voucherInfo">
-                                                                    <p class="giaTri">Giảm 10k VND </p>
-                                                                    <p class="donToiThieu">Đơn tối thiểu 10k VND</p>
-                                                                    <p class="thoiGian conLai">Còn tác dụng trong: 10
-                                                                        giờ 6
-                                                                        phút</p>
+                                                                    <p class="giaTri"><%=discount.get(i + 1).getName()%>
+                                                                    </p>
+                                                                    <p class="donToiThieu">Đơn tối
+                                                                        thiểu <%=discount.get(i + 1).getMinPrice()%>k
+                                                                        VND</p>
+                                                                    <p class="thoiGian"><%=discount.get(i + 1).getVoucherDescription()%>
+                                                                    </p>
                                                                 </div>
                                                                 <div class="use">
-                                                                    <p>Dùng ngay ></p>
+                                                                    <p> Chi tiết ></p>
                                                                 </div>
                                                             </div>
+                                                            <%}%>
                                                         </td>
+
                                                     </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="voucher">
-                                                                <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/voucherGiamGia.png"
-                                                                         alt="Voucher Giam Gia">
-                                                                </div>
-                                                                <div class="voucherInfo">
-                                                                    <p class="giaTri">Giảm 10k VND </p>
-                                                                    <p class="donToiThieu">Đơn tối thiểu 10k VND</p>
-                                                                    <p class="thoiGian">Có tác dụng sau: 6 ngày</p>
-                                                                </div>
-                                                                <div class="use">
-                                                                    <p>Dùng ngay ></p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="voucher">
-                                                                <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/voucherGiamGia.png"
-                                                                         alt="Voucher Giam Gia">
-                                                                </div>
-                                                                <div class="voucherInfo">
-                                                                    <p class="giaTri">Giảm 10k VND </p>
-                                                                    <p class="donToiThieu">Đơn tối thiểu 10k VND</p>
-                                                                    <p class="thoiGian">Có tác dụng sau: 7 ngày</p>
-                                                                </div>
-                                                                <div class="use">
-                                                                    <p>Dùng ngay ></p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="voucher">
-                                                                <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/voucherGiamGia.png"
-                                                                         alt="Voucher Giam Gia">
-                                                                </div>
-                                                                <div class="voucherInfo">
-                                                                    <p class="giaTri">Giảm 10k VND </p>
-                                                                    <p class="donToiThieu">Đơn tối thiểu 10k VND</p>
-                                                                    <p class="thoiGian">Có tác dụng sau: 5 ngày</p>
-                                                                </div>
-                                                                <div class="use">
-                                                                    <p>Dùng ngay ></p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="voucher">
-                                                                <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/voucherGiamGia.png"
-                                                                         alt="Voucher Giam Gia">
-                                                                </div>
-                                                                <div class="voucherInfo">
-                                                                    <p class="giaTri">Giảm 10k VND </p>
-                                                                    <p class="donToiThieu">Đơn tối thiểu 10k VND</p>
-                                                                    <p class="thoiGian">Có tác dụng sau: 5 ngày</p>
-                                                                </div>
-                                                                <div class="use">
-                                                                    <p>Dùng ngay ></p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="voucher">
-                                                                <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/voucherGiamGia.png"
-                                                                         alt="Voucher Giam Gia">
-                                                                </div>
-                                                                <div class="voucherInfo">
-                                                                    <p class="giaTri">Giảm 10k VND </p>
-                                                                    <p class="donToiThieu">Đơn tối thiểu 10k VND</p>
-                                                                    <p class="thoiGian conLai">Còn tác dụng trong: 1
-                                                                        ngày</p>
-                                                                </div>
-                                                                <div class="use">
-                                                                    <p>Dùng ngay ></p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="voucher">
-                                                                <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/voucherGiamGia.png"
-                                                                         alt="Voucher Giam Gia">
-                                                                </div>
-                                                                <div class="voucherInfo">
-                                                                    <p class="giaTri">Giảm 10k VND </p>
-                                                                    <p class="donToiThieu">Đơn tối thiểu 10k VND</p>
-                                                                    <p class="thoiGian">Có tác dụng sau: 5 ngày</p>
-                                                                </div>
-                                                                <div class="use">
-                                                                    <p>Dùng ngay ></p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                    <%}%>
                                                 </table>
+                                                <%}%>
                                             </div>
                                             <div class="container 5">
+                                                <%
+                                                    List<Voucher> fs = DataDB.getFreeshipVouchers(user.getId());
+                                                    if (fs.size() != 0) {
+                                                %>
                                                 <table>
+                                                    <%for (int i = 0; i < fs.size(); i += 2) {%>
                                                     <tr>
                                                         <td>
                                                             <div class="voucher">
                                                                 <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/mienpivanchuyen.png"
+                                                                    <img src="<%=fs.get(i).getImg()%>"
                                                                          alt="Voucher Giam Gia"
-                                                                         class="freeship">
+                                                                         style="border-color: #ffa400">
                                                                 </div>
                                                                 <div class="voucherInfo">
-                                                                    <p class="giaTri">Miễn phí vận chuyển</p>
-                                                                    <p class="donToiThieu">Đơn tối thiểu 10k VND</p>
-                                                                    <p class="thoiGian conLai">Còn hiệu lực trong: 3
-                                                                        ngày</p>
+                                                                    <p class="giaTri"><%=fs.get(i).getName()%>
+                                                                    </p>
+                                                                    <p class="donToiThieu">Đơn tối
+                                                                        thiểu <%=fs.get(i).getMinPrice()%>k
+                                                                        VND</p>
+                                                                    <p class="thoiGian"><%=fs.get(i).getVoucherDescription()%>
+                                                                    </p>
                                                                 </div>
                                                                 <div class="use">
-                                                                    <p>Dùng ngay ></p>
+                                                                    <p> Chi tiết ></p>
                                                                 </div>
                                                             </div>
                                                         </td>
+
                                                         <td>
+                                                            <%if (i + 1 < fs.size()) {%>
                                                             <div class="voucher">
                                                                 <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/mienpivanchuyen.png"
+                                                                    <img src="<%=fs.get(i+1).getImg()%>"
                                                                          alt="Voucher Giam Gia"
-                                                                         class="freeship">
+                                                                         style="border-color: #ffa400">
                                                                 </div>
                                                                 <div class="voucherInfo">
-                                                                    <p class="giaTri">Miễn phí vận chuyển</p>
-                                                                    <p class="donToiThieu">Cho mọi đơn hàng</p>
-                                                                    <p class="thoiGian">Có hiệu lực sau: 6 ngày</p>
+                                                                    <p class="giaTri"><%=fs.get(i + 1).getName()%>
+                                                                    </p>
+                                                                    <p class="donToiThieu">Đơn tối
+                                                                        thiểu <%=fs.get(i + 1).getMinPrice()%>k
+                                                                        VND</p>
+                                                                    <p class="thoiGian"><%=fs.get(i + 1).getVoucherDescription()%>
+                                                                    </p>
                                                                 </div>
                                                                 <div class="use">
-                                                                    <p>Dùng ngay ></p>
+                                                                    <p> Chi tiết ></p>
                                                                 </div>
                                                             </div>
+                                                            <%}%>
                                                         </td>
+
                                                     </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="voucher">
-                                                                <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/mienpivanchuyen.png"
-                                                                         alt="Voucher Giam Gia"
-                                                                         class="freeship">
-                                                                </div>
-                                                                <div class="voucherInfo">
-                                                                    <p class="giaTri">Miễn phí vận chuyển</p>
-                                                                    <p class="donToiThieu">Đơn tối thiểu 10k VND</p>
-                                                                    <p class="thoiGian">Có hiệu lực sau: 3 giờ 5
-                                                                        phút</p>
-                                                                </div>
-                                                                <div class="use">
-                                                                    <p>Dùng ngay ></p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="voucher">
-                                                                <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/mienpivanchuyen.png"
-                                                                         alt="Voucher Giam Gia"
-                                                                         class="freeship">
-                                                                </div>
-                                                                <div class="voucherInfo">
-                                                                    <p class="giaTri">Miễn phí vận chuyển</p>
-                                                                    <p class="donToiThieu">Cho mọi đơn hàng</p>
-                                                                    <p class="thoiGian conLai">Còn hiệu lực trong: 5
-                                                                        ngày</p>
-                                                                </div>
-                                                                <div class="use">
-                                                                    <p>Dùng ngay ></p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="voucher">
-                                                                <div class="voucherIcon">
-                                                                    <img src="../phone_thuan/images/mienpivanchuyen.png"
-                                                                         alt="Voucher Giam Gia"
-                                                                         class="freeship">
-                                                                </div>
-                                                                <div class="voucherInfo">
-                                                                    <p class="giaTri">Miễn phí vận chuyển</p>
-                                                                    <p class="donToiThieu">Đơn tối thiểu 10k VND</p>
-                                                                    <p class="thoiGian">Có hiệu lực sau: 7 ngày</p>
-                                                                </div>
-                                                                <div class="use">
-                                                                    <p>Dùng ngay ></p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td></td>
-                                                    </tr>
+                                                    <%}%>
                                                 </table>
+                                                <%}%>
                                             </div>
                                         </div>
                                         <div id="changePassTab">
@@ -1192,48 +956,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Facility Section -->
-                            <!-- <section class="facility__section section" id="facility">
-                              <div class="container">
-                                <div class="facility__contianer">
-                                  <div class="facility__box">
-                                    <div class="facility-img__container">
-                                      <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-airplane"></use>
-                                      </svg>
-                                    </div>
-                                    <p>FREE SHIPPING WORLD WIDE</p>
-                                  </div>
 
-                                  <div class="facility__box">
-                                    <div class="facility-img__container">
-                                      <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-credit-card-alt"></use>
-                                      </svg>
-                                    </div>
-                                    <p>100% MONEY BACK GUARANTEE</p>
-                                  </div>
-
-                                  <div class="facility__box">
-                                    <div class="facility-img__container">
-                                      <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-credit-card"></use>
-                                      </svg>
-                                    </div>
-                                    <p>MANY PAYMENT GATWAYS</p>
-                                  </div>
-
-                                  <div class="facility__box">
-                                    <div class="facility-img__container">
-                                      <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-headphones"></use>
-                                      </svg>
-                                    </div>
-                                    <p>24/7 ONLINE SUPPORT</p>
-                                  </div>
-                                </div>
-                              </div>
-                            </section> -->
 </main>
 
 <!-- Footer -->
@@ -1316,24 +1039,14 @@
 
 <!-- End Footer -->
 
-<!-- Go To -->
-
-<a href="#header" class="goto-top scroll-link">
-    <svg>
-        <use xlink:href="./images/sprite.svg#icon-arrow-up"></use>
-    </svg>
-</a>
-
-<!-- Glide Carousel Script -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
-
-<!-- Animate On Scroll -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-<!-- Custom JavaScript -->
-<script src="../../../../../Nhom17_GTNM_THAYTOAN/Nhom17_GTNM_THAYTOAN/phone_nam/js/products.js"></script>
-<script src="../../../../../Nhom17_GTNM_THAYTOAN/Nhom17_GTNM_THAYTOAN/phone_nam/js/index.js"></script>
-<script src="../../../../../Nhom17_GTNM_THAYTOAN/Nhom17_GTNM_THAYTOAN/phone_nam/js/slider.js"></script>
+<script>
+    let form=document.querySelector("#info-form")
+    form.onsubmit =(e) =>{
+        let smt=e.submitter;
+        if (smt.id=="submit") return true;
+        else return false;
+    }
+</script>
 </body>
 
 </html>

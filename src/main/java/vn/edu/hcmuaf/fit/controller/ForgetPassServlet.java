@@ -9,6 +9,7 @@ import vn.edu.hcmuaf.fit.model.User;
 import java.io.IOException;
 import java.sql.SQLException;
 
+
 @WebServlet(name = "ForgetPassServlet", value = "/ForgetPassServlet")
 public class ForgetPassServlet extends HttpServlet {
     @Override
@@ -28,8 +29,6 @@ public class ForgetPassServlet extends HttpServlet {
         HttpSession session=request.getSession();
         String confirmCode =(String) session.getAttribute("confirmCode");
         String email = request.getParameter("email");
-        System.out.println(email);
-        System.out.println(confirmCode);
         try {
             User user = DataDB.getUserByEmail(email);
             if (user == null) {
