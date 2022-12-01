@@ -1,5 +1,7 @@
 package vn.edu.hcmuaf.fit.model;
 
+import vn.edu.hcmuaf.fit.controller.Util;
+
 import java.util.Date;
 
 public class Voucher {
@@ -8,7 +10,7 @@ public class Voucher {
     private Date startDate, endDate;
     private int status;
 
-    public Voucher(String id, String name, String type, long discount, long minPrice, Date startDate, Date endDate, int status) {
+    public Voucher(String id, String type, String name, long discount, long minPrice, Date startDate, Date endDate, int status) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -86,5 +88,26 @@ public class Voucher {
     public String getImg(){
         if (type.equals("Miễn phí vận chuyển")) return "image/voucher_type/free_ship.png";
         else return "image/voucher_type/discount.png";
+    }
+
+    public String getVoucherDescription(){
+        int range1=Math.abs(Util.minusDate(startDate,new Date()));
+        int range2=Math.abs(Util.minusDate(new Date(),endDate));
+        if (startDate.compareTo(new Date())>0) return "Có tác dụng sau "+ (range1!=0?range1+" ngày":Util.minusDateToHours(startDate, new Date())+" giờ");
+        else return "Hết hạn sau "+(range2!=0?range2+" ngày":Util.minusDateToHours(new Date(), endDate)+" giờ");
+    }
+
+    @Override
+    public String toString() {
+        return "Voucher{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", discount=" + discount +
+                ", minPrice=" + minPrice +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", status=" + status +
+                '}';
     }
 }
