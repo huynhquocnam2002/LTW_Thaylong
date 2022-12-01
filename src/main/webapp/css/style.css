@@ -1468,7 +1468,7 @@ Testimonial
 
 .testimonial {
     position: relative;
-    background: url("../phone_nam/images/testimonial.jpg") center/cover no-repeat;
+    background: url("../image/images/testimonial.jpg") center/cover no-repeat;
     height: 50rem;
     padding: 5rem 0;
     z-index: 1;
@@ -2148,7 +2148,7 @@ Product Details
 
 #description li {
     line-height: 3rem;
-    color: vaf;
+
 }
 
 #description ol {
@@ -2809,4 +2809,7 @@ header>li {
 .category__section .category__container{
     padding: 1rem;
     background: #f6b896;
+}
+#category .category__container{
+    display: none;
 }
