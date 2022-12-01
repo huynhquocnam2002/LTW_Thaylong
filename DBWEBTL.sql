@@ -3,269 +3,414 @@ CREATE DATABASE PROJECT_WEB;
 USE PROJECT_WEB;
 
 CREATE TABLE PRODUCT(
-	ID VARCHAR(10) PRIMARY KEY,
-	NAME VARCHAR(100),
-	UNIT_PRICE LONG,
-	IMG VARCHAR(255),
-	INSURANCE INT,
-	ID_CATEGORY VARCHAR(10),
-	TAG VARCHAR(20),
-	ID_PRODUCER VARCHAR(10),
-	STATUS TINYINT,
-	ADD_DATE DATE,
-	QUANTITY INT,
-	DETAILS TEXT
+                        ID VARCHAR(10) PRIMARY KEY,
+                        NAME VARCHAR(100),
+                        UNIT_PRICE LONG,
+                        IMG VARCHAR(255),
+                        INSURANCE INT,
+                        ID_CATEGORY VARCHAR(10),
+                        TAG VARCHAR(20),
+                        ID_PRODUCER VARCHAR(10),
+                        STATUS TINYINT,
+                        ADD_DATE DATE,
+                        QUANTITY INT,
+                        DETAILS TEXT
 );
 
 CREATE TABLE OPTION(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
-	VALUE VARCHAR(50),
-	PRICE LONG,
-	QUANTITY INT,
-	STATUS TINYINT
+                       ID VARCHAR(10) PRIMARY KEY,
+                       ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
+                       VALUE VARCHAR(50),
+                       PRICE LONG,
+                       QUANTITY INT,
+                       STATUS TINYINT
 );
 
 CREATE TABLE IMG_PRODUCT(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_PRODUCT VARCHAR(10) REFERENCES PRODUCTS(ID),
-	SRC VARCHAR(255)
+                            ID VARCHAR(10) PRIMARY KEY,
+                            ID_PRODUCT VARCHAR(10) REFERENCES PRODUCTS(ID),
+                            SRC VARCHAR(255)
 );
 
 CREATE TABLE PRODUCER(
-	ID VARCHAR(10) PRIMARY KEY,
-	NAME VARCHAR(50),
-	IMG VARCHAR(255),
-	STATUS TINYINT
+                         ID VARCHAR(10) PRIMARY KEY,
+                         NAME VARCHAR(50),
+                         IMG VARCHAR(255),
+                         STATUS TINYINT
 );
 
 CREATE TABLE CATEGORY(
-	ID VARCHAR(10) PRIMARY KEY,
-	NAME VARCHAR(50),
-	IMG VARCHAR(255),
-	STATUS TINYINT
+                         ID VARCHAR(10) PRIMARY KEY,
+                         NAME VARCHAR(50),
+                         IMG VARCHAR(255),
+                         STATUS TINYINT
 );
 
 CREATE TABLE USER(
-	ID VARCHAR(10) PRIMARY KEY,
-	IMG VARCHAR(255),
-	NAME VARCHAR(50),
-	PHONE_NUMBER VARCHAR(10),
-	EMAIL VARCHAR(255),
-	PASSWORD VARCHAR(50),
-	GENDER VARCHAR(3) DEFAULT 'UKN' CHECK( GENDER IN('NAM','NU','UKN')),
-	BIRTHDAY DATE,
-	STATUS TINYINT,
-	ACCOUNT_DATE DATE
+                     ID VARCHAR(10) PRIMARY KEY,
+                     IMG VARCHAR(255),
+                     NAME VARCHAR(50),
+                     PHONE_NUMBER VARCHAR(10),
+                     EMAIL VARCHAR(255),
+                     PASSWORD VARCHAR(50),
+                     GENDER VARCHAR(3) DEFAULT 'UKN' CHECK( GENDER IN('NAM','NU','UKN')),
+                     BIRTHDAY DATE,
+                     STATUS TINYINT,
+                     ACCOUNT_DATE DATE
 );
 
 CREATE TABLE CART(
-	ID_USER VARCHAR(10) REFERENCES USER(ID),
-	ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
-	QUANTITY INT
+                     ID_USER VARCHAR(10) REFERENCES USER(ID),
+                     ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
+                     QUANTITY INT
 );
 ALTER TABLE CART ADD PRIMARY KEY(ID_USER, ID_PRODUCT);
 
 CREATE TABLE STATUS_ORDER(
-	ID VARCHAR(10) PRIMARY KEY,
-	NAME VARCHAR(50),
-	IMG VARCHAR(255)
+                             ID VARCHAR(10) PRIMARY KEY,
+                             NAME VARCHAR(50),
+                             IMG VARCHAR(255)
 );
 
 CREATE TABLE DELIVERY_ADDRESS(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_USER VARCHAR(10) REFERENCES USER(ID),
-	NAME_RECEIVER VARCHAR(50),
-	PHONE_NUMBER VARCHAR(10),
-	ADDRESS VARCHAR(255)
+                                 ID VARCHAR(10) PRIMARY KEY,
+                                 ID_USER VARCHAR(10) REFERENCES USER(ID),
+                                 NAME_RECEIVER VARCHAR(50),
+                                 PHONE_NUMBER VARCHAR(10),
+                                 ADDRESS VARCHAR(255)
 );
 
 CREATE TABLE ORDERS(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_USER VARCHAR(10) REFERENCES USER(ID),
-	ID_STATUS_ORDER VARCHAR(10) REFERENCES STATUS_ORDER(ID),
-	ID_DELIVERY_ADDRESS VARCHAR(10) REFERENCES DELIVERY_ADDRESS(ID),
-	AMOUNT LONG,
-	NOTES VARCHAR(255),
-	ORDER_DATE DATE
+                       ID VARCHAR(10) PRIMARY KEY,
+                       ID_USER VARCHAR(10) REFERENCES USER(ID),
+                       ID_STATUS_ORDER VARCHAR(10) REFERENCES STATUS_ORDER(ID),
+                       ID_DELIVERY_ADDRESS VARCHAR(10) REFERENCES DELIVERY_ADDRESS(ID),
+                       AMOUNT LONG,
+                       NOTES VARCHAR(255),
+                       ORDER_DATE DATE
 );
 
 CREATE TABLE ANNOUNCEMENT(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_ORDERS VARCHAR(10) REFERENCES ORDERS(ID),
-	NAME VARCHAR(50),
-	IMG VARCHAR(255),
-	CONTENT VARCHAR(255),
-	TIME DATETIME,
-	STATUS TINYINT CHECK(STATUS IN(0,1))
+                             ID VARCHAR(10) PRIMARY KEY,
+                             ID_ORDERS VARCHAR(10) REFERENCES ORDERS(ID),
+                             NAME VARCHAR(50),
+                             IMG VARCHAR(255),
+                             CONTENT VARCHAR(255),
+                             TIME DATETIME,
+                             STATUS TINYINT CHECK(STATUS IN(0,1))
 );
 
 CREATE TABLE PRODUCT_ORDER(
-	ID_ORDER VARCHAR(10) REFERENCES ORDERS(ID),
-	ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
-	QUANTITY INT,
-	AMOUNT LONG
+                              ID_ORDER VARCHAR(10) REFERENCES ORDERS(ID),
+                              ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
+                              QUANTITY INT,
+                              AMOUNT LONG
 );
 ALTER TABLE PRODUCT_ORDER ADD PRIMARY KEY (ID_ORDER, ID_PRODUCT);
 
 CREATE TABLE REVIEW(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_USER VARCHAR(10) REFERENCES USER(ID),
-	ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
-	STAR INT CHECK(STAR >0 AND STAR <=5),
-	CONTENT VARCHAR(255),
-	REVIEW_DATE DATE
+                       ID VARCHAR(10) PRIMARY KEY,
+                       ID_USER VARCHAR(10) REFERENCES USER(ID),
+                       ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
+                       STAR INT CHECK(STAR >0 AND STAR <=5),
+                       CONTENT VARCHAR(255),
+                       REVIEW_DATE DATE
 );
 
 CREATE TABLE VOUCHER_TYPE(
-	ID VARCHAR(10) PRIMARY KEY,
-	NAME VARCHAR(50),
-	IMG VARCHAR(255)
+                             ID VARCHAR(10) PRIMARY KEY,
+                             NAME VARCHAR(50),
+                             IMG VARCHAR(255)
 );
 
 CREATE TABLE VOUCHER(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_TYPE VARCHAR(10) REFERENCES VOUCHER_TYPE(ID),
-	NAME VARCHAR(50),
-	DISCOUNT LONG,
-	MIN_PRICE LONG,
-	START_DATE DATE,
-	END_DATE DATE,
-	STATUS TINYINT
+                        ID VARCHAR(10) PRIMARY KEY,
+                        ID_TYPE VARCHAR(10) REFERENCES VOUCHER_TYPE(ID),
+                        NAME VARCHAR(50),
+                        DISCOUNT LONG,
+                        MIN_PRICE LONG,
+                        START_DATE DATE,
+                        END_DATE DATE,
+                        STATUS TINYINT
 );
 
 CREATE TABLE USER_VOUCHER(
-	ID_USER VARCHAR(10) REFERENCES USER(ID),
-	ID_VOUCHER VARCHAR(10) REFERENCES VOUCHER(ID),
-	QUANTITY INT
+                             ID_USER VARCHAR(10) REFERENCES USER(ID),
+                             ID_VOUCHER VARCHAR(10) REFERENCES VOUCHER(ID),
+                             QUANTITY INT
 );
 ALTER TABLE USER_VOUCHER ADD PRIMARY KEY (ID_USER, ID_VOUCHER);
 
 CREATE TABLE ORDER_VOUCHER(
-	ID_ORDER VARCHAR(10) REFERENCES ORDERS(ID),
-ID_VOUCHER VARCHAR(10) REFERENCES VOUCHER(ID)
+                              ID_ORDER VARCHAR(10) REFERENCES ORDERS(ID),
+                              ID_VOUCHER VARCHAR(10) REFERENCES VOUCHER(ID)
 );
 ALTER TABLE ORDER_VOUCHER ADD PRIMARY KEY (ID_ORDER, ID_VOUCHER);
 
 CREATE TABLE ADMIN(
-	ID VARCHAR(10) PRIMARY KEY,
-	NAME VARCHAR(50),
-	PHONE_NUMBER VARCHAR(10),
-	EMAIL VARCHAR(255),
-	BIRTHDAY DATE,
-	GENDER VARCHAR(3) CHECK( GENDER IN ('NAM','NU')),
-	PASSWORD VARCHAR(50)
+                      ID VARCHAR(10) PRIMARY KEY,
+                      NAME VARCHAR(50),
+                      PHONE_NUMBER VARCHAR(10),
+                      EMAIL VARCHAR(255),
+                      BIRTHDAY DATE,
+                      GENDER VARCHAR(3) CHECK( GENDER IN ('NAM','NU')),
+                      PASSWORD VARCHAR(50)
 );
 
 CREATE TABLE EDIT_CATEGORY(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
-	ID_CATEGORY VARCHAR(10) REFERENCES CATEGORY(ID),
-	EDIT_DETAILS VARCHAR(255) 
+                              ID VARCHAR(10) PRIMARY KEY,
+                              ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
+                              ID_CATEGORY VARCHAR(10) REFERENCES CATEGORY(ID),
+                              EDIT_DETAILS VARCHAR(255)
 );
 
 CREATE TABLE EDIT_PRODUCT(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
-	ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
-	EDIT_DETAILS VARCHAR(255)
+                             ID VARCHAR(10) PRIMARY KEY,
+                             ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
+                             ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
+                             EDIT_DETAILS VARCHAR(255)
 );
 
 CREATE TABLE EDIT_PRODUCER(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
-	ID_PRODUCER VARCHAR(10) REFERENCES PRODUCER(ID),
-	EDIT_DETAILS VARCHAR(255)
+                              ID VARCHAR(10) PRIMARY KEY,
+                              ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
+                              ID_PRODUCER VARCHAR(10) REFERENCES PRODUCER(ID),
+                              EDIT_DETAILS VARCHAR(255)
 );
 
 CREATE TABLE EDIT_IMG_PRODUCT(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
-	ID_IMG_PRODUCT VARCHAR(10) REFERENCES IMG_PRODUCT(ID),
-	EDIT_DETAILS VARCHAR(255)
+                                 ID VARCHAR(10) PRIMARY KEY,
+                                 ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
+                                 ID_IMG_PRODUCT VARCHAR(10) REFERENCES IMG_PRODUCT(ID),
+                                 EDIT_DETAILS VARCHAR(255)
 );
 
 CREATE TABLE EDIT_VOUCHER(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
-	ID_VOUCHER VARCHAR(10) REFERENCES VOUCHER(ID),
-	EDIT_DETAILS VARCHAR(255)
+                             ID VARCHAR(10) PRIMARY KEY,
+                             ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
+                             ID_VOUCHER VARCHAR(10) REFERENCES VOUCHER(ID),
+                             EDIT_DETAILS VARCHAR(255)
 );
 
 CREATE TABLE EDIT_VOUCHER_TYPE(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
-	ID_VOUCHER_TYPE VARCHAR(10) REFERENCES VOUCHER_TYPE(ID),
-	EDIT_DETAILS VARCHAR(255)
+                                  ID VARCHAR(10) PRIMARY KEY,
+                                  ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
+                                  ID_VOUCHER_TYPE VARCHAR(10) REFERENCES VOUCHER_TYPE(ID),
+                                  EDIT_DETAILS VARCHAR(255)
 );
 
 CREATE TABLE EDIT_ORDER(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
-	ID_ORDER VARCHAR(10) REFERENCES ORDERS(ID),
-	EDIT_DETAILS VARCHAR(255)
+                           ID VARCHAR(10) PRIMARY KEY,
+                           ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
+                           ID_ORDER VARCHAR(10) REFERENCES ORDERS(ID),
+                           EDIT_DETAILS VARCHAR(255)
 );
 
 CREATE TABLE EDIT_USER_VOUCHER(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
-	ID_USER_VOUCHER VARCHAR(10) REFERENCES USER_VOUCHER(ID),
-	EDIT_DETAILS VARCHAR(255)
+                                  ID VARCHAR(10) PRIMARY KEY,
+                                  ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
+                                  ID_USER_VOUCHER VARCHAR(10) REFERENCES USER_VOUCHER(ID),
+                                  EDIT_DETAILS VARCHAR(255)
 );
 
-INSERT INTO PRODUCT VALUES ('PR1','Combo sạc Pisen Quick PD 20W kèm cáp Lightning',295000,'imageProduct/product1.jpg',9,'1','hot','5',-1,'2022/11/20',281,null);
-INSERT INTO PRODUCT VALUES ('PR2','Cáp Lightning tự ngắt 1.2m Pisen AL26',180000,'imageProduct/product2.jpg',6,'1','hot','5',-1,'2022/11/20',101,null);
-INSERT INTO PRODUCT VALUES ('PR3','Sạc dự phòng PISEN Quick 10500mAh(LED) – Ultra',405000,'imageProduct/product3.jpg',8,'2','hot','5',1,'2022/11/20',250,null);
-INSERT INTO PRODUCT VALUES ('PR4','Ốp lưng trong S-Case Chống sốc cho iPhone 7/8 Plus',81000,'imageProduct/product4.jpg',10,'3','hot','3',2,'2022/11/20',137,null);
-INSERT INTO PRODUCT VALUES ('PR5','Tai nghe Bluetooth không dây Energizer UB2609',590000,'imageProduct/product5.jpg',6,'5','hot','6',1,'2022/11/20',135,null);
-INSERT INTO PRODUCT VALUES ('PR6','Dán PPF iPhone 13 Pro Max full trong mặt sau',135000,'imageProduct/product6.jpg',9,'4','hot','3',1,'2022/11/20',106,null);
-
-INSERT INTO PRODUCT VALUES ('PR7','Sạc dự phòng PISEN Quick High Power Box 10000mAh 20W',590000,'imageProduct/product7.jpg',9,'2','new','5',0,'2022/11/20',186,null);
-INSERT INTO PRODUCT VALUES ('PR8','Apple iPhone 11 dán Camera chống va đập S-Case',90000,'imageProduct/product8.jpg',12,'7','new','3',0,'2022/11/20',197,null);
-INSERT INTO PRODUCT VALUES ('PR9','Củ sạc nhanh PD 20W chính hãng Apple (MHJE3ZA)',750000,'imageProduct/product9.jpg',12,'1','new','3',1,'2022/11/20',123,null);
-INSERT INTO PRODUCT VALUES ('PR10','Apple iPhone 11 Pro Max dán Camera chống va đập S-Case',90000,'imageProduct/product10.jpg',12,'7','new','3',0,'2022/11/20',107,null);
-INSERT INTO PRODUCT VALUES ('PR11','Tai nghe In-Ears Devia Smart Earpods có mic',95000,'imageProduct/product11.jpg',12,'5','new','7',2,'2022/11/20',131,null);
-INSERT INTO PRODUCT VALUES ('PR12','Tai nghe Bluetooth không dây Apple AirPods Pro 2021',4890000,'imageProduct/product12.jpg',10,'5','new','3',0,'2022/11/20',278,null);
-INSERT INTO PRODUCT VALUES ('PR13','Tai nghe Bluetooth không dây Apple AirPods 2',2790000,'imageProduct/product13.jpg',7,'5','new','3',2,'2022/11/20',191,null);
-INSERT INTO PRODUCT VALUES ('PR14','Miếng Dán PPF Full Viền Mặt sau cho iPhone 11 Pro Max (A20K.012)',135000,'imageProduct/product14.jpg',11,'4','new','3',1,'2022/11/20',198,null);
-INSERT INTO PRODUCT VALUES ('PR15','Củ sạc nhanh Mophie PD 18W Type-C',250000,'imageProduct/product15.jpg',6,'1','new','8',-1,'2022/11/20',253,null);
-INSERT INTO PRODUCT VALUES ('PR16','Tai nghe không dây Havit TW967',290000,'imageProduct/product16.jpg',12,'5','new','9',1,'2022/11/20',170,null);
-INSERT INTO PRODUCT VALUES ('PR17','Sạc dự phòng Energizer 15.000 mAh (UE15032PQ)',550000,'imageProduct/product17.jpg',12,'2','new','6',-1,'2022/11/20',154,null);
-INSERT INTO PRODUCT VALUES ('PR18','Dán PPF full màn hình cao cấp cho iPhone 11',135000,'imageProduct/product18.jpg',10,'4','new','3',-1,'2022/11/20',225,null);
-INSERT INTO PRODUCT VALUES ('PR19','Sạc nhanh PD 20W Anker Powerport III Nano (A2633)',360000,'imageProduct/product19.jpg',10,'1','new','10',-1,'2022/11/20',158,null);
-INSERT INTO PRODUCT VALUES ('PR20','Dán PPF nhám cao cấp full mặt sau Apple iPhone 12 Pro Max',135000,'imageProduct/product20.jpg',8,'4','new','3',0,'2022/11/20',257,null);
-INSERT INTO PRODUCT VALUES ('PR21','"Cáp sạc Lightning tự ngắt 1,2m Pisen ZINC Intelligent Pro XD"',175000,'imageProduct/product21.jpg',9,'1','new','5',1,'2022/11/20',283,null);
-
-INSERT INTO PRODUCT VALUES ('PR22','Tai nghe chụp tai Gaming Havit HV-H2232D',350000,'imageProduct/product22.jpg',11,'5','salerun','9',1,'2022/11/20',235,null);
-INSERT INTO PRODUCT VALUES ('PR23','Tai nghe In-Ear cổng Lightning Devia',205000,'imageProduct/product23.jpg',10,'5','salerun','7',2,'2022/11/20',168,null);
-INSERT INTO PRODUCT VALUES ('PR24','Apple iPhone 11/XR ốp lưng Likgus Kickstand trong suốt',157000,'imageProduct/product24.jpg',8,'3','salerun','3',-1,'2022/11/20',176,null);
-INSERT INTO PRODUCT VALUES ('PR25','Củ sạc nhanh PD Pisen Quick 20W',200000,'imageProduct/product25.jpg',11,'1','salerun','5',-1,'2022/11/20',119,null);
-INSERT INTO PRODUCT VALUES ('PR26','Dán cường lực full màn hình 4D cho iPhone 7 Plus / 8 Plus',135000,'imageProduct/product26.jpg',6,'6','salerun','3',2,'2022/11/20',192,null);
-INSERT INTO PRODUCT VALUES ('PR27','Tai nghe có dây cổng Lightning chính hãng Apple (MMTN2)',550000,'imageProduct/product27.jpg',12,'5','salerun','3',1,'2022/11/20',237,null);
-INSERT INTO PRODUCT VALUES ('PR28','Tai nghe Bluetooth không dây SoundPEATS True Air 2',690000,'imageProduct/product28.jpg',6,'5','salerun','11',2,'2022/11/20',241,null);
-INSERT INTO PRODUCT VALUES ('PR29','Tai nghe Bluetooth không dây SoundPEATS True Wings',790000,'imageProduct/product29.jpg',11,'5','salerun','11',0,'2022/11/20',177,null);
-INSERT INTO PRODUCT VALUES ('PR30','Cáp sạc USB-C to Lightning 1m chính hãng Apple (MM0A3FE/A)',490000,'imageProduct/product30.jpg',8,'1','salerun','3',1,'2022/11/20',139,null);
-INSERT INTO PRODUCT VALUES ('PR31','Miếng Dán Nhám PPF Full Viền Mặt sau cho iPhone Xs Max (A16D.004)',135000,'imageProduct/product31.jpg',10,'4','salerun','3',1,'2022/11/20',253,null);
-INSERT INTO PRODUCT VALUES ('PR32','Tai nghe Bluetooth không dây Havit GAMING TW938',490000,'imageProduct/product32.jpg',9,'5','salerun','9',0,'2022/11/20',143,null);
-INSERT INTO PRODUCT VALUES ('PR33','Apple iPhone 11 Pro Max dán chống va đập Kingkong Full cao cấp chống nhìn trộm Đen',270000,'imageProduct/product33.jpg',9,'6','salerun','3',1,'2022/11/20',290,null);
-INSERT INTO PRODUCT VALUES ('PR34','Tai nghe Bluetooth không dây QCY T1C',260000,'imageProduct/product34.jpg',6,'5','salerun','12',-1,'2022/11/20',286,null);
-INSERT INTO PRODUCT VALUES ('PR35','Sạc nhanh PD 20W Pisen Quick Teeny',230000,'imageProduct/product35.jpg',6,'1','salerun','5',0,'2022/11/20',294,null);
-INSERT INTO PRODUCT VALUES ('PR36','Pin sạc dự phòng GOLF Candy 10.000 mAh (G80)',250000,'imageProduct/product36.jpg',12,'2','salerun','15',0,'2022/11/20',208,null);
-INSERT INTO PRODUCT VALUES ('PR37','Tai nghe Bluetooth không dây Defunc True Basic',490000,'imageProduct/product37.jpg',12,'5','salerun','14',-1,'2022/11/20',212,null);
-INSERT INTO PRODUCT VALUES ('PR38','Cáp sạc Lightning 1m MFi MOPHIE',230000,'imageProduct/product38.jpg',11,'1','salerun','13',0,'2022/11/20',192,null);
-
-INSERT INTO PRODUCT VALUES ('PR39','Apple iPhone 11 Pro Max ốp lưng S-Case trong',81000,'imageProduct/product39.jpg',10,'3','flastsale','3',1,'2022/11/20',219,null);
-INSERT INTO PRODUCT VALUES ('PR40','Tai nghe Bluetooth không dây Havit TW959',450000,'imageProduct/product40.jpg',12,'5','flastsale','9',1,'2022/11/20',217,null);
-INSERT INTO PRODUCT VALUES ('PR41','Tai nghe Bluetooth không dây Xiaomi Earbud Basic S',450000,'imageProduct/product41.jpg',8,'5','flastsale','1',0,'2022/11/20',198,null);
-INSERT INTO PRODUCT VALUES ('PR42','Pin dự phòng Energizer 10.000 mAh tích hợp sạc không dây 5W (QE10007)',550000,'imageProduct/product42.jpg',7,'2','flastsale','3',-1,'2022/11/20',287,null);
-INSERT INTO PRODUCT VALUES ('PR43','Apple Iphone X/XS Dán Camera chống trầy S-Case',45000,'imageProduct/product43.jpg',11,'7','flastsale','3',1,'2022/11/20',108,null);
-INSERT INTO PRODUCT VALUES ('PR44','Tai nghe Bluetooth Earbuds SoundPEATS Mac',590000,'imageProduct/product44.jpg',12,'5','flastsale','11',0,'2022/11/20',157,null);
-INSERT INTO PRODUCT VALUES ('PR45','Combo sạc Pisen Quick PD 30W kèm cáp Lightning',495000,'imageProduct/product45.jpg',7,'1','flastsale','5',1,'2022/11/20',190,null);
-INSERT INTO PRODUCT VALUES ('PR46','Apple iPhone 11 ốp lưng S-Case Silicone',81000,'imageProduct/product46.jpg',12,'3','flastsale','3',2,'2022/11/20',139,null);
-INSERT INTO PRODUCT VALUES ('PR47','Sạc Aukey PD 20W PA-B1 Pro',270000,'imageProduct/product47.jpg',12,'1','flastsale','16',2,'2022/11/20',103,null);
-INSERT INTO PRODUCT VALUES ('PR48','Samsung Galaxy S20 Plus dán màn hình PPF Full cao cấp mặt trước',283000,'imageProduct/product48.jpg',11,'4','flastsale','2',1,'2022/11/20',221,null);
-INSERT INTO PRODUCT VALUES ('PR49','Tai nghe Bluetooth không dây QCY T7',380000,'imageProduct/product49.jpg',12,'5','flastsale','12',1,'2022/11/20',259,null);
-INSERT INTO PRODUCT VALUES ('PR50','Cáp sạc Mophie Type-C to Lightning 1m',250000,'imageProduct/product50.jpg',10,'1','flastsale','8',2,'2022/11/20',215,null);
+INSERT INTO PRODUCT VALUES ('PR1', 'Combo sạc Pisen Quick PD 20W kèm cáp Lightning', '295000', 'image/imageProduct/product1.jpg', 9, '1', 'hot', '5', -1, '2022-11-20', 281,
+                            'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+                            Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+                            Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+                            Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR10', 'Apple iPhone 11 Pro Max dán Camera chống va đập S-Case', '90000', 'image/imageProduct/product10.jpg', 12, '7', 'new', '3', 0, '2022-11-20', 107,'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR11', 'Tai nghe In-Ears Devia Smart Earpods có mic', '95000', 'image/imageProduct/product11.jpg', 12, '5', 'new', '7', 2, '2022-11-20', 131, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR12', 'Tai nghe Bluetooth không dây Apple AirPods Pro 2021', '4890000', 'image/imageProduct/product12.jpg', 10, '5', 'new', '3', 0, '2022-11-20', 278, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR13', 'Tai nghe Bluetooth không dây Apple AirPods 2', '2790000', 'image/imageProduct/product13.jpg', 7, '5', 'new', '3', 2, '2022-11-20', 191, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR14', 'Miếng Dán PPF Full Viền Mặt sau cho iPhone 11 Pro Max (A20K.012)', '135000', 'image/imageProduct/product14.jpg', 11, '4', 'new', '3', 1, '2022-11-20', 198, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR15', 'Củ sạc nhanh Mophie PD 18W Type-C', '250000', 'image/imageProduct/product15.jpg', 6, '1', 'new', '8', -1, '2022-11-20', 253, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR16', 'Tai nghe không dây Havit TW967', '290000', 'image/imageProduct/product16.jpg', 12, '5', 'new', '9', 1, '2022-11-20', 170, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR17', 'Sạc dự phòng Energizer 15.000 mAh (UE15032PQ)', '550000', 'image/imageProduct/product17.jpg', 12, '2', 'new', '6', -1, '2022-11-20', 154, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR18', 'Dán PPF full màn hình cao cấp cho iPhone 11', '135000', 'image/imageProduct/product18.jpg', 10, '4', 'new', '3', -1, '2022-11-20', 225, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR19', 'Sạc nhanh PD 20W Anker Powerport III Nano (A2633)', '360000', 'image/imageProduct/product19.jpg', 10, '1', 'new', '10', -1, '2022-11-20', 158, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR2', 'Cáp Lightning tự ngắt 1.2m Pisen AL26', '180000', 'image/imageProduct/product2.jpg', 6, '1', 'hot', '5', -1, '2022-11-20', 101, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR20', 'Dán PPF nhám cao cấp full mặt sau Apple iPhone 12 Pro Max', '135000', 'image/imageProduct/product20.jpg', 8, '4', 'new', '3', 0, '2022-11-20', 257, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR21', '\"Cáp sạc Lightning tự ngắt 1,2m Pisen ZINC Intelligent Pro XD\"', '175000', 'image/imageProduct/product21.jpg', 9, '1', 'new', '5', 1, '2022-11-20', 283, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR22', 'Tai nghe chụp tai Gaming Havit HV-H2232D', '350000', 'image/imageProduct/product22.jpg', 11, '5', 'salerun', '9', 1, '2022-11-20', 235, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR23', 'Tai nghe In-Ear cổng Lightning Devia', '205000', 'image/imageProduct/product23.jpg', 10, '5', 'salerun', '7', 2, '2022-11-20', 168, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR24', 'Apple iPhone 11/XR ốp lưng Likgus Kickstand trong suốt', '157000', 'image/imageProduct/product24.jpg', 8, '3', 'salerun', '3', -1, '2022-11-20', 176, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR25', 'Củ sạc nhanh PD Pisen Quick 20W', '200000', 'image/imageProduct/product25.jpg', 11, '1', 'salerun', '5', -1, '2022-11-20', 119, NULL);
+INSERT INTO PRODUCT VALUES ('PR26', 'Dán cường lực full màn hình 4D cho iPhone 7 Plus / 8 Plus', '135000', 'image/imageProduct/product26.jpg', 6, '6', 'salerun', '3', 2, '2022-11-20', 192, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR27', 'Tai nghe có dây cổng Lightning chính hãng Apple (MMTN2)', '550000', 'image/imageProduct/product27.jpg', 12, '5', 'salerun', '3', 1, '2022-11-20', 237, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR28', 'Tai nghe Bluetooth không dây SoundPEATS True Air 2', '690000', 'image/imageProduct/product28.jpg', 6, '5', 'salerun', '11', 2, '2022-11-20', 241, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR29', 'Tai nghe Bluetooth không dây SoundPEATS True Wings', '790000', 'image/imageProduct/product29.jpg', 11, '5', 'salerun', '11', 0, '2022-11-20', 177, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR3', 'Sạc dự phòng PISEN Quick 10500mAh(LED) – Ultra', '405000', 'image/imageProduct/product3.jpg', 8, '2', 'hot', '5', 1, '2022-11-20', 250, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR30', 'Cáp sạc USB-C to Lightning 1m chính hãng Apple (MM0A3FE/A)', '490000', 'image/imageProduct/product30.jpg', 8, '1', 'salerun', '3', 1, '2022-11-20', 139, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR31', 'Miếng Dán Nhám PPF Full Viền Mặt sau cho iPhone Xs Max (A16D.004)', '135000', 'image/imageProduct/product31.jpg', 10, '4', 'salerun', '3', 1, '2022-11-20', 253, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR32', 'Tai nghe Bluetooth không dây Havit GAMING TW938', '490000', 'image/imageProduct/product32.jpg', 9, '5', 'salerun', '9', 0, '2022-11-20', 143, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR33', 'Apple iPhone 11 Pro Max dán chống va đập Kingkong Full cao cấp chống nhìn trộm Đen', '270000', 'image/imageProduct/product33.jpg', 9, '6', 'salerun', '3', 1, '2022-11-20', 290, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR34', 'Tai nghe Bluetooth không dây QCY T1C', '260000', 'image/imageProduct/product34.jpg', 6, '5', 'salerun', '12', -1, '2022-11-20', 286, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR35', 'Sạc nhanh PD 20W Pisen Quick Teeny', '230000', 'image/imageProduct/product35.jpg', 6, '1', 'salerun', '5', 0, '2022-11-20', 294, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR36', 'Pin sạc dự phòng GOLF Candy 10.000 mAh (G80)', '250000', 'image/imageProduct/product36.jpg', 12, '2', 'salerun', '15', 0, '2022-11-20', 208, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR37', 'Tai nghe Bluetooth không dây Defunc True Basic', '490000', 'image/imageProduct/product37.jpg', 12, '5', 'salerun', '14', -1, '2022-11-20', 212, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR38', 'Cáp sạc Lightning 1m MFi MOPHIE', '230000', 'image/imageProduct/product38.jpg', 11, '1', 'salerun', '13', 0, '2022-11-20', 192, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR39', 'Apple iPhone 11 Pro Max ốp lưng S-Case trong', '81000', 'image/imageProduct/product39.jpg', 10, '3', 'flastsale', '3', 1, '2022-11-20', 219, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR4', 'Ốp lưng trong S-Case Chống sốc cho iPhone 7/8 Plus', '81000', 'image/imageProduct/product4.jpg', 10, '3', 'hot', '3', 2, '2022-11-20', 137, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR40', 'Tai nghe Bluetooth không dây Havit TW959', '450000', 'image/imageProduct/product40.jpg', 12, '5', 'flastsale', '9', 1, '2022-11-20', 217, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR41', 'Tai nghe Bluetooth không dây Xiaomi Earbud Basic S', '450000', 'image/imageProduct/product41.jpg', 8, '5', 'flastsale', '1', 0, '2022-11-20', 198, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR42', 'Pin dự phòng Energizer 10.000 mAh tích hợp sạc không dây 5W ', '550000', 'image/imageProduct/product42.jpg', 7, '2', 'flastsale', '3', -1, '2022-11-20', 287, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR43', 'Apple Iphone X/XS Dán Camera chống trầy S-Case', '45000', 'image/imageProduct/product43.jpg', 11, '7', 'flastsale', '3', 1, '2022-11-20', 108, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR44', 'Tai nghe Bluetooth Earbuds SoundPEATS Mac', '590000', 'image/imageProduct/product44.jpg', 12, '5', 'flastsale', '11', 0, '2022-11-20', 157, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR45', 'Combo sạc Pisen Quick PD 30W kèm cáp Lightning', '495000', 'image/imageProduct/product45.jpg', 7, '1', 'flastsale', '5', 1, '2022-11-20', 190, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR46', 'Apple iPhone 11 ốp lưng S-Case Silicone Thế Hệ Mới 2022', '81000', 'image/imageProduct/product46.jpg', 12, '3', 'flastsale', '3', 2, '2022-11-20', 139, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR47', 'Sạc Aukey PD 20W PA-B1 Pro Thế Hệ Mới 2022', '270000', 'image/imageProduct/product47.jpg', 12, '1', 'flastsale', '16', 2, '2022-11-20', 103, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR48', 'Samsung Galaxy S20 Plus dán màn hình PPF Full ', '283000', 'image/imageProduct/product48.jpg', 11, '4', 'flastsale', '2', 1, '2022-11-20', 221, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR49', 'Tai nghe Bluetooth không dây QCY T7 Thế Hệ Mới 2022', '380000', 'image/imageProduct/product49.jpg', 12, '5', 'flastsale', '12', 1, '2022-11-20', 259, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR5', 'Tai nghe Bluetooth không dây Energizer UB2609', '590000', 'image/imageProduct/product5.jpg', 6, '5', 'hot', '6', 1, '2022-11-20', 135, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR50', 'Cáp sạc Mophie Type-C to Lightning 1m', '250000', 'image/imageProduct/product50.jpg', 10, '1', 'flastsale', '8', 2, '2022-11-20', 215, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR6', 'Dán PPF iPhone 13 Pro Max full trong mặt sau', '135000', 'image/imageProduct/product6.jpg', 9, '4', 'hot', '3', 1, '2022-11-20', 106, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR7', 'Sạc dự phòng PISEN Quick High Power Box 10000mAh 20W', '590000', 'image/imageProduct/product7.jpg', 9, '2', 'new', '5', 0, '2022-11-20', 186, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR8', 'Apple iPhone 11 dán Camera chống va đập S-Case', '90000', 'image/imageProduct/product8.jpg', 12, '7', 'new', '3', 0, '2022-11-20', 197, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR9', 'Củ sạc nhanh PD 20W chính hãng Apple (MHJE3ZA)', '750000', 'image/imageProduct/product9.jpg', 12, '1', 'new', '3', 1, '2022-11-20', 123, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
 
 INSERT INTO PRODUCER VALUES ('PRER1','Xiaomi','image/producer/producer1.png',1);
 INSERT INTO PRODUCER VALUES ('PRER2','Samsung','image/producer/producer2.png',1);
@@ -1248,19 +1393,3 @@ INSERT INTO EDIT_ORDER VALUES ('47','2','47','Chỉnh sửa trạng thái');
 INSERT INTO EDIT_ORDER VALUES ('48','3','48','Chỉnh sửa ảnh');
 INSERT INTO EDIT_ORDER VALUES ('49','1','49','Chỉnh sửa ảnh');
 INSERT INTO EDIT_ORDER VALUES ('50','2','50','Chỉnh sửa trạng thái');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

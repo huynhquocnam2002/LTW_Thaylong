@@ -173,6 +173,7 @@
             </li>
 
 
+
             <li><%=data.getProductById("PR17").getName()%>
             </li>
 
@@ -180,7 +181,7 @@
         </ul>
     </div>
 </div>
-<h2 id="section__title__product" ><%=data.getProductById("PR17").getName() %>
+<h2 id="section__title__product"><%=data.getProductById("PR17").getName()%>
 </h2>
 <%--<%=data.getProductById(request.getParameter("idProduct")).getName()%>--%>
 
@@ -203,7 +204,7 @@
                                         <div class="hero__left">
                                             <h1>TÍNH NĂNG NỔI BẬT</h1>
 
-                                            <img src="<%=data.getProductById("PR17").getImg()%>
+                                            <img src="   <%=data.getProductById(request.getParameter("idProduct")).getImg()%>
                                             "
 
                                                  alt="img__product" id="image__detail__product">
@@ -326,8 +327,8 @@
             <div class="product__item">
 
                 <img
-                        src="<%=data.getProductById("PR17").getImg()%>"
-                        alt="" style="width: 35px;height: 33.9px">
+                        src="<%=data.getProductById(request.getParameter("idProduct")).getImg()%>"
+                        alt="">
 
                 <div class="product__title__item">
                     <strong>Đen</strong>
@@ -415,7 +416,7 @@
 
 
                     <span>Giá:</span>
-                    <a href="#" class="new__price"><%=data.getProductById("PR17").getPrice()%>VNĐ</a>
+                    <a href="#" class="new__price"><%=data.getProductById(request.getParameter("idProduct")).getPrice()%>VNĐ</a>
 
 
                 </li>
@@ -429,13 +430,12 @@
 
                 <li>
                     <span>Loại sản phẩm:</span>
-                    <a href="#"><%= data.getCategorysObject().getName()%>
-                    </a>
+                    <a href="#"><%= data.getCategorysObject().getName()%> </a>
 
                 </li>
                 <li>
                     <span>Hiện có:</span>
-                    <a href="#" class="in-stock">Trong kho (<%=data.getProductById("PR17").getQuantity()%> sản phẩm)</a>
+                    <a href="#" class="in-stock">Trong kho (<%=data.getProductById(request.getParameter("idProduct")).getQuantity()%> sản phẩm)</a>
                 </li>
                 </ul>
                 <div class="product-info__btn">
@@ -506,8 +506,8 @@
 
                 <strong>Bảo hành </strong>
 
-                <p style="color:#333333; font-size:14px;">Bảo hành: <b 12
-                        tháng></b> chính hãng Energiner</p>
+                <p style="color:#333333; font-size:14px;">Bảo hành:<b<%=data.getProductById("PR17").getIns()%> tháng></b> chính hãng Energiner</p>
+
 
 
             </div>
