@@ -220,11 +220,14 @@ public class DataDB {
     public static boolean readAllAnnouncement(String userId) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
         int res = 0;
+        List<String> orderId = new ArrayList<String>();
         ResultSet orderIds = db.getStatement().executeQuery("select id from orders where id_user='" + userId + "';");
         while (orderIds.next()) {
-            String orderId = orderIds.getString(1);
-            res += db.getStatement().executeUpdate("update announcement set status=1 where id='" + orderId + "';");
+            orderId.add(orderIds.getString(1));
         }
+        orderIds.close();
+        for (String st : orderId)
+            res += db.getStatement().executeUpdate("update announcement set status=1 where id_orders='" + st + "';");
         if (res == 0) return false;
         return true;
     }
@@ -232,11 +235,14 @@ public class DataDB {
     public static boolean deleteAllAnnouncement(String userId) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
         int res = 0;
+        List<String> orderId = new ArrayList<String>();
         ResultSet orderIds = db.getStatement().executeQuery("select id from orders where id_user='" + userId + "';");
         while (orderIds.next()) {
-            String orderId = orderIds.getString(1);
-            res += db.getStatement().executeUpdate("delete from announcement where id_orders='" + orderId + "';");
+            orderId.add(orderIds.getString(1));
         }
+        orderIds.close();
+        for (String st : orderId)
+            res += db.getStatement().executeUpdate("delete from announcement where id_orders='" + st + "';");
         if (res == 0) return false;
         return true;
     }
@@ -245,7 +251,7 @@ public class DataDB {
         List<Voucher> res = new ArrayList<Voucher>();
         List<Voucher> all = getVouchers(userId);
         for (Voucher v : all) {
-            if (Util.minusDateToHours(v.getStartDate(), new Date())>0) res.add(v);
+            if (Util.minusDateToHours(v.getStartDate(), new Date()) > 0) res.add(v);
         }
         return res;
     }
@@ -254,7 +260,7 @@ public class DataDB {
         List<Voucher> res = new ArrayList<Voucher>();
         List<Voucher> all = getVouchers(userId);
         for (Voucher v : all) {
-            if (Util.minusDateToHours(new Date(), v.getStartDate())>0) res.add(v);
+            if (Util.minusDateToHours(new Date(), v.getStartDate()) > 0) res.add(v);
         }
         return res;
     }
@@ -278,8 +284,6 @@ public class DataDB {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-//        for (Voucher v : getNewestVouchers("U1") ){
-//            System.out.println(v.getVoucherDescription());
-//        }
+        System.out.println(getUserById("U1"));
     }
 }

@@ -3,7 +3,7 @@
     <output-path>$PROJECT_DIR$/target</output-path>
     <properties id="maven-jee-properties">
       <options>
-        <module>Project_Web2</module>
+        <module>Project_Web</module>
         <packaging>war</packaging>
       </options>
     </properties>
