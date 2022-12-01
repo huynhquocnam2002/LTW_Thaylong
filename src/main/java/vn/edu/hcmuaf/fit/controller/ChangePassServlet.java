@@ -4,6 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.hcmuaf.fit.DB.DataDB;
+import vn.edu.hcmuaf.fit.model.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,6 +23,7 @@ public class ChangePassServlet extends HttpServlet {
         String confirm = request.getParameter("confirmPass");
         if (pass.equals(confirm)) {
             String email = (String) request.getSession().getAttribute("email");
+            if (email==null) email=((User) request.getSession().getAttribute("user")).getEmail();
             if (email != null)
                 try {
                     DataDB.changeUserPassword(email, pass);

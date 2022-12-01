@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" rel="stylesheet"/>
 
     <!-- Custom StyleSheet -->
-<%--    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>--%>
+    <%--    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>--%>
     <script src="jquery/jquery-ui-1.13.0.custom/external/jquery/jquery.js"></script>
     <script src="jquery/jquery-ui-1.13.0.custom/jquery-ui.js"></script>
     <script src="js/mainUser.js"></script>
@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="css/mainUser.css">
     <link rel="stylesheet" href="jquery/jquery-ui-user.css">
     <link rel="stylesheet" href="css/cssheader.css">
+    <script>
+        console.log(1)
+    </script>
 
     <title>Phone Shop</title>
 </head>
@@ -521,9 +524,9 @@
                                                                        class="gt"><%}%>
                                                                 <label for="female">Nữ</label>
                                                                 <%if (user.getGender().equals("UKN")) {%>
-                                                                <input type="radio" name="gender" id="unset" value="nu"
+                                                                <input type="radio" name="gender" id="unset" value="ukn"
                                                                        class="gt" checked><%} else {%>
-                                                                <input type="radio" name="gender" id="unset" value="nu"
+                                                                <input type="radio" name="gender" id="unset" value="ukn"
                                                                        class="gt"><%}%>
                                                                 <label for="female">Ẩn</label>
                                                             </td>
@@ -534,7 +537,8 @@
                                                             </td>
                                                             <td>
                                                                 <input type="date" name="birthDay" id="birthDay"
-                                                                       value="<%=user.getBirthday()%>" style="width: 90%; padding: 7px; border-radius: 3px; border: 1px solid #c5c5c5">
+                                                                       value="<%=user.getBirthday()%>"
+                                                                       style="width: 90%; padding: 7px; border-radius: 3px; border: 1px solid #c5c5c5">
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -924,7 +928,7 @@
                                                 <p>ĐỔI MẬT KHẨU</p>
                                             </div>
                                             <div class="container_bottom">
-                                                <form action="" method="dialog">
+                                                <form action="/ChangePassServlet" method="post" id="changePassForm">
                                                     <table>
                                                         <tr>
                                                             <td><label for="passcr">Mật khẩu hiện tại</label></td>
@@ -932,7 +936,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td><label for="newpass">Mật khẩu mới</label></td>
-                                                            <td><input type="password" id="newpass" name="newpass"
+                                                            <td><input type="password" id="newpass" name="newPass"
                                                                        minlength="8"></td>
                                                         </tr>
                                                         <tr>
@@ -945,7 +949,8 @@
                                                         <tr>
                                                             <td></td>
                                                             <td>
-                                                                <input type="submit" value="Lưu mật khẩu">
+                                                                <input type="submit" value="Lưu mật khẩu"
+                                                                       id="submitChangePass">
                                                                 <button id="back">Trở về</button>
                                                             </td>
                                                         </tr>
@@ -1040,10 +1045,16 @@
 <!-- End Footer -->
 
 <script>
-    let form=document.querySelector("#info-form")
-    form.onsubmit =(e) =>{
-        let smt=e.submitter;
-        if (smt.id=="submit") return true;
+    let form = document.querySelector("#info-form")
+    form.onsubmit = (e) => {
+        let smt = e.submitter;
+        if (smt.id == "submit") return true;
+        else return false;
+    }
+    let form2 = document.querySelector("#changePassForm")
+    form2.onsubmit = (e) => {
+        let smt = e.submitter;
+        if (smt.id == "submitChangePass") return true;
         else return false;
     }
 </script>

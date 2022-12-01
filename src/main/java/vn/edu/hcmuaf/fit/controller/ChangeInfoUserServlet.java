@@ -32,17 +32,24 @@ public class ChangeInfoUserServlet extends HttpServlet {
 
         Part filePart = request.getPart("avatar"); // Retrieves <input type="file" name="file">
         System.out.println(Paths.get(filePart.getSubmittedFileName()).toAbsolutePath());
-
-        InputStream fileContent = filePart.getInputStream();
-        File file= new File("D:\\Code_Web\\Project_Web\\src\\main\\webapp\\image\\user\\user_" + id + ".png");
-        FileOutputStream out = new FileOutputStream(file);
+        System.out.println(filePart.getSubmittedFileName());
+        System.out.println(filePart.getSubmittedFileName().equals(""));
         String img = "image/user/user_" + id + ".png";
-        int i = fileContent.read();
-        while (i != -1) {
-            out.write(i);
-            i = fileContent.read();
+        if (!filePart.getSubmittedFileName().equals("")) {
+            InputStream fileContent = filePart.getInputStream();
+            File file = new File("D:\\Code_Web\\Project_Web\\src\\main\\webapp\\image\\user\\user_" + id + ".png");
+            FileOutputStream out = new FileOutputStream(file);
+            File file2 = new File("D:\\Code_Web\\Project_Web\\target\\image\\user\\user_" + id + ".png");
+            FileOutputStream out2 = new FileOutputStream(file2);
+            int i = fileContent.read();
+            while (i != -1) {
+                out.write(i);
+                out2.write(i);
+                i = fileContent.read();
+            }
+            out.close();
+            out2.close();
         }
-        out.close();
 
 
         try {
