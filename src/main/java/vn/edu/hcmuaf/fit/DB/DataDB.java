@@ -66,7 +66,7 @@ public class DataDB {
         DataDB db = new DataDB();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDateTime now = LocalDateTime.now();
-        if (db.getStatement().executeUpdate("insert into user values ('" + id + "','image/user/none.png','user " + id + "',null,'"+email+"','" + pass + "',null,null,0,'" + dtf.format(now) + "');") == 0)
+        if (db.getStatement().executeUpdate("insert into user values ('" + id + "','image/user/none.png','user " + id + "',null,'" + email + "','" + pass + "',null,null,0,'" + dtf.format(now) + "');") == 0)
             return false;
         return true;
     }
@@ -197,7 +197,6 @@ public class DataDB {
         }
         return null;
     }
-
 
 
     public static Set<Product> getProductsKind(String name) throws SQLException, ClassNotFoundException {

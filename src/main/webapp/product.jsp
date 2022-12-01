@@ -234,7 +234,7 @@
                                             <img src="
                                       https://cdn2.cellphones.com.vn/358x/media/catalog/product/p/i/pin-sac-du-phong-anker-powercore-iii-sense-slim-a1244-10000mah.jpg"
                                                  alt="img__product" class="image__detail__product"
-                                                 style="width:375px!important;height: 375px !important; position: relative;top:-22px;padding: 10px;border-radius: 10px;">
+                                                 style="width:375px!important;height: 375px !important; position: relative;top:-22px;padding: 10px;border-radius: 10px !important;">
 
                                         </div>
 
@@ -246,7 +246,7 @@
 
                                             <img src="https://cdn2.cellphones.com.vn/358x/media/catalog/product/p/i/pin-sac-du-phong-anker-powercore-iii-sense-slim-a1244-10000mah-1.png"
                                                  alt="img__product" class="image__detail__product"
-                                                 style="width:375px!important;height: 375px !important; position: relative;top:-22px;padding: 10px;border-radius: 10px;">
+                                                 style="width:375px!important;height: 375px !important; position: relative;top:-22px;padding: 10px;border-radius: 10px !important;">
 
                                         </div>
 
@@ -328,7 +328,7 @@
             <div class="product__item">
 
                 <img
-                        src="https://cdn2.cellphones.com.vn/35x/media/catalog/product/p/i/pin-sac-du-phong-anker-powercore-iii-sense-slim-a1244-10000mah-1_1.png"
+                        src="<%=data.getProductById("PR17").getImg()%>"
                         alt="">
 
                 <div class="product__title__item">
@@ -435,7 +435,7 @@
                 </li>
                 <li>
                     <span>Hiện có:</span>
-                    <a href="#" class="in-stock">Trong kho (7 sản phẩm)</a>
+                    <a href="#" class="in-stock">Trong kho (<%=data.getProductById("PR17").getQuantity()%> sản phẩm)</a>
                 </li>
                 </ul>
                 <div class="product-info__btn">
@@ -972,11 +972,11 @@
                         <div class="product">
                             <div class="product__header">
                                 <a href="#"><img
-                                        src="https://cdn.didongviet.vn/pub/media/catalog/product//s/a/sac-du-phong-mazer-infinite-boost-supermini-pocket-8.0-v2-8000mah-didongviet.jpg"
+                                        src="<%=data.getProductById("PR3").getImg()%>"
                                         alt="product"></a>
                             </div>
                             <div class="product__footer">
-                                <h3>Pin sạc dự phòng Mazer </h3>
+                                <h3><%=data.getProductById("PR3").getName()%> </h3>
                                 <div class="rating">
                                     <svg>
                                         <use xlink:href="./images/sprite.svg#icon-star-full"></use>
@@ -995,7 +995,7 @@
                                     </svg>
                                 </div>
                                 <div class="product__price">
-                                    <h4>550.000 VNĐ</h4>
+                                    <h4><%=data.getProductById("PR3").getPrice()%> VNĐ</h4>
                                 </div>
                                 <a href="#">
                                     <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
@@ -1031,12 +1031,12 @@
                         <div class="product">
                             <div class="product__header">
                                 <a href="#"><img
-                                        src="https://cdn.didongviet.vn/pub/media/catalog/product//p/i/pin-sac-du-phong-mophie-snap_-powerstation-stand-10000-mah-didongviet_1.jpg"
+                                        src="<%=data.getProductById("PR36").getImg()%>"
                                         alt="product"></a>
                             </div>
                             <div class="product__footer">
                                 <h3>
-                                    Pin sạc dự phòng Mophie
+                                   <%=data.getProductById("PR36").getName()%>
                                 </h3>
                                 <div class="rating">
                                     <svg>
@@ -1056,7 +1056,7 @@
                                     </svg>
                                 </div>
                                 <div class="product__price">
-                                    <h4>1.320.000 VNĐ</h4>
+                                    <h4>  <%=data.getProductById("PR36").getPrice()%> VNĐ</h4>
                                 </div>
                                 <a href="#">
                                     <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
@@ -1091,11 +1091,11 @@
                         <div class="product">
                             <div class="product__header">
                                 <a href="#"><img
-                                        src="https://cdn.didongviet.vn/pub/media/catalog/product//p/i/pin-sac-du-phong-aukey-basix-slim-pd-n99-10000mah-didongviet.jpg"
+                                        src="  <%=data.getProductById("PR42").getImg()%>"
                                         alt="product"></a>
                             </div>
                             <div class="product__footer">
-                                <h3>Pin sạc dự phòng Aukey </h3>
+                                <h3>  <%=data.getProductById("PR42").getName()%> </h3>
                                 <div class="rating">
                                     <svg>
                                         <use xlink:href="./images/sprite.svg#icon-star-full"></use>
@@ -1114,7 +1114,7 @@
                                     </svg>
                                 </div>
                                 <div class="product__price">
-                                    <h4>250.000 VNĐ</h4>
+                                    <h4>  <%=data.getProductById("PR42").getPrice()%> VNĐ</h4>
                                 </div>
                                 <a href="#">
                                     <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
@@ -1149,11 +1149,11 @@
                         <div class="product">
                             <div class="product__header">
                                 <a href="#"><img
-                                        src="https://cdn.didongviet.vn/pub/media/catalog/product//p/i/pin-sac-du-phong-aukey-10000mah-pb-n83s-didongviet.jpg"
+                                        src="  <%=data.getProductById("PR7").getImg()%>"
                                         alt="product"></a>
                             </div>
                             <div class="product__footer">
-                                <h3>Pin sạc dự phòng Aukey </h3>
+                                <h3>  <%=data.getProductById("PR7").getName()%> </h3>
                                 <div class="rating">
                                     <svg>
                                         <use xlink:href="./images/sprite.svg#icon-star-full"></use>
@@ -1172,7 +1172,7 @@
                                     </svg>
                                 </div>
                                 <div class="product__price">
-                                    <h4>550.000 VNĐ</h4>
+                                    <h4>  <%=data.getProductById("PR7").getPrice()%> VNĐ</h4>
                                 </div>
                                 <a href="#">
                                     <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
