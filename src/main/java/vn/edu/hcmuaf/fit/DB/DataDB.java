@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.DB;
 
+import vn.edu.hcmuaf.fit.controller.Util;
 import vn.edu.hcmuaf.fit.model.*;
 
 import java.sql.ResultSet;
@@ -66,7 +67,7 @@ public class DataDB {
         DataDB db = new DataDB();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDateTime now = LocalDateTime.now();
-        if (db.getStatement().executeUpdate("insert into user values ('" + id + "','image/user/none.png','user " + id + "',null,'"+email+"','" + pass + "',null,null,0,'" + dtf.format(now) + "');") == 0)
+        if (db.getStatement().executeUpdate("insert into user values ('" + id + "','image/user/none.png','user " + id + "',null,'" + email + "','" + pass + "',null,null,0,'" + dtf.format(now) + "');") == 0)
             return false;
         return true;
     }
@@ -143,62 +144,40 @@ public class DataDB {
     }
 
     public static Category getCategorysObject() throws SQLException, ClassNotFoundException {
-
         try {
-
-
             DBConnect dbConnect = DBConnect.getInstance();
             Statement statement = dbConnect.get();
             ResultSet rs = statement.executeQuery("SELECT * FROM category WHERE category.ID=\"CG2\"");
             while (rs.next()) {
-
                 Category c = new Category(
                         rs.getString(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getInt(4));
-
-
                 return c;
-
             }
-
         } catch (Exception e) {
-
-
         }
         return null;
     }
 
     public static Producer getProducersOject() throws SQLException, ClassNotFoundException {
-
         try {
-
-
             DBConnect dbConnect = DBConnect.getInstance();
             Statement statement = dbConnect.get();
             ResultSet rs = statement.executeQuery("SELECT * FROM producer WHERE producer.ID=\"PRER10\"");
             while (rs.next()) {
-
                 Producer p = new Producer(
                         rs.getString(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getInt(4));
-
-
                 return p;
-
             }
-
         } catch (Exception e) {
-
-
         }
         return null;
     }
-
-
 
     public static Set<Product> getProductsKind(String name) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
@@ -213,10 +192,94 @@ public class DataDB {
         return res;
     }
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        System.out.println(getProductById("PR17").getIns());
-//        System.out.println(getProductsKind("hot"));
+    public static boolean changeUserPassword(String email, String pass) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        int res = db.getStatement().executeUpdate("update user set password='" + pass + "' where email='" + email + "'");
+        if (res != 0) return true;
+        return false;
+    }
 
-//        System.out.println(getCategorysObject().getName());
+    public static List<Announcement> getAnnounmentByUserId(String userId) throws SQLException, ClassNotFoundException {
+        List<Announcement> res = new ArrayList<Announcement>();
+        DataDB db = new DataDB();
+        ResultSet rs = db.getStatement().executeQuery("select announcement.* from announcement, orders where orders.ID_USER='" + userId + "' and orders.id=announcement.id_orders;");
+        while (rs.next()) {
+            res.add(new Announcement(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7)));
+        }
+        res.sort(null);
+        return res;
+    }
+
+    public static boolean readAnnouncement(String anmId) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        int res = db.getStatement().executeUpdate("update announcement set status=1 where id='" + anmId + "';");
+        if (res == 0) return false;
+        return true;
+    }
+
+    public static boolean readAllAnnouncement(String userId) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        int res = 0;
+        ResultSet orderIds = db.getStatement().executeQuery("select id from orders where id_user='" + userId + "';");
+        while (orderIds.next()) {
+            String orderId = orderIds.getString(1);
+            res += db.getStatement().executeUpdate("update announcement set status=1 where id='" + orderId + "';");
+        }
+        if (res == 0) return false;
+        return true;
+    }
+
+    public static boolean deleteAllAnnouncement(String userId) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        int res = 0;
+        ResultSet orderIds = db.getStatement().executeQuery("select id from orders where id_user='" + userId + "';");
+        while (orderIds.next()) {
+            String orderId = orderIds.getString(1);
+            res += db.getStatement().executeUpdate("delete from announcement where id_orders='" + orderId + "';");
+        }
+        if (res == 0) return false;
+        return true;
+    }
+
+    public static List<Voucher> getNewestVouchers(String userId) throws SQLException, ClassNotFoundException {
+        List<Voucher> res = new ArrayList<Voucher>();
+        List<Voucher> all = getVouchers(userId);
+        for (Voucher v : all) {
+            if (Util.minusDateToHours(v.getStartDate(), new Date())>0) res.add(v);
+        }
+        return res;
+    }
+
+    public static List<Voucher> getOldVouchers(String userId) throws SQLException, ClassNotFoundException {
+        List<Voucher> res = new ArrayList<Voucher>();
+        List<Voucher> all = getVouchers(userId);
+        for (Voucher v : all) {
+            if (Util.minusDateToHours(new Date(), v.getStartDate())>0) res.add(v);
+        }
+        return res;
+    }
+
+    public static List<Voucher> getFreeshipVouchers(String userId) throws SQLException, ClassNotFoundException {
+        List<Voucher> res = new ArrayList<Voucher>();
+        List<Voucher> all = getVouchers(userId);
+        for (Voucher v : all) {
+            if (v.getType().equals("Miễn phí vận chuyển")) res.add(v);
+        }
+        return res;
+    }
+
+    public static List<Voucher> getDiscountVouchers(String userId) throws SQLException, ClassNotFoundException {
+        List<Voucher> res = new ArrayList<Voucher>();
+        List<Voucher> all = getVouchers(userId);
+        for (Voucher v : all) {
+            if (v.getType().equals("Giảm giá")) res.add(v);
+        }
+        return res;
+    }
+
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+//        for (Voucher v : getNewestVouchers("U1") ){
+//            System.out.println(v.getVoucherDescription());
+//        }
     }
 }
