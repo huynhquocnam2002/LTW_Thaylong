@@ -82,12 +82,26 @@ public class Util {
         return (int) ((c1.getTime().getTime() - c2.getTime().getTime()) / (1000 * 60 * 60 * 24));
     }
 
+    public static int minusDateToHours(Date d1, Date d2) {
+        Calendar c1 = Calendar.getInstance();
+        Calendar c2 = Calendar.getInstance();
+        c1.setTime(d1);
+        c2.setTime(d2);
+        return (int) ((c1.getTime().getTime() - c2.getTime().getTime()) / (1000 * 60 * 60));
+    }
+
     public static String reverseDate(String str) {
-        String[] arr=str.split("-");
+        String[] arr=str.split("-/");
         String res = "";
         for (int i= arr.length-1; i>=0; i--)
             res+=arr[i]+"-";
         return res.substring(0, res.length()-1);
+    }
+
+    public static String createOTP(){
+        Random rd = new Random();
+        String confirmCode = rd.nextInt(1000000) + "";
+        return confirmCode;
     }
 
 
