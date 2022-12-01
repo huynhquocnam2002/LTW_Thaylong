@@ -278,8 +278,8 @@ public class DataDB {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        for (Voucher v : getNewestVouchers("U1") ){
-            System.out.println(v.getVoucherDescription());
-        }
+//        for (Voucher v : getNewestVouchers("U1") ){
+//            System.out.println(v.getVoucherDescription());
+//        }
     }
 }
