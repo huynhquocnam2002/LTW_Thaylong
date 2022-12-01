@@ -754,6 +754,7 @@ header>li {
 
 
 
+
 }
 
 #section-detailsProduct {
@@ -775,6 +776,11 @@ header>li {
 
 .product-detail__center:last-child>p {
   margin-bottom: 10px;
+}
+.product-detail__center .title li{
+
+text-decoration: none;
+
 }
 
 .section__container__product hr {
@@ -1352,6 +1358,13 @@ span.dot::before {
 
 .product__footer {
   padding: 1rem 0;
+  max-height: 169.53px !important;
+}
+.product__footer > h3 {
+  padding: 1rem 0;
+  max-height: 169.53px !important;
+
+  color: red;
 }
 
 .rating svg {
