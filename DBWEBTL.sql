@@ -3,265 +3,414 @@ CREATE DATABASE PROJECT_WEB;
 USE PROJECT_WEB;
 
 CREATE TABLE PRODUCT(
-	ID VARCHAR(10) PRIMARY KEY,
-	NAME VARCHAR(100),
-	UNIT_PRICE LONG,
-	IMG VARCHAR(255),
-	INSURANCE INT,
-	ID_CATEGORY VARCHAR(10),
-	TAG VARCHAR(20),
-	ID_PRODUCER VARCHAR(10),
-	STATUS TINYINT,
-	ADD_DATE DATE,
-	QUANTITY INT,
-	DETAILS TEXT
+                        ID VARCHAR(10) PRIMARY KEY,
+                        NAME VARCHAR(100),
+                        UNIT_PRICE LONG,
+                        IMG VARCHAR(255),
+                        INSURANCE INT,
+                        ID_CATEGORY VARCHAR(10),
+                        TAG VARCHAR(20),
+                        ID_PRODUCER VARCHAR(10),
+                        STATUS TINYINT,
+                        ADD_DATE DATE,
+                        QUANTITY INT,
+                        DETAILS TEXT
 );
 
 CREATE TABLE OPTION(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
-	VALUE VARCHAR(50),
-	PRICE LONG,
-	QUANTITY INT,
-	STATUS TINYINT
+                       ID VARCHAR(10) PRIMARY KEY,
+                       ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
+                       VALUE VARCHAR(50),
+                       PRICE LONG,
+                       QUANTITY INT,
+                       STATUS TINYINT
 );
 
 CREATE TABLE IMG_PRODUCT(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_PRODUCT VARCHAR(10) REFERENCES PRODUCTS(ID),
-	SRC VARCHAR(255)
+                            ID VARCHAR(10) PRIMARY KEY,
+                            ID_PRODUCT VARCHAR(10) REFERENCES PRODUCTS(ID),
+                            SRC VARCHAR(255)
 );
 
 CREATE TABLE PRODUCER(
-	ID VARCHAR(10) PRIMARY KEY,
-	NAME VARCHAR(50),
-	IMG VARCHAR(255),
-	STATUS TINYINT
+                         ID VARCHAR(10) PRIMARY KEY,
+                         NAME VARCHAR(50),
+                         IMG VARCHAR(255),
+                         STATUS TINYINT
 );
 
 CREATE TABLE CATEGORY(
-	ID VARCHAR(10) PRIMARY KEY,
-	NAME VARCHAR(50),
-	IMG VARCHAR(255),
-	STATUS TINYINT
+                         ID VARCHAR(10) PRIMARY KEY,
+                         NAME VARCHAR(50),
+                         IMG VARCHAR(255),
+                         STATUS TINYINT
 );
 
 CREATE TABLE USER(
-	ID VARCHAR(10) PRIMARY KEY,
-	IMG VARCHAR(255),
-	NAME VARCHAR(50),
-	PHONE_NUMBER VARCHAR(10),
-	EMAIL VARCHAR(255),
-	PASSWORD VARCHAR(50),
-	GENDER VARCHAR(3) CHECK( GENDER IN('NAM','NU')),
-	BIRTHDAY DATE,
-	STATUS TINYINT,
-	ACCOUNT_DATE DATE
+                     ID VARCHAR(10) PRIMARY KEY,
+                     IMG VARCHAR(255),
+                     NAME VARCHAR(50),
+                     PHONE_NUMBER VARCHAR(10),
+                     EMAIL VARCHAR(255),
+                     PASSWORD VARCHAR(50),
+                     GENDER VARCHAR(3) DEFAULT 'UKN' CHECK( GENDER IN('NAM','NU','UKN')),
+                     BIRTHDAY DATE,
+                     STATUS TINYINT,
+                     ACCOUNT_DATE DATE
 );
 
 CREATE TABLE CART(
-	ID_USER VARCHAR(10) REFERENCES USER(ID),
-	ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
-	QUANTITY INT
+                     ID_USER VARCHAR(10) REFERENCES USER(ID),
+                     ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
+                     QUANTITY INT
 );
 ALTER TABLE CART ADD PRIMARY KEY(ID_USER, ID_PRODUCT);
 
 CREATE TABLE STATUS_ORDER(
-	ID VARCHAR(10) PRIMARY KEY,
-	NAME VARCHAR(50),
-	IMG VARCHAR(255)
+                             ID VARCHAR(10) PRIMARY KEY,
+                             NAME VARCHAR(50),
+                             IMG VARCHAR(255)
 );
 
 CREATE TABLE DELIVERY_ADDRESS(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_USER VARCHAR(10) REFERENCES USER(ID),
-	NAME_RECEIVER VARCHAR(50),
-	PHONE_NUMBER VARCHAR(10),
-	ADDRESS VARCHAR(255)
+                                 ID VARCHAR(10) PRIMARY KEY,
+                                 ID_USER VARCHAR(10) REFERENCES USER(ID),
+                                 NAME_RECEIVER VARCHAR(50),
+                                 PHONE_NUMBER VARCHAR(10),
+                                 ADDRESS VARCHAR(255)
 );
 
 CREATE TABLE ORDERS(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_USER VARCHAR(10) REFERENCES USER(ID),
-	ID_STATUS_ORDER VARCHAR(10) REFERENCES STATUS_ORDER(ID),
-	ID_DELIVERY_ADDRESS VARCHAR(10) REFERENCES DELIVERY_ADDRESS(ID),
-	AMOUNT LONG,
-	NOTES VARCHAR(255),
-	ORDER_DATE DATE
+                       ID VARCHAR(10) PRIMARY KEY,
+                       ID_USER VARCHAR(10) REFERENCES USER(ID),
+                       ID_STATUS_ORDER VARCHAR(10) REFERENCES STATUS_ORDER(ID),
+                       ID_DELIVERY_ADDRESS VARCHAR(10) REFERENCES DELIVERY_ADDRESS(ID),
+                       AMOUNT LONG,
+                       NOTES VARCHAR(255),
+                       ORDER_DATE DATE
 );
 
 CREATE TABLE ANNOUNCEMENT(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_USER VARCHAR(10) REFERENCES USER(ID),
-	CONTENT VARCHAR(255)
+                             ID VARCHAR(10) PRIMARY KEY,
+                             ID_ORDERS VARCHAR(10) REFERENCES ORDERS(ID),
+                             NAME VARCHAR(50),
+                             IMG VARCHAR(255),
+                             CONTENT VARCHAR(255),
+                             TIME DATETIME,
+                             STATUS TINYINT CHECK(STATUS IN(0,1))
 );
 
 CREATE TABLE PRODUCT_ORDER(
-	ID_ORDER VARCHAR(10) REFERENCES ORDERS(ID),
-	ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
-	QUANTITY INT,
-	AMOUNT LONG
+                              ID_ORDER VARCHAR(10) REFERENCES ORDERS(ID),
+                              ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
+                              QUANTITY INT,
+                              AMOUNT LONG
 );
 ALTER TABLE PRODUCT_ORDER ADD PRIMARY KEY (ID_ORDER, ID_PRODUCT);
 
 CREATE TABLE REVIEW(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_USER VARCHAR(10) REFERENCES USER(ID),
-	ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
-	STAR INT CHECK(STAR >0 AND STAR <=5),
-	CONTENT VARCHAR(255),
-	REVIEW_DATE DATE
+                       ID VARCHAR(10) PRIMARY KEY,
+                       ID_USER VARCHAR(10) REFERENCES USER(ID),
+                       ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
+                       STAR INT CHECK(STAR >0 AND STAR <=5),
+                       CONTENT VARCHAR(255),
+                       REVIEW_DATE DATE
 );
 
 CREATE TABLE VOUCHER_TYPE(
-	ID VARCHAR(10) PRIMARY KEY,
-	NAME VARCHAR(50),
-	IMG VARCHAR(255)
+                             ID VARCHAR(10) PRIMARY KEY,
+                             NAME VARCHAR(50),
+                             IMG VARCHAR(255)
 );
 
 CREATE TABLE VOUCHER(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_TYPE VARCHAR(10) REFERENCES VOUCHER_TYPE(ID),
-	NAME VARCHAR(50),
-	DISCOUNT LONG,
-	MIN_PRICE LONG,
-	START_DATE DATE,
-	END_DATE DATE,
-	STATUS TINYINT
+                        ID VARCHAR(10) PRIMARY KEY,
+                        ID_TYPE VARCHAR(10) REFERENCES VOUCHER_TYPE(ID),
+                        NAME VARCHAR(50),
+                        DISCOUNT LONG,
+                        MIN_PRICE LONG,
+                        START_DATE DATE,
+                        END_DATE DATE,
+                        STATUS TINYINT
 );
 
 CREATE TABLE USER_VOUCHER(
-	ID_USER VARCHAR(10) REFERENCES USER(ID),
-	ID_VOUCHER VARCHAR(10) REFERENCES VOUCHER(ID),
-	QUANTITY INT
+                             ID_USER VARCHAR(10) REFERENCES USER(ID),
+                             ID_VOUCHER VARCHAR(10) REFERENCES VOUCHER(ID),
+                             QUANTITY INT
 );
 ALTER TABLE USER_VOUCHER ADD PRIMARY KEY (ID_USER, ID_VOUCHER);
 
 CREATE TABLE ORDER_VOUCHER(
-	ID_ORDER VARCHAR(10) REFERENCES ORDERS(ID),
-ID_VOUCHER VARCHAR(10) REFERENCES VOUCHER(ID)
+                              ID_ORDER VARCHAR(10) REFERENCES ORDERS(ID),
+                              ID_VOUCHER VARCHAR(10) REFERENCES VOUCHER(ID)
 );
 ALTER TABLE ORDER_VOUCHER ADD PRIMARY KEY (ID_ORDER, ID_VOUCHER);
 
 CREATE TABLE ADMIN(
-	ID VARCHAR(10) PRIMARY KEY,
-	NAME VARCHAR(50),
-	PHONE_NUMBER VARCHAR(10),
-	EMAIL VARCHAR(255),
-	BIRTHDAY DATE,
-	GENDER VARCHAR(3) CHECK( GENDER IN ('NAM','NU')),
-	PASSWORD VARCHAR(50)
+                      ID VARCHAR(10) PRIMARY KEY,
+                      NAME VARCHAR(50),
+                      PHONE_NUMBER VARCHAR(10),
+                      EMAIL VARCHAR(255),
+                      BIRTHDAY DATE,
+                      GENDER VARCHAR(3) CHECK( GENDER IN ('NAM','NU')),
+                      PASSWORD VARCHAR(50)
 );
 
 CREATE TABLE EDIT_CATEGORY(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
-	ID_CATEGORY VARCHAR(10) REFERENCES CATEGORY(ID),
-	EDIT_DETAILS VARCHAR(255) 
+                              ID VARCHAR(10) PRIMARY KEY,
+                              ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
+                              ID_CATEGORY VARCHAR(10) REFERENCES CATEGORY(ID),
+                              EDIT_DETAILS VARCHAR(255)
 );
 
 CREATE TABLE EDIT_PRODUCT(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
-	ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
-	EDIT_DETAILS VARCHAR(255)
+                             ID VARCHAR(10) PRIMARY KEY,
+                             ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
+                             ID_PRODUCT VARCHAR(10) REFERENCES PRODUCT(ID),
+                             EDIT_DETAILS VARCHAR(255)
 );
 
 CREATE TABLE EDIT_PRODUCER(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
-	ID_PRODUCER VARCHAR(10) REFERENCES PRODUCER(ID),
-	EDIT_DETAILS VARCHAR(255)
+                              ID VARCHAR(10) PRIMARY KEY,
+                              ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
+                              ID_PRODUCER VARCHAR(10) REFERENCES PRODUCER(ID),
+                              EDIT_DETAILS VARCHAR(255)
 );
 
 CREATE TABLE EDIT_IMG_PRODUCT(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
-	ID_IMG_PRODUCT VARCHAR(10) REFERENCES IMG_PRODUCT(ID),
-	EDIT_DETAILS VARCHAR(255)
+                                 ID VARCHAR(10) PRIMARY KEY,
+                                 ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
+                                 ID_IMG_PRODUCT VARCHAR(10) REFERENCES IMG_PRODUCT(ID),
+                                 EDIT_DETAILS VARCHAR(255)
 );
 
 CREATE TABLE EDIT_VOUCHER(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
-	ID_VOUCHER VARCHAR(10) REFERENCES VOUCHER(ID),
-	EDIT_DETAILS VARCHAR(255)
+                             ID VARCHAR(10) PRIMARY KEY,
+                             ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
+                             ID_VOUCHER VARCHAR(10) REFERENCES VOUCHER(ID),
+                             EDIT_DETAILS VARCHAR(255)
 );
 
 CREATE TABLE EDIT_VOUCHER_TYPE(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
-	ID_VOUCHER_TYPE VARCHAR(10) REFERENCES VOUCHER_TYPE(ID),
-	EDIT_DETAILS VARCHAR(255)
+                                  ID VARCHAR(10) PRIMARY KEY,
+                                  ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
+                                  ID_VOUCHER_TYPE VARCHAR(10) REFERENCES VOUCHER_TYPE(ID),
+                                  EDIT_DETAILS VARCHAR(255)
 );
 
 CREATE TABLE EDIT_ORDER(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
-	ID_ORDER VARCHAR(10) REFERENCES ORDERS(ID),
-	EDIT_DETAILS VARCHAR(255)
+                           ID VARCHAR(10) PRIMARY KEY,
+                           ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
+                           ID_ORDER VARCHAR(10) REFERENCES ORDERS(ID),
+                           EDIT_DETAILS VARCHAR(255)
 );
 
 CREATE TABLE EDIT_USER_VOUCHER(
-	ID VARCHAR(10) PRIMARY KEY,
-	ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
-	ID_USER_VOUCHER VARCHAR(10) REFERENCES USER_VOUCHER(ID),
-	EDIT_DETAILS VARCHAR(255)
+                                  ID VARCHAR(10) PRIMARY KEY,
+                                  ID_ADMIN VARCHAR(10) REFERENCES ADMIN(ID),
+                                  ID_USER_VOUCHER VARCHAR(10) REFERENCES USER_VOUCHER(ID),
+                                  EDIT_DETAILS VARCHAR(255)
 );
 
-INSERT INTO PRODUCT VALUES ('PR1','Combo sạc Pisen Quick PD 20W kèm cáp Lightning',295000,'imageProduct/product1.jpg',9,'1','hot','5',-1,'2022/11/20',281,null);
-INSERT INTO PRODUCT VALUES ('PR2','Cáp Lightning tự ngắt 1.2m Pisen AL26',180000,'imageProduct/product2.jpg',6,'1','hot','5',-1,'2022/11/20',101,null);
-INSERT INTO PRODUCT VALUES ('PR3','Sạc dự phòng PISEN Quick 10500mAh(LED) – Ultra',405000,'imageProduct/product3.jpg',8,'2','hot','5',1,'2022/11/20',250,null);
-INSERT INTO PRODUCT VALUES ('PR4','Ốp lưng trong S-Case Chống sốc cho iPhone 7/8 Plus',81000,'imageProduct/product4.jpg',10,'3','hot','3',2,'2022/11/20',137,null);
-INSERT INTO PRODUCT VALUES ('PR5','Tai nghe Bluetooth không dây Energizer UB2609',590000,'imageProduct/product5.jpg',6,'5','hot','6',1,'2022/11/20',135,null);
-INSERT INTO PRODUCT VALUES ('PR6','Dán PPF iPhone 13 Pro Max full trong mặt sau',135000,'imageProduct/product6.jpg',9,'4','hot','3',1,'2022/11/20',106,null);
-
-INSERT INTO PRODUCT VALUES ('PR7','Sạc dự phòng PISEN Quick High Power Box 10000mAh 20W',590000,'imageProduct/product7.jpg',9,'2','new','5',0,'2022/11/20',186,null);
-INSERT INTO PRODUCT VALUES ('PR8','Apple iPhone 11 dán Camera chống va đập S-Case',90000,'imageProduct/product8.jpg',12,'7','new','3',0,'2022/11/20',197,null);
-INSERT INTO PRODUCT VALUES ('PR9','Củ sạc nhanh PD 20W chính hãng Apple (MHJE3ZA)',750000,'imageProduct/product9.jpg',12,'1','new','3',1,'2022/11/20',123,null);
-INSERT INTO PRODUCT VALUES ('PR10','Apple iPhone 11 Pro Max dán Camera chống va đập S-Case',90000,'imageProduct/product10.jpg',12,'7','new','3',0,'2022/11/20',107,null);
-INSERT INTO PRODUCT VALUES ('PR11','Tai nghe In-Ears Devia Smart Earpods có mic',95000,'imageProduct/product11.jpg',12,'5','new','7',2,'2022/11/20',131,null);
-INSERT INTO PRODUCT VALUES ('PR12','Tai nghe Bluetooth không dây Apple AirPods Pro 2021',4890000,'imageProduct/product12.jpg',10,'5','new','3',0,'2022/11/20',278,null);
-INSERT INTO PRODUCT VALUES ('PR13','Tai nghe Bluetooth không dây Apple AirPods 2',2790000,'imageProduct/product13.jpg',7,'5','new','3',2,'2022/11/20',191,null);
-INSERT INTO PRODUCT VALUES ('PR14','Miếng Dán PPF Full Viền Mặt sau cho iPhone 11 Pro Max (A20K.012)',135000,'imageProduct/product14.jpg',11,'4','new','3',1,'2022/11/20',198,null);
-INSERT INTO PRODUCT VALUES ('PR15','Củ sạc nhanh Mophie PD 18W Type-C',250000,'imageProduct/product15.jpg',6,'1','new','8',-1,'2022/11/20',253,null);
-INSERT INTO PRODUCT VALUES ('PR16','Tai nghe không dây Havit TW967',290000,'imageProduct/product16.jpg',12,'5','new','9',1,'2022/11/20',170,null);
-INSERT INTO PRODUCT VALUES ('PR17','Sạc dự phòng Energizer 15.000 mAh (UE15032PQ)',550000,'imageProduct/product17.jpg',12,'2','new','6',-1,'2022/11/20',154,null);
-INSERT INTO PRODUCT VALUES ('PR18','Dán PPF full màn hình cao cấp cho iPhone 11',135000,'imageProduct/product18.jpg',10,'4','new','3',-1,'2022/11/20',225,null);
-INSERT INTO PRODUCT VALUES ('PR19','Sạc nhanh PD 20W Anker Powerport III Nano (A2633)',360000,'imageProduct/product19.jpg',10,'1','new','10',-1,'2022/11/20',158,null);
-INSERT INTO PRODUCT VALUES ('PR20','Dán PPF nhám cao cấp full mặt sau Apple iPhone 12 Pro Max',135000,'imageProduct/product20.jpg',8,'4','new','3',0,'2022/11/20',257,null);
-INSERT INTO PRODUCT VALUES ('PR21','"Cáp sạc Lightning tự ngắt 1,2m Pisen ZINC Intelligent Pro XD"',175000,'imageProduct/product21.jpg',9,'1','new','5',1,'2022/11/20',283,null);
-
-INSERT INTO PRODUCT VALUES ('PR22','Tai nghe chụp tai Gaming Havit HV-H2232D',350000,'imageProduct/product22.jpg',11,'5','salerun','9',1,'2022/11/20',235,null);
-INSERT INTO PRODUCT VALUES ('PR23','Tai nghe In-Ear cổng Lightning Devia',205000,'imageProduct/product23.jpg',10,'5','salerun','7',2,'2022/11/20',168,null);
-INSERT INTO PRODUCT VALUES ('PR24','Apple iPhone 11/XR ốp lưng Likgus Kickstand trong suốt',157000,'imageProduct/product24.jpg',8,'3','salerun','3',-1,'2022/11/20',176,null);
-INSERT INTO PRODUCT VALUES ('PR25','Củ sạc nhanh PD Pisen Quick 20W',200000,'imageProduct/product25.jpg',11,'1','salerun','5',-1,'2022/11/20',119,null);
-INSERT INTO PRODUCT VALUES ('PR26','Dán cường lực full màn hình 4D cho iPhone 7 Plus / 8 Plus',135000,'imageProduct/product26.jpg',6,'6','salerun','3',2,'2022/11/20',192,null);
-INSERT INTO PRODUCT VALUES ('PR27','Tai nghe có dây cổng Lightning chính hãng Apple (MMTN2)',550000,'imageProduct/product27.jpg',12,'5','salerun','3',1,'2022/11/20',237,null);
-INSERT INTO PRODUCT VALUES ('PR28','Tai nghe Bluetooth không dây SoundPEATS True Air 2',690000,'imageProduct/product28.jpg',6,'5','salerun','11',2,'2022/11/20',241,null);
-INSERT INTO PRODUCT VALUES ('PR29','Tai nghe Bluetooth không dây SoundPEATS True Wings',790000,'imageProduct/product29.jpg',11,'5','salerun','11',0,'2022/11/20',177,null);
-INSERT INTO PRODUCT VALUES ('PR30','Cáp sạc USB-C to Lightning 1m chính hãng Apple (MM0A3FE/A)',490000,'imageProduct/product30.jpg',8,'1','salerun','3',1,'2022/11/20',139,null);
-INSERT INTO PRODUCT VALUES ('PR31','Miếng Dán Nhám PPF Full Viền Mặt sau cho iPhone Xs Max (A16D.004)',135000,'imageProduct/product31.jpg',10,'4','salerun','3',1,'2022/11/20',253,null);
-INSERT INTO PRODUCT VALUES ('PR32','Tai nghe Bluetooth không dây Havit GAMING TW938',490000,'imageProduct/product32.jpg',9,'5','salerun','9',0,'2022/11/20',143,null);
-INSERT INTO PRODUCT VALUES ('PR33','Apple iPhone 11 Pro Max dán chống va đập Kingkong Full cao cấp chống nhìn trộm Đen',270000,'imageProduct/product33.jpg',9,'6','salerun','3',1,'2022/11/20',290,null);
-INSERT INTO PRODUCT VALUES ('PR34','Tai nghe Bluetooth không dây QCY T1C',260000,'imageProduct/product34.jpg',6,'5','salerun','12',-1,'2022/11/20',286,null);
-INSERT INTO PRODUCT VALUES ('PR35','Sạc nhanh PD 20W Pisen Quick Teeny',230000,'imageProduct/product35.jpg',6,'1','salerun','5',0,'2022/11/20',294,null);
-INSERT INTO PRODUCT VALUES ('PR36','Pin sạc dự phòng GOLF Candy 10.000 mAh (G80)',250000,'imageProduct/product36.jpg',12,'2','salerun','15',0,'2022/11/20',208,null);
-INSERT INTO PRODUCT VALUES ('PR37','Tai nghe Bluetooth không dây Defunc True Basic',490000,'imageProduct/product37.jpg',12,'5','salerun','14',-1,'2022/11/20',212,null);
-INSERT INTO PRODUCT VALUES ('PR38','Cáp sạc Lightning 1m MFi MOPHIE',230000,'imageProduct/product38.jpg',11,'1','salerun','13',0,'2022/11/20',192,null);
-
-INSERT INTO PRODUCT VALUES ('PR39','Apple iPhone 11 Pro Max ốp lưng S-Case trong',81000,'imageProduct/product39.jpg',10,'3','flastsale','3',1,'2022/11/20',219,null);
-INSERT INTO PRODUCT VALUES ('PR40','Tai nghe Bluetooth không dây Havit TW959',450000,'imageProduct/product40.jpg',12,'5','flastsale','9',1,'2022/11/20',217,null);
-INSERT INTO PRODUCT VALUES ('PR41','Tai nghe Bluetooth không dây Xiaomi Earbud Basic S',450000,'imageProduct/product41.jpg',8,'5','flastsale','1',0,'2022/11/20',198,null);
-INSERT INTO PRODUCT VALUES ('PR42','Pin dự phòng Energizer 10.000 mAh tích hợp sạc không dây 5W (QE10007)',550000,'imageProduct/product42.jpg',7,'2','flastsale','3',-1,'2022/11/20',287,null);
-INSERT INTO PRODUCT VALUES ('PR43','Apple Iphone X/XS Dán Camera chống trầy S-Case',45000,'imageProduct/product43.jpg',11,'7','flastsale','3',1,'2022/11/20',108,null);
-INSERT INTO PRODUCT VALUES ('PR44','Tai nghe Bluetooth Earbuds SoundPEATS Mac',590000,'imageProduct/product44.jpg',12,'5','flastsale','11',0,'2022/11/20',157,null);
-INSERT INTO PRODUCT VALUES ('PR45','Combo sạc Pisen Quick PD 30W kèm cáp Lightning',495000,'imageProduct/product45.jpg',7,'1','flastsale','5',1,'2022/11/20',190,null);
-INSERT INTO PRODUCT VALUES ('PR46','Apple iPhone 11 ốp lưng S-Case Silicone',81000,'imageProduct/product46.jpg',12,'3','flastsale','3',2,'2022/11/20',139,null);
-INSERT INTO PRODUCT VALUES ('PR47','Sạc Aukey PD 20W PA-B1 Pro',270000,'imageProduct/product47.jpg',12,'1','flastsale','16',2,'2022/11/20',103,null);
-INSERT INTO PRODUCT VALUES ('PR48','Samsung Galaxy S20 Plus dán màn hình PPF Full cao cấp mặt trước',283000,'imageProduct/product48.jpg',11,'4','flastsale','2',1,'2022/11/20',221,null);
-INSERT INTO PRODUCT VALUES ('PR49','Tai nghe Bluetooth không dây QCY T7',380000,'imageProduct/product49.jpg',12,'5','flastsale','12',1,'2022/11/20',259,null);
-INSERT INTO PRODUCT VALUES ('PR50','Cáp sạc Mophie Type-C to Lightning 1m',250000,'imageProduct/product50.jpg',10,'1','flastsale','8',2,'2022/11/20',215,null);
+INSERT INTO PRODUCT VALUES ('PR1', 'Combo sạc Pisen Quick PD 20W kèm cáp Lightning', '295000', 'image/imageProduct/product1.jpg', 9, '1', 'hot', '5', -1, '2022-11-20', 281,
+                            'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+                            Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+                            Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+                            Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR10', 'Apple iPhone 11 Pro Max dán Camera chống va đập S-Case', '90000', 'image/imageProduct/product10.jpg', 12, '7', 'new', '3', 0, '2022-11-20', 107,'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR11', 'Tai nghe In-Ears Devia Smart Earpods có mic', '95000', 'image/imageProduct/product11.jpg', 12, '5', 'new', '7', 2, '2022-11-20', 131, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR12', 'Tai nghe Bluetooth không dây Apple AirPods Pro 2021', '4890000', 'image/imageProduct/product12.jpg', 10, '5', 'new', '3', 0, '2022-11-20', 278, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR13', 'Tai nghe Bluetooth không dây Apple AirPods 2', '2790000', 'image/imageProduct/product13.jpg', 7, '5', 'new', '3', 2, '2022-11-20', 191, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR14', 'Miếng Dán PPF Full Viền Mặt sau cho iPhone 11 Pro Max (A20K.012)', '135000', 'image/imageProduct/product14.jpg', 11, '4', 'new', '3', 1, '2022-11-20', 198, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR15', 'Củ sạc nhanh Mophie PD 18W Type-C', '250000', 'image/imageProduct/product15.jpg', 6, '1', 'new', '8', -1, '2022-11-20', 253, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR16', 'Tai nghe không dây Havit TW967', '290000', 'image/imageProduct/product16.jpg', 12, '5', 'new', '9', 1, '2022-11-20', 170, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR17', 'Sạc dự phòng Energizer 15.000 mAh (UE15032PQ)', '550000', 'image/imageProduct/product17.jpg', 12, '2', 'new', '6', -1, '2022-11-20', 154, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR18', 'Dán PPF full màn hình cao cấp cho iPhone 11', '135000', 'image/imageProduct/product18.jpg', 10, '4', 'new', '3', -1, '2022-11-20', 225, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR19', 'Sạc nhanh PD 20W Anker Powerport III Nano (A2633)', '360000', 'image/imageProduct/product19.jpg', 10, '1', 'new', '10', -1, '2022-11-20', 158, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR2', 'Cáp Lightning tự ngắt 1.2m Pisen AL26', '180000', 'image/imageProduct/product2.jpg', 6, '1', 'hot', '5', -1, '2022-11-20', 101, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR20', 'Dán PPF nhám cao cấp full mặt sau Apple iPhone 12 Pro Max', '135000', 'image/imageProduct/product20.jpg', 8, '4', 'new', '3', 0, '2022-11-20', 257, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR21', '\"Cáp sạc Lightning tự ngắt 1,2m Pisen ZINC Intelligent Pro XD\"', '175000', 'image/imageProduct/product21.jpg', 9, '1', 'new', '5', 1, '2022-11-20', 283, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR22', 'Tai nghe chụp tai Gaming Havit HV-H2232D', '350000', 'image/imageProduct/product22.jpg', 11, '5', 'salerun', '9', 1, '2022-11-20', 235, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR23', 'Tai nghe In-Ear cổng Lightning Devia', '205000', 'image/imageProduct/product23.jpg', 10, '5', 'salerun', '7', 2, '2022-11-20', 168, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR24', 'Apple iPhone 11/XR ốp lưng Likgus Kickstand trong suốt', '157000', 'image/imageProduct/product24.jpg', 8, '3', 'salerun', '3', -1, '2022-11-20', 176, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR25', 'Củ sạc nhanh PD Pisen Quick 20W', '200000', 'image/imageProduct/product25.jpg', 11, '1', 'salerun', '5', -1, '2022-11-20', 119, NULL);
+INSERT INTO PRODUCT VALUES ('PR26', 'Dán cường lực full màn hình 4D cho iPhone 7 Plus / 8 Plus', '135000', 'image/imageProduct/product26.jpg', 6, '6', 'salerun', '3', 2, '2022-11-20', 192, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR27', 'Tai nghe có dây cổng Lightning chính hãng Apple (MMTN2)', '550000', 'image/imageProduct/product27.jpg', 12, '5', 'salerun', '3', 1, '2022-11-20', 237, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR28', 'Tai nghe Bluetooth không dây SoundPEATS True Air 2', '690000', 'image/imageProduct/product28.jpg', 6, '5', 'salerun', '11', 2, '2022-11-20', 241, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR29', 'Tai nghe Bluetooth không dây SoundPEATS True Wings', '790000', 'image/imageProduct/product29.jpg', 11, '5', 'salerun', '11', 0, '2022-11-20', 177, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR3', 'Sạc dự phòng PISEN Quick 10500mAh(LED) – Ultra', '405000', 'image/imageProduct/product3.jpg', 8, '2', 'hot', '5', 1, '2022-11-20', 250, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR30', 'Cáp sạc USB-C to Lightning 1m chính hãng Apple (MM0A3FE/A)', '490000', 'image/imageProduct/product30.jpg', 8, '1', 'salerun', '3', 1, '2022-11-20', 139, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR31', 'Miếng Dán Nhám PPF Full Viền Mặt sau cho iPhone Xs Max (A16D.004)', '135000', 'image/imageProduct/product31.jpg', 10, '4', 'salerun', '3', 1, '2022-11-20', 253, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR32', 'Tai nghe Bluetooth không dây Havit GAMING TW938', '490000', 'image/imageProduct/product32.jpg', 9, '5', 'salerun', '9', 0, '2022-11-20', 143, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR33', 'Apple iPhone 11 Pro Max dán chống va đập Kingkong Full cao cấp chống nhìn trộm Đen', '270000', 'image/imageProduct/product33.jpg', 9, '6', 'salerun', '3', 1, '2022-11-20', 290, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR34', 'Tai nghe Bluetooth không dây QCY T1C', '260000', 'image/imageProduct/product34.jpg', 6, '5', 'salerun', '12', -1, '2022-11-20', 286, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR35', 'Sạc nhanh PD 20W Pisen Quick Teeny', '230000', 'image/imageProduct/product35.jpg', 6, '1', 'salerun', '5', 0, '2022-11-20', 294, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR36', 'Pin sạc dự phòng GOLF Candy 10.000 mAh (G80)', '250000', 'image/imageProduct/product36.jpg', 12, '2', 'salerun', '15', 0, '2022-11-20', 208, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR37', 'Tai nghe Bluetooth không dây Defunc True Basic', '490000', 'image/imageProduct/product37.jpg', 12, '5', 'salerun', '14', -1, '2022-11-20', 212, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR38', 'Cáp sạc Lightning 1m MFi MOPHIE', '230000', 'image/imageProduct/product38.jpg', 11, '1', 'salerun', '13', 0, '2022-11-20', 192, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR39', 'Apple iPhone 11 Pro Max ốp lưng S-Case trong', '81000', 'image/imageProduct/product39.jpg', 10, '3', 'flastsale', '3', 1, '2022-11-20', 219, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR4', 'Ốp lưng trong S-Case Chống sốc cho iPhone 7/8 Plus', '81000', 'image/imageProduct/product4.jpg', 10, '3', 'hot', '3', 2, '2022-11-20', 137, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR40', 'Tai nghe Bluetooth không dây Havit TW959', '450000', 'image/imageProduct/product40.jpg', 12, '5', 'flastsale', '9', 1, '2022-11-20', 217, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR41', 'Tai nghe Bluetooth không dây Xiaomi Earbud Basic S', '450000', 'image/imageProduct/product41.jpg', 8, '5', 'flastsale', '1', 0, '2022-11-20', 198, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR42', 'Pin dự phòng Energizer 10.000 mAh tích hợp sạc không dây 5W ', '550000', 'image/imageProduct/product42.jpg', 7, '2', 'flastsale', '3', -1, '2022-11-20', 287, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR43', 'Apple Iphone X/XS Dán Camera chống trầy S-Case', '45000', 'image/imageProduct/product43.jpg', 11, '7', 'flastsale', '3', 1, '2022-11-20', 108, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR44', 'Tai nghe Bluetooth Earbuds SoundPEATS Mac', '590000', 'image/imageProduct/product44.jpg', 12, '5', 'flastsale', '11', 0, '2022-11-20', 157, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR45', 'Combo sạc Pisen Quick PD 30W kèm cáp Lightning', '495000', 'image/imageProduct/product45.jpg', 7, '1', 'flastsale', '5', 1, '2022-11-20', 190, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR46', 'Apple iPhone 11 ốp lưng S-Case Silicone Thế Hệ Mới 2022', '81000', 'image/imageProduct/product46.jpg', 12, '3', 'flastsale', '3', 2, '2022-11-20', 139, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR47', 'Sạc Aukey PD 20W PA-B1 Pro Thế Hệ Mới 2022', '270000', 'image/imageProduct/product47.jpg', 12, '1', 'flastsale', '16', 2, '2022-11-20', 103, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR48', 'Samsung Galaxy S20 Plus dán màn hình PPF Full ', '283000', 'image/imageProduct/product48.jpg', 11, '4', 'flastsale', '2', 1, '2022-11-20', 221, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR49', 'Tai nghe Bluetooth không dây QCY T7 Thế Hệ Mới 2022', '380000', 'image/imageProduct/product49.jpg', 12, '5', 'flastsale', '12', 1, '2022-11-20', 259, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR5', 'Tai nghe Bluetooth không dây Energizer UB2609', '590000', 'image/imageProduct/product5.jpg', 6, '5', 'hot', '6', 1, '2022-11-20', 135, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR50', 'Cáp sạc Mophie Type-C to Lightning 1m', '250000', 'image/imageProduct/product50.jpg', 10, '1', 'flastsale', '8', 2, '2022-11-20', 215, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR6', 'Dán PPF iPhone 13 Pro Max full trong mặt sau', '135000', 'image/imageProduct/product6.jpg', 9, '4', 'hot', '3', 1, '2022-11-20', 106, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR7', 'Sạc dự phòng PISEN Quick High Power Box 10000mAh 20W', '590000', 'image/imageProduct/product7.jpg', 9, '2', 'new', '5', 0, '2022-11-20', 186, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR8', 'Apple iPhone 11 dán Camera chống va đập S-Case', '90000', 'image/imageProduct/product8.jpg', 12, '7', 'new', '3', 0, '2022-11-20', 197, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
+INSERT INTO PRODUCT VALUES ('PR9', 'Củ sạc nhanh PD 20W chính hãng Apple (MHJE3ZA)', '750000', 'image/imageProduct/product9.jpg', 12, '1', 'new', '3', 1, '2022-11-20', 123, 'Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị
+Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo
+Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C
+Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp');
 
 INSERT INTO PRODUCER VALUES ('PRER1','Xiaomi','image/producer/producer1.png',1);
 INSERT INTO PRODUCER VALUES ('PRER2','Samsung','image/producer/producer2.png',1);
@@ -492,57 +641,108 @@ INSERT INTO DELIVERY_ADDRESS VALUES ('ADRESS50','U50','HUỲNH QUỐC NAM 50','0
 
 
 
+INSERT INTO ANNOUNCEMENT VALUES ('ANM0','ORDER44','Thông báo 0','image/imageProduct/product33.jpg','Đơn hàng của bạn đã được xác nhận','2021-12-10 18:37:46',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM1','ORDER12','Thông báo 1','image/imageProduct/product9.jpg','Đơn hàng của bạn đã được hủy','2021-4-9 8:44:41',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM2','ORDER36','Thông báo 2','image/imageProduct/product29.jpg','Đơn hàng của bạn đã được hủy','2021-9-23 17:14:2',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM3','ORDER34','Thông báo 3','image/imageProduct/product2.jpg','Đơn hàng của bạn đã giao thành công','2022-5-10 15:33:14',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM4','ORDER40','Thông báo 4','image/imageProduct/product44.jpg','Đơn hàng của bạn đã được hủy','2022-7-24 19:0:51',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM5','ORDER26','Thông báo 5','image/imageProduct/product20.jpg','Đơn hàng của bạn đã được hủy','2021-6-24 7:1:33',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM6','ORDER1','Thông báo 6','image/imageProduct/product18.jpg','Đơn hàng của bạn đang giao đến bạn','2022-5-9 11:29:13',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM7','ORDER11','Thông báo 7','image/imageProduct/product43.jpg','Đơn hàng của bạn đã giao thành công','2022-6-19 21:28:54',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM8','ORDER9','Thông báo 8','image/imageProduct/product19.jpg','Đơn hàng của bạn đã được hủy','2021-8-18 3:18:10',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM9','ORDER19','Thông báo 9','image/imageProduct/product6.jpg','Đơn hàng của bạn đang giao đến bạn','2022-7-18 22:24:45',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM10','ORDER37','Thông báo 10','image/imageProduct/product28.jpg','Đơn hàng của bạn đã giao thành công','2022-2-11 2:49:19',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM11','ORDER34','Thông báo 11','image/imageProduct/product30.jpg','Đơn hàng của bạn đang giao đến bạn','2021-1-10 5:18:53',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM12','ORDER14','Thông báo 12','image/imageProduct/product1.jpg','Đơn hàng của bạn đã giao thành công','2021-8-13 17:0:53',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM13','ORDER13','Thông báo 13','image/imageProduct/product17.jpg','Đơn hàng của bạn đã giao thành công','2022-5-5 1:36:7',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM14','ORDER0','Thông báo 14','image/imageProduct/product28.jpg','Đơn hàng của bạn đang giao đến bạn','2022-4-11 17:54:24',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM15','ORDER0','Thông báo 15','image/imageProduct/product29.jpg','Đơn hàng của bạn đang được người bán chuẩn bị','2022-5-24 7:47:52',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM16','ORDER8','Thông báo 16','image/imageProduct/product22.jpg','Đơn hàng của bạn đã được hủy','2021-6-29 20:41:54',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM17','ORDER28','Thông báo 17','image/imageProduct/product15.jpg','Đơn hàng của bạn đã được xác nhận','2022-10-1 19:37:7',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM18','ORDER15','Thông báo 18','image/imageProduct/product29.jpg','Đơn hàng của bạn đang giao đến bạn','2022-9-2 22:59:41',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM19','ORDER9','Thông báo 19','image/imageProduct/product5.jpg','Đơn hàng của bạn đã giao thành công','2021-10-4 22:11:46',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM20','ORDER6','Thông báo 20','image/imageProduct/product8.jpg','Đơn hàng của bạn đã giao thành công','2021-9-12 16:35:22',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM21','ORDER14','Thông báo 21','image/imageProduct/product9.jpg','Đơn hàng của bạn đã giao thành công','2022-7-5 13:36:58',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM22','ORDER14','Thông báo 22','image/imageProduct/product42.jpg','Đơn hàng của bạn đang được người bán chuẩn bị','2022-8-20 9:28:19',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM23','ORDER21','Thông báo 23','image/imageProduct/product16.jpg','Đơn hàng của bạn đang giao đến bạn','2021-8-18 6:53:41',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM24','ORDER23','Thông báo 24','image/imageProduct/product40.jpg','Đơn hàng của bạn đã được xác nhận','2021-11-22 9:25:5',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM25','ORDER21','Thông báo 25','image/imageProduct/product37.jpg','Đơn hàng của bạn đã giao thành công','2021-7-3 15:57:20',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM26','ORDER22','Thông báo 26','image/imageProduct/product1.jpg','Đơn hàng của bạn đã được hủy','2021-7-30 3:24:0',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM27','ORDER0','Thông báo 27','image/imageProduct/product0.jpg','Đơn hàng của bạn đã giao thành công','2022-4-2 12:5:7',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM28','ORDER47','Thông báo 28','image/imageProduct/product49.jpg','Đơn hàng của bạn đang giao đến bạn','2022-8-5 6:0:55',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM29','ORDER23','Thông báo 29','image/imageProduct/product31.jpg','Đơn hàng của bạn đang được người bán chuẩn bị','2022-10-24 12:30:38',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM30','ORDER0','Thông báo 30','image/imageProduct/product27.jpg','Đơn hàng của bạn đang giao đến bạn','2021-11-2 0:38:24',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM31','ORDER39','Thông báo 31','image/imageProduct/product16.jpg','Đơn hàng của bạn đã giao thành công','2021-3-17 1:4:34',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM32','ORDER33','Thông báo 32','image/imageProduct/product0.jpg','Đơn hàng của bạn đã giao thành công','2022-4-20 23:52:1',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM33','ORDER46','Thông báo 33','image/imageProduct/product37.jpg','Đơn hàng của bạn đã được hủy','2022-6-12 10:27:16',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM34','ORDER43','Thông báo 34','image/imageProduct/product24.jpg','Đơn hàng của bạn đang được người bán chuẩn bị','2021-3-15 21:46:41',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM35','ORDER3','Thông báo 35','image/imageProduct/product8.jpg','Đơn hàng của bạn đã được xác nhận','2021-9-10 7:36:58',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM36','ORDER11','Thông báo 36','image/imageProduct/product12.jpg','Đơn hàng của bạn đã được hủy','2022-8-7 23:18:21',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM37','ORDER29','Thông báo 37','image/imageProduct/product30.jpg','Đơn hàng của bạn đã được xác nhận','2021-8-4 0:25:52',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM38','ORDER5','Thông báo 38','image/imageProduct/product26.jpg','Đơn hàng của bạn đã được hủy','2022-12-5 17:58:22',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM39','ORDER10','Thông báo 39','image/imageProduct/product22.jpg','Đơn hàng của bạn đã được hủy','2021-3-29 1:6:6',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM40','ORDER43','Thông báo 40','image/imageProduct/product15.jpg','Đơn hàng của bạn đã giao thành công','2021-8-7 2:57:41',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM41','ORDER32','Thông báo 41','image/imageProduct/product0.jpg','Đơn hàng của bạn đã được hủy','2022-7-6 14:33:29',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM42','ORDER45','Thông báo 42','image/imageProduct/product24.jpg','Đơn hàng của bạn đã giao thành công','2022-6-30 15:2:51',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM43','ORDER3','Thông báo 43','image/imageProduct/product48.jpg','Đơn hàng của bạn đã được hủy','2022-8-27 6:22:59',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM44','ORDER17','Thông báo 44','image/imageProduct/product5.jpg','Đơn hàng của bạn đã giao thành công','2021-4-1 23:2:12',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM45','ORDER7','Thông báo 45','image/imageProduct/product18.jpg','Đơn hàng của bạn đang được người bán chuẩn bị','2021-3-4 23:28:9',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM46','ORDER45','Thông báo 46','image/imageProduct/product31.jpg','Đơn hàng của bạn đã được xác nhận','2021-2-27 11:43:26',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM47','ORDER2','Thông báo 47','image/imageProduct/product30.jpg','Đơn hàng của bạn đã giao thành công','2021-3-6 15:35:3',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM48','ORDER2','Thông báo 48','image/imageProduct/product9.jpg','Đơn hàng của bạn đang giao đến bạn','2022-2-26 22:14:10',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM49','ORDER39','Thông báo 49','image/imageProduct/product44.jpg','Đơn hàng của bạn đã giao thành công','2021-4-8 17:14:47',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM50','ORDER39','Thông báo 50','image/imageProduct/product3.jpg','Đơn hàng của bạn đã được hủy','2022-10-2 0:33:12',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM51','ORDER16','Thông báo 51','image/imageProduct/product22.jpg','Đơn hàng của bạn đang được người bán chuẩn bị','2021-6-6 12:26:39',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM52','ORDER11','Thông báo 52','image/imageProduct/product15.jpg','Đơn hàng của bạn đã được xác nhận','2022-1-24 11:48:17',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM53','ORDER8','Thông báo 53','image/imageProduct/product26.jpg','Đơn hàng của bạn đang giao đến bạn','2021-8-15 20:57:24',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM54','ORDER35','Thông báo 54','image/imageProduct/product33.jpg','Đơn hàng của bạn đã được hủy','2022-7-20 0:38:10',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM55','ORDER29','Thông báo 55','image/imageProduct/product19.jpg','Đơn hàng của bạn đang được người bán chuẩn bị','2021-12-8 2:36:21',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM56','ORDER15','Thông báo 56','image/imageProduct/product12.jpg','Đơn hàng của bạn đã được hủy','2021-9-23 1:6:2',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM57','ORDER24','Thông báo 57','image/imageProduct/product42.jpg','Đơn hàng của bạn đã được xác nhận','2021-3-11 22:32:25',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM58','ORDER13','Thông báo 58','image/imageProduct/product18.jpg','Đơn hàng của bạn đã giao thành công','2022-9-13 11:12:52',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM59','ORDER18','Thông báo 59','image/imageProduct/product28.jpg','Đơn hàng của bạn đang được người bán chuẩn bị','2021-4-18 23:53:47',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM60','ORDER40','Thông báo 60','image/imageProduct/product33.jpg','Đơn hàng của bạn đang giao đến bạn','2022-8-22 16:10:11',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM61','ORDER33','Thông báo 61','image/imageProduct/product5.jpg','Đơn hàng của bạn đang được người bán chuẩn bị','2022-2-22 21:50:35',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM62','ORDER45','Thông báo 62','image/imageProduct/product25.jpg','Đơn hàng của bạn đang giao đến bạn','2022-5-20 14:31:40',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM63','ORDER16','Thông báo 63','image/imageProduct/product19.jpg','Đơn hàng của bạn đã được hủy','2021-8-18 20:21:17',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM64','ORDER8','Thông báo 64','image/imageProduct/product44.jpg','Đơn hàng của bạn đã được hủy','2021-5-10 15:3:23',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM65','ORDER49','Thông báo 65','image/imageProduct/product32.jpg','Đơn hàng của bạn đang được người bán chuẩn bị','2021-11-15 21:38:13',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM66','ORDER37','Thông báo 66','image/imageProduct/product29.jpg','Đơn hàng của bạn đang giao đến bạn','2021-6-30 5:46:55',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM67','ORDER12','Thông báo 67','image/imageProduct/product17.jpg','Đơn hàng của bạn đã giao thành công','2021-2-27 1:14:34',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM68','ORDER34','Thông báo 68','image/imageProduct/product7.jpg','Đơn hàng của bạn đã được xác nhận','2022-8-20 17:58:4',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM69','ORDER31','Thông báo 69','image/imageProduct/product25.jpg','Đơn hàng của bạn đang giao đến bạn','2021-11-20 5:34:14',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM70','ORDER3','Thông báo 70','image/imageProduct/product21.jpg','Đơn hàng của bạn đã được hủy','2021-8-27 9:8:34',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM71','ORDER18','Thông báo 71','image/imageProduct/product21.jpg','Đơn hàng của bạn đang được người bán chuẩn bị','2022-9-13 12:15:3',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM72','ORDER30','Thông báo 72','image/imageProduct/product15.jpg','Đơn hàng của bạn đang giao đến bạn','2022-4-17 4:39:4',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM73','ORDER40','Thông báo 73','image/imageProduct/product34.jpg','Đơn hàng của bạn đã được hủy','2022-7-13 13:34:56',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM74','ORDER33','Thông báo 74','image/imageProduct/product19.jpg','Đơn hàng của bạn đang được người bán chuẩn bị','2022-7-26 11:9:54',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM75','ORDER23','Thông báo 75','image/imageProduct/product46.jpg','Đơn hàng của bạn đã giao thành công','2021-5-19 3:21:49',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM76','ORDER23','Thông báo 76','image/imageProduct/product16.jpg','Đơn hàng của bạn đã được xác nhận','2022-3-22 4:8:40',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM77','ORDER16','Thông báo 77','image/imageProduct/product27.jpg','Đơn hàng của bạn đã được xác nhận','2021-6-3 10:24:21',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM78','ORDER29','Thông báo 78','image/imageProduct/product44.jpg','Đơn hàng của bạn đang được người bán chuẩn bị','2021-1-27 6:0:8',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM79','ORDER14','Thông báo 79','image/imageProduct/product41.jpg','Đơn hàng của bạn đang giao đến bạn','2021-2-10 13:17:23',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM80','ORDER14','Thông báo 80','image/imageProduct/product5.jpg','Đơn hàng của bạn đang được người bán chuẩn bị','2021-5-25 4:18:56',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM81','ORDER43','Thông báo 81','image/imageProduct/product18.jpg','Đơn hàng của bạn đang giao đến bạn','2022-8-8 0:11:48',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM82','ORDER6','Thông báo 82','image/imageProduct/product38.jpg','Đơn hàng của bạn đã được xác nhận','2021-3-17 0:40:9',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM83','ORDER12','Thông báo 83','image/imageProduct/product29.jpg','Đơn hàng của bạn đã được xác nhận','2021-12-3 12:38:45',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM84','ORDER13','Thông báo 84','image/imageProduct/product20.jpg','Đơn hàng của bạn đã được hủy','2021-5-2 21:29:56',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM85','ORDER39','Thông báo 85','image/imageProduct/product14.jpg','Đơn hàng của bạn đã giao thành công','2022-4-30 7:13:12',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM86','ORDER1','Thông báo 86','image/imageProduct/product35.jpg','Đơn hàng của bạn đang giao đến bạn','2021-7-12 16:53:43',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM87','ORDER16','Thông báo 87','image/imageProduct/product30.jpg','Đơn hàng của bạn đang giao đến bạn','2022-10-16 13:54:54',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM88','ORDER33','Thông báo 88','image/imageProduct/product21.jpg','Đơn hàng của bạn đang giao đến bạn','2022-1-9 13:37:47',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM89','ORDER5','Thông báo 89','image/imageProduct/product5.jpg','Đơn hàng của bạn đã được xác nhận','2022-3-18 14:3:0',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM90','ORDER35','Thông báo 90','image/imageProduct/product34.jpg','Đơn hàng của bạn đã được hủy','2021-5-20 1:57:41',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM91','ORDER34','Thông báo 91','image/imageProduct/product26.jpg','Đơn hàng của bạn đã được hủy','2021-5-24 21:2:18',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM92','ORDER23','Thông báo 92','image/imageProduct/product23.jpg','Đơn hàng của bạn đang được người bán chuẩn bị','2021-6-12 1:47:3',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM93','ORDER11','Thông báo 93','image/imageProduct/product45.jpg','Đơn hàng của bạn đang giao đến bạn','2022-6-19 19:1:6',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM94','ORDER14','Thông báo 94','image/imageProduct/product22.jpg','Đơn hàng của bạn đang giao đến bạn','2021-8-30 22:53:19',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM95','ORDER23','Thông báo 95','image/imageProduct/product48.jpg','Đơn hàng của bạn đang được người bán chuẩn bị','2021-1-18 13:0:48',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM96','ORDER21','Thông báo 96','image/imageProduct/product40.jpg','Đơn hàng của bạn đã giao thành công','2021-9-19 2:44:31',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM97','ORDER15','Thông báo 97','image/imageProduct/product16.jpg','Đơn hàng của bạn đã được xác nhận','2021-8-7 8:57:56',0);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM98','ORDER26','Thông báo 98','image/imageProduct/product27.jpg','Đơn hàng của bạn đã được hủy','2021-9-26 12:19:39',1);
+INSERT INTO ANNOUNCEMENT VALUES ('ANM99','ORDER38','Thông báo 99','image/imageProduct/product49.jpg','Đơn hàng của bạn đã giao thành công','2022-9-29 23:30:53',1);
 
-INSERT INTO ANNOUNCEMENT VALUES ('ANM1','U1','THONG BAO 1');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM2','U2','THONG BAO 2');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM3','U3','THONG BAO 3');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM4','U4','THONG BAO 4');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM5','U5','THONG BAO 5');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM6','U6','THONG BAO 6');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM7','U7','THONG BAO 7');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM8','U8','THONG BAO 8');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM9','U9','THONG BAO 9');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM10','U10','THONG BAO 10');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM11','U11','THONG BAO 11');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM12','U12','THONG BAO 12');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM13','U13','THONG BAO 13');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM14','U14','THONG BAO 14');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM15','U15','THONG BAO 15');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM16','U16','THONG BAO 16');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM17','U17','THONG BAO 17');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM18','U18','THONG BAO 18');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM19','U19','THONG BAO 19');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM20','U20','THONG BAO 20');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM21','U21','THONG BAO 21');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM22','U22','THONG BAO 22');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM23','U23','THONG BAO 23');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM24','U24','THONG BAO 24');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM25','U25','THONG BAO 25');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM26','U26','THONG BAO 26');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM27','U27','THONG BAO 27');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM28','U28','THONG BAO 28');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM29','U29','THONG BAO 29');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM30','U30','THONG BAO 30');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM31','U31','THONG BAO 31');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM32','U32','THONG BAO 32');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM33','U33','THONG BAO 33');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM34','U34','THONG BAO 34');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM35','U35','THONG BAO 35');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM36','U36','THONG BAO 36');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM37','U37','THONG BAO 37');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM38','U38','THONG BAO 38');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM39','U39','THONG BAO 39');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM40','U40','THONG BAO 40');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM41','U41','THONG BAO 41');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM42','U42','THONG BAO 42');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM43','U43','THONG BAO 43');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM44','U44','THONG BAO 44');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM45','U45','THONG BAO 45');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM46','U46','THONG BAO 46');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM47','U47','THONG BAO 47');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM48','U48','THONG BAO 48');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM49','U49','THONG BAO 49');
-INSERT INTO ANNOUNCEMENT VALUES ('ANM50','U50','THONG BAO 50');
+
 
 
 
@@ -1193,19 +1393,3 @@ INSERT INTO EDIT_ORDER VALUES ('47','2','47','Chỉnh sửa trạng thái');
 INSERT INTO EDIT_ORDER VALUES ('48','3','48','Chỉnh sửa ảnh');
 INSERT INTO EDIT_ORDER VALUES ('49','1','49','Chỉnh sửa ảnh');
 INSERT INTO EDIT_ORDER VALUES ('50','2','50','Chỉnh sửa trạng thái');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

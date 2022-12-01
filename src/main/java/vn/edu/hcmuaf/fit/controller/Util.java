@@ -31,8 +31,8 @@ public class Util {
         return id;
     }
 
-    public static List<Order> getOrdersByStatus(List<Order> list, String status){
-        List<Order> res= new ArrayList<Order>();
+    public static List<Order> getOrdersByStatus(List<Order> list, String status) {
+        List<Order> res = new ArrayList<Order>();
         for (Order o : list) {
             if (o.getStatus().equals(status)) res.add(o);
         }
@@ -74,28 +74,50 @@ public class Util {
         }
     }
 
-    public static int minusDate(Date d1, Date d2){
-        Calendar c1= Calendar.getInstance();
-        Calendar c2= Calendar.getInstance();
+    public static int minusDate(Date d1, Date d2) {
+        Calendar c1 = Calendar.getInstance();
+        Calendar c2 = Calendar.getInstance();
         c1.setTime(d1);
         c2.setTime(d2);
-        return (int) ((c1.getTime().getTime()-c2.getTime().getTime())/(1000*60*60*24));
+        return (int) ((c1.getTime().getTime() - c2.getTime().getTime()) / (1000 * 60 * 60 * 24));
+    }
+
+    public static int minusDateToHours(Date d1, Date d2) {
+        Calendar c1 = Calendar.getInstance();
+        Calendar c2 = Calendar.getInstance();
+        c1.setTime(d1);
+        c2.setTime(d2);
+        return (int) ((c1.getTime().getTime() - c2.getTime().getTime()) / (1000 * 60 * 60));
+    }
+
+    public static String reverseDate(String str) {
+        String[] arr=str.split("-/");
+        String res = "";
+        for (int i= arr.length-1; i>=0; i--)
+            res+=arr[i]+"-";
+        return res.substring(0, res.length()-1);
+    }
+
+    public static String createOTP(){
+        Random rd = new Random();
+        String confirmCode = rd.nextInt(1000000) + "";
+        return confirmCode;
     }
 
 
     public static void main(String[] args) {
-        Date d1= new Date(2022,11,27);
-        Date d2= new Date(2023,1,11);
+        Date d1 = new Date(2022, 11, 27);
+        Date d2 = new Date(2023, 1, 11);
         System.out.println(d1);
-        Calendar c1= Calendar.getInstance();
-        Calendar c2= Calendar.getInstance();
+        Calendar c1 = Calendar.getInstance();
+        Calendar c2 = Calendar.getInstance();
         c1.setTime(d1);
         c2.setTime(d2);
 
         System.out.println(d1.compareTo(d2));
         LocalDateTime now = LocalDateTime.now();
-        System.out.println((c2.getTime().getTime()-c1.getTime().getTime())/(1000*60*60*24));
-        System.out.println((-new Date(LocalDateTime.now().getYear(),LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth()).getTime()+d2.getTime())/(24*3600*1000));
+        System.out.println((c2.getTime().getTime() - c1.getTime().getTime()) / (1000 * 60 * 60 * 24));
+        System.out.println((-new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth()).getTime() + d2.getTime()) / (24 * 3600 * 1000));
 
     }
 }

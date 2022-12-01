@@ -322,10 +322,11 @@ Header
 }
 
 .container {
-    max-width: 117rem;
-    margin: 0 auto;
+    width: fit-content;
     padding: 0 1.6rem;
-
+}
+.container a{
+    border-radius: 50%;
 }
 
 
@@ -528,6 +529,8 @@ Header
     display: flex;
     align-items: center;
     cursor: pointer;
+    box-shadow: 2px 2px 3px 3px #a04a63;
+    border-radius: 50%;
 }
 
 .nav_header {

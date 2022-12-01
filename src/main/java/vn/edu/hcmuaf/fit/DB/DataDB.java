@@ -19,7 +19,7 @@ public class DataDB {
 
     public DataDB() throws SQLException, ClassNotFoundException {
     }
-    // list san pham
+
     public static Set<Product> getProducts() throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
         Set<Product> res = new HashSet<Product>();
@@ -29,72 +29,8 @@ public class DataDB {
                     rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
                     rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12)));
         }
-        //
+        //m chỉnh lại theo cấu trúc hồi nảy á là ok
         return res;
-    }
-
-    // loc theo modul
-    public static Set<Product> getProductsKind(String name) throws SQLException, ClassNotFoundException {
-        DataDB db = new DataDB();
-        Set<Product> res = new HashSet<Product>();
-        ResultSet rs = db.getStatement().executeQuery("select * from product where  product.TAG ='" + name +"'");
-        while (rs.next()) {
-            res.add(new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
-                    rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
-                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12)));
-        }
-        //
-        return res;
-    }
-    // lấy sản phẩm theo danh mục
-    public static Set<Product> getProductsByCatory(String name) throws SQLException, ClassNotFoundException {
-        DataDB db = new DataDB();
-        Set<Product> res = new HashSet<Product>();
-        ResultSet rs = db.getStatement().executeQuery("select * from product ,category where  category.ID = product.ID_CATEGORY and category.ID ='" + name +"'");
-        while (rs.next()) {
-            res.add(new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
-                    rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
-                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12)));
-        }
-
-        return res;
-    }
-
-    public static List<String> getnameCatory(String name) throws SQLException, ClassNotFoundException {
-        DataDB db = new DataDB();
-        List<String> list = new ArrayList<String>();
-        ResultSet rs = db.getStatement().executeQuery("select NAME from category where  category.ID ='" + name +"'");
-        while (rs.next()) {
-        list.add(rs.getString(1));
-        }
-
-        System.out.println(list.get(0));
-        return list;
-    }
-
-    // lấy sản phẩm có tên " . . . "
-    public static Set<Product> getProductSeach(String name) throws SQLException, ClassNotFoundException {
-        DataDB db = new DataDB();
-        Set<Product> res = new HashSet<Product>();
-        ResultSet rs = db.getStatement().executeQuery("select * from product where   product.TAG = LIKE '%" + name +"%'");
-        while (rs.next()) {
-            res.add(new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
-                    rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
-                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12)));
-        }
-        //
-        return res;
-    }
-    // get danh muc
-
-    public static List<Category> getCategory()throws SQLException, ClassNotFoundException {
-        DataDB db = new DataDB();
-        List<Category> list = new ArrayList<Category>();
-        ResultSet rs = db.getStatement().executeQuery("select * from category");
-        while (rs.next()) {
-            list.add(new Category(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
-        }
-        return list ;
     }
 
     //
@@ -190,6 +126,164 @@ public class DataDB {
         ResultSet rs= db.getStatement().executeQuery("select * from category;");
         while (rs.next())
             res.add(new Category(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
+        return res;
+    }
+            // get thong tin product
+    public static Product getProductById(String id) throws SQLException, ClassNotFoundException {
+        Product res = null;
+        DataDB db = new DataDB();
+        ResultSet rs = db.getStatement().executeQuery("select * from product where id='" + id + "';");
+        while (rs.next()) {
+            res = new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
+                    rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
+                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12));
+        }
+        return res;
+    }
+
+    public static Category getCategorysObject(String id) throws SQLException, ClassNotFoundException {
+        try {
+            DBConnect dbConnect = DBConnect.getInstance();
+            Statement statement = dbConnect.get();
+            ResultSet rs = statement.executeQuery("SELECT * FROM category , product WHERE category.ID = product.ID_category and product.ID =  '"+ id + "'");
+            while (rs.next()) {
+                Category c = new Category(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4));
+                return c;
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public static Producer getProducersOject() throws SQLException, ClassNotFoundException {
+        try {
+            DBConnect dbConnect = DBConnect.getInstance();
+            Statement statement = dbConnect.get();
+            ResultSet rs = statement.executeQuery("SELECT * FROM producer WHERE producer.ID=\"PRER10\"");
+            while (rs.next()) {
+                Producer p = new Producer(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4));
+                return p;
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+    public static Category getCategorysObject() throws SQLException, ClassNotFoundException {
+        try {
+            DBConnect dbConnect = DBConnect.getInstance();
+            Statement statement = dbConnect.get();
+            ResultSet rs = statement.executeQuery("SELECT * FROM category WHERE category.ID=\"CG2\"");
+            while (rs.next()) {
+                Category c = new Category(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4));
+                return c;
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public static boolean changeUserPassword(String email, String pass) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        int res = db.getStatement().executeUpdate("update user set password='" + pass + "' where email='" + email + "'");
+        if (res != 0) return true;
+        return false;
+    }
+
+    public static List<Announcement> getAnnounmentByUserId(String userId) throws SQLException, ClassNotFoundException {
+        List<Announcement> res = new ArrayList<Announcement>();
+        DataDB db = new DataDB();
+        ResultSet rs = db.getStatement().executeQuery("select announcement.* from announcement, orders where orders.ID_USER='" + userId + "' and orders.id=announcement.id_orders;");
+        while (rs.next()) {
+            res.add(new Announcement(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7)));
+        }
+        res.sort(null);
+        return res;
+    }
+
+    public static boolean readAnnouncement(String anmId) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        int res = db.getStatement().executeUpdate("update announcement set status=1 where id='" + anmId + "';");
+        if (res == 0) return false;
+        return true;
+    }
+
+    public static boolean readAllAnnouncement(String userId) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        int res = 0;
+        List<String> orderId = new ArrayList<String>();
+        ResultSet orderIds = db.getStatement().executeQuery("select id from orders where id_user='" + userId + "';");
+        while (orderIds.next()) {
+            orderId.add(orderIds.getString(1));
+        }
+        orderIds.close();
+        for (String st : orderId)
+            res += db.getStatement().executeUpdate("update announcement set status=1 where id_orders='" + st + "';");
+        if (res == 0) return false;
+        return true;
+    }
+
+    public static boolean deleteAllAnnouncement(String userId) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        int res = 0;
+        List<String> orderId = new ArrayList<String>();
+        ResultSet orderIds = db.getStatement().executeQuery("select id from orders where id_user='" + userId + "';");
+        while (orderIds.next()) {
+            orderId.add(orderIds.getString(1));
+        }
+        orderIds.close();
+        for (String st : orderId)
+            res += db.getStatement().executeUpdate("delete from announcement where id_orders='" + st + "';");
+        if (res == 0) return false;
+        return true;
+    }
+
+    public static List<Voucher> getNewestVouchers(String userId) throws SQLException, ClassNotFoundException {
+        List<Voucher> res = new ArrayList<Voucher>();
+        List<Voucher> all = getVouchers(userId);
+        for (Voucher v : all) {
+            if (Util.minusDateToHours(v.getStartDate(), new Date()) > 0) res.add(v);
+        }
+        return res;
+    }
+
+    public static List<Voucher> getOldVouchers(String userId) throws SQLException, ClassNotFoundException {
+        List<Voucher> res = new ArrayList<Voucher>();
+        List<Voucher> all = getVouchers(userId);
+        for (Voucher v : all) {
+            if (Util.minusDateToHours(new Date(), v.getStartDate()) > 0) res.add(v);
+        }
+        return res;
+    }
+
+    public static List<Voucher> getFreeshipVouchers(String userId) throws SQLException, ClassNotFoundException {
+        List<Voucher> res = new ArrayList<Voucher>();
+        List<Voucher> all = getVouchers(userId);
+        for (Voucher v : all) {
+            if (v.getType().equals("Miễn phí vận chuyển")) res.add(v);
+        }
+        return res;
+    }
+
+    public static List<Voucher> getDiscountVouchers(String userId) throws SQLException, ClassNotFoundException {
+        List<Voucher> res = new ArrayList<Voucher>();
+        List<Voucher> all = getVouchers(userId);
+        for (Voucher v : all) {
+            if (v.getType().equals("Giảm giá")) res.add(v);
+        }
         return res;
     }
             // get thong tin product
