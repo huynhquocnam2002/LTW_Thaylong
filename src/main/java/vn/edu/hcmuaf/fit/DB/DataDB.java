@@ -179,6 +179,24 @@ public class DataDB {
         return null;
     }
 
+    public static Review getReviewObjects(String id_user) throws SQLException, ClassNotFoundException {
+        Review res = null;
+        DataDB db = new DataDB();
+        ResultSet rs = db.getStatement().executeQuery("select * from review where id_user='" + id_user + "';");
+        while (rs.next()) {
+            res = new Review(rs.getString(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getInt(4),
+                    rs.getString(5),
+                    rs.getDate(6));
+
+
+
+        }
+        return res;
+    }
+
     public static Set<Product> getProductsKind(String name) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
         Set<Product> res = new HashSet<Product>();
@@ -280,6 +298,10 @@ public class DataDB {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 //        for (Voucher v : getNewestVouchers("U1") ){
 //            System.out.println(v.getVoucherDescription());
+
 //        }
+
+        System.out.println(getReviewObjects("1").getReview_date());
+
     }
 }
