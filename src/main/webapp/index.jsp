@@ -3,6 +3,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="java.util.Set" %>
 <%@ page import="vn.edu.hcmuaf.fit.controller.Util" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Category" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,13 +106,13 @@
                     User user = (User) session.getAttribute("user");
                 %>
                 <div class="nav__icons">
-                    <a href="/UserServlet" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
+                    <a href="user.jsp" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
                         <img src="<%=user.getImg()%>"
                              style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%" alt="img">
                     </a>
 
                     <div class="nav__item_user" style="font-size: 1.2rem" id="nav__item_user1">
-                        <a href="/UserServlet" class="nav__link scroll-link"
+                        <a href="user.jsp" class="nav__link scroll-link"
                            style="line-height: 2"><%=user.getName()%>
                         </a><br>
                         <a href="" class="nav__link scroll-link">Thành Viên</a>
@@ -235,7 +237,6 @@
                         </li>
                     </div>
 
-
                 </ul>
 
             </nav>
@@ -341,166 +342,34 @@
         <!-- DANH MUC SÃN PHẨM -->
         <section class="section section-danhmuc">
             <div>
-
+                <% List<Category> rsCategory = DataDB.getCategory();%>
                 <ul class="nav__list" id="nav__list_DANHMUC11">
 
-
+                    <%for(int i =0 ; i< (rsCategory.size()/2+1) ; i++){%>
                     <div class="nav__icons_danhmuc1">
-                        <a href="/phone_nam/indexseach.html" class="icon__item1">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/oplung.png"></img>
+                        <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>" class="icon__item1">
+                            <img class="icon__itemdanhmuc" src="<%= rsCategory.get(i).getImg()%>"></img>
                         </a>
                         <li class="nav__item">
-                            <a href="/phone_nam/indexseach.html" class="scroll-linkDANHMUC">ỐP LƯNG</a>
+                            <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>" class="scroll-linkDANHMUC"><%= rsCategory.get(i).getName()%></a>
                         </li>
                     </div>
 
-
-                    <div class="nav__icons_danhmuc1">
-                        <a href="/phone_nam/indexseach.html" class="icon__item1">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/sacduphong.jpg"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/phone_nam/indexseach.html" class="scroll-linkDANHMUC">SẠC DỰ PHÒNG</a>
-                        </li>
-                    </div>
-
-
-                    <div class="nav__icons_danhmuc1">
-                        <a href="/phone_nam/indexseach.html" class="icon__item1">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/tainghe.png"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/phone_nam/indexseach.html" class="scroll-linkDANHMUC">TAI NGHE</a>
-                        </li>
-                    </div>
-
-                    <div class="nav__icons_danhmuc1">
-                        <a href="/phone_nam/indexseach.html" class="icon__item1">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/capsac.png"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/phone_nam/indexseach.html" class="scroll-linkDANHMUC">CỤC SẠC</a>
-                        </li>
-                    </div>
-
-                    <div class="nav__icons_danhmuc1">
-                        <a href="/phone_nam/indexseach.html" class="icon__item1">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/kinhcuongluc.jpg"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/phone_nam/indexseach.html" class="scroll-linkDANHMUC">KÍNH CƯỜNG LỰC</a>
-                        </li>
-                    </div>
-
-                    <div class="nav__icons_danhmuc1">
-                        <a href="/phone_nam/indexseach.html" class="icon__item1">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/apple1.png"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/phone_nam/indexseach.html" class="scroll-linkDANHMUC">PHỤ KIỆN APPLE</a>
-                        </li>
-                    </div>
-
-                    <div class="nav__icons_danhmuc1">
-                        <a href="/phone_nam/indexseach.html" class="icon__item1">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/gaydienthoai.png"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/phone_nam/indexseach.html" class="scroll-linkDANHMUC">GIÁ ĐỠ ĐIỆN THOẠI</a>
-                        </li>
-                    </div>
-
-                    <div class="nav__icons_danhmuc1">
-                        <a href="/phone_nam/indexseach.html" class="icon__item1">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/bag1.png"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/phone_nam/indexseach.html" class="scroll-linkDANHMUC">TÚI CHỐNG NƯỚC</a>
-                        </li>
-                    </div>
-
-
+                    <%}%>
                 </ul>
             </div>
             <div>
-
                 <ul class="nav__list" id="nav__list_DANHMUC1">
-
-
+                    <%for(int i =rsCategory.size()/2+1 ; i< (rsCategory.size()) ; i++){%>
                     <div class="nav__icons_danhmuc1">
-                        <a href="/phone_nam/indexseach.html" class="icon__item1">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/oplung.png"></img>
+                        <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>" class="icon__item1">
+                            <img class="icon__itemdanhmuc" src="<%= rsCategory.get(i).getImg()%>"></img>
                         </a>
                         <li class="nav__item">
-                            <a href="/phone_nam/indexseach.html" class="scroll-linkDANHMUC">THẺ NHỚ</a>
+                            <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>" class="scroll-linkDANHMUC"><%= rsCategory.get(i).getName()%></a>
                         </li>
                     </div>
-
-
-                    <div class="nav__icons_danhmuc1">
-                        <a href="/html/indexseach.html" class="icon__item1">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/sacduphong.jpg"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/html/indexseach.html" class="scroll-linkDANHMUC">CÁP CHUYỂN ĐỔI</a>
-                        </li>
-                    </div>
-
-
-                    <div class="nav__icons_danhmuc1">
-                        <a href="/html/indexseach.html" class="icon__item1">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/tainghe.png"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/html/indexseach.html" class="scroll-linkDANHMUC">MIC PHỤ</a>
-                        </li>
-                    </div>
-
-                    <div class="nav__icons_danhmuc1">
-                        <a href="/html/indexseach.html" class="icon__item1">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/capsac.png"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/html/indexseach.html" class="scroll-linkDANHMUC">ĐÈN MINI</a>
-                        </li>
-                    </div>
-
-                    <div class="nav__icons_danhmuc1">
-                        <a href="/html/indexseach.html" class="icon__item1">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/kinhcuongluc.jpg"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/html/indexseach.html" class="scroll-linkDANHMUC">KHĂN LAU MÀN HÌNH</a>
-                        </li>
-                    </div>
-
-                    <div class="nav__icons_danhmuc1">
-                        <a href="/html/indexseach.html" class="icon__item1">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/apple1.png"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href=/phone_nam/indexseach.html" class="scroll-linkDANHMUC">MIẾNG DÁN DECOR</a>
-                        </li>
-                    </div>
-
-                    <div class="nav__icons_danhmuc1">
-                        <a href="/html/indexseach.html" class="icon__item1">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/gaydienthoai.png"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/html/indexseach.html" class="scroll-linkDANHMUC">DỤNG CỤ VỆ SINH</a>
-                        </li>
-                    </div>
-
-                    <div class="nav__icons_danhmuc1">
-                        <a href="/html/indexseach.html" class="icon__item1">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/bag1.png"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/html/indexseach.html" class="scroll-linkDANHMUC">BÚT CẢM ỨNG</a>
-                        </li>
-                    </div>
-
+                    <%}%>
                 </ul>
             </div>
         </section>
@@ -537,13 +406,15 @@
                     </div>
                     <div class="glide__track" data-glide-el="track">
                         <ul class="glide__slides latest-center">
+                            <% Set<Product> flastsale = DataDB.getProductsKind("flastsale");%>
+                            <%for(Product pr: flastsale){%>
                             <li class="glide__slide">
                                 <div class="product">
                                     <div class="product__header">
-                                        <img src="phone_nam/images_phukien/gay1.jpg" alt="product">
+                                        <img src="<%=pr.getImg()%>" alt="product">
                                     </div>
                                     <div class="product__footer">
-                                        <h3>Gậy tự sướng nhập khẩu</h3>
+                                        <h3><%=pr.getName()%></h3>
                                         <div class="rating">
                                             <svg>
                                                 <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
@@ -562,7 +433,7 @@
                                             </svg>
                                         </div>
                                         <div class="product__price" style="color: red">
-                                            <h4>500.000 VNĐ</h4>
+                                            <h4><%=pr.getPrice()%></h4>
                                         </div>
                                         <a href="#">
                                             <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
@@ -571,7 +442,7 @@
                                     <ul>
                                         <li>
                                             <a data-tip="Quick View" data-place="left"
-                                               href="/phone_chuong/product.html">
+                                               href="product.jsp?idProduct=<%=pr.getId()%>">
                                                 <svg>
                                                     <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
                                                 </svg>
@@ -594,462 +465,7 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li class="glide__slide">
-                                <div class="product">
-                                    <div class="product__header">
-                                        <img src="phone_nam/images_phukien/taingh6.webp" alt="product">
-                                    </div>
-                                    <div class="product__footer">
-                                        <h3>Tai Nghe Không Dây</h3>
-                                        <div class="rating">
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-empty"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="product__price" style="color: red">
-                                            <h4>9.800.000 VNĐ</h4>
-                                        </div>
-                                        <a href="#">
-                                            <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                        </a>
-                                    </div>
-                                    <ul>
-                                        <li>
-                                            <a data-tip="Quick View" data-place="left"
-                                               href="/phone_chuong/product.html">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-tip="Add To Compare" data-place="left" href="#">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-loop2"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="glide__slide">
-                                <div class="product">
-                                    <div class="product__header">
-                                        <img src="phone_nam/images_phukien/sacdp1.jpg" alt="product">
-                                    </div>
-                                    <div class="product__footer">
-                                        <h3>Sạc Dự Phòng Phiển Bản Giới Hạn</h3>
-                                        <div class="rating">
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-empty"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="product__price" style="color: red">
-                                            <h4>3.200.000 VNĐ</h4>
-                                        </div>
-                                        <a href="#">
-                                            <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                        </a>
-                                    </div>
-                                    <ul>
-                                        <li>
-                                            <a data-tip="Quick View" data-place="left"
-                                               href="/phone_chuong/product.html">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-tip="Add To Compare" data-place="left" href="#">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-loop2"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="glide__slide">
-                                <div class="product">
-                                    <div class="product__header">
-                                        <img src="phone_nam/images_phukien/gay2.jpg" alt="product">
-                                    </div>
-                                    <div class="product__footer">
-                                        <h3>Gậy Tự Sướng China</h3>
-                                        <div class="rating">
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-empty"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="product__price" style="color: red">
-                                            <h4>700.000 VNĐ</h4>
-                                        </div>
-                                        <a href="#">
-                                            <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                        </a>
-                                    </div>
-                                    <ul>
-                                        <li>
-                                            <a data-tip="Quick View" data-place="left"
-                                               href="/phone_chuong/product.html">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-tip="Add To Compare" data-place="left" href="#">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-loop2"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="glide__slide">
-                                <div class="product">
-                                    <div class="product__header">
-                                        <img src="phone_nam/images_phukien/op1.webp" alt="product">
-                                    </div>
-                                    <div class="product__footer">
-                                        <h3>Ốp Lưng Siêu Cứng</h3>
-                                        <div class="rating">
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-empty"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="product__price" style="color: red">
-                                            <h4>900.000 VNĐ</h4>
-                                        </div>
-                                        <a href="#">
-                                            <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                        </a>
-                                    </div>
-                                    <ul>
-                                        <li>
-                                            <a data-tip="Quick View" data-place="left"
-                                               href="/phone_chuong/product.html">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-tip="Add To Compare" data-place="left" href="#">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-loop2"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="glide__slide">
-                                <div class="product">
-                                    <div class="product__header">
-                                        <img src="phone_nam/images_phukien/cuongluc1.jpg" alt="product">
-                                    </div>
-                                    <div class="product__footer">
-                                        <h3>Kính Cường Lực KingKong</h3>
-                                        <div class="rating">
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-empty"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="product__price" style="color: red">
-                                            <h4>600.000 VNĐ</h4>
-                                        </div>
-                                        <a href="#">
-                                            <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                        </a>
-                                    </div>
-                                    <ul>
-                                        <li>
-                                            <a data-tip="Quick View" data-place="left"
-                                               href="/phone_chuong/product.html">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-tip="Add To Compare" data-place="left" href="#">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-loop2"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="glide__slide">
-                                <div class="product">
-                                    <div class="product__header">
-                                        <img src="phone_nam/images_phukien/tainghe5.jpg" alt="product">
-                                    </div>
-                                    <div class="product__footer">
-                                        <h3>Tại Nghe Dành Cho Điện Thoại</h3>
-                                        <div class="rating">
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-empty"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="product__price" style="color: red">
-                                            <h4>6.600.000</h4>
-                                        </div>
-                                        <a href="#">
-                                            <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                        </a>
-                                    </div>
-                                    <ul>
-                                        <li>
-                                            <a data-tip="Quick View" data-place="left"
-                                               href="/phone_chuong/product.html">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-tip="Add To Compare" data-place="left" href="#">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-loop2"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="glide__slide">
-                                <div class="product">
-                                    <div class="product__header">
-                                        <img src="phone_nam/images_phukien/sacdp3.jpg" alt="product">
-                                    </div>
-                                    <div class="product__footer">
-                                        <h3>Sạc Dự Phòng Nhập Khẩu</h3>
-                                        <div class="rating">
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-empty"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="product__price" style="color: red">
-                                            <h4>5.500.000 VNĐ</h4>
-                                        </div>
-                                        <a href="#">
-                                            <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                        </a>
-                                    </div>
-                                    <ul>
-                                        <li>
-                                            <a data-tip="Quick View" data-place="left"
-                                               href="/phone_chuong/product.html">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-tip="Add To Compare" data-place="left" href="#">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-loop2"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="glide__slide">
-                                <div class="product">
-                                    <div class="product__header">
-                                        <img src="phone_nam/images_phukien/op3.png" alt="product">
-                                    </div>
-                                    <div class="product__footer">
-                                        <h3>Ốp Lưng Trong suốt</h3>
-                                        <div class="rating">
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                                            </svg>
-                                            <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-empty"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="product__price" style="color: red">
-                                            <h4>2.100.000 VNĐ</h4>
-                                        </div>
-                                        <a href="#">
-                                            <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                        </a>
-                                    </div>
-                                    <ul>
-                                        <li>
-                                            <a data-tip="Quick View" data-place="left"
-                                               href="/phone_chuong/product.html">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-tip="Add To Compare" data-place="left" href="#">
-                                                <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-loop2"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
+                            <%}%>
                         </ul>
                     </div>
 
@@ -1070,31 +486,32 @@
         </section>
 
 
+
         <section class="category__section section" id="category">
             <div class="tab__list">
                 <div class="title__container tabs">
                     <div class="section__titles category__titles ">
-                        <div class="section__title filter-btn active" id="All" name="All">
+                        <div class="section__title filter-btn active" id="All" name="All" onclick="checkKind('all')">
                             <span class="dot"></span>
                             <h1 class="primary__title">Tất cả</h1>
                         </div>
                     </div>
                     <div class="section__titles">
-                        <div class="section__title filter-btn" id="hot" name="hot">
+                        <div class="section__title filter-btn" id="hot" name="hot" onclick="checkKind('hot')">
                             <span class="dot"></span>
                             <h1 class="primary__title">Xu hướng</h1>
                         </div>
                     </div>
 
                     <div class="section__titles">
-                        <div class="section__title filter-btn" id="new" name="new">
+                        <div class="section__title filter-btn" id="new" name="new" onclick="checkKind('new')">
                             <span class="dot"></span>
                             <h1 class="primary__title">Mới Nhất</h1>
                         </div>
                     </div>
 
                     <div class="section__titles">
-                        <div class="section__title filter-btn" id="salerun" name="salerun">
+                        <div class="section__title filter-btn" id="salerun" name="salerun" onclick="checkKind('salerun')">
                             <span class="dot"></span>
                             <h1 class="primary__title">Bán chạy</h1>
                         </div>
@@ -1102,19 +519,11 @@
 
                 </div>
             </div>
+
+
+
             <% Set<Product> rs = DataDB.getProducts();%>
-
-            <script !src="">
-                const categoryContainer = document.getElementById("category");
-
-                if (categoryContainer) {
-                    categoryContainer.addEventListener("click", async e => {
-                        const filtername = document.querySelector(".filter-btn").valueOf();
-
-                        })}
-            </script>
-
-            <div class="category__container" data-aos="fade-up" data-aos-duration="1200">
+            <div class="category__container" id="category__container__all" style="display: block;" data-aos="fade-up" data-aos-duration="1200">
                 <div class="category__center">
                     <%for(Product pr: rs){%>
                     <div class="product category__products">
@@ -1148,23 +557,24 @@
                         </div>
                         <ul>
                             <li>
-                                <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
+                                <a data-tip="Quick View" data-place="left"
+                                   href="product.jsp?idProduct=<%=pr.getId()%>">
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-eye"></use>
+                                        <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
                                     </svg>
                                 </a>
                             </li>
                             <li>
                                 <a data-tip="Add To Wishlist" data-place="left" href="#">
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
+                                        <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
                                     </svg>
                                 </a>
                             </li>
                             <li>
                                 <a data-tip="Add To Compare" data-place="left" href="#">
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-loop2"></use>
+                                        <use xlink:href="phone_nam/images/sprite.svg#icon-loop2"></use>
                                     </svg>
                                 </a>
                             </li>
@@ -1174,7 +584,196 @@
                 </div>
             </div>
 
+            <% Set<Product> rshot = DataDB.getProductsKind("hot");%>
+            <div class="category__container" id="category__container__hot" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
+                <div class="category__center">
+                    <%for(Product pr: rshot){%>
+                    <div class="product category__products">
+                        <div class="product__header">
+                            <img src="<%=pr.getImg()%>" alt="product">
+                        </div>
+                        <div class="product__footer">
+                            <h3><%=pr.getName()%></h3>
+                            <div class="rating">
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                </svg>
+                            </div>
+                            <div class="product__price" style="color: red">
+
+                                <h4><%=pr.getPrice()+" VND"%></h4>
+                            </div>
+                            <a href="#" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                        </div>
+                        <ul>
+                            <li>
+                                <a data-tip="Quick View" data-place="left"
+                                   href="product.jsp?idProduct=<%=pr.getId()%>">
+                                    <svg>
+                                        <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-tip="Add To Wishlist" data-place="left" href="#">
+                                    <svg>
+                                        <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-tip="Add To Compare" data-place="left" href="#">
+                                    <svg>
+                                        <use xlink:href="phone_nam/images/sprite.svg#icon-loop2"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+
+            <% Set<Product> rsnew = DataDB.getProductsKind("new");%>
+            <div class="category__container" id="category__container__new" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
+                <div class="category__center">
+                    <%for(Product pr: rsnew){%>
+                    <div class="product category__products">
+                        <div class="product__header">
+                            <img src="<%=pr.getImg()%>" alt="product">
+                        </div>
+                        <div class="product__footer">
+                            <h3><%=pr.getName()%></h3>
+                            <div class="rating">
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                </svg>
+                            </div>
+                            <div class="product__price" style="color: red">
+
+                                <h4><%=pr.getPrice()+" VND"%></h4>
+                            </div>
+                            <a href="#" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                        </div>
+                        <ul>
+                            <li>
+                                <a data-tip="Quick View" data-place="left"
+                                   href="product.jsp?idProduct=<%=pr.getId()%>">
+                                    <svg>
+                                        <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-tip="Add To Wishlist" data-place="left" href="#">
+                                    <svg>
+                                        <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-tip="Add To Compare" data-place="left" href="#">
+                                    <svg>
+                                        <use xlink:href="phone_nam/images/sprite.svg#icon-loop2"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+
+            <% Set<Product> rssalerun = DataDB.getProductsKind("salerun");%>
+            <div class="category__container" id="category__container__salerun" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
+                <div class="category__center">
+                    <%for(Product pr: rssalerun){%>
+                    <div class="product category__products">
+                        <div class="product__header">
+                            <img src="<%=pr.getImg()%>" alt="product">
+                        </div>
+                        <div class="product__footer">
+                            <h3><%=pr.getName()%></h3>
+                            <div class="rating">
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                </svg>
+                            </div>
+                            <div class="product__price" style="color: red">
+
+                                <h4><%=pr.getPrice()+" VND"%></h4>
+                            </div>
+                            <a href="#" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                        </div>
+                        <ul>
+                            <li>
+                                <a data-tip="Quick View" data-place="left"
+                                   href="product.jsp?idProduct=<%=pr.getId()%>">
+                                    <svg>
+                                        <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-tip="Add To Wishlist" data-place="left" href="#">
+                                    <svg>
+                                        <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-tip="Add To Compare" data-place="left" href="#">
+                                    <svg>
+                                        <use xlink:href="phone_nam/images/sprite.svg#icon-loop2"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+
+
         </section>
+
+
 
         <!-- Facility Section -->
         <section class="facility__section section" id="facility">
@@ -1609,9 +1208,10 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <!-- Custom JavaScript -->
-<script src="js/products.js"></script>
+<%--<script src="js/products.js"></script>--%>
 <%--<script src="js/index.js"></script>--%>
 <script src="js/slider.js"></script>
+<script src="js/filterPr.js"></script>
 
 </body>
 

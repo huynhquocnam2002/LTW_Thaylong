@@ -1,5 +1,4 @@
 package vn.edu.hcmuaf.fit.model;
-
 public class Producer {
 
     private String id;
