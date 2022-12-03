@@ -21,6 +21,10 @@ public class User {
         this.status = status;
     }
 
+    public User(){
+
+    }
+
     public String getId() {
         return id;
     }

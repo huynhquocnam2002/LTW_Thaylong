@@ -102,15 +102,7 @@
                     </div>
                 </div>
 
-                <div class="nav__icons" id="nav__item_giohang">
-                    <a href="/html/cart.html" class="icon__item">
-                        <svg class="icon__cart">
-                            <use xlink:href="./images/sprite.svg#icon-shopping-basket"></use>
-                        </svg>
-                        <span id="cart__total">4</span>
-                    </a>
-                    <a href="/html/cart.html" class="nav__link_giohang">Giỏ Hàng</a>
-                </div>
+
             </nav>
         </div>
     </div>

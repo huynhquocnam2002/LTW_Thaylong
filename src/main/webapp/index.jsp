@@ -342,7 +342,7 @@
         <!-- DANH MUC SÃN PHẨM -->
         <section class="section section-danhmuc">
             <div>
-                <% List<Category> rsCategory = DataDB.getCategory();%>
+                <% List<Category> rsCategory = DataDB.getCategorys();%>
                 <ul class="nav__list" id="nav__list_DANHMUC11">
 
                     <%for(int i =0 ; i< (rsCategory.size()/2+1) ; i++){%>

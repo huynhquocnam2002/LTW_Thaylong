@@ -50,6 +50,12 @@ public class Product {
         return id;
     }
 
+    public String getKey(){
+
+        return id;
+
+    }
+
     public String getName() {
         return name;
     }
@@ -123,7 +129,10 @@ public class Product {
     }
 
     public void setQuantity(int quantity) {
-        this.quantity = quantity;
+
+        if(quantity < 1) quantity =1;
+
+        this.quantity =quantity;
     }
 
     public void setDetail(String detail) {

@@ -569,9 +569,10 @@
                 <span id="dots">...</span></p>
 
 
-            <img style="width:100% ;height: 495.23px; object-fit: cover; "
+            <img style="width:100% ;height: 495.23px; object-fit: contain; "
                  src="<%=data.getProductById("PR40").getImg()%>"
                  alt="">
+
 
             <p>Hỗ trợ 3 chế độ sạc và công nghệ PD tiết kiệm thời gian sạc
                 Pin sạc dự phòng Anker PowerSlim 10000mAh PD A1244 cung cấp <br> cho người dùng 3 chế độ sạc bao gồm sạc
