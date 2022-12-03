@@ -174,14 +174,14 @@
 
 
 
-            <li><%=data.getProductById("PR17").getName()%>
+            <li><%=data.getProductById("PR40").getName()%>
             </li>
 
 
         </ul>
     </div>
 </div>
-<h2 id="section__title__product"><%=data.getProductById("PR17").getName()%>
+<h2 id="section__title__product"><%=data.getProductById("PR40").getName()%>
 </h2>
 <%--<%=data.getProductById(request.getParameter("idProduct")).getName()%>--%>
 
@@ -204,7 +204,7 @@
                                         <div class="hero__left">
                                             <h1>TÍNH NĂNG NỔI BẬT</h1>
 
-                                            <img src="   <%=data.getProductById(request.getParameter("idProduct")).getImg()%>
+                                            <img src="<%=data.getProductById("PR40").getImg()%>
                                             "
 
                                                  alt="img__product" id="image__detail__product">
@@ -232,7 +232,7 @@
                                         <div class="hero__left">
 
                                             <img src="
-                                     <%=data.getProductById("PR17").getImg()%>"
+                                     <%=data.getProductById("PR40").getImg()%>"
                                                  style="width:375px!important;height: 375px !important; position: relative;top:-22px;padding: 10px;border-radius: 10px !important;">
 
                                         </div>
@@ -243,7 +243,7 @@
                                     <div class="hero__center">
                                         <div class="hero__left">
 
-                                            <img src="<%=data.getProductById("PR17").getImg()%>"
+                                            <img src="<%=data.getProductById("PR40").getImg()%>"
                                                  alt="img__product" class="image__detail__product"
                                                  style="width:375px!important;height: 375px !important; position: relative;top:-22px;padding: 10px;border-radius: 10px !important;">
 
@@ -314,7 +314,7 @@
         <div class="product-detail__center">
 
 
-            <h3 style="color: red; "><%=data.getProductById("PR17").getPrice()%> đ
+            <h3 style="color: red; "><%=data.getProductById("PR40").getPrice()%> đ
 
 
                 <p style="color:#707070; position: relative; left:90px; bottom:25px;">
@@ -327,8 +327,8 @@
             <div class="product__item">
 
                 <img
-                        src="<%=data.getProductById(request.getParameter("idProduct")).getImg()%>"
-                        alt="">
+                        src="<%=data.getProductById("PR40").getImg()%>"
+                        alt="" style="width: 33px; height: 35px; object-fit: cover;">
 
                 <div class="product__title__item">
                     <strong>Đen</strong>
@@ -416,8 +416,8 @@
 
 
                     <span>Giá:</span>
-                    <a href="#" class="new__price"><%=data.getProductById(request.getParameter("idProduct")).getPrice()%>VNĐ</a>
-
+                    <a href="#" class="new__price"><%=data.getProductById("PR40").getPrice()%>VNĐ</a>
+<%--                    <%=data.getProductById(request.getParameter("idProduct")).getPrice()%>--%>
 
                 </li>
                 <li>
@@ -435,7 +435,7 @@
                 </li>
                 <li>
                     <span>Hiện có:</span>
-                    <a href="#" class="in-stock">Trong kho (<%=data.getProductById(request.getParameter("idProduct")).getQuantity()%> sản phẩm)</a>
+                    <a href="#" class="in-stock">Trong kho (<%=data.getProductById("PR40").getQuantity()%> sản phẩm)</a>
                 </li>
                 </ul>
                 <div class="product-info__btn">
@@ -506,7 +506,7 @@
 
                 <strong>Bảo hành </strong>
 
-                <p style="color:#333333; font-size:14px;">Bảo hành:<b<%=data.getProductById("PR17").getIns()%> tháng></b> chính hãng Energiner</p>
+                <p style="color:#333333; font-size:14px;">Bảo hành:<b<%=data.getProductById("PR40").getIns()%> tháng></b> chính hãng Energiner</p>
 
 
 
@@ -570,7 +570,7 @@
 
 
             <img style="width:100% ;height: 495.23px; object-fit: cover; "
-                 src="<%=data.getProductById("PR17").getImg()%>"
+                 src="<%=data.getProductById("PR40").getImg()%>"
                  alt="">
 
             <p>Hỗ trợ 3 chế độ sạc và công nghệ PD tiết kiệm thời gian sạc
@@ -976,11 +976,11 @@
                         <div class="product">
                             <div class="product__header">
                                 <a href="#"><img
-                                        src="<%=data.getProductById("PR3").getImg()%>"
+                                        src="<%=data.getProductById("PR40").getImg()%>"
                                         alt="product"></a>
                             </div>
                             <div class="product__footer">
-                                <h3><%=data.getProductById("PR3").getName()%>
+                                <h3><%=data.getProductById("PR40").getName()%>
                                 </h3>
                                 <div class="rating">
                                     <svg>
@@ -1000,7 +1000,7 @@
                                     </svg>
                                 </div>
                                 <div class="product__price">
-                                    <h4><%=data.getProductById("PR3").getPrice()%> VNĐ</h4>
+                                    <h4><%=data.getProductById("PR40").getPrice()%> VNĐ</h4>
                                 </div>
                                 <a href="#">
                                     <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>

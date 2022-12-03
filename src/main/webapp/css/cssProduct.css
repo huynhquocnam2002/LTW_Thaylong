@@ -779,7 +779,7 @@ header>li {
 }
 .product-detail__center .title li{
 
-text-decoration: none;
+  text-decoration: none;
 
 }
 
@@ -1004,7 +1004,7 @@ text-decoration: none;
   border: 1px solid #d70018;
   border-radius: 12px;
 
-  padding-left: 30px;
+  padding-left: 5px;
 
   display: flex;
 
@@ -1015,6 +1015,23 @@ text-decoration: none;
   cursor: pointer;
 }
 
+.product__title__item{
+
+  display: flex;
+
+
+  flex-direction: column;
+
+
+
+
+}
+.product__title__item span{
+
+
+
+
+}
 /*
   ======================
   Collection
@@ -1969,7 +1986,7 @@ span.dot::before {
 
 /*
   ======================
-  Testimonial 
+  Testimonial
   ======================
   */
 
