@@ -239,54 +239,7 @@ public class DataDB {
             res.add(new Category(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
         return res;
     }
-            // get thong tin product
-    public static Product getProductById(String id) throws SQLException, ClassNotFoundException {
-        Product res = null;
-        DataDB db = new DataDB();
-        ResultSet rs = db.getStatement().executeQuery("select * from product where id='" + id + "';");
-        while (rs.next()) {
-            res = new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
-                    rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
-                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12));
-        }
-        return res;
-    }
 
-    public static Category getCategorysObject() throws SQLException, ClassNotFoundException {
-        try {
-            DBConnect dbConnect = DBConnect.getInstance();
-            Statement statement = dbConnect.get();
-            ResultSet rs = statement.executeQuery("SELECT * FROM category WHERE category.ID=\"CG2\"");
-            while (rs.next()) {
-                Category c = new Category(
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getInt(4));
-                return c;
-            }
-        } catch (Exception e) {
-        }
-        return null;
-    }
-
-    public static Producer getProducersOject() throws SQLException, ClassNotFoundException {
-        try {
-            DBConnect dbConnect = DBConnect.getInstance();
-            Statement statement = dbConnect.get();
-            ResultSet rs = statement.executeQuery("SELECT * FROM producer WHERE producer.ID=\"PRER10\"");
-            while (rs.next()) {
-                Producer p = new Producer(
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getInt(4));
-                return p;
-            }
-        } catch (Exception e) {
-        }
-        return null;
-    }
 
 
     public static Category getCategorysObject() throws SQLException, ClassNotFoundException {
@@ -429,7 +382,7 @@ public class DataDB {
 
 //        }
 
-        System.out.println(getReviewObjects("1").getReview_date());
+//        System.out.println(getReviewObjects("1").getReview_date());
 
     }
 }
