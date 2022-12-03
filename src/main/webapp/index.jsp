@@ -5,6 +5,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.controller.Util" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Category" %>
 <%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.DB.DBConnect" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +42,7 @@
             <nav class="nav">
                 <div class="nav__hamburger">
                     <svg>
-                        <use xlink:href="phone_nam/images/sprite.svg#icon-menu"></use>
+                        <use xlink:href="image/images/sprite.svg#icon-menu"></use>
                     </svg>
                 </div>
 
@@ -56,7 +57,7 @@
                         <span class="nav__category">PHONE</span>
                         <a href="#" class="close__toggle">
                             <svg>
-                                <use xlink:href="phone_nam/images/sprite.svg#icon-cross"></use>
+                                <use xlink:href="image/images/sprite.svg#icon-cross"></use>
                             </svg>
                         </a>
                     </div>
@@ -72,7 +73,7 @@
                             <div class="nav__icons">
                                 <a href="#" class="icon__item" id="icon__item_seach">
                                     <svg class="icon__search">
-                                        <use xlink:href="phone_nam/images/sprite.svg#icon-search"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-search"></use>
                                     </svg>
                                 </a>
                             </div>
@@ -91,7 +92,7 @@
                 <div class="nav__icons">
                     <a href="/LoginServlet" class="icon__item">
                         <svg class="icon__user">
-                            <use xlink:href="phone_nam/images/sprite.svg#icon-user"></use>
+                            <use xlink:href="image/images/sprite.svg#icon-user"></use>
                         </svg>
                     </a>
 
@@ -126,14 +127,14 @@
                         int numOfCartItems= DataDB.getCartItems(u).size();
                 %>
                 <div class="nav__icons" id="nav__item_giohang">
-                    <a href="/phone_nam/login.html" class="icon__item">
+                    <a href="/image/login.html" class="icon__item">
                         <svg class="icon__cart">
-                            <use xlink:href="phone_nam/images/sprite.svg#icon-shopping-basket"></use>
+                            <use xlink:href="image/images/sprite.svg#icon-shopping-basket"></use>
                         </svg>
 
                         <span id="cart__total"><%=numOfCartItems%></span>
                     </a>
-                    <a href="/phone_nam/login.html" class="nav__link_giohang">Giỏ Hàng</a>
+                    <a href="/image/login.html" class="nav__link_giohang">Giỏ Hàng</a>
                 </div>
                 <%}%>
             </nav>
@@ -147,93 +148,30 @@
             <nav class="nav">
                 <div class="nav__hamburger">
                     <svg>
-                        <use xlink:href="phone_nam/images/sprite.svg#icon-menu"></use>
+                        <use xlink:href="image/images/sprite.svg#icon-menu"></use>
                     </svg>
                 </div>
 
                 <ul class="nav__list" id="nav__list_DANHMUC">
-
+                <% List<Category> list = DataDB.getCategoryHeader();%>
+                    <% for (int i = 0; i < list.size(); i++) {%>
 
                     <div class="nav__icons_danhmuc">
-                        <a href="../html/indexseach.html" class="icon__item">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/oplung.png"></img>
+                        <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="icon__item">
+                            <img class="icon__itemdanhmuc" src="<%=list.get(i).getImg()%>"></img>
                         </a>
                         <li class="nav__item">
-                            <a href="../html/indexseach.html" class="scroll-linkDANHMUC">ỐP LƯNG</a>
+                            <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="scroll-linkDANHMUC"><%=list.get(i).getName()%></a>
                         </li>
                     </div>
 
-
+                    <% }%>
                     <div class="nav__icons_danhmuc">
-                        <a href="/phone_nam/indexseach.html" class="icon__item">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/sacduphong.jpg"></img>
+                        <a href="#sectiondanhmuc2" class="icon__item">
+                            <img class="icon__itemdanhmuc" src="image/icon/khac.jpg"></img>
                         </a>
                         <li class="nav__item">
-                            <a href="/phone_nam/indexseach.html" class="scroll-linkDANHMUC">SẠC DỰ PHÒNG</a>
-                        </li>
-                    </div>
-
-
-                    <div class="nav__icons_danhmuc">
-                        <a href="/phone_nam/indexseach.html" class="icon__item">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/tainghe.png"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/phone_nam/indexseach.html" class="scroll-linkDANHMUC">TAI NGHE</a>
-                        </li>
-                    </div>
-
-                    <div class="nav__icons_danhmuc">
-                        <a href="/phone_nam/indexseach.html" class="icon__item">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/capsac.png"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/phone_nam/indexseach.html" class="scroll-linkDANHMUC">CỤC SẠC</a>
-                        </li>
-                    </div>
-
-                    <div class="nav__icons_danhmuc">
-                        <a href="/phone_nam/indexseach.html" class="icon__item">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/kinhcuongluc.jpg"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/phone_nam/indexseach.html" class="scroll-linkDANHMUC">KÍNH CƯỜNG LỰC</a>
-                        </li>
-                    </div>
-
-                    <div class="nav__icons_danhmuc">
-                        <a href="/phone_nam/indexseach.html" class="icon__item">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/apple1.png"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/phone_nam/indexseach.html" class="scroll-linkDANHMUC">PHỤ KIỆN APPLE</a>
-                        </li>
-                    </div>
-
-                    <div class="nav__icons_danhmuc">
-                        <a href="/phone_nam/indexseach.html" class="icon__item">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/gaydienthoai.png"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/phone_nam/indexseach.html" class="scroll-linkDANHMUC">GIÁ ĐỠ ĐIỆN THOẠI</a>
-                        </li>
-                    </div>
-
-                    <div class="nav__icons_danhmuc">
-                        <a href="/phone_nam/indexseach.html" class="icon__item">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/bag1.png"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/phone_nam/indexseach.html" class="scroll-linkDANHMUC">TÚI CHỐNG NƯỚC</a>
-                        </li>
-                    </div>
-
-                    <div class="nav__icons_danhmuc">
-                        <a href="/phone_nam/indexseach.html" class="icon__item">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/khac.jpg"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/phone_nam/indexseach.html" class="scroll-linkDANHMUC">PHỤ KIỆN KHÁC</a>
+                            <a href="#sectiondanhmuc2" class="scroll-linkDANHMUC">PHỤ KIỆN KHÁC</a>
                         </li>
                     </div>
 
@@ -261,7 +199,7 @@
                             </div>
                             <div class="hero__right">
                                 <div class="hero__img-container">
-                                    <img class="banner_01" src="phone_nam/images/sacduphong1.png" alt="banner2"/>
+                                    <img class="banner_01" src="image/images/sacduphong1.png" alt="banner2"/>
                                 </div>
                             </div>
                         </div>
@@ -277,7 +215,7 @@
                                 </a>
                             </div>
                             <div class="hero__right">
-                                <img class="banner_02" src="phone_nam/images/tainghe6.png" alt="banner2"/>
+                                <img class="banner_02" src="image/images/tainghe6.png" alt="banner2"/>
                             </div>
                         </div>
                     </li>
@@ -291,12 +229,12 @@
             <div class="glide__arrows" data-glide-el="controls">
                 <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
                     <svg>
-                        <use xlink:href="phone_nam/images/sprite.svg#icon-arrow-left2"></use>
+                        <use xlink:href="image/images/sprite.svg#icon-arrow-left2"></use>
                     </svg>
                 </button>
                 <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
                     <svg>
-                        <use xlink:href="phone_nam/images/sprite.svg#icon-arrow-right2"></use>
+                        <use xlink:href="image/images/sprite.svg#icon-arrow-right2"></use>
                     </svg>
                 </button>
             </div>
@@ -313,7 +251,7 @@
             <div class="collection__container" data-aos="fade-up" data-aos-duration="1200">
                 <div class="collection__box">
                     <div class="img__container">
-                        <img class="collection_02" src="phone_nam/images/collection_02.png" alt="">
+                        <img class="collection_02" src="image/images/collection_02.png" alt="">
                     </div>
                     <div class="collection__content">
                         <div class="collection__data">
@@ -325,7 +263,7 @@
                 </div>
                 <div class="collection__box">
                     <div class="img__container">
-                        <img class="collection_01" src="phone_nam/images/sacnhanh1.png" alt="">
+                        <img class="collection_01" src="image/images/sacnhanh1.png" alt="">
                     </div>
                     <div class="collection__content">
                         <div class="collection__data">
@@ -340,7 +278,7 @@
 
 
         <!-- DANH MUC SÃN PHẨM -->
-        <section class="section section-danhmuc">
+        <section class="section section-danhmuc" id="sectiondanhmuc2">
             <div>
                 <% List<Category> rsCategory = DataDB.getCategory();%>
                 <ul class="nav__list" id="nav__list_DANHMUC11">
@@ -417,19 +355,19 @@
                                         <h3><%=pr.getName()%></h3>
                                         <div class="rating">
                                             <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
+                                                <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                             </svg>
                                             <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
+                                                <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                             </svg>
                                             <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
+                                                <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                             </svg>
                                             <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
+                                                <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                             </svg>
                                             <svg>
-                                                <use xlink:href="phone_nam/images/sprite.svg#icon-star-empty"></use>
+                                                <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                                             </svg>
                                         </div>
                                         <div class="product__price" style="color: red">
@@ -444,21 +382,21 @@
                                             <a data-tip="Quick View" data-place="left"
                                                href="product.jsp?idProduct=<%=pr.getId()%>">
                                                 <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
+                                                    <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                                 </svg>
                                             </a>
                                         </li>
                                         <li>
                                             <a data-tip="Add To Wishlist" data-place="left" href="#">
                                                 <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
+                                                    <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                                 </svg>
                                             </a>
                                         </li>
                                         <li>
                                             <a data-tip="Add To Compare" data-place="left" href="#">
                                                 <svg>
-                                                    <use xlink:href="phone_nam/images/sprite.svg#icon-loop2"></use>
+                                                    <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                                 </svg>
                                             </a>
                                         </li>
@@ -472,12 +410,12 @@
                     <div class="glide__arrows" data-glide-el="controls">
                         <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
                             <svg>
-                                <use xlink:href="phone_nam/images/sprite.svg#icon-arrow-left2"></use>
+                                <use xlink:href="image/images/sprite.svg#icon-arrow-left2"></use>
                             </svg>
                         </button>
                         <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
                             <svg>
-                                <use xlink:href="phone_nam/images/sprite.svg#icon-arrow-right2"></use>
+                                <use xlink:href="image/images/sprite.svg#icon-arrow-right2"></use>
                             </svg>
                         </button>
                     </div>
@@ -560,21 +498,21 @@
                                 <a data-tip="Quick View" data-place="left"
                                    href="product.jsp?idProduct=<%=pr.getId()%>">
                                     <svg>
-                                        <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                     </svg>
                                 </a>
                             </li>
                             <li>
                                 <a data-tip="Add To Wishlist" data-place="left" href="#">
                                     <svg>
-                                        <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                     </svg>
                                 </a>
                             </li>
                             <li>
                                 <a data-tip="Add To Compare" data-place="left" href="#">
                                     <svg>
-                                        <use xlink:href="phone_nam/images/sprite.svg#icon-loop2"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                     </svg>
                                 </a>
                             </li>
@@ -622,21 +560,21 @@
                                 <a data-tip="Quick View" data-place="left"
                                    href="product.jsp?idProduct=<%=pr.getId()%>">
                                     <svg>
-                                        <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                     </svg>
                                 </a>
                             </li>
                             <li>
                                 <a data-tip="Add To Wishlist" data-place="left" href="#">
                                     <svg>
-                                        <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                     </svg>
                                 </a>
                             </li>
                             <li>
                                 <a data-tip="Add To Compare" data-place="left" href="#">
                                     <svg>
-                                        <use xlink:href="phone_nam/images/sprite.svg#icon-loop2"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                     </svg>
                                 </a>
                             </li>
@@ -684,21 +622,21 @@
                                 <a data-tip="Quick View" data-place="left"
                                    href="product.jsp?idProduct=<%=pr.getId()%>">
                                     <svg>
-                                        <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                     </svg>
                                 </a>
                             </li>
                             <li>
                                 <a data-tip="Add To Wishlist" data-place="left" href="#">
                                     <svg>
-                                        <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                     </svg>
                                 </a>
                             </li>
                             <li>
                                 <a data-tip="Add To Compare" data-place="left" href="#">
                                     <svg>
-                                        <use xlink:href="phone_nam/images/sprite.svg#icon-loop2"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                     </svg>
                                 </a>
                             </li>
@@ -746,21 +684,21 @@
                                 <a data-tip="Quick View" data-place="left"
                                    href="product.jsp?idProduct=<%=pr.getId()%>">
                                     <svg>
-                                        <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                     </svg>
                                 </a>
                             </li>
                             <li>
                                 <a data-tip="Add To Wishlist" data-place="left" href="#">
                                     <svg>
-                                        <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                     </svg>
                                 </a>
                             </li>
                             <li>
                                 <a data-tip="Add To Compare" data-place="left" href="#">
                                     <svg>
-                                        <use xlink:href="phone_nam/images/sprite.svg#icon-loop2"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                     </svg>
                                 </a>
                             </li>
@@ -782,7 +720,7 @@
                     <div class="facility__box">
                         <div class="facility-img__container">
                             <svg>
-                                <use xlink:href="phone_nam/images/sprite.svg#icon-airplane"></use>
+                                <use xlink:href="image/images/sprite.svg#icon-airplane"></use>
                             </svg>
                         </div>
                         <p>MIỄN PHÍ VẬN CHUYỂN TOÀN CẦU</p>
@@ -791,7 +729,7 @@
                     <div class="facility__box">
                         <div class="facility-img__container">
                             <svg>
-                                <use xlink:href="phone_nam/images/sprite.svg#icon-credit-card-alt"></use>
+                                <use xlink:href="image/images/sprite.svg#icon-credit-card-alt"></use>
                             </svg>
                         </div>
                         <p>HOÀN TIỀN 100%</p>
@@ -800,7 +738,7 @@
                     <div class="facility__box">
                         <div class="facility-img__container">
                             <svg>
-                                <use xlink:href="phone_nam/images/sprite.svg#icon-credit-card"></use>
+                                <use xlink:href="image/images/sprite.svg#icon-credit-card"></use>
                             </svg>
                         </div>
                         <p>NHIỀU HÌNH THỨC THANH TOÁN</p>
@@ -809,7 +747,7 @@
                     <div class="facility__box">
                         <div class="facility-img__container">
                             <svg>
-                                <use xlink:href="phone_nam/images/sprite.svg#icon-headphones"></use>
+                                <use xlink:href="image/images/sprite.svg#icon-headphones"></use>
                             </svg>
                         </div>
                         <p>HỖ TRỢ 24/7</p>
@@ -826,7 +764,7 @@
                             <li class="glide__slide">
                                 <div class="testimonial__box">
                                     <div class="client__image">
-                                        <img src="phone_nam/img/voucher2.png" alt="profile">
+                                        <img src="image/img/voucher2.png" alt="profile">
                                     </div>
                                     <p>Sử dụng mã giảm 80% phí vận chuyển (tối đa 15K) đơn hàng từ 0Đ cho sản phẩm thuộc
                                         gian hàng Freeship Extra.
@@ -847,7 +785,7 @@
                             <li class="glide__slide">
                                 <div class="testimonial__box">
                                     <div class="client__image">
-                                        <img src="phone_nam/img/voucher2.png" alt="profile">
+                                        <img src="image/img/voucher2.png" alt="profile">
                                     </div>
                                     <p>Sử dụng mã giảm 50% phí vận chuyển (tối đa 30K) đơn hàng từ 0Đ cho sản phẩm thuộc
                                         gian hàng Freeship Extra.
@@ -868,7 +806,7 @@
                             <li class="glide__slide">
                                 <div class="testimonial__box">
                                     <div class="client__image">
-                                        <img src="phone_nam/img/voucher2.png" alt="profile">
+                                        <img src="image/img/voucher2.png" alt="profile">
                                     </div>
                                     <p>Mã CCBDPBL1022A hoàn 5% tối đa 100K Xu cho đơn hàng hợp lệ từ 50K từ shop Hoàn Xu
                                         Xtra trên ứng dụng Shopee. HSD: 28/10/2022 23:59. Số lượng có hạn. Mỗi khách
@@ -888,7 +826,7 @@
                             <li class="glide__slide">
                                 <div class="testimonial__box">
                                     <div class="client__image">
-                                        <img src="phone_nam/img/voucher2.png" alt="">
+                                        <img src="image/img/voucher2.png" alt="">
                                     </div>
                                     <p>Sử dụng mã miễn phí vận chuyển cho sản phẩm thuộc gian hàng FreeShip Xtra:
                                         + Miễn phí vận chuyển tối đa 15,000đ cho đơn hàng từ 50,000đ.
@@ -915,7 +853,7 @@
                             <li class="glide__slide">
                                 <div class="testimonial__box">
                                     <div class="client__image">
-                                        <img src="phone_nam/img/voucher2.png" alt="">
+                                        <img src="image/img/voucher2.png" alt="">
                                     </div>
                                     <p>Sử dụng mã miễn phí vận chuyển cho đơn hàng thỏa điều kiện ưu đãi tại ứng
                                         dụng
@@ -968,7 +906,7 @@
                                 <li class="glide__slide">
                                     <div class="new__card">
                                         <div class="card__header">
-                                            <img src="phone_nam/images/news1.jpg" alt="">
+                                            <img src="image/images/news1.jpg" alt="">
                                         </div>
                                         <div class="card__footer">
                                             <h3>Khai Trương Tưng Bừng Sale Cực Lớn</h3>
@@ -986,7 +924,7 @@
                                 <li class="glide__slide">
                                     <div class="new__card">
                                         <div class="card__header">
-                                            <img src="phone_nam/images/news2.jpg" alt="">
+                                            <img src="image/images/news2.jpg" alt="">
                                         </div>
                                         <div class="card__footer">
                                             <h3>Khai Trương Tưng Bừng Sale Cực Lớn</h3>
@@ -1004,7 +942,7 @@
                                 <li class="glide__slide">
                                     <div class="new__card">
                                         <div class="card__header">
-                                            <img src="phone_nam/images/news3.jpg" alt="">
+                                            <img src="image/images/news3.jpg" alt="">
                                         </div>
                                         <div class="card__footer">
                                             <h3>Khai Trương Tưng Bừng Sale Cực Lớn</h3>
@@ -1022,7 +960,7 @@
                                 <li class="glide__slide">
                                     <div class="new__card">
                                         <div class="card__header">
-                                            <img src="phone_nam/images/news4.jpg" alt="">
+                                            <img src="image/images/news4.jpg" alt="">
                                         </div>
                                         <div class="card__footer">
                                             <h3>Khai Trương Tưng Bừng Sale Cực Lớn</h3>
@@ -1040,7 +978,7 @@
                                 <li class="glide__slide">
                                     <div class="new__card">
                                         <div class="card__header">
-                                            <img src="phone_nam/images/news5.jpg" alt="">
+                                            <img src="image/images/news5.jpg" alt="">
                                         </div>
                                         <div class="card__footer">
                                             <h3>Khai Trương Tưng Bừng Sale Cực Lớn</h3>
@@ -1092,19 +1030,19 @@
         <div class="footer__top">
             <div class="footer-top__box">
                 <h3>BỔ SUNG</h3>
-                <a href="/phone_nam/htmlfooter/nhanhieu.html">Nhãn hiệu</a>
-                <a href="/phone_nam/htmlfooter/phieuquatang.html">Phiếu quà tặng</a>
-                <a href="/phone_nam/htmlfooter/chinhanh.html">Chi nhánh</a>
+                <a href="/image/htmlfooter/nhanhieu.html">Nhãn hiệu</a>
+                <a href="/image/htmlfooter/phieuquatang.html">Phiếu quà tặng</a>
+                <a href="/image/htmlfooter/chinhanh.html">Chi nhánh</a>
                 <a href="#">Đặc biệt</a>
-                <a href="/phone_nam/htmlfooter/sodoweb.html">Sơ đồ trang Web</a>
+                <a href="/image/htmlfooter/sodoweb.html">Sơ đồ trang Web</a>
             </div>
             <div class="footer-top__box">
                 <h3>THÔNG TIN</h3>
-                <a href="/phone_nam/htmlfooter/vechungtoi.html">Về chúng tôi</a>
-                <a href="/phone_nam/htmlfooter/chinhsachbaomat.html">Chính sách bảo mật</a>
-                <a href="/phone_nam/htmlfooter/dieukhoanvadieukien.html">Các điều khoản và điều kiện</a>
-                <a href="/phone_nam/htmlfooter/lienhechungtoi.html">Liên hệ chúng tôi</a>
-                <a href="/phone_nam/htmlfooter/sodoweb.html">Sơ đồ trang Web</a>
+                <a href="/image/htmlfooter/vechungtoi.html">Về chúng tôi</a>
+                <a href="/image/htmlfooter/chinhsachbaomat.html">Chính sách bảo mật</a>
+                <a href="/image/htmlfooter/dieukhoanvadieukien.html">Các điều khoản và điều kiện</a>
+                <a href="/image/htmlfooter/lienhechungtoi.html">Liên hệ chúng tôi</a>
+                <a href="/image/htmlfooter/sodoweb.html">Sơ đồ trang Web</a>
             </div>
             <div class="footer-top__box">
                 <h3>TÀI KHOẢN CỦA TÔI</h3>
@@ -1119,7 +1057,7 @@
                 <div>
             <span>
               <svg>
-                <use xlink:href="phone_nam/images/sprite.svg#icon-location"></use>
+                <use xlink:href="image/images/sprite.svg#icon-location"></use>
               </svg>
             </span>
                     <a
@@ -1129,7 +1067,7 @@
                 <div>
             <span>
               <svg>
-                <use xlink:href="phone_nam/images/sprite.svg#icon-envelop"></use>
+                <use xlink:href="image/images/sprite.svg#icon-envelop"></use>
               </svg>
             </span>
                     JC-PHONEcompany@gmail.com
@@ -1137,7 +1075,7 @@
                 <div>
             <span>
               <svg>
-                <use xlink:href="phone_nam/images/sprite.svg#icon-phone"></use>
+                <use xlink:href="image/images/sprite.svg#icon-phone"></use>
               </svg>
             </span>
                     08.999.999.99
@@ -1145,7 +1083,7 @@
                 <div>
             <span>
               <svg>
-                <use xlink:href="phone_nam/images/sprite.svg#icon-paperplane"></use>
+                <use xlink:href="image/images/sprite.svg#icon-paperplane"></use>
               </svg>
             </span>
                     TOÀN VIỆT NAM
@@ -1170,12 +1108,12 @@
     <div class="popup__content">
         <div class="popup__close">
             <svg>
-                <use xlink:href="phone_nam/images/sprite.svg#icon-cross"></use>
+                <use xlink:href="image/images/sprite.svg#icon-cross"></use>
             </svg>
         </div>
         <div class="popup__left">
             <div class="popup-img__container">
-                <img class="popup__img" src="phone_nam/images/popup.jpg" alt="popup">
+                <img class="popup__img" src="image/images/popup.jpg" alt="popup">
             </div>
         </div>
         <div class="popup__right">
@@ -1198,7 +1136,7 @@
 
 <a href="#header" class="goto-top scroll-link">
     <svg>
-        <use xlink:href="phone_nam/images/sprite.svg#icon-arrow-up"></use>
+        <use xlink:href="image/images/sprite.svg#icon-arrow-up"></use>
     </svg>
 </a>
 

@@ -2,6 +2,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.DB.DataDB" %>
 <%@ page import="java.util.Set" %>
 <%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Category" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -126,90 +127,28 @@
 
             <ul class="nav__list" id="nav__list_DANHMUC">
 
+              <% List<Category> list = DataDB.getCategoryHeader();%>
+              <% for (int i = 0; i < list.size(); i++) {%>
 
               <div class="nav__icons_danhmuc">
-                <a href="/html/indexseach.html" class="icon__item">
-                    <img class="icon__itemdanhmuc" src="../image/icon/oplung.png"></img>
+                <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="icon__item">
+                  <img class="icon__itemdanhmuc" src="<%=list.get(i).getImg()%>"></img>
                 </a>
-              <li class="nav__item">
-                <a href="/html/indexseach.html" class="scroll-linkDANHMUC">ỐP LƯNG</a>
-              </li>
+                <li class="nav__item">
+                  <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="scroll-linkDANHMUC"><%=list.get(i).getName()%></a>
+                </li>
               </div>
 
-
+              <% }%>
               <div class="nav__icons_danhmuc">
-                <a href="/html/indexseach.html" class="icon__item">
-                  <img class="icon__itemdanhmuc" src="../image/icon/sacduphong.jpg"></img>
+                <a href="#sectiondanhmuc2" class="icon__item">
+                  <img class="icon__itemdanhmuc" src="image/icon/khac.jpg"></img>
                 </a>
-              <li class="nav__item">
-                <a href="/html/indexseach.html" class="scroll-linkDANHMUC">SẠC DỰ PHÒNG</a>
-              </li>
-            </div>
+                <li class="nav__item">
+                  <a href="#sectiondanhmuc2" class="scroll-linkDANHMUC">PHỤ KIỆN KHÁC</a>
+                </li>
+              </div>
 
-
-              <div class="nav__icons_danhmuc">
-                <a href="/html/indexseach.html" class="icon__item">
-                  <img class="icon__itemdanhmuc" src="../image/icon/tainghe.png"></img>
-                </a>
-              <li class="nav__item">
-                <a href="/html/indexseach.html" class="scroll-linkDANHMUC">TAI NGHE</a>
-              </li>
-            </div>
-
-              <div class="nav__icons_danhmuc">
-                <a href="/html/indexseach.html" class="icon__item">
-                  <img class="icon__itemdanhmuc" src="../image/icon/capsac.png"></img>
-                </a>
-              <li class="nav__item">
-                <a href="/html/indexseach.html" class="scroll-linkDANHMUC">CỤC SẠC</a>
-              </li>
-            </div>
-
-              <div class="nav__icons_danhmuc">
-                <a href="/html/indexseach.html" class="icon__item">
-                  <img class="icon__itemdanhmuc" src="../image/icon/kinhcuongluc.jpg"></img>
-                </a>
-              <li class="nav__item">
-                <a href="/html/indexseach.html" class="scroll-linkDANHMUC">KÍNH CƯỜNG LỰC</a>
-              </li>
-            </div>
-
-              <div class="nav__icons_danhmuc">
-                <a href="/html/indexseach.html" class="icon__item">
-                  <img class="icon__itemdanhmuc" src="../image/icon/apple1.png"></img>
-                </a>
-              <li class="nav__item">
-                <a href="/html/indexseach.html" class="scroll-linkDANHMUC">PHỤ KIỆN APPLE</a>
-              </li>
-            </div>
-
-              <div class="nav__icons_danhmuc">
-                <a href="/html/indexseach.html" class="icon__item">
-                  <img class="icon__itemdanhmuc" src="../image/icon/gaydienthoai.png"></img>
-                </a>
-              <li class="nav__item">
-                <a href="/html/indexseach.html" class="scroll-linkDANHMUC">GIÁ ĐỠ ĐIỆN THOẠI</a>
-              </li>
-            </div>
-
-              <div class="nav__icons_danhmuc">
-                <a href="/html/indexseach.html" class="icon__item">
-                  <img class="icon__itemdanhmuc" src="../image/icon/bag1.png"></img>
-                </a>
-              <li class="nav__item">
-                <a href="/html/indexseach.html" class="scroll-linkDANHMUC">TÚI CHỐNG NƯỚC</a>
-              </li>
-            </div>
-
-              <div class="nav__icons_danhmuc">
-                <a href="/html/indexseach.html" class="icon__item">
-                  <img class="icon__itemdanhmuc" src="../image/icon/khac.jpg"></img>
-                </a>
-              <li class="nav__item">
-                <a href="/html/indexseach.html" class="scroll-linkDANHMUC">PHỤ KIỆN KHÁC</a>
-              </li>
-            </div>
-             
 
             </ul>
 
@@ -231,13 +170,14 @@
   <main id="main">
     <div class="container">
       <% Set<Product> ProductsByCatory = DataDB.getProductsByCatory(request.getParameter("idcategory"));%>
-       <% List<String> list = DataDB.getnameCatory(request.getParameter("idcategory"));%>
+       <% List<String> listname = DataDB.getnameCatory(request.getParameter("idcategory"));%>
       <!-- label thong bao -->
       <div class="label_seach">
-        <p class="label_seach_p">Tìm kiếm sản phẩm với từ khóa: "<%=list.get(0)+""%>"</p>
+        <p class="label_seach_p">Tìm kiếm sản phẩm với từ khóa: "<%=listname.get(0)+""%>"</p>
       </div>
-      <!-- Latest Products -->
 
+
+      <!-- Latest Products -->
       <section class="category__section section" id="category">
         <div class="tab__list">
           <div class="title__container tabs">
@@ -250,21 +190,21 @@
             <div class="section__titles">
               <div class="section__title filter-btn" id="hot" name="hot" onclick="checkKind('hot')">
                 <span class="dot"></span>
-                <h1 class="primary__title">Xu hướng</h1>
+                <h1 class="primary__title">Sản Phẩm Mới</h1>
               </div>
             </div>
 
             <div class="section__titles">
               <div class="section__title filter-btn" id="new" name="new" onclick="checkKind('new')">
                 <span class="dot"></span>
-                <h1 class="primary__title">Mới Nhất</h1>
+                <h1 class="primary__title">Giá Tăng Dần</h1>
               </div>
             </div>
 
             <div class="section__titles">
               <div class="section__title filter-btn" id="salerun" name="salerun" onclick="checkKind('salerun')">
                 <span class="dot"></span>
-                <h1 class="primary__title">Bán chạy</h1>
+                <h1 class="primary__title">Giá Giảm Dần</h1>
               </div>
             </div>
 
@@ -335,7 +275,7 @@
           </div>
         </div>
 
-        <% Set<Product> rshot = DataDB.getProductsKind("hot");%>
+        <% Set<Product> rshot = DataDB.getProductsByCatorynew(request.getParameter("idcategory"));%>
         <div class="category__container" id="category__container__hot" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
           <div class="category__center">
             <%for(Product pr: rshot){%>
@@ -397,7 +337,7 @@
           </div>
         </div>
 
-        <% Set<Product> rsnew = DataDB.getProductsKind("new");%>
+        <% Set<Product> rsnew = DataDB.getProductsByCatoryASC(request.getParameter("idcategory"));%>
         <div class="category__container" id="category__container__new" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
           <div class="category__center">
             <%for(Product pr: rsnew){%>
@@ -459,7 +399,7 @@
           </div>
         </div>
 
-        <% Set<Product> rssalerun = DataDB.getProductsKind("salerun");%>
+        <% Set<Product> rssalerun = DataDB.getProductsByCatoryDESC(request.getParameter("idcategory"));%>
         <div class="category__container" id="category__container__salerun" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
           <div class="category__center">
             <%for(Product pr: rssalerun){%>
