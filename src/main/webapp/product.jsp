@@ -1,4 +1,3 @@
-
 <%--
 <%--  Created by IntelliJ IDEA.--%>
 <%--  User: Admin--%>
@@ -165,7 +164,7 @@
             <li class="item"></li>
             </li>
             <li>
-                    <%=data.getCategorysObject(request.getParameter("idProduct")).getName()%>
+                    <%=data.getCategorysObject().getName()%>
             <li class="item"></li>
             </li>
 
@@ -174,16 +173,17 @@
             </li>
 
 
-            <li><%=data.getProductById(request.getParameter("idProduct")).getName()%>
+
+            <li><%=data.getProductById("PR40").getName()%>
             </li>
 
 
         </ul>
     </div>
 </div>
-<h2 id="section__title__product"><%=data.getProductById(request.getParameter("idProduct")).getName()%>
+<h2 id="section__title__product"><%=data.getProductById("PR40").getName()%>
 </h2>
-
+<%--<%=data.getProductById(request.getParameter("idProduct")).getName()%>--%>
 
 <section id="section-detailsProduct">
 
@@ -204,7 +204,7 @@
                                         <div class="hero__left">
                                             <h1>TÍNH NĂNG NỔI BẬT</h1>
 
-                                            <img src="   <%=data.getProductById(request.getParameter("idProduct")).getImg()%>
+                                            <img src="<%=data.getProductById("PR40").getImg()%>
                                             "
 
                                                  alt="img__product" id="image__detail__product">
@@ -232,8 +232,7 @@
                                         <div class="hero__left">
 
                                             <img src="
-                                      https://cdn2.cellphones.com.vn/358x/media/catalog/product/p/i/pin-sac-du-phong-anker-powercore-iii-sense-slim-a1244-10000mah.jpg"
-                                                 alt="img__product" class="image__detail__product"
+                                     <%=data.getProductById("PR40").getImg()%>"
                                                  style="width:375px!important;height: 375px !important; position: relative;top:-22px;padding: 10px;border-radius: 10px !important;">
 
                                         </div>
@@ -244,7 +243,7 @@
                                     <div class="hero__center">
                                         <div class="hero__left">
 
-                                            <img src="https://cdn2.cellphones.com.vn/358x/media/catalog/product/p/i/pin-sac-du-phong-anker-powercore-iii-sense-slim-a1244-10000mah-1.png"
+                                            <img src="<%=data.getProductById("PR40").getImg()%>"
                                                  alt="img__product" class="image__detail__product"
                                                  style="width:375px!important;height: 375px !important; position: relative;top:-22px;padding: 10px;border-radius: 10px !important;">
 
@@ -315,7 +314,7 @@
         <div class="product-detail__center">
 
 
-            <h3 style="color: red; "><%=data.getProductById(request.getParameter("idProduct")).getPrice()%> đ
+            <h3 style="color: red; "><%=data.getProductById("PR40").getPrice()%> đ
 
 
                 <p style="color:#707070; position: relative; left:90px; bottom:25px;">
@@ -328,8 +327,8 @@
             <div class="product__item">
 
                 <img
-                        src="<%=data.getProductById(request.getParameter("idProduct")).getImg()%>"
-                        alt="">
+                        src="<%=data.getProductById("PR40").getImg()%>"
+                        alt="" style="width: 33px; height: 35px; object-fit: cover;">
 
                 <div class="product__title__item">
                     <strong>Đen</strong>
@@ -417,8 +416,8 @@
 
 
                     <span>Giá:</span>
-                    <a href="#" class="new__price"><%=data.getProductById(request.getParameter("idProduct")).getPrice()%>VNĐ</a>
-
+                    <a href="#" class="new__price"><%=data.getProductById("PR40").getPrice()%>VNĐ</a>
+<%--                    <%=data.getProductById(request.getParameter("idProduct")).getPrice()%>--%>
 
                 </li>
                 <li>
@@ -431,13 +430,12 @@
 
                 <li>
                     <span>Loại sản phẩm:</span>
-                    <a href="#"><%= data.getCategorysObject(request.getParameter("idProduct")).getName()%>
-                    </a>
+                    <a href="#"><%= data.getCategorysObject().getName()%> </a>
 
                 </li>
                 <li>
                     <span>Hiện có:</span>
-                    <a href="#" class="in-stock">Trong kho (<%=data.getProductById(request.getParameter("idProduct")).getQuantity()%> sản phẩm)</a>
+                    <a href="#" class="in-stock">Trong kho (<%=data.getProductById("PR40").getQuantity()%> sản phẩm)</a>
                 </li>
                 </ul>
                 <div class="product-info__btn">
@@ -508,8 +506,8 @@
 
                 <strong>Bảo hành </strong>
 
-                <p style="color:#333333; font-size:14px;">Bảo hành: <b 12
-                                                                       tháng></b> chính hãng Energiner</p>
+                <p style="color:#333333; font-size:14px;">Bảo hành:<b<%=data.getProductById("PR40").getIns()%> tháng></b> chính hãng Energiner</p>
+
 
 
             </div>
@@ -570,8 +568,9 @@
 
                 <span id="dots">...</span></p>
 
+
             <img style="width:100% ;height: 495.23px; object-fit: cover; "
-                 src="https://cdn2.cellphones.com.vn/358x/media/catalog/product/p/i/pin-sac-du-phong-anker-powercore-iii-sense-slim-a1244-10000mah.jpg"
+                 src="<%=data.getProductById("PR40").getImg()%>"
                  alt="">
 
             <p>Hỗ trợ 3 chế độ sạc và công nghệ PD tiết kiệm thời gian sạc
@@ -713,12 +712,12 @@
 
                     <div class="container__name__image" style="display: flex;align-items: center; ">
                         <img class="container__feedback__name--border"
-                             src="https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/275669743_1361047297676932_7075608344792939540_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=ZukN44NzPN8AX_GRqp7&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfDcKItUUdwzHqXeolj5A82eR-7VqSx39gu9Em3Ea-qBhw&oe=636D10D1"
+                             src="<%=data.getUserById("U1").getImg()%>"
                              alt="">
-                        <h6>Đỗ Phú Nguyên Chương</h6>
+                        <h6> <%=data.getUserById("U1").getName()%></h6>
                     </div>
 
-                    <h6>1/11/2022</h6>
+                    <h6> <%=data.getReviewObjects("1").getReview_date()%></h6>
                 </div>
 
 
@@ -745,7 +744,7 @@
                         </div>
                     </h6>
 
-                    <h6><strong>Nhận xét:</strong> Máy đẹp, nhân viên nhiệt tình</h6>
+                    <h6><strong>Nhận xét:</strong> <%=data.getReviewObjects("1").getContent()%></h6>
                 </div>
 
 
@@ -753,12 +752,12 @@
 
                     <div class="container__name__image" style="display: flex;align-items: center; ">
                         <img class="container__feedback__name--border"
-                             src="https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-6/269683013_1294293907710187_3077575652464397202_n.jpg?stp=dst-jpg_p526x296&_nc_cat=109&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=BC-puduVYdwAX-aJjgi&_nc_ht=scontent.fsgn2-4.fna&oh=00_AfDM5VW0F2POTVCNZJ_UKYaAh3jXSIFd75gIz9VZ_hK5OA&oe=636E57AA"
+                             src="<%=data.getUserById("U2").getImg()%>"
                              alt="">
-                        <h6>Huỳnh Quốc Nam</h6>
+                        <h6><%=data.getUserById("U2").getName()%></h6>
                     </div>
 
-                    <h6>2/11/2022</h6>
+                    <h6><%=data.getReviewObjects("2").getReview_date()%></h6>
 
                 </div>
 
@@ -786,7 +785,7 @@
                         </div>
                     </h6>
 
-                    <h6><strong>Nhận xét:</strong> Đúng như trong hình,tư vấn nhiệt tình</h6>
+                    <h6><strong>Nhận xét:</strong> <%=data.getReviewObjects("2").getContent()%></h6>
                 </div>
 
 
@@ -794,13 +793,14 @@
 
                     <div class="container__name__image" style="display: flex;align-items: center; ">
                         <img class="container__feedback__name--border"
-                             src="https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-6/275662930_1342361109613177_1798580031594503466_n.jpg?stp=dst-jpg_s552x414&_nc_cat=109&ccb=1-7&_nc_sid=e3f864&_nc_ohc=Ms-d2SFfY58AX8Ybql3&_nc_ht=scontent.fsgn2-4.fna&oh=00_AfCr1ieXg1QCtmAKdct-LOuuuVafKBLj-bDjQBYW04OzTQ&oe=636D1B63"
+
+                             src="<%=data.getUserById("U3").getImg()%>"
                              alt="">
-                        <h6>Nguyễn Minh Thuận</h6>
+                        <h6><%=data.getUserById("U3").getName()%></h6>
                     </div>
 
 
-                    <h6>3/11/2022</h6>
+                    <h6><%=data.getReviewObjects("3").getReview_date()%></h6>
                 </div>
 
 
@@ -827,7 +827,7 @@
                         </div>
                     </h6>
 
-                    <h6><strong>Nhận xét:</strong> Đẹp,Giao hàng nhanh</h6>
+                    <h6><strong>Nhận xét:</strong><%=data.getReviewObjects("10").getContent()%></h6>
                 </div>
 
 
@@ -835,13 +835,14 @@
 
                     <div class="container__name__image" style="display: flex;align-items: center; ">
                         <img class="container__feedback__name--border"
-                             src="https://scontent.fsgn2-7.fna.fbcdn.net/v/t1.6435-9/164759779_915488049285244_8787432790582826146_n.jpg?stp=dst-jpg_p526x296&_nc_cat=108&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=cErqLjkHJ7YAX-z6RCt&tn=nKoj-m9JAZFTNHdU&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfAZ186J6vfCJjKAHdlrgiGaHsH3hxSahbvkMF_1cn0QoA&oe=63908978"
+
+                             src="<%=data.getUserById("U4").getImg()%>"
                              alt="">
-                        <h6>Nguyễn Đắc Cường</h6>
+                        <h6><%=data.getUserById("U4").getName()%></h6>
                     </div>
 
 
-                    <h6>4/11/2022</h6>
+                    <h6><%=data.getReviewObjects("4").getReview_date()%></h6>
                 </div>
 
 
@@ -868,7 +869,7 @@
                         </div>
                     </h6>
 
-                    <h6><strong>Nhận xét:</strong> Đẹp,Giao hàng nhanh</h6>
+                    <h6><strong>Nhận xét:</strong><%=data.getReviewObjects("49").getContent()%></h6>
                 </div>
 
 
@@ -876,13 +877,14 @@
 
                     <div class="container__name__image" style="display: flex;align-items: center; ">
                         <img class="container__feedback__name--border"
-                             src="https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/299940262_1718876608449064_4338647799853200977_n.jpg?stp=dst-jpg_s720x720&_nc_cat=111&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=9uDCpFJY1S4AX8zYZj6&_nc_ht=scontent.fsgn2-6.fna&oh=00_AfDmR2si5XOzZbcFpY9EzLkhJI0igo963HBJFfOVJtFAMA&oe=636EC7A4"
+
+                             src="<%=data.getUserById("U5").getImg()%>"
                              alt="">
-                        <h6>Hoàng Nhựt Duy</h6>
+                        <h6><%=data.getUserById("U5").getName()%></h6>
                     </div>
 
 
-                    <h6>5/11/2022</h6>
+                    <h6><%=data.getReviewObjects("5").getReview_date()%></h6>
                 </div>
 
 
@@ -909,7 +911,7 @@
                         </div>
                     </h6>
 
-                    <h6><strong>Nhận xét:</strong> Đẹp,Giao hàng nhanh</h6>
+                    <h6><strong>Nhận xét:</strong><%=data.getReviewObjects("42").getContent()%></h6>
                 </div>
 
 
@@ -974,11 +976,11 @@
                         <div class="product">
                             <div class="product__header">
                                 <a href="#"><img
-                                        src="<%=data.getProductById("PR3").getImg()%>"
+                                        src="<%=data.getProductById("PR40").getImg()%>"
                                         alt="product"></a>
                             </div>
                             <div class="product__footer">
-                                <h3><%=data.getProductById("PR3").getName()%>
+                                <h3><%=data.getProductById("PR40").getName()%>
                                 </h3>
                                 <div class="rating">
                                     <svg>
@@ -998,7 +1000,7 @@
                                     </svg>
                                 </div>
                                 <div class="product__price">
-                                    <h4><%=data.getProductById("PR3").getPrice()%> VNĐ</h4>
+                                    <h4><%=data.getProductById("PR40").getPrice()%> VNĐ</h4>
                                 </div>
                                 <a href="#">
                                     <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>

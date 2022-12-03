@@ -20,7 +20,7 @@ public class DataDB {
 
     public DataDB() throws SQLException, ClassNotFoundException {
     }
-
+    // list san pham
     public static Set<Product> getProducts() throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
         Set<Product> res = new HashSet<Product>();
@@ -63,11 +63,11 @@ public class DataDB {
         return res;
     }
 
-    public static boolean register(String id, String phone, String pass) throws SQLException, ClassNotFoundException {
+    public static boolean register(String id, String email, String pass) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDateTime now = LocalDateTime.now();
-        if (db.getStatement().executeUpdate("insert into user values ('" + id + "','image/user/none.png','user " + id + "','" + phone + "',null,'" + pass + "',null,null,0,'" + dtf.format(now) + "');") == 0)
+        if (db.getStatement().executeUpdate("insert into user values ('" + id + "','image/user/none.png','user " + id + "',null,'" + email + "','" + pass + "',null,null,0,'" + dtf.format(now) + "');") == 0)
             return false;
         return true;
     }
@@ -115,6 +115,7 @@ public class DataDB {
 
     public static boolean changeInfoUser(String userId, String name, String email, String phone, String gender, String bday, String img) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
+
         int i = db.getStatement().executeUpdate("update user set name='" + name + "', email='" + email + "', phone_number='" + phone + "', gender='" + gender + "', birthday='" + bday + "',img='" + img + "' where id='" + userId + "';");
         if (i == 0)
             return false;
@@ -239,12 +240,23 @@ public class DataDB {
         return res;
     }
             // get thong tin product
+    public static Product getProductById(String id) throws SQLException, ClassNotFoundException {
+        Product res = null;
+        DataDB db = new DataDB();
+        ResultSet rs = db.getStatement().executeQuery("select * from product where id='" + id + "';");
+        while (rs.next()) {
+            res = new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
+                    rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
+                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12));
+        }
+        return res;
+    }
 
-    public static Category getCategorysObject(String id) throws SQLException, ClassNotFoundException {
+    public static Category getCategorysObject() throws SQLException, ClassNotFoundException {
         try {
             DBConnect dbConnect = DBConnect.getInstance();
             Statement statement = dbConnect.get();
-            ResultSet rs = statement.executeQuery("SELECT * FROM category , product WHERE category.ID = product.ID_category and product.ID =  '"+ id + "'");
+            ResultSet rs = statement.executeQuery("SELECT * FROM category WHERE category.ID=\"CG2\"");
             while (rs.next()) {
                 Category c = new Category(
                         rs.getString(1),
@@ -258,8 +270,42 @@ public class DataDB {
         return null;
     }
 
+    public static Producer getProducersOject() throws SQLException, ClassNotFoundException {
+        try {
+            DBConnect dbConnect = DBConnect.getInstance();
+            Statement statement = dbConnect.get();
+            ResultSet rs = statement.executeQuery("SELECT * FROM producer WHERE producer.ID=\"PRER10\"");
+            while (rs.next()) {
+                Producer p = new Producer(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4));
+                return p;
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
 
+    public static Category getCategorysObject() throws SQLException, ClassNotFoundException {
+        try {
+            DBConnect dbConnect = DBConnect.getInstance();
+            Statement statement = dbConnect.get();
+            ResultSet rs = statement.executeQuery("SELECT * FROM category WHERE category.ID=\"CG2\"");
+            while (rs.next()) {
+                Category c = new Category(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4));
+                return c;
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
     public static boolean changeUserPassword(String email, String pass) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
@@ -289,14 +335,11 @@ public class DataDB {
     public static boolean readAllAnnouncement(String userId) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
         int res = 0;
-        List<String> orderId = new ArrayList<String>();
         ResultSet orderIds = db.getStatement().executeQuery("select id from orders where id_user='" + userId + "';");
         while (orderIds.next()) {
-            orderId.add(orderIds.getString(1));
+            String orderId = orderIds.getString(1);
+            res += db.getStatement().executeUpdate("update announcement set status=1 where id='" + orderId + "';");
         }
-        orderIds.close();
-        for (String st : orderId)
-            res += db.getStatement().executeUpdate("update announcement set status=1 where id_orders='" + st + "';");
         if (res == 0) return false;
         return true;
     }
@@ -304,14 +347,11 @@ public class DataDB {
     public static boolean deleteAllAnnouncement(String userId) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
         int res = 0;
-        List<String> orderId = new ArrayList<String>();
         ResultSet orderIds = db.getStatement().executeQuery("select id from orders where id_user='" + userId + "';");
         while (orderIds.next()) {
-            orderId.add(orderIds.getString(1));
+            String orderId = orderIds.getString(1);
+            res += db.getStatement().executeUpdate("delete from announcement where id_orders='" + orderId + "';");
         }
-        orderIds.close();
-        for (String st : orderId)
-            res += db.getStatement().executeUpdate("delete from announcement where id_orders='" + st + "';");
         if (res == 0) return false;
         return true;
     }
@@ -320,7 +360,7 @@ public class DataDB {
         List<Voucher> res = new ArrayList<Voucher>();
         List<Voucher> all = getVouchers(userId);
         for (Voucher v : all) {
-            if (Util.minusDateToHours(v.getStartDate(), new Date()) > 0) res.add(v);
+            if (Util.minusDateToHours(v.getStartDate(), new Date())>0) res.add(v);
         }
         return res;
     }
@@ -329,7 +369,7 @@ public class DataDB {
         List<Voucher> res = new ArrayList<Voucher>();
         List<Voucher> all = getVouchers(userId);
         for (Voucher v : all) {
-            if (Util.minusDateToHours(new Date(), v.getStartDate()) > 0) res.add(v);
+            if (Util.minusDateToHours(new Date(), v.getStartDate())>0) res.add(v);
         }
         return res;
     }
@@ -384,6 +424,12 @@ public class DataDB {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        System.out.println(getVouchers("U1"));
+//        for (Voucher v : getNewestVouchers("U1") ){
+//            System.out.println(v.getVoucherDescription());
+
+//        }
+
+        System.out.println(getReviewObjects("1").getReview_date());
+
     }
 }
