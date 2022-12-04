@@ -4,6 +4,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.DB.DataDB" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.ProductDAO" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -154,7 +155,7 @@
                                 <tbody>
                                 <% Product pr;
                                     for ( Map.Entry<String, Integer> ds : list.entrySet()){
-                                            pr= DataDB.getProductById(ds.getKey());
+                                            pr= ProductDAO.getProductById(ds.getKey());
                                 %>
                                     <tr>
                                         <td class="product__thumbnail">

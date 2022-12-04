@@ -17,6 +17,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.DB.DataDB" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Review" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.*" %>
 
 
 <%--<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>--%>
@@ -166,24 +167,24 @@
             <li class="item"></li>
             </li>
             <li>
-                    <%=data.getCategorysObject(request.getParameter("idProduct")).getName()%>
+                    <%=CategoryDAO.getCategorysObject(request.getParameter("idProduct")).getName()%>
             <li class="item"></li>
             </li>
 
-            <li> <%=data.getProducersOject(request.getParameter("idProduct")).getName()%>
+            <li> <%=ProducerDAO.getProducersOject(request.getParameter("idProduct")).getName()%>
             <li class="item"></li>
             </li>
 
 
 
-            <li><%=data.getProductById(request.getParameter("idProduct")).getName()%>
+            <li><%=ProductDAO.getProductById(request.getParameter("idProduct")).getName()%>
             </li>
 
 
         </ul>
     </div>
 </div>
-<h2 id="section__title__product"><%=data.getProductById(request.getParameter("idProduct")).getName()%>
+<h2 id="section__title__product"><%=ProductDAO.getProductById(request.getParameter("idProduct")).getName()%>
 </h2>
 
 <section id="section-detailsProduct">
@@ -205,7 +206,7 @@
                                         <div class="hero__left">
                                             <h1>TÍNH NĂNG NỔI BẬT</h1>
 
-                                            <img src="<%=data.getProductById(request.getParameter("idProduct")).getImg()%>
+                                            <img src="<%=ProductDAO.getProductById(request.getParameter("idProduct")).getImg()%>
                                             "
 
                                                  alt="img__product" id="image__detail__product">
@@ -233,7 +234,7 @@
                                         <div class="hero__left">
 
                                             <img src="
-                                                <%=data.getProductById(request.getParameter("idProduct")).getImg()%>"
+                                                <%=ProductDAO.getProductById(request.getParameter("idProduct")).getImg()%>"
                                                  style="width:375px!important;height: 375px !important; position: relative;top:-22px;padding: 10px;border-radius: 10px !important;">
 
                                         </div>
@@ -245,7 +246,7 @@
                                         <div class="hero__left">
 
                                             <img src="
-                                                <%=data.getProductById(request.getParameter("idProduct")).getImg()%>"
+                                                <%=ProductDAO.getProductById(request.getParameter("idProduct")).getImg()%>"
                                                  style="width:375px!important;height: 375px !important; position: relative;top:-22px;padding: 10px;border-radius: 10px !important;">
                                         </div>
 
@@ -314,7 +315,7 @@
         <div class="product-detail__center">
 
 
-            <h3 style="color: red; "><%=data.getProductById(request.getParameter("idProduct")).getPrice()%> đ
+            <h3 style="color: red; "><%=ProductDAO.getProductById(request.getParameter("idProduct")).getPrice()%> đ
 
 
                 <p style="color:#707070; position: relative; left:90px; bottom:25px;">
@@ -327,7 +328,7 @@
             <div class="product__item">
 
                 <img
-                        src="<%=data.getProductById(request.getParameter("idProduct")).getImg()%>"
+                        src="<%=ProductDAO.getProductById(request.getParameter("idProduct")).getImg()%>"
                         alt="" style="width: 33px; height: 35px; object-fit: cover;">
 
                 <div class="product__title__item">
@@ -373,12 +374,12 @@
 
 
                     <span>Giá:</span>
-                    <a href="#" class="new__price"><%=data.getProductById(request.getParameter("idProduct")).getPrice()%>VNĐ</a>
+                    <a href="#" class="new__price"><%=ProductDAO.getProductById(request.getParameter("idProduct")).getPrice()%>VNĐ</a>
 
                 </li>
                 <li>
                     <span>Hãng:</span>
-                    <a href="#"><%=data.getProducersOject(request.getParameter("idProduct")).getName()%>
+                    <a href="#"><%=ProducerDAO.getProducersOject(request.getParameter("idProduct")).getName()%>
                     </a>
 
 
@@ -386,12 +387,12 @@
 
                 <li>
                     <span>Loại sản phẩm:</span>
-                    <a href="#"><%= data.getCategorysObject(request.getParameter("idProduct")).getName()%> </a>
+                    <a href="#"><%= CategoryDAO.getCategorysObject(request.getParameter("idProduct")).getName()%> </a>
 
                 </li>
                 <li>
                     <span>Hiện có:</span>
-                    <a href="#" class="in-stock">Trong kho (<%=data.getProductById(request.getParameter("idProduct")).getQuantity()%> sản phẩm)</a>
+                    <a href="#" class="in-stock">Trong kho (<%=ProductDAO.getProductById(request.getParameter("idProduct")).getQuantity()%> sản phẩm)</a>
                 </li>
                 </ul>
                 <div class="product-info__btn">
@@ -462,7 +463,7 @@
 
                 <strong>Bảo hành </strong>
 
-                <p style="color:#333333; font-size:14px;">Bảo hành:<b<%=data.getProductById(request.getParameter("idProduct")).getIns()%> tháng></b> chính hãng Energiner</p>
+                <p style="color:#333333; font-size:14px;">Bảo hành:<b<%=ProductDAO.getProductById(request.getParameter("idProduct")).getIns()%> tháng></b> chính hãng Energiner</p>
 
 
 
@@ -526,7 +527,7 @@
 
 
             <img style="width:100% ;height: 495.23px; object-fit: cover; "
-                 src="<%=data.getProductById(request.getParameter("idProduct")).getImg()%>"
+                 src="<%=ProductDAO.getProductById(request.getParameter("idProduct")).getImg()%>"
                  alt="">
 
             <p>Hỗ trợ 3 chế độ sạc và công nghệ PD tiết kiệm thời gian sạc
@@ -662,16 +663,16 @@
 
             <div class="container__feedback">
 
-                <% List<Review> listreview =  data.getReview(request.getParameter("idProduct")); %>
+                <% List<Review> listreview =  ReviewDAO.getReview(request.getParameter("idProduct")); %>
                 <% for (int i = 0; i < listreview.size() ; i++) { %>
 
                 <div class="container__feedback__name">
 
                     <div class="container__name__image" style="display: flex;align-items: center; ">
                         <img class="container__feedback__name--border"
-                             src="<%=data.getUserById(listreview.get(i).getId_user()).getImg()%>"
+                             src="<%=UserDAO.getUserById(listreview.get(i).getId_user()).getImg()%>"
                              alt="">
-                        <h6> <%=data.getUserById(listreview.get(i).getId_user()).getName()%></h6>
+                        <h6> <%=UserDAO.getUserById(listreview.get(i).getId_user()).getName()%></h6>
                     </div>
 
                     <h6> <%=listreview.get(i).getReview_date()%></h6>
@@ -702,7 +703,7 @@
 
                     <h6><strong>Nhận xét:</strong> <%=listreview.get(i).getContent()%></h6>
                 </div>
-           <%}%>
+                <%}%>
 
             </div>
         </div>
@@ -765,11 +766,11 @@
                         <div class="product">
                             <div class="product__header">
                                 <a href="#"><img
-                                        src="<%=data.getProductById(request.getParameter("idProduct")).getImg()%>"
+                                        src="<%=ProductDAO.getProductById(request.getParameter("idProduct")).getImg()%>"
                                         alt="product"></a>
                             </div>
                             <div class="product__footer">
-                                <h3><%=data.getProductById(request.getParameter("idProduct")).getName()%>
+                                <h3><%=ProductDAO.getProductById(request.getParameter("idProduct")).getName()%>
                                 </h3>
                                 <div class="rating">
                                     <svg>
@@ -789,9 +790,9 @@
                                     </svg>
                                 </div>
                                 <div class="product__price">
-                                    <h4><%=data.getProductById(request.getParameter("idProduct")).getPrice()%> VNĐ</h4>
+                                    <h4><%=ProductDAO.getProductById(request.getParameter("idProduct")).getPrice()%> VNĐ</h4>
                                 </div>
-                                <a href="CartServlet?command=insert&idProduct=<%=data.getProductById(request.getParameter("idProduct")).getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                <a href="CartServlet?command=insert&idProduct=<%=ProductDAO.getProductById(request.getParameter("idProduct")).getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                     <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
                                 </a>
                             </div>
@@ -825,12 +826,12 @@
                         <div class="product">
                             <div class="product__header">
                                 <a href="#"><img
-                                        src="<%=data.getProductById("PR36").getImg()%>"
+                                        src="<%=ProductDAO.getProductById("PR36").getImg()%>"
                                         alt="product"></a>
                             </div>
                             <div class="product__footer">
                                 <h3>
-                                    <%=data.getProductById("PR36").getName()%>
+                                    <%=ProductDAO.getProductById("PR36").getName()%>
                                 </h3>
                                 <div class="rating">
                                     <svg>
@@ -850,7 +851,7 @@
                                     </svg>
                                 </div>
                                 <div class="product__price">
-                                    <h4><%=data.getProductById("PR36").getPrice()%> VNĐ</h4>
+                                    <h4><%=ProductDAO.getProductById("PR36").getPrice()%> VNĐ</h4>
                                 </div>
                                 <a href="#">
                                     <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
@@ -885,11 +886,11 @@
                         <div class="product">
                             <div class="product__header">
                                 <a href="#"><img
-                                        src="  <%=data.getProductById("PR42").getImg()%>"
+                                        src="  <%=ProductDAO.getProductById("PR42").getImg()%>"
                                         alt="product"></a>
                             </div>
                             <div class="product__footer">
-                                <h3><%=data.getProductById("PR42").getName()%>
+                                <h3><%=ProductDAO.getProductById("PR42").getName()%>
                                 </h3>
                                 <div class="rating">
                                     <svg>
@@ -909,7 +910,7 @@
                                     </svg>
                                 </div>
                                 <div class="product__price">
-                                    <h4><%=data.getProductById("PR42").getPrice()%> VNĐ</h4>
+                                    <h4><%=ProductDAO.getProductById("PR42").getPrice()%> VNĐ</h4>
                                 </div>
                                 <a href="#">
                                     <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
@@ -944,11 +945,11 @@
                         <div class="product">
                             <div class="product__header">
                                 <a href="#"><img
-                                        src="  <%=data.getProductById("PR7").getImg()%>"
+                                        src="  <%=ProductDAO.getProductById("PR7").getImg()%>"
                                         alt="product"></a>
                             </div>
                             <div class="product__footer">
-                                <h3><%=data.getProductById("PR7").getName()%>
+                                <h3><%=ProductDAO.getProductById("PR7").getName()%>
                                 </h3>
                                 <div class="rating">
                                     <svg>
@@ -968,7 +969,7 @@
                                     </svg>
                                 </div>
                                 <div class="product__price">
-                                    <h4><%=data.getProductById("PR7").getPrice()%> VNĐ</h4>
+                                    <h4><%=ProductDAO.getProductById("PR7").getPrice()%> VNĐ</h4>
                                 </div>
                                 <a href="#">
                                     <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
