@@ -244,19 +244,19 @@
 
                   <h4><%=pr.getPrice()+" VND"%></h4>
                 </div>
-                <a href="#" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
               </div>
               <ul>
                 <li>
                   <a data-tip="Quick View" data-place="left"
-                     href="/phone_chuong/product.html">
+                     href="product.jsp?idProduct=<%=pr.getId()%>">
                     <svg>
                       <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                     </svg>
                   </a>
                 </li>
                 <li>
-                  <a data-tip="Add To Wishlist" data-place="left" href="#">
+                  <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                     <svg>
                       <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                     </svg>
@@ -306,19 +306,19 @@
 
                   <h4><%=pr.getPrice()+" VND"%></h4>
                 </div>
-                <a href="#" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
               </div>
               <ul>
                 <li>
                   <a data-tip="Quick View" data-place="left"
-                     href="/phone_chuong/product.html">
+                     href="product.jsp?idProduct=<%=pr.getId()%>">
                     <svg>
                       <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
                     </svg>
                   </a>
                 </li>
                 <li>
-                  <a data-tip="Add To Wishlist" data-place="left" href="#">
+                  <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                     <svg>
                       <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
                     </svg>
@@ -368,19 +368,19 @@
 
                   <h4><%=pr.getPrice()+" VND"%></h4>
                 </div>
-                <a href="#" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
               </div>
               <ul>
                 <li>
                   <a data-tip="Quick View" data-place="left"
-                     href="/phone_chuong/product.html">
+                     href="product.jsp?idProduct=<%=pr.getId()%>">
                     <svg>
                       <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
                     </svg>
                   </a>
                 </li>
                 <li>
-                  <a data-tip="Add To Wishlist" data-place="left" href="#">
+                  <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                     <svg>
                       <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
                     </svg>
@@ -430,19 +430,19 @@
 
                   <h4><%=pr.getPrice()+" VND"%></h4>
                 </div>
-                <a href="#" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
               </div>
               <ul>
                 <li>
                   <a data-tip="Quick View" data-place="left"
-                     href="/phone_chuong/product.html">
+                     href="product.jsp?idProduct=<%=pr.getId()%>">
                     <svg>
                       <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
                     </svg>
                   </a>
                 </li>
                 <li>
-                  <a data-tip="Add To Wishlist" data-place="left" href="#">
+                  <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                     <svg>
                       <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
                     </svg>
