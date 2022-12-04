@@ -6,7 +6,8 @@ import java.util.Objects;
 public class User {
     private String id,img,name, phone,email,pass,gender;
     private Date birthday,accountDate;
-    private int status;//-1:locked; 0:non-active    ; 1:actived
+    private int status; //-1:locked; 0:non-active    ; 1:actived
+    private int role; //0: user;    1: admin
     //
     public User(String id, String img, String name, String phone, String email, String pass, String gender, Date birthday, Date accountDate, int status) {
         this.id = id;
@@ -19,6 +20,25 @@ public class User {
         this.birthday = birthday;
         this.accountDate = accountDate;
         this.status = status;
+        this.role=0;
+    }
+
+    public User(String id, String img, String name, String phone, String email, String pass, String gender, Date birthday, Date accountDate, int status, int role) {
+        this.id = id;
+        this.img = img;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.pass = pass;
+        this.gender = gender;
+        this.birthday = birthday;
+        this.accountDate = accountDate;
+        this.status = status;
+        this.role=role;
+    }
+
+    public int getRole() {
+        return role;
     }
 
     public User(){
@@ -124,7 +144,6 @@ public class User {
         return getStatus() == user.getStatus() && Objects.equals(getId(), user.getId()) && Objects.equals(getImg(), user.getImg()) && Objects.equals(getName(), user.getName()) && Objects.equals(getPhone(), user.getPhone()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(pass, user.pass) && Objects.equals(getGender(), user.getGender()) && Objects.equals(getBirthday(), user.getBirthday()) && Objects.equals(getAccountDate(), user.getAccountDate());
     }
 
-    @Override
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
@@ -132,11 +151,11 @@ public class User {
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
-                ", pass='" + pass + '\'' +
                 ", gender='" + gender + '\'' +
                 ", birthday=" + birthday +
                 ", accountDate=" + accountDate +
                 ", status=" + status +
+                ", role=" + role +
                 '}';
     }
 }

@@ -3,6 +3,7 @@ package vn.edu.hcmuaf.fit.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.hcmuaf.fit.DAO.UserDAO;
 import vn.edu.hcmuaf.fit.DB.DataDB;
 import vn.edu.hcmuaf.fit.model.User;
 
@@ -30,7 +31,7 @@ public class ForgetPassServlet extends HttpServlet {
         String confirmCode =(String) session.getAttribute("confirmCode");
         String email = request.getParameter("email");
         try {
-            User user = DataDB.getUserByEmail(email);
+            User user = UserDAO.getUserByEmail(email);
             if (user == null) {
                 request.setAttribute("error", "Email không đúng");
                 request.getRequestDispatcher("forgetPassword.jsp").forward(request, response);

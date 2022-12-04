@@ -3,6 +3,7 @@ package vn.edu.hcmuaf.fit.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.hcmuaf.fit.DAO.AnnouncementDAO;
 import vn.edu.hcmuaf.fit.DB.DataDB;
 import vn.edu.hcmuaf.fit.model.User;
 
@@ -18,7 +19,7 @@ public class AnnouncementServlet extends HttpServlet {
         switch (method){
             case "deleteAll":
                 try {
-                    DataDB.deleteAllAnnouncement(userId);
+                    AnnouncementDAO.deleteAllAnnouncement(userId);
                     request.getRequestDispatcher("user.jsp").forward(request, response);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -28,7 +29,7 @@ public class AnnouncementServlet extends HttpServlet {
                 break;
             case "readAll":
                 try {
-                    DataDB.readAllAnnouncement(userId);
+                    AnnouncementDAO.readAllAnnouncement(userId);
                     request.getRequestDispatcher("user.jsp").forward(request, response);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -40,7 +41,7 @@ public class AnnouncementServlet extends HttpServlet {
                 String orderId=request.getParameter("orderId");
                 String anmId=request.getParameter("anmId");
                 try {
-                    DataDB.readAnnouncement(anmId);
+                    AnnouncementDAO.readAnnouncement(anmId);
                     request.setAttribute("orderId",orderId);
                     request.getRequestDispatcher("").forward(request, response);
                 } catch (SQLException e) {

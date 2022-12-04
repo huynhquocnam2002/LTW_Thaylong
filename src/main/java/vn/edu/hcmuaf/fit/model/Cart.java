@@ -1,115 +1,36 @@
 package vn.edu.hcmuaf.fit.model;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.TreeMap;
 
-public class Cart implements Serializable {
-
-    HashMap<String, Product> data;
-
-    User custommers;
-
-    long total;
-
-    int quantity;
+public class Cart {
+    private TreeMap<String , Integer> list ;
 
     public Cart() {
-
-
-        data = new HashMap<String, Product>();
-
-        custommers = new User();
-
-        total = 0;
-
-        quantity = 0;
-
-
+        this.list = new TreeMap<>();
     }
 
-    public Cart(User custommers, long total, int quantity) {
-
-        data = new HashMap<>();
-
-        this.custommers = custommers;
-        this.total = total;
-        this.quantity = quantity;
+    public TreeMap<String, Integer> getList() {
+        return list;
     }
 
-    public void put(Product p) {
-
-        if (data.containsKey(p.getKey())) {
-
-            Product p1 = data.get(p.getKey());
-
-            p1.setQuantity(p1.getQuantity() + 1);
-
-            data.put(p.getKey(), p1);
-
-        } else {
-
-            data.put(p.getKey(), p);
-
-        }
-
-
-        updateTotalMoneyAndQuantity();
-
-
-    }
-    private void put (String key ,int quantity){
-
-
-        if (data.containsKey(key)) {
-
-            Product p1 = data.get(key);
-
-            p1.setQuantity(quantity);
-
-            data.put(key, p1);
-
-
-        }
-        updateTotalMoneyAndQuantity();
-
-
+    public void setList(TreeMap<String, Integer> list) {
+        this.list = list;
     }
 
-    public void updates(Product p){
-
-        if(data.containsKey(p.getKey())){
-
-            data.put(p.getKey(),p);
-
-
+    public void insertToCart(String sp){
+        boolean bl = list.containsKey(sp);
+        if(bl){
+            int sl = 1;
+            sl++;
+            list.put(sp , sl);
+        }else {
+            list.put(sp , 1);
         }
     }
-
-    public void remove (String key){
-
-         data.remove(key);
-
-         updateTotalMoneyAndQuantity();
+    public boolean checkEmpty(){
+        return list.isEmpty();
     }
-    private void updateTotalMoneyAndQuantity() {
-
-        total = 0;
-
-        quantity = 0;
-
-        for (Product p : data.values()) {
-
-
-            total += p.getQuantity() * p.getPrice();
-
-            quantity += p.getQuantity();
-        }
-
-    }
-
-    public Collection<Product> getListProduct() {
-
-         return data.values();
+    public int getSize(){
+        return list.size();
     }
 }
