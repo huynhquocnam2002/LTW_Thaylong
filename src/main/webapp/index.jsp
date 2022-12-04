@@ -168,7 +168,7 @@
                 <ul class="nav__list" id="nav__list_DANHMUC">
                 <% List<Category> list = CategoryDAO.getCategoryHeader();%>
                     <% for (int i = 0; i < list.size(); i++) {%>
-
+<%--    --%>
                     <div class="nav__icons_danhmuc">
                         <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="icon__item">
                             <img class="icon__itemdanhmuc" src="<%=list.get(i).getImg()%>"></img>

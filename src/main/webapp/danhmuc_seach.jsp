@@ -3,6 +3,8 @@
 <%@ page import="java.util.Set" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Category" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.CategoryDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.ProductDAO" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -127,7 +129,7 @@
 
             <ul class="nav__list" id="nav__list_DANHMUC">
 
-              <% List<Category> list = DataDB.getCategoryHeader();%>
+              <% List<Category> list = CategoryDAO.getCategoryHeader();%>
               <% for (int i = 0; i < list.size(); i++) {%>
 
               <div class="nav__icons_danhmuc">
@@ -169,8 +171,8 @@
   <!-- Main -->
   <main id="main">
     <div class="container">
-      <% Set<Product> ProductsByCatory = DataDB.getProductsByCatory(request.getParameter("idcategory"));%>
-       <% List<String> listname = DataDB.getnameCatory(request.getParameter("idcategory"));%>
+      <% Set<Product> ProductsByCatory = CategoryDAO.getProductsByCatory(request.getParameter("idcategory"));%>
+       <% List<String> listname = CategoryDAO.getnameCatory(request.getParameter("idcategory"));%>
       <!-- label thong bao -->
       <div class="label_seach">
         <p class="label_seach_p">Tìm kiếm sản phẩm với từ khóa: "<%=listname.get(0)+""%>"</p>
@@ -275,7 +277,7 @@
           </div>
         </div>
 
-        <% Set<Product> rshot = DataDB.getProductsByCatorynew(request.getParameter("idcategory"));%>
+        <% Set<Product> rshot = ProductDAO.getProductsByCatorynew(request.getParameter("idcategory"));%>
         <div class="category__container" id="category__container__hot" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
           <div class="category__center">
             <%for(Product pr: rshot){%>
@@ -337,7 +339,7 @@
           </div>
         </div>
 
-        <% Set<Product> rsnew = DataDB.getProductsByCatoryASC(request.getParameter("idcategory"));%>
+        <% Set<Product> rsnew = ProductDAO.getProductsByCatoryASC(request.getParameter("idcategory"));%>
         <div class="category__container" id="category__container__new" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
           <div class="category__center">
             <%for(Product pr: rsnew){%>
@@ -399,7 +401,7 @@
           </div>
         </div>
 
-        <% Set<Product> rssalerun = DataDB.getProductsByCatoryDESC(request.getParameter("idcategory"));%>
+        <% Set<Product> rssalerun = ProductDAO.getProductsByCatoryDESC(request.getParameter("idcategory"));%>
         <div class="category__container" id="category__container__salerun" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
           <div class="category__center">
             <%for(Product pr: rssalerun){%>
