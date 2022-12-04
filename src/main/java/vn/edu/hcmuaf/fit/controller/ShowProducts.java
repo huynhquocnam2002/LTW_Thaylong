@@ -25,13 +25,13 @@ public class ShowProducts extends HttpServlet {
 
         } else {
 
-            Collection<Product> list = cart.getListProduct();
+//            Collection<Product> list = cart.getListProduct();
 
 
-            for (Product p : list) {
-
-                response.getWriter().println(p);
-            }
+//            for (Product p : list) {
+//
+//                response.getWriter().println(p);
+//            }
         }
 
 

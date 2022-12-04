@@ -31,7 +31,7 @@ public class AddProductServlet extends HttpServlet {
 
 
             {
-                cart.put(p);
+
 
                 request.getSession().setAttribute("cart", cart);
 

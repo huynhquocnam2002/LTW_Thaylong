@@ -7,6 +7,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.DB.DBConnect" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Cart" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.*" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -132,7 +133,7 @@
                 <%
                     if (session.getAttribute("user") != null) {
                         User u = (User) session.getAttribute("user");
-                        int numOfCartItems= DataDB.getCartItems(u).size();
+                        int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
                 %>
                 <div class="nav__icons" id="nav__item_giohang">
                     <a href="/image/login.html" class="icon__item">
@@ -149,6 +150,7 @@
         </div>
     </div>
 </header>
+
 <!-- Header_danhmuc -->
 <header id="Header_danhmuc" class="Header_danhmuc">
     <div class="navigation_danhmuc">
@@ -159,9 +161,17 @@
                         <use xlink:href="image/images/sprite.svg#icon-menu"></use>
                     </svg>
                 </div>
+                <% ProductDAO prDao = new ProductDAO();%>
 
+                <%CategoryDAO cDao = new CategoryDAO();%>
+
+                <%ProducerDAO prcDao=new ProducerDAO(); %>
+
+                <%UserDAO uDao = new UserDAO();%>
+
+                <% ReviewDAO rvDao = new ReviewDAO(); %>
                 <ul class="nav__list" id="nav__list_DANHMUC">
-                    <% List<Category> list = DataDB.getCategoryHeader();%>
+                    <% List<Category> list = cDao.getCategoryHeader();%>
                     <% for (int i = 0; i < list.size(); i++) {%>
 
                     <div class="nav__icons_danhmuc">
@@ -288,7 +298,7 @@
         <!-- DANH MUC SÃN PHẨM -->
         <section class="section section-danhmuc" id="sectiondanhmuc2">
             <div>
-                <% List<Category> rsCategory = DataDB.getCategory();%>
+                <% List<Category> rsCategory = cDao.getCategory();%>
                 <ul class="nav__list" id="nav__list_DANHMUC11">
 
                     <%for(int i =0 ; i< (rsCategory.size()/2+1) ; i++){%>
@@ -352,7 +362,7 @@
                     </div>
                     <div class="glide__track" data-glide-el="track">
                         <ul class="glide__slides latest-center">
-                            <% Set<Product> flastsale = DataDB.getProductsKind("flastsale");%>
+                            <% Set<Product> flastsale = prDao.getProductsKind("flastsale");%>
                             <%for(Product pr: flastsale){%>
                             <li class="glide__slide">
                                 <div class="product">
@@ -468,7 +478,7 @@
 
 
 
-            <% Set<Product> rs = DataDB.getProducts();%>
+            <% Set<Product> rs = prDao.getProducts();%>
             <div class="category__container" id="category__container__all" style="display: block;" data-aos="fade-up" data-aos-duration="1200">
                 <div class="category__center">
                     <%for(Product pr: rs){%>
@@ -530,7 +540,7 @@
                 </div>
             </div>
 
-            <% Set<Product> rshot = DataDB.getProductsKind("hot");%>
+            <% Set<Product> rshot = prDao.getProductsKind("hot");%>
             <div class="category__container" id="category__container__hot" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
                 <div class="category__center">
                     <%for(Product pr: rshot){%>
@@ -592,7 +602,7 @@
                 </div>
             </div>
 
-            <% Set<Product> rsnew = DataDB.getProductsKind("new");%>
+            <% Set<Product> rsnew = prDao.getProductsKind("new");%>
             <div class="category__container" id="category__container__new" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
                 <div class="category__center">
                     <%for(Product pr: rsnew){%>
@@ -654,7 +664,7 @@
                 </div>
             </div>
 
-            <% Set<Product> rssalerun = DataDB.getProductsKind("salerun");%>
+            <% Set<Product> rssalerun = prDao.getProductsKind("salerun");%>
             <div class="category__container" id="category__container__salerun" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
                 <div class="category__center">
                     <%for(Product pr: rssalerun){%>
