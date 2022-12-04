@@ -4,6 +4,7 @@
 <%@ page import="java.util.Set" %>
 <%@ page import="vn.edu.hcmuaf.fit.controller.Util" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Cart" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.ProductDAO" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -1103,7 +1104,7 @@
 
                 </div>
             </div>
-            <% Set<Product> rs = DataDB.getProducts();%>
+            <% Set<Product> rs = ProductDAO.getProducts();%>
 
             <script !src="">
                 const categoryContainer = document.getElementById("category");
