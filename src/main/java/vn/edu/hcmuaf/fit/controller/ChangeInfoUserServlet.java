@@ -3,6 +3,7 @@ package vn.edu.hcmuaf.fit.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.hcmuaf.fit.DAO.UserDAO;
 import vn.edu.hcmuaf.fit.DB.DataDB;
 import vn.edu.hcmuaf.fit.model.User;
 
@@ -28,12 +29,9 @@ public class ChangeInfoUserServlet extends HttpServlet {
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String gender = request.getParameter("gender");
-        String bday = Util.reverseDate(request.getParameter("birthDay"));
+        String bday=request.getParameter("birthDay").equals("")?"null":"'"+Util.reverseDate(request.getParameter("birthDay"))+"'";
 
         Part filePart = request.getPart("avatar"); // Retrieves <input type="file" name="file">
-        System.out.println(Paths.get(filePart.getSubmittedFileName()).toAbsolutePath());
-        System.out.println(filePart.getSubmittedFileName());
-        System.out.println(filePart.getSubmittedFileName().equals(""));
         String img = "image/user/user_" + id + ".png";
         if (!filePart.getSubmittedFileName().equals("")) {
             InputStream fileContent = filePart.getInputStream();
@@ -53,8 +51,8 @@ public class ChangeInfoUserServlet extends HttpServlet {
 
 
         try {
-            boolean change = DataDB.changeInfoUser(id, name, email, phone, gender, bday, img);
-            request.getSession().setAttribute("user", DataDB.getUserById(id));
+            boolean change = UserDAO.changeInfoUser(id, name, email, phone, gender, bday, img);
+            request.getSession().setAttribute("user", UserDAO.getUserById(id));
             request.getRequestDispatcher("user.jsp").forward(request, response);
         } catch (SQLException e) {
             throw new RuntimeException(e);
