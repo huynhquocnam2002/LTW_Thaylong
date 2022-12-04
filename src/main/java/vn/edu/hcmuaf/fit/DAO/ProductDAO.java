@@ -44,7 +44,8 @@ public class ProductDAO {
     public static Product getProductById(String id) throws SQLException, ClassNotFoundException {
         Product res = null;
         DataDB db = new DataDB();
-        PreparedStatement sta=db.getStatement("select * from product where id=?;");
+        PreparedStatement sta=db.getStatement("select * from product where id=?");
+        sta.setString(1,id);
         ResultSet rs = sta.executeQuery();
         while (rs.next()) {
             res = new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
@@ -66,5 +67,9 @@ public class ProductDAO {
                     rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12)));
         }
         return res;
+    }
+
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        System.out.println(getProductById("PR1").getName());
     }
 }
