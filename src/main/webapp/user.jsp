@@ -3,6 +3,9 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="vn.edu.hcmuaf.fit.controller.Util" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.*" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.OrderDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.AnnouncementDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.VoucherDAO" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -109,7 +112,7 @@
                         <svg class="icon__cart">
                             <use xlink:href="./images/sprite.svg#icon-shopping-basket"></use>
                         </svg>
-                        <span id="cart__total"><%=DataDB.getCartItems(user).size()%></span>
+                        <span id="cart__total"><%=((Cart) session.getAttribute("cart")).getSize()%></span>
                     </a>
                     <a href="cart.jsp" class="nav__link_giohang">Giỏ Hàng</a>
                 </div>
@@ -191,7 +194,7 @@
                         <li><a href="#tabs-5">Đã giao</a></li>
                         <li><a href="#tabs-6">Đã hủy</a></li>
                     </ul>
-                        <%List<Order> list = DataDB.getOrders(user.getId());%>
+                        <%List<Order> list = OrderDAO.getOrders(user.getId());%>
                     <div id="tabs-1">
                             <%
                             if (list.size() != 0) {
@@ -480,7 +483,7 @@
                                                             </td>
                                                             <td>
                                                                 <input type="text" name="name"
-                                                                       value="<%=user.getName()%>" id="ten">
+                                                                       value="<%=user.getName()%>" required id="ten">
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -570,7 +573,7 @@
                                                     <button class="readed">Đánh dấu đã đọc tất cả</button>
                                                 </form>
                                             </div>
-                                            <%List<Announcement> listAnm = DataDB.getAnnounmentByUserId(user.getId());%>
+                                            <%List<Announcement> listAnm = AnnouncementDAO.getAnnounmentByUserId(user.getId());%>
                                             <div class="thong-bao-container">
                                                 <%for (Announcement a : listAnm) {%>
                                                 <div class="thong_bao_div <%=a.getStatus()==0?"unread":""%>">
@@ -607,7 +610,7 @@
                                             </div>
                                             <div class="container 1">
                                                 <%
-                                                    List<Voucher> vouchers = DataDB.getVouchers(user.getId());
+                                                    List<Voucher> vouchers = VoucherDAO.getVouchers(user.getId());
                                                     if (vouchers.size() != 0) {
                                                 %>
                                                 <table>
@@ -674,7 +677,7 @@
                                             </div>
                                             <div class="container 2">
                                                 <%
-                                                    List<Voucher> newest = DataDB.getNewestVouchers(user.getId());
+                                                    List<Voucher> newest = VoucherDAO.getNewestVouchers(user.getId());
                                                     if (newest.size() != 0) {
                                                 %>
                                                 <table>
@@ -741,7 +744,7 @@
                                             </div>
                                             <div class="container 3">
                                                 <%
-                                                    List<Voucher> old = DataDB.getOldVouchers(user.getId());
+                                                    List<Voucher> old = VoucherDAO.getOldVouchers(user.getId());
                                                     if (old.size() != 0) {
                                                 %>
                                                 <table>
@@ -808,7 +811,7 @@
                                             </div>
                                             <div class="container 4">
                                                 <%
-                                                    List<Voucher> discount = DataDB.getDiscountVouchers(user.getId());
+                                                    List<Voucher> discount = VoucherDAO.getDiscountVouchers(user.getId());
                                                     if (discount.size() != 0) {
                                                 %>
                                                 <table>
@@ -865,7 +868,7 @@
                                             </div>
                                             <div class="container 5">
                                                 <%
-                                                    List<Voucher> fs = DataDB.getFreeshipVouchers(user.getId());
+                                                    List<Voucher> fs = VoucherDAO.getFreeshipVouchers(user.getId());
                                                     if (fs.size() != 0) {
                                                 %>
                                                 <table>

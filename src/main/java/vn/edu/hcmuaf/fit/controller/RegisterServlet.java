@@ -3,12 +3,12 @@ package vn.edu.hcmuaf.fit.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.hcmuaf.fit.DAO.UserDAO;
 import vn.edu.hcmuaf.fit.DB.DataDB;
 import vn.edu.hcmuaf.fit.model.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Random;
 
 @WebServlet(name = "RegisterServlet", value = "/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
@@ -35,13 +35,13 @@ public class RegisterServlet extends HttpServlet {
             request.getRequestDispatcher("register.jsp").forward(request, response);
         } else {
             try {
-                if (DataDB.getUserByEmail(email) != null) {
+                if (UserDAO.getUserByEmail(email) != null) {
                     request.setAttribute("error","Email bạn nhập đã được sử dụng");
                     request.getRequestDispatcher("register.jsp").forward(request, response);
                 } else {
-                    while (!DataDB.register(Util.getRandomId(), email, pass)) ;
+                    while (!UserDAO.register(Util.getRandomId(), email, pass)) ;
                     HttpSession session = request.getSession();
-                    session.setAttribute("user", (User) DataDB.getUserByEmail(email));
+                    session.setAttribute("user", (User) UserDAO.getUserByEmail(email));
                     doGet(request, response);
                 }
             } catch (SQLException e) {

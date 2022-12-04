@@ -15,6 +15,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Category" %>
 
 <%@ page import="vn.edu.hcmuaf.fit.DB.DataDB" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.CategoryDAO" %>
 
 
 <%--<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>--%>
@@ -151,9 +152,6 @@
 
     <div class="prefix">
 
-        <% DataDB data = new DataDB();%>
-
-
         <ul>
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10.633" viewBox="0 0 12 10.633">
                 <path id="home"
@@ -164,7 +162,7 @@
             <li class="item"></li>
             </li>
             <li>
-                    <%=data.getCategorysObject().getName()%>
+                    <%=CategoryDAO.getCategorysObject().getName()%>
             <li class="item"></li>
             </li>
 
