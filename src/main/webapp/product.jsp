@@ -445,9 +445,14 @@
                 </div>
 
                 <div class="button">
-                    <button class="button__pay" id="button__cart"> THÊM VÀO <strong>GIỎ</strong> HÀNG</button>
+                    <a href="CartServlet?command=insert&idProduct=<%=ProductDAO.getProductById(request.getParameter("idProduct")).getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                        <button class="button__pay" id="button__cart" > THÊM VÀO <strong>GIỎ</strong> HÀNG</button>
+                    </a>
 
-                    <button class="button__pay" id="button__buy">MUA NGAY</button>
+                    <a href="CartServlet?command=insert&idProduct=<%=ProductDAO.getProductById(request.getParameter("idProduct")).getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                        <button class="button__pay" id="button__buy">MUA NGAY</button>
+                    </a>
+
 
                 </div>
 

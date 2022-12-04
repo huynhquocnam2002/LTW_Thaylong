@@ -45,7 +45,7 @@ public class CategoryDAO {
 
     public static Category getCategorysObject(String id) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
-        PreparedStatement sta = db.getStatement("SELECT * FROM category WHERE category.ID=?");
+        PreparedStatement sta = db.getStatement("SELECT * FROM category ,product WHERE category.ID = product.ID_CATEGORY and product.ID =?");
         sta.setString(1, id);
         ResultSet rs = sta.executeQuery();
         while (rs.next()) {
@@ -57,5 +57,10 @@ public class CategoryDAO {
             return c;
         }
         return null;
+    }
+
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+       Category l= getCategorysObject("PR1");
+        System.out.println(l.getName());
     }
 }

@@ -1,14 +1,16 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.DB.DataDB" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
-<%@ page import="java.util.Set" %>
+
 <%@ page import="vn.edu.hcmuaf.fit.controller.Util" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Category" %>
-<%@ page import="java.util.List" %>
+
 <%@ page import="vn.edu.hcmuaf.fit.DB.DBConnect" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Cart" %>
 <%@ page import="vn.edu.hcmuaf.fit.DAO.CategoryDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.DAO.ProductDAO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Set" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
