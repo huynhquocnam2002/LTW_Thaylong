@@ -26,7 +26,8 @@ public class DBConnect {
         }
     }
 
-    public PreparedStatement getPreparedStatement(String query) throws SQLException {
+    public PreparedStatement getPreparedStatement(String query) throws SQLException, ClassNotFoundException {
+        if (connection==null) connect();
         return connection.prepareStatement(query);
     }
 
