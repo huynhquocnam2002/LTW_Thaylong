@@ -3,6 +3,7 @@ package vn.edu.hcmuaf.fit.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.hcmuaf.fit.DAO.UserDAO;
 import vn.edu.hcmuaf.fit.DB.DataDB;
 import vn.edu.hcmuaf.fit.model.User;
 
@@ -20,8 +21,8 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             try {
-                if (user.equals(DataDB.getUserByEmail(user.getEmail()))) {
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                if (user.equals(UserDAO.getUserByEmail(user.getEmail()))) {
+                    response.sendRedirect("index.jsp");
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -35,24 +36,26 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         try {
-            User user = DataDB.getUserByEmail(request.getParameter("name"));
+            User user = UserDAO.getUserByEmail(request.getParameter("name"));
             if (user == null) {
                 request.setAttribute("error", "Email hoặc mật khẩu không chính xác");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
                 if (user.isPassword(request.getParameter("pass"))) {
                     session.setAttribute("user", user);
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                    if (user.getRole() == 0)
+                        response.sendRedirect("index.jsp");
+                    else if (user.getRole()==1) response.sendRedirect("admin.jsp");
                 } else {
                     request.setAttribute("error", "Email hoặc mật khẩu không chính xác");
                     request.getRequestDispatcher("login.jsp").forward(request, response);
                 }
             }
 
-            } catch(SQLException e){
-                throw new RuntimeException(e);
-            } catch(ClassNotFoundException e){
-                throw new RuntimeException(e);
-            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
+}

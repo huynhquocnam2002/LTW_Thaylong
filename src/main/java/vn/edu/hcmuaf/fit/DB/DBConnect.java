@@ -17,11 +17,17 @@ public class DBConnect {
         return instance;
     }
 
+
+
     private void connect() throws SQLException, ClassNotFoundException {
         if (connection==null || connection.isClosed()){
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection= DriverManager.getConnection(DB_URL,user,pass);
         }
+    }
+
+    public PreparedStatement getPreparedStatement(String query) throws SQLException {
+        return connection.prepareStatement(query);
     }
 
     public Statement get() throws SQLException, ClassNotFoundException {

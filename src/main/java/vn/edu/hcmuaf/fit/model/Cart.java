@@ -4,11 +4,9 @@ import java.util.TreeMap;
 
 public class Cart {
     private TreeMap<String , Integer> list ;
-    private Long cartID;
 
     public Cart() {
         this.list = new TreeMap<>();
-        this.cartID =  System.currentTimeMillis();
     }
 
     public TreeMap<String, Integer> getList() {
@@ -17,14 +15,6 @@ public class Cart {
 
     public void setList(TreeMap<String, Integer> list) {
         this.list = list;
-    }
-
-    public Long getCartID() {
-        return cartID;
-    }
-
-    public void setCartID(Long cartID) {
-        this.cartID = cartID;
     }
 
     public void insertToCart(String sp){
@@ -39,5 +29,8 @@ public class Cart {
     }
     public boolean checkEmpty(){
         return list.isEmpty();
+    }
+    public int getSize(){
+        return list.size();
     }
 }
