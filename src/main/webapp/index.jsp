@@ -6,6 +6,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Category" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.DB.DBConnect" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Cart" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +35,13 @@
 </head>
 
 <body>
+<%
+    Cart cart =(Cart) session.getAttribute("cart");
+    if(cart ==null){
+        cart = new Cart();
+        session.setAttribute("cart",cart);
+    }
+%>
 <!-- Header -->
 <!-- Header_top -->
 <header id="header" class="header">
@@ -153,7 +161,7 @@
                 </div>
 
                 <ul class="nav__list" id="nav__list_DANHMUC">
-                <% List<Category> list = DataDB.getCategoryHeader();%>
+                    <% List<Category> list = DataDB.getCategoryHeader();%>
                     <% for (int i = 0; i < list.size(); i++) {%>
 
                     <div class="nav__icons_danhmuc">
@@ -280,7 +288,7 @@
         <!-- DANH MUC SÃN PHẨM -->
         <section class="section section-danhmuc" id="sectiondanhmuc2">
             <div>
-                <% List<Category> rsCategory = DataDB.getCategorys();%>
+                <% List<Category> rsCategory = DataDB.getCategory();%>
                 <ul class="nav__list" id="nav__list_DANHMUC11">
 
                     <%for(int i =0 ; i< (rsCategory.size()/2+1) ; i++){%>
@@ -373,7 +381,7 @@
                                         <div class="product__price" style="color: red">
                                             <h4><%=pr.getPrice()%></h4>
                                         </div>
-                                        <a href="#">
+                                        <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                             <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
                                         </a>
                                     </div>

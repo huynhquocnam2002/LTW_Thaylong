@@ -134,7 +134,7 @@ public class DataDB {
         //
         return res;
     }
-        // lay ten danh muc
+    // lay ten danh muc
     public static List<String> getnameCatory(String name) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
         List<String> list = new ArrayList<String>();
@@ -231,7 +231,7 @@ public class DataDB {
         return list;
     }
 
-        public static List<Category> getCategorys() throws SQLException, ClassNotFoundException {
+    public static List<Category> getCategorys() throws SQLException, ClassNotFoundException {
         DataDB db= new DataDB();
         List<Category> res= new ArrayList<Category>();
         ResultSet rs= db.getStatement().executeQuery("select * from category;");
@@ -242,11 +242,11 @@ public class DataDB {
 
 
 
-    public static Category getCategorysObject() throws SQLException, ClassNotFoundException {
+    public static Category getCategorysObject(String id) throws SQLException, ClassNotFoundException {
         try {
             DBConnect dbConnect = DBConnect.getInstance();
             Statement statement = dbConnect.get();
-            ResultSet rs = statement.executeQuery("SELECT * FROM category WHERE category.ID=\"CG2\"");
+            ResultSet rs = statement.executeQuery("SELECT * FROM category ,product WHERE category.ID = product.ID_CATEGORY and product.ID ='"+id +"'");
             while (rs.next()) {
                 Category c = new Category(
                         rs.getString(1),
@@ -344,7 +344,7 @@ public class DataDB {
         }
         return res;
     }
-            // get thong tin product
+    // get thong tin product
     public static Product getProductById(String id) throws SQLException, ClassNotFoundException {
         Product res = null;
         DataDB db = new DataDB();
@@ -357,12 +357,22 @@ public class DataDB {
         return res;
     }
 
+    // get danh sach review
+    public static List<Review> getReview(String id) throws SQLException, ClassNotFoundException {
+        DataDB db= new DataDB();
+        List<Review> res= new ArrayList<Review>();
+        ResultSet rs= db.getStatement().executeQuery("SELECT * FROM review , product WHERE review.ID_PRODUCT = product.ID and product.ID = '" + id + "'; ");
+        while (rs.next())
+            res.add(new Review(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getDate(6)));
+        return res;
+    }
 
-    public static Producer getProducersOject() throws SQLException, ClassNotFoundException {
+
+    public static Producer getProducersOject(String id) throws SQLException, ClassNotFoundException {
         try {
             DBConnect dbConnect = DBConnect.getInstance();
             Statement statement = dbConnect.get();
-            ResultSet rs = statement.executeQuery("SELECT * FROM producer WHERE producer.ID=\"PRER10\"");
+            ResultSet rs = statement.executeQuery("SELECT * FROM producer , product WHERE producer.ID = product.ID_PRODUCER and product.ID  ='"+id+"'");
             while (rs.next()) {
                 Producer p = new Producer(
                         rs.getString(1),
@@ -383,6 +393,10 @@ public class DataDB {
 //        }
 
 //        System.out.println(getReviewObjects("1").getReview_date());
+
+//        System.out.println(getCategorysObject("PR17").getName());
+
+//        System.out.println(getProducts().iterator().next().getImg());
 
     }
 }

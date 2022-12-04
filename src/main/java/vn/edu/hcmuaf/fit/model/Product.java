@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.model;
 
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Product {
@@ -158,5 +159,7 @@ public class Product {
         Product product = (Product) o;
         return getPrice() == product.getPrice() && getIns() == product.getIns() && getQuantity() == product.getQuantity() && getStatus() == product.getStatus() && Objects.equals(getId(), product.getId()) && Objects.equals(getName(), product.getName()) && Objects.equals(getImg(), product.getImg()) && Objects.equals(getCategory(), product.getCategory()) && Objects.equals(getTag(), product.getTag()) && Objects.equals(getID_product(), product.getID_product()) && Objects.equals(getAdd_date(), product.getAdd_date()) && Objects.equals(getDetail(), product.getDetail());
     }
+
+
 
 }

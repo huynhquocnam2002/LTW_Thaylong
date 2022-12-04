@@ -91,33 +91,37 @@ public class Util {
     }
 
     public static String reverseDate(String str) {
-        String[] arr=str.split("-/");
+        String[] arr = str.split("-/");
         String res = "";
-        for (int i= arr.length-1; i>=0; i--)
-            res+=arr[i]+"-";
-        return res.substring(0, res.length()-1);
+        for (int i = arr.length - 1; i >= 0; i--)
+            res += arr[i] + "-";
+        return res.substring(0, res.length() - 1);
     }
 
-    public static String createOTP(){
+    public static String createOTP() {
         Random rd = new Random();
         String confirmCode = rd.nextInt(1000000) + "";
         return confirmCode;
     }
 
 
-    public static void main(String[] args) {
-        Date d1 = new Date(2022, 11, 27);
-        Date d2 = new Date(2023, 1, 11);
-        System.out.println(d1);
-        Calendar c1 = Calendar.getInstance();
-        Calendar c2 = Calendar.getInstance();
-        c1.setTime(d1);
-        c2.setTime(d2);
 
-        System.out.println(d1.compareTo(d2));
-        LocalDateTime now = LocalDateTime.now();
-        System.out.println((c2.getTime().getTime() - c1.getTime().getTime()) / (1000 * 60 * 60 * 24));
-        System.out.println((-new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth()).getTime() + d2.getTime()) / (24 * 3600 * 1000));
+
+
+    public static void main(String[] args) {
+//        Date d1 = new Date(2022, 11, 27);
+//        Date d2 = new Date(2023, 1, 11);
+//        System.out.println(d1);
+//        Calendar c1 = Calendar.getInstance();
+//        Calendar c2 = Calendar.getInstance();
+//        c1.setTime(d1);
+//        c2.setTime(d2);
+//
+//        System.out.println(d1.compareTo(d2));
+//        LocalDateTime now = LocalDateTime.now();
+//        System.out.println((c2.getTime().getTime() - c1.getTime().getTime()) / (1000 * 60 * 60 * 24));
+//        System.out.println((-new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth()).getTime() + d2.getTime()) / (24 * 3600 * 1000));
+
 
     }
 }

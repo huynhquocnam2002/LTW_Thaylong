@@ -14,14 +14,14 @@ public class ProductService {
 
     private static ProductService instance;
 
-    private static Map<String,Product>  product= new HashMap<>();
+    private static Map<String, Product> products = new HashMap<>();
 
     static {
-        product.put("AKA1999", new Product("1" ,
-                "chuong" ,690000,
+        products.put("AKA1999", new Product("1",
+                "chuong", 690000,
                 "imageProduct/product28.jpg",
-                6,"5","salerum","11",241,
-                new Date("2022-11-20)"),1,"dads"));
+                6, "5", "salerum", "11", 241,
+                new Date("2022-11-20)"), 1, "dads"));
 
     }
 
@@ -39,7 +39,7 @@ public class ProductService {
 
     public Product get(String id) {
 
-        return product.get(id);
+        return products.get(id);
 
     }
 }
