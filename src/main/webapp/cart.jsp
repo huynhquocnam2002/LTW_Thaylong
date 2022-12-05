@@ -1,3 +1,11 @@
+<%@ page import="vn.edu.hcmuaf.fit.model.Cart" %>
+<%@ page import="java.util.TreeMap" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.DB.DataDB" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.ProductDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.User" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -27,24 +35,28 @@
 
 
     <!-- Custom StyleSheet -->
-    <link rel="stylesheet" href="../css/cssCart.css"/>
+    <link rel="stylesheet" href="/css/cssCart.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <title>JC Phone Shop</title>
 </head>
 
 <body>
-
-<!-- Header -->
-<!-- Header_top -->
-<header id="header" class="header">
-    <div class="navigation">
-        <div class="container">
-            <nav class="nav">
-                <div class="nav__hamburger">
-                    <svg>
-                        <use xlink:href="./images/sprite.svg#icon-menu"></use>
-                    </svg>
-                </div>
+        <%
+            Cart cart =(Cart) session.getAttribute("cart");
+            if(cart == null) cart = new Cart();
+            TreeMap<String , Integer> list =cart.getList();
+        %>
+ <!-- Header -->
+    <!-- Header_top -->
+        <header id="header" class="header">
+            <div class="navigation">
+                <div class="container">
+                    <nav class="nav">
+                        <div class="nav__hamburger">
+                            <svg>
+                                <use xlink:href="image/images/sprite.svg#icon-menu"></use>
+                            </svg>
+                        </div>
 
                 <div class="nav__logo">
                     <a href="/" class="scroll-link">

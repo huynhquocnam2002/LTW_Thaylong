@@ -12,7 +12,7 @@ import java.sql.Statement;
 public class ProducerDAO {
     public static Producer getProducersOject(String id) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
-        PreparedStatement sta = db.getStatement("SELECT * FROM producer WHERE producer.ID=?");
+        PreparedStatement sta = db.getStatement("SELECT * FROM producer , product WHERE producer.ID = product.ID_PRODUCER and product.ID  =?");
         sta.setString(1, id);
         ResultSet rs = sta.executeQuery();
         while (rs.next()) {

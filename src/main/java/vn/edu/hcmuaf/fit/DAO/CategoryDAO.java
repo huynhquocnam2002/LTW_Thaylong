@@ -58,8 +58,4 @@ public class CategoryDAO {
         }
         return null;
     }
-
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        System.out.println(getCategorysObject("1").getName());
-    }
 }

@@ -8,13 +8,11 @@
 
 <%@ page import="vn.edu.hcmuaf.fit.DB.DBConnect" %>
 
-<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
-
-<%@ page import="vn.edu.hcmuaf.fit.model.Producer" %>
-
-<%@ page import="vn.edu.hcmuaf.fit.model.Category" %>
-
 <%@ page import="vn.edu.hcmuaf.fit.DB.DataDB" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.*" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.*" %>
+<%@ page import="java.util.Set" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Review" %>
 <%@ page import="vn.edu.hcmuaf.fit.controller.Util" %>
@@ -38,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="image/images/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon"/>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" rel="stylesheet"/>
@@ -72,7 +70,7 @@
             <nav class="nav">
                 <div class="nav__hamburger">
                     <svg>
-                        <use xlink:href="image/images/sprite.svg#icon-menu"></use>
+                        <use xlink:href="./images/sprite.svg#icon-menu"></use>
                     </svg>
                 </div>
 
@@ -87,7 +85,7 @@
                         <span class="nav__category">PHONE</span>
                         <a href="#" class="close__toggle">
                             <svg>
-                                <use xlink:href="image/images/sprite.svg#icon-cross"></use>
+                                <use xlink:href="./images/sprite.svg#icon-cross"></use>
                             </svg>
                         </a>
                     </div>
@@ -103,7 +101,7 @@
                             <div class="nav__icons">
                                 <a href="#" class="icon__item" id="icon__item_seach">
                                     <svg class="icon__search">
-                                        <use xlink:href="image/images/sprite.svg#icon-search"></use>
+                                        <use xlink:href="./images/sprite.svg#icon-search"></use>
                                     </svg>
                                 </a>
                             </div>
@@ -122,25 +120,50 @@
                 <div class="nav__icons">
                     <a href="/phone_thuan/user.html" class="icon__item">
                         <svg class="icon__user">
-                            <use xlink:href="image/images/sprite.svg#icon-user"></use>
+                            <use xlink:href="./images/sprite.svg#icon-user"></use>
                         </svg>
                     </a>
+
                     <div class="nav__item_user" id="nav__item_user">
                         <a href="#login" class="nav__link scroll-link">Hello Minh Thuận</a> <br>
                         <!-- <a  href="#register" class="nav__link scroll-link">Đăng Ký</a><br> -->
                         <a href="" class="nav__link scroll-link">Thành Viên</a>
                     </div>
                 </div>
+                <%
+                } else {
+                    User user = (User) session.getAttribute("user");
+                %>
+                <div class="nav__icons">
+                    <a href="user.jsp" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
+                        <img src="<%=user.getImg()%>"
+                             style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%" alt="img">
+                    </a>
 
+                    <div class="nav__item_user" style="font-size: 1.2rem" id="nav__item_user1">
+                        <a href="user.jsp" class="nav__link scroll-link"
+                           style="line-height: 2"><%=user.getName()%>
+                        </a><br>
+                        <a href="" class="nav__link scroll-link">Thành Viên</a>
+                    </div>
+                </div>
+                <%}%>
+
+                <%
+                    if (session.getAttribute("user") != null) {
+                        User u = (User) session.getAttribute("user");
+                        int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
+                %>
                 <div class="nav__icons" id="nav__item_giohang">
                     <a href="/phone_chuong/cart.html" class="icon__item">
                         <svg class="icon__cart">
-                            <use xlink:href="image/images/sprite.svg#icon-shopping-basket"></use>
+                            <use xlink:href="./images/sprite.svg#icon-shopping-basket"></use>
                         </svg>
                         <span id="cart__total">4</span>
                     </a>
                     <a href="/phone_chuong/cart.html" class="nav__link_giohang">Giỏ Hàng</a>
                 </div>
+                <%}%>
             </nav>
         </div>
     </div>
@@ -155,6 +178,9 @@
 
     <div class="prefix">
 
+        <% DataDB data = new DataDB();%>
+
+
 
 
 
@@ -168,6 +194,7 @@
             <li class="item"></li>
             </li>
             <li>
+                    <%=CategoryDAO.getCategorysObject(request.getParameter("idProduct")).getName()%>
 
                 <% ProductDAO prDao = new ProductDAO();%>
 
@@ -183,21 +210,23 @@
             <li class="item"></li>
             </li>
 
-            <li> <%=prcDao.getProducersOject(request.getParameter("idProduct")).getName()%>
+            <li> <%=ProducerDAO.getProducersOject(request.getParameter("idProduct")).getName()%>
             <li class="item"></li>
             </li>
 
 
 
-            <li><%=prDao.getProductById(request.getParameter("idProduct")).getName()%>
+            <li><%=ProductDAO.getProductById(request.getParameter("idProduct")).getName()%>
             </li>
 
 
         </ul>
     </div>
 </div>
-<h2 id="section__title__product"><%=prDao.getProductById(request.getParameter("idProduct")).getName()%>
+
+<h2 id="section__title__product"><%=ProductDAO.getProductById(request.getParameter("idProduct")).getName()%>
 </h2>
+<%--<%=data.getProductById(request.getParameter("idProduct")).getName()%>--%>
 
 <section id="section-detailsProduct">
 
@@ -218,7 +247,7 @@
                                         <div class="hero__left">
                                             <h1>TÍNH NĂNG NỔI BẬT</h1>
 
-                                            <img src="<%=prDao.getProductById(request.getParameter("idProduct")).getImg()%>
+                                            <img src="<%=ProductDAO.getProductById(request.getParameter("idProduct")).getImg()%>
                                             "
 
                                                  alt="img__product" id="image__detail__product">
@@ -246,7 +275,7 @@
                                         <div class="hero__left">
 
                                             <img src="
-                                                <%=prDao.getProductById(request.getParameter("idProduct")).getImg()%>"
+                                                <%=ProductDAO.getProductById(request.getParameter("idProduct")).getImg()%>"
                                                  style="width:375px!important;height: 375px !important; position: relative;top:-22px;padding: 10px;border-radius: 10px !important;">
 
                                         </div>
@@ -258,7 +287,8 @@
                                         <div class="hero__left">
 
                                             <img src="
-                                                <%=prDao.getProductById(request.getParameter("idProduct")).getImg()%>"
+                                                <%=ProductDAO.getProductById(request.getParameter("idProduct")).getImg()%>"
+
                                                  style="width:375px!important;height: 375px !important; position: relative;top:-22px;padding: 10px;border-radius: 10px !important;">
                                         </div>
 
@@ -275,12 +305,12 @@
                         <div class="glide__arrows" data-glide-el="controls">
                             <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
                                 <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-arrow-left2"></use>
+                                    <use xlink:href="./images/sprite.svg#icon-arrow-left2"></use>
                                 </svg>
                             </button>
                             <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
                                 <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-arrow-right2"></use>
+                                    <use xlink:href="./images/sprite.svg#icon-arrow-right2"></use>
                                 </svg>
                             </button>
                         </div>
@@ -327,7 +357,8 @@
         <div class="product-detail__center">
 
 
-            <h3 style="color: red; "><%=prDao.getProductById(request.getParameter("idProduct")).getPrice()%> đ
+            <h3 style="color: red; "><%=ProductDAO.getProductById(request.getParameter("idProduct")).getPrice()%> đ
+
 
 
                 <p style="color:#707070; position: relative; left:90px; bottom:25px;">
@@ -340,6 +371,7 @@
             <div class="product__item">
 
                 <img
+                        src="<%=ProductDAO.getProductById(request.getParameter("idProduct")).getImg()%>"
                         src="<%=prDao.getProductById(request.getParameter("idProduct")).getImg()%>"
                         alt="" style="width: 33px; height: 35px; object-fit: cover;">
 
@@ -361,13 +393,13 @@
                 <div>
                     <button class="minus-btn" onclick="minus()">
                         <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-minus"></use>
+                            <use xlink:href="./images/sprite.svg#icon-minus"></use>
                         </svg>
                     </button>
                     <input type="text" value="1" class="counter-btn" id="amount">
                     <button class="plus-btn" onclick="plus()">
                         <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-plus"></use>
+                            <use xlink:href="./images/sprite.svg#icon-plus"></use>
                         </svg>
                     </button>
                 </div>
@@ -376,7 +408,50 @@
             <%--    Tang giam so luong         --%>
             <%--            js--%>
 
+            <script>
 
+                let amountElement = document.getElementById('amount');
+
+                let amount = amountElement.value;
+                let render = function (amount) {
+
+                    amountElement.value = amount;
+
+
+                }
+
+                let minus = function () {
+
+                    if (amount > 1)
+                        amount--
+                    render(amount);
+
+                }
+
+                let plus = function () {
+
+
+                    amount++
+                    render(amount);
+                }
+
+                amountElement.addEventListener('input', () => {
+
+                    amount = amountElement.value;
+
+                    amount = parseInt(amount);
+
+                    amount = (isNaN(amount) || amount == 0) ? 1 : amount;
+
+                    render(amount);
+
+                    console.log(amount);
+
+
+                });
+
+
+            </script>
 
             </li>
 
@@ -386,12 +461,14 @@
 
 
                     <span>Giá:</span>
-                    <a href="#" class="new__price"><%=prDao.getProductById(request.getParameter("idProduct")).getPrice()%>VNĐ</a>
+                    <a href="#" class="new__price"><%=ProductDAO.getProductById(request.getParameter("idProduct")).getPrice()%>VNĐ</a>
+
 
                 </li>
                 <li>
                     <span>Hãng:</span>
-                    <a href="#"><%=prcDao.getProducersOject(request.getParameter("idProduct")).getName()%>
+                    <a href="#"><%=ProducerDAO.getProducersOject(request.getParameter("idProduct")).getName()%>
+
                     </a>
 
 
@@ -399,19 +476,19 @@
 
                 <li>
                     <span>Loại sản phẩm:</span>
-                    <a href="#"><%= cDao.getCategorysObject(request.getParameter("idProduct")).getName()%> </a>
+                    <a href="#"><%= CategoryDAO.getCategorysObject(request.getParameter("idProduct")).getName()%> </a>
 
                 </li>
                 <li>
                     <span>Hiện có:</span>
-                    <a href="#" class="in-stock">Trong kho (<%=prDao.getProductById(request.getParameter("idProduct")).getQuantity()%> sản phẩm)</a>
+                    <a href="#" class="in-stock">Trong kho (<%=ProductDAO.getProductById(request.getParameter("idProduct")).getQuantity()%> sản phẩm)</a>
                 </li>
                 </ul>
                 <div class="product-info__btn">
                     <a href="#">
               <span>
                 <svg>
-                  <use xlink:href="image/images/sprite.svg#icon-crop"></use>
+                  <use xlink:href="./images/sprite.svg#icon-crop"></use>
                 </svg>
               </span>&nbsp;
                         HƯỚNG DẪN KÍCH THƯỚC
@@ -419,7 +496,7 @@
                     <a href="#">
               <span>
                 <svg>
-                  <use xlink:href="image/images/sprite.svg#icon-truck"></use>
+                  <use xlink:href="./images/sprite.svg#icon-truck"></use>
                 </svg>
               </span>&nbsp;
                         VẬN CHUYỂN
@@ -427,7 +504,7 @@
                     <a href="#">
               <span>
                 <svg>
-                  <use xlink:href="image/images/sprite.svg#icon-envelope-o"></use>
+                  <use xlink:href="./images/sprite.svg#icon-envelope-o"></use>
                 </svg>&nbsp;
               </span>
                         HỎI VỀ SẢN PHẨM
@@ -475,7 +552,7 @@
 
                 <strong>Bảo hành </strong>
 
-                <p style="color:#333333; font-size:14px;">Bảo hành:<b<%=prDao.getProductById(request.getParameter("idProduct")).getIns()%> tháng></b> chính hãng Energiner</p>
+                <p style="color:#333333; font-size:14px;">Bảo hành:<b<%=ProductDAO.getProductById(request.getParameter("idProduct")).getIns()%> tháng></b> chính hãng Energiner</p>
 
 
 
@@ -538,8 +615,9 @@
                 <span id="dots">...</span></p>
 
 
-            <img style="width:100% ;height: 495.23px; object-fit: contain; "
-                 src="<%=prDao.getProductById(request.getParameter("idProduct")).getImg()%>"
+            <img style="width:100% ;height: 495.23px; object-fit: cover; "
+                 src="<%=ProductDAO.getProductById(request.getParameter("idProduct")).getImg()%>"
+
                  alt="">
 
             <p>Hỗ trợ 3 chế độ sạc và công nghệ PD tiết kiệm thời gian sạc
@@ -590,19 +668,19 @@
                     <div class="rating">
 
                         <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                            <use xlink:href="./images/sprite.svg#icon-star-full"></use>
                         </svg>
                         <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                            <use xlink:href="./images/sprite.svg#icon-star-full"></use>
                         </svg>
                         <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                            <use xlink:href="./images/sprite.svg#icon-star-full"></use>
                         </svg>
                         <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                            <use xlink:href="./images/sprite.svg#icon-star-full"></use>
                         </svg>
                         <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
+                            <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
                         </svg>
                     </div>
 
@@ -617,7 +695,7 @@
                         <tr>
                             <td>5
                                 <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
                                 </svg>
                             </td>
 
@@ -627,7 +705,7 @@
                         <tr>
                             <td>4
                                 <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
                                 </svg>
                             </td>
                             <td><input type="range" min="0" max="100" value="0" disabled></td>
@@ -636,7 +714,7 @@
                         <tr>
                             <td>3
                                 <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
                                 </svg>
                             </td>
                             <td><input type="range" min="0" max="100" value="0" disabled></td>
@@ -645,7 +723,7 @@
                         <tr>
                             <td>2
                                 <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
                                 </svg>
                             </td>
                             <td><input type="range" min="0" max="100" value="0" disabled></td>
@@ -654,7 +732,7 @@
                         <tr>
                             <td>1
                                 <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
                                 </svg>
                             </td>
                             <td><input type="range" min="0" max="100" value="0" disabled></td>
@@ -675,6 +753,47 @@
 
             <div class="container__feedback">
 
+                <% List<Review> listreview =  ReviewDAO.getReview(request.getParameter("idProduct")); %>
+                <% for (int i = 0; i < listreview.size() ; i++) { %>
+
+                <div class="container__feedback__name">
+
+                    <div class="container__name__image" style="display: flex;align-items: center; ">
+                        <img class="container__feedback__name--border"
+                             src="<%=UserDAO.getUserById(listreview.get(i).getId_user()).getImg()%>"
+                             alt="">
+                        <h6> <%=UserDAO.getUserById(listreview.get(i).getId_user()).getName()%></h6>
+                    </div>
+
+                    <h6> <%=listreview.get(i).getReview_date()%></h6>
+                </div>
+
+                <div class="container__feedback__title">
+
+                    <h6 style="display: flex;">Đánh giá
+                        <div class="rating">
+
+                            <svg>
+                                <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                            </svg>
+                            <svg>
+                                <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                            </svg>
+                            <svg>
+                                <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                            </svg>
+                            <svg>
+                                <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                            </svg>
+                            <svg>
+                                <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
+                            </svg>
+                        </div>
+                    </h6>
+
+                    <h6><strong>Nhận xét:</strong> <%=listreview.get(i).getContent()%></h6>
+                </div>
+                <%}%>
                 <% List<Review> listreview =  rvDao.getReview(request.getParameter("idProduct")); %>
                 <% for (int i = 0; i < listreview.size() ; i++) { %>
 
@@ -774,6 +893,7 @@
         <div class="glide" id="glide_3">
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides latest-center">
+                    <%for( Product pr : listconection){%>
                     <li class="glide__slide">
                         <div class="product">
                             <div class="product__header">
@@ -898,30 +1018,33 @@
                         <div class="product">
                             <div class="product__header">
                                 <a href="#"><img
+
                                         src="  <%=prDao.getProductById("PR42").getImg()%>"
                                         alt="product"></a>
                             </div>
                             <div class="product__footer">
+
                                 <h3><%=prDao.getProductById("PR42").getName()%>
                                 </h3>
                                 <div class="rating">
                                     <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
+                                        <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
                                     </svg>
                                 </div>
                                 <div class="product__price">
+                                    <h4><%=pr.getPrice()%> VNĐ</h4>
                                     <h4><%=prDao.getProductById("PR42").getPrice()%> VNĐ</h4>
                                 </div>
                                 <a href="#">
@@ -932,27 +1055,28 @@
                                 <li>
                                     <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
                                         <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
+                                            <use xlink:href="./images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Wishlist" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
+                                            <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Compare" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
+                                            <use xlink:href="./images/sprite.svg#icon-loop2"></use>
                                         </svg>
                                     </a>
                                 </li>
                             </ul>
                         </div>
                     </li>
+                    <%}%>
                     <li class="glide__slide">
                         <div class="product">
                             <div class="product__header">
@@ -1255,13 +1379,13 @@
                 <button style="position: absolute; left:0; top:50%;" class="glide__arrow glide__arrow--left"
                         data-glide-dir="<">
                     <svg>
-                        <use xlink:href="image/images/sprite.svg#icon-arrow-left2"></use>
+                        <use xlink:href="./images/sprite.svg#icon-arrow-left2"></use>
                     </svg>
                 </button>
                 <button style="position: absolute; left:96%; top:50%;" class="glide__arrow glide__arrow--right"
                         data-glide-dir=">">
                     <svg>
-                        <use xlink:href="image/images/sprite.svg#icon-arrow-right2"></use>
+                        <use xlink:href="./images/sprite.svg#icon-arrow-right2"></use>
                     </svg>
                 </button>
             </div>
@@ -1288,83 +1412,23 @@
                                         alt="product"></a>
                             </div>
                             <div class="product__footer">
-                                <h3>Pin sạc dự phòng Mazer </h3>
-                                <div class="rating">
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
-                                    </svg>
-                                </div>
-                                <div class="product__price">
-                                    <h4>550.000 VNĐ</h4>
-                                </div>
-                                <a href="#">
-                                    <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                </a>
-                            </div>
-                            <ul>
-                                <li>
-                                    <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Compare" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="glide__slide">
-                        <div class="product">
-                            <div class="product__header">
-                                <a href="#"><img
-                                        src="https://cdn.didongviet.vn/pub/media/catalog/product//p/i/pin-sac-du-phong-mophie-snap_-powerstation-stand-10000-mah-didongviet_1.jpg"
-                                        alt="product"></a>
-                            </div>
-                            <div class="product__footer">
-                                <h3>
-                                    Pin sạc dự phòng Mophie
+                                <h3><%=pr.getName()%>
                                 </h3>
                                 <div class="rating">
                                     <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
+                                        <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
                                     </svg>
                                 </div>
                                 <div class="product__price">
@@ -1378,27 +1442,28 @@
                                 <li>
                                     <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
                                         <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
+                                            <use xlink:href="./images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Wishlist" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
+                                            <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Compare" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
+                                            <use xlink:href="./images/sprite.svg#icon-loop2"></use>
                                         </svg>
                                     </a>
                                 </li>
                             </ul>
                         </div>
                     </li>
+                    <%}%>
                     <li class="glide__slide">
                         <div class="product">
                             <div class="product__header">
@@ -1759,13 +1824,13 @@
                 <button style="position: absolute; left:0; top:50%;" class="glide__arrow glide__arrow--left"
                         data-glide-dir="<">
                     <svg>
-                        <use xlink:href="image/images/sprite.svg#icon-arrow-left2"></use>
+                        <use xlink:href="./images/sprite.svg#icon-arrow-left2"></use>
                     </svg>
                 </button>
                 <button style="position: absolute; left: 96% ; top:50%;" class="glide__arrow glide__arrow--right"
                         data-glide-dir=">">
                     <svg>
-                        <use xlink:href="image/images/sprite.svg#icon-arrow-right2"></use>
+                        <use xlink:href="./images/sprite.svg#icon-arrow-right2"></use>
                     </svg>
                 </button>
             </div>
@@ -1780,7 +1845,7 @@
             <div class="facility__box">
                 <div class="facility-img__container">
                     <svg>
-                        <use xlink:href="image/images/sprite.svg#icon-airplane"></use>
+                        <use xlink:href="./images/sprite.svg#icon-airplane"></use>
                     </svg>
                 </div>
                 <p>MIỄN PHÍ VẬN CHUYỂN TOÀN CẦU</p>
@@ -1789,7 +1854,7 @@
             <div class="facility__box">
                 <div class="facility-img__container">
                     <svg>
-                        <use xlink:href="image/images/sprite.svg#icon-credit-card-alt"></use>
+                        <use xlink:href="./images/sprite.svg#icon-credit-card-alt"></use>
                     </svg>
                 </div>
                 <p>ĐẢM BẢO HOÀN TIỀN 100%</p>
@@ -1798,7 +1863,7 @@
             <div class="facility__box">
                 <div class="facility-img__container">
                     <svg>
-                        <use xlink:href="image/images/sprite.svg#icon-credit-card"></use>
+                        <use xlink:href="./images/sprite.svg#icon-credit-card"></use>
                     </svg>
                 </div>
                 <p>THANH TOÁN BẰNG THẺ</p>
@@ -1807,7 +1872,7 @@
             <div class="facility__box">
                 <div class="facility-img__container">
                     <svg>
-                        <use xlink:href="image/images/sprite.svg#icon-headphones"></use>
+                        <use xlink:href="./images/sprite.svg#icon-headphones"></use>
                     </svg>
                 </div>
                 <p>HỖ TRỢ TRỰC TUYẾN 24/7</p>
@@ -1871,7 +1936,7 @@
                 <div>
               <span>
                 <svg>
-                  <use xlink:href="image/images/sprite.svg#icon-location"></use>
+                  <use xlink:href="./images/sprite.svg#icon-location"></use>
                 </svg>
               </span>
                     <a
@@ -1881,7 +1946,7 @@
                 <div>
               <span>
                 <svg>
-                  <use xlink:href="image/images/sprite.svg#icon-envelop"></use>
+                  <use xlink:href="./images/sprite.svg#icon-envelop"></use>
                 </svg>
               </span>
                     JC-PHONEcompany@gmail.com
@@ -1889,7 +1954,7 @@
                 <div>
               <span>
                 <svg>
-                  <use xlink:href="image/images/sprite.svg#icon-phone"></use>
+                  <use xlink:href="./images/sprite.svg#icon-phone"></use>
                 </svg>
               </span>
                     08.999.999.99
@@ -1897,7 +1962,7 @@
                 <div>
               <span>
                 <svg>
-                  <use xlink:href="image/images/sprite.svg#icon-paperplane"></use>
+                  <use xlink:href="./images/sprite.svg#icon-paperplane"></use>
                 </svg>
               </span>
                     TOÀN VIỆT NAM
@@ -1919,55 +1984,10 @@
 
 <a href="#header" class="goto-top scroll-link">
     <svg>
-        <use xlink:href="image/images/sprite.svg#icon-arrow-up"></use>
+        <use xlink:href="./images/sprite.svg#icon-arrow-up"></use>
     </svg>
 </a>
 
-
-<script>
-
-    let amountElement = document.getElementById('amount');
-
-    let amount = amountElement.value;
-    let render = function (amount) {
-
-        amountElement.value = amount;
-
-
-    }
-
-    let minus = function () {
-
-        if (amount > 1)
-            amount--
-        render(amount);
-
-    }
-
-    let plus = function () {
-
-
-        amount++
-        render(amount);
-    }
-
-    amountElement.addEventListener('input', () => {
-
-        amount = amountElement.value;
-
-        amount = parseInt(amount);
-
-        amount = (isNaN(amount) || amount == 0) ? 1 : amount;
-
-        render(amount);
-
-        console.log(amount);
-
-
-    });
-
-
-</script>
 
 <!-- Glide Carousel Script -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
@@ -1976,7 +1996,7 @@
 
 <!-- Custom JavaScript -->
 <script src="./js/products.js"></script>
-<%--<script src="./js/index.js"></script>--%>
+<script src="./js/index.js"></script>
 <script src="./js/slider.js"></script>
 
 

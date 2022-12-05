@@ -3,6 +3,10 @@
 <%@ page import="java.util.Set" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Category" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.CategoryDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.ProductDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Cart" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,85 +39,111 @@
    
   <!-- Header -->
     <!-- Header_top -->
-    <header id="header" class="header">
-      <div class="navigation">
-        <div class="container">
-          <nav class="nav">
-            <div class="nav__hamburger">
-              <svg>
-                <use xlink:href="image/images/sprite.svg#icon-menu"></use>
+  <header id="header" class="header">
+    <div class="navigation">
+      <div class="container">
+        <nav class="nav">
+          <div class="nav__hamburger">
+            <svg>
+              <use xlink:href="image/images/sprite.svg#icon-menu"></use>
+            </svg>
+          </div>
+
+          <div class="nav__logo">
+            <a href="/" class="scroll-link">
+              JC SHOP
+            </a>
+          </div>
+
+          <div class="nav__menu">
+            <div class="menu__top">
+              <span class="nav__category">PHONE</span>
+              <a href="#" class="close__toggle">
+                <svg>
+                  <use xlink:href="image/images/sprite.svg#icon-cross"></use>
+                </svg>
+              </a>
+            </div>
+            <ul class="nav__list">
+              <li class="nav__item">
+                <a href="#header" class="nav__link scroll-link">Trang chủ</a>
+              </li>
+              <li class="nav__item">
+                <a href="#category" class="nav__link scroll-link">Sản phẩm</a>
+              </li>
+              <li class="nav__item_seach">
+                <input class="input_seach" id="input_seach" type="text" placeholder="seach...">
+                <div class="nav__icons">
+                  <a href="#" class="icon__item" id="icon__item_seach">
+                    <svg class="icon__search">
+                      <use xlink:href="image/images/sprite.svg#icon-search"></use>
+                    </svg>
+                  </a>
+                </div>
+              </li>
+              <li class="nav__item">
+
+                <div class="nav__item_hotro">
+                  <a href="#hotro" class="nav__link scroll-link">HOTLINE HỖ TRỢ</a> <br>
+                  <a href="#hotro" class="nav__link scroll-link">0999.999.999</a>
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <%if (session.getAttribute("user") == null) {%>
+          <div class="nav__icons">
+            <a href="/LoginServlet" class="icon__item">
+              <svg class="icon__user">
+                <use xlink:href="image/images/sprite.svg#icon-user"></use>
               </svg>
+            </a>
+
+            <div class="nav__item_user" id="nav__item_user">
+              <a href="/LoginServlet" class="nav__link scroll-link">Đăng Nhập /</a>
+              <a href="register.jsp" class="nav__link scroll-link">Đăng Ký</a><br>
+              <a href="" class="nav__link scroll-link">Thành Viên</a>
             </div>
-  
-            <div class="nav__logo">
-              <a href="/" class="scroll-link">
-                JC SHOP
-              </a>
+          </div>
+          <%
+          } else {
+            User user = (User) session.getAttribute("user");
+          %>
+          <div class="nav__icons">
+            <a href="user.jsp" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
+              <img src="<%=user.getImg()%>"
+                   style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%" alt="img">
+            </a>
+
+            <div class="nav__item_user" style="font-size: 1.2rem" id="nav__item_user1">
+              <a href="user.jsp" class="nav__link scroll-link"
+                 style="line-height: 2"><%=user.getName()%>
+              </a><br>
+              <a href="" class="nav__link scroll-link">Thành Viên</a>
             </div>
-  
-            <div class="nav__menu">
-              <div class="menu__top">
-                <span class="nav__category">PHONE</span>
-                <a href="#" class="close__toggle">
-                  <svg>
-                    <use xlink:href="image/images/sprite.svg#icon-cross"></use>
-                  </svg>
-                </a>
-              </div>
-              <ul class="nav__list">
-                <li class="nav__item">
-                  <a href="#header" class="nav__link scroll-link">Trang chủ</a>
-                </li>
-                <li class="nav__item">
-                  <a href="#category" class="nav__link scroll-link">Sản phẩm</a>
-                </li>
-                <li class="nav__item_seach">
-                  <input class="input_seach"  id="input_seach" type="text" placeholder="seach...">
-                  <div class="nav__icons">
-                    <a href="#" class="icon__item" id="icon__item_seach">
-                      <svg class="icon__search">
-                        <use xlink:href="image/images/sprite.svg#icon-search"></use>
-                      </svg>
-                    </a>
-                  </div>
-                </li>
-                <li class="nav__item">
-  
-                  <div class="nav__item_hotro">
-                    <a  href="#hotro" class="nav__link scroll-link">HOTLINE HỖ TRỢ</a> <br>
-                    <a  href="#hotro" class="nav__link scroll-link">0999.999.999</a>
-                  </div>
-                </li>
-  
-              </ul>
-            </div>
-  
-            <div class="nav__icons">
-              <a href="/html/login.html" class="icon__item">
-                <svg class="icon__user">
-                  <use xlink:href="phone_nam/images/sprite.svg#icon-user"></use>
-                </svg>
-              </a>
-              <div class="nav__item_user" id="nav__item_user">
-                <a  href="#login" class="nav__link scroll-link">Đăng Nhập /</a> 
-                <a  href="#register" class="nav__link scroll-link">Đăng Ký</a><br>
-                <a  href="" class="nav__link scroll-link">Thành Viên</a>
-              </div>
-              </div>
-  
-              <div class="nav__icons" id="nav__item_giohang">
-              <a href="/html/login.html" class="icon__item">
-                <svg class="icon__cart">
-                  <use xlink:href="phone_nam/images/sprite.svg#icon-shopping-basket"></use>
-                </svg>
-                <span id="cart__total">0</span>
-              </a>
-              <a href="/html/login.html" class="nav__link_giohang">Giỏ Hàng</a>
-            </div>
-          </nav>
-        </div>
+          </div>
+          <%}%>
+
+          <%
+            if (session.getAttribute("user") != null) {
+              User u = (User) session.getAttribute("user");
+              int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
+          %>
+          <div class="nav__icons" id="nav__item_giohang">
+            <a href="cart.jsp" class="icon__item">
+              <svg class="icon__cart">
+                <use xlink:href="image/images/sprite.svg#icon-shopping-basket"></use>
+              </svg>
+
+              <span id="cart__total"><%=numOfCartItems%></span>
+            </a>
+            <a href="cart.jsp" class="nav__link_giohang">Giỏ Hàng</a>
+          </div>
+          <%}%>
+        </nav>
       </div>
-    </header>
+    </div>
+  </header>
   <!-- Header_danhmuc -->
   <header id="Header_danhmuc" class="Header_danhmuc">
     <div class="navigation_danhmuc">
@@ -127,7 +157,7 @@
 
             <ul class="nav__list" id="nav__list_DANHMUC">
 
-              <% List<Category> list = DataDB.getCategoryHeader();%>
+              <% List<Category> list = CategoryDAO.getCategoryHeader();%>
               <% for (int i = 0; i < list.size(); i++) {%>
 
               <div class="nav__icons_danhmuc">
@@ -169,8 +199,8 @@
   <!-- Main -->
   <main id="main">
     <div class="container">
-      <% Set<Product> ProductsByCatory = DataDB.getProductsByCatory(request.getParameter("idcategory"));%>
-       <% List<String> listname = DataDB.getnameCatory(request.getParameter("idcategory"));%>
+      <% Set<Product> ProductsByCatory = CategoryDAO.getProductsByCatory(request.getParameter("idcategory"));%>
+       <% List<String> listname = CategoryDAO.getnameCatory(request.getParameter("idcategory"));%>
       <!-- label thong bao -->
       <div class="label_seach">
         <p class="label_seach_p">Tìm kiếm sản phẩm với từ khóa: "<%=listname.get(0)+""%>"</p>
@@ -244,19 +274,19 @@
 
                   <h4><%=pr.getPrice()+" VND"%></h4>
                 </div>
-                <a href="#" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
               </div>
               <ul>
                 <li>
                   <a data-tip="Quick View" data-place="left"
-                     href="/phone_chuong/product.html">
+                     href="product.jsp?idProduct=<%=pr.getId()%>">
                     <svg>
                       <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                     </svg>
                   </a>
                 </li>
                 <li>
-                  <a data-tip="Add To Wishlist" data-place="left" href="#">
+                  <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                     <svg>
                       <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                     </svg>
@@ -275,7 +305,7 @@
           </div>
         </div>
 
-        <% Set<Product> rshot = DataDB.getProductsByCatorynew(request.getParameter("idcategory"));%>
+        <% Set<Product> rshot = ProductDAO.getProductsByCatorynew(request.getParameter("idcategory"));%>
         <div class="category__container" id="category__container__hot" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
           <div class="category__center">
             <%for(Product pr: rshot){%>
@@ -306,19 +336,19 @@
 
                   <h4><%=pr.getPrice()+" VND"%></h4>
                 </div>
-                <a href="#" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
               </div>
               <ul>
                 <li>
                   <a data-tip="Quick View" data-place="left"
-                     href="/phone_chuong/product.html">
+                     href="product.jsp?idProduct=<%=pr.getId()%>">
                     <svg>
                       <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
                     </svg>
                   </a>
                 </li>
                 <li>
-                  <a data-tip="Add To Wishlist" data-place="left" href="#">
+                  <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                     <svg>
                       <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
                     </svg>
@@ -337,7 +367,7 @@
           </div>
         </div>
 
-        <% Set<Product> rsnew = DataDB.getProductsByCatoryASC(request.getParameter("idcategory"));%>
+        <% Set<Product> rsnew = ProductDAO.getProductsByCatoryASC(request.getParameter("idcategory"));%>
         <div class="category__container" id="category__container__new" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
           <div class="category__center">
             <%for(Product pr: rsnew){%>
@@ -368,19 +398,19 @@
 
                   <h4><%=pr.getPrice()+" VND"%></h4>
                 </div>
-                <a href="#" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
               </div>
               <ul>
                 <li>
                   <a data-tip="Quick View" data-place="left"
-                     href="/phone_chuong/product.html">
+                     href="product.jsp?idProduct=<%=pr.getId()%>">
                     <svg>
                       <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
                     </svg>
                   </a>
                 </li>
                 <li>
-                  <a data-tip="Add To Wishlist" data-place="left" href="#">
+                  <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                     <svg>
                       <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
                     </svg>
@@ -399,7 +429,7 @@
           </div>
         </div>
 
-        <% Set<Product> rssalerun = DataDB.getProductsByCatoryDESC(request.getParameter("idcategory"));%>
+        <% Set<Product> rssalerun = ProductDAO.getProductsByCatoryDESC(request.getParameter("idcategory"));%>
         <div class="category__container" id="category__container__salerun" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
           <div class="category__center">
             <%for(Product pr: rssalerun){%>
@@ -430,19 +460,19 @@
 
                   <h4><%=pr.getPrice()+" VND"%></h4>
                 </div>
-                <a href="#" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
               </div>
               <ul>
                 <li>
                   <a data-tip="Quick View" data-place="left"
-                     href="/phone_chuong/product.html">
+                     href="product.jsp?idProduct=<%=pr.getId()%>">
                     <svg>
                       <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
                     </svg>
                   </a>
                 </li>
                 <li>
-                  <a data-tip="Add To Wishlist" data-place="left" href="#">
+                  <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                     <svg>
                       <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
                     </svg>
