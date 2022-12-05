@@ -12,6 +12,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.DAO.*" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.*" %>
+<%@ page import="java.util.Set" %>
 
 
 <%--<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>--%>
@@ -150,14 +151,14 @@
                         int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
                 %>
                 <div class="nav__icons" id="nav__item_giohang">
-                    <a href="/image/login.html" class="icon__item">
+                    <a href="cart.jsp" class="icon__item">
                         <svg class="icon__cart">
                             <use xlink:href="image/images/sprite.svg#icon-shopping-basket"></use>
                         </svg>
 
                         <span id="cart__total"><%=numOfCartItems%></span>
                     </a>
-                    <a href="/image/login.html" class="nav__link_giohang">Giỏ Hàng</a>
+                    <a href="cart.jsp" class="nav__link_giohang">Giỏ Hàng</a>
                 </div>
                 <%}%>
             </nav>
@@ -783,19 +784,21 @@
             <h1 class="primary__title">Sản phẩm liên quan</h1>
         </div>
     </div>
+    <% Set<Product> listconection = ProductDAO.getProductsconnection(request.getParameter("idProduct"));%>
     <div class="container" data-aos="fade-up" data-aos-duration="1200">
         <div class="glide" id="glide_3">
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides latest-center">
+                    <%for( Product pr : listconection){%>
                     <li class="glide__slide">
                         <div class="product">
                             <div class="product__header">
                                 <a href="#"><img
-                                        src="<%=ProductDAO.getProductById(request.getParameter("idProduct")).getImg()%>"
+                                        src="<%=pr.getImg()%>"
                                         alt="product"></a>
                             </div>
                             <div class="product__footer">
-                                <h3><%=ProductDAO.getProductById(request.getParameter("idProduct")).getName()%>
+                                <h3><%=pr.getName()%>
                                 </h3>
                                 <div class="rating">
                                     <svg>
@@ -815,7 +818,7 @@
                                     </svg>
                                 </div>
                                 <div class="product__price">
-                                    <h4><%=ProductDAO.getProductById(request.getParameter("idProduct")).getPrice()%> VNĐ</h4>
+                                    <h4><%=pr.getPrice()%> VNĐ</h4>
                                 </div>
                                 <a href="CartServlet?command=insert&idProduct=<%=ProductDAO.getProductById(request.getParameter("idProduct")).getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                     <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
@@ -823,14 +826,14 @@
                             </div>
                             <ul>
                                 <li>
-                                    <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
+                                    <a data-tip="Quick View" data-place="left" href="product.jsp?idProduct=<%=pr.getId()%>">
                                         <svg>
                                             <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="#">
+                                    <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=ProductDAO.getProductById(request.getParameter("idProduct")).getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                         <svg>
                                             <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
@@ -846,421 +849,7 @@
                             </ul>
                         </div>
                     </li>
-
-                    <li class="glide__slide">
-                        <div class="product">
-                            <div class="product__header">
-                                <a href="#"><img
-                                        src="<%=ProductDAO.getProductById("PR36").getImg()%>"
-                                        alt="product"></a>
-                            </div>
-                            <div class="product__footer">
-                                <h3>
-                                    <%=ProductDAO.getProductById("PR36").getName()%>
-                                </h3>
-                                <div class="rating">
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
-                                    </svg>
-                                </div>
-                                <div class="product__price">
-                                    <h4><%=ProductDAO.getProductById("PR36").getPrice()%> VNĐ</h4>
-                                </div>
-                                <a href="#">
-                                    <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                </a>
-                            </div>
-                            <ul>
-                                <li>
-                                    <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Compare" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="product">
-                            <div class="product__header">
-                                <a href="#"><img
-                                        src="  <%=ProductDAO.getProductById("PR42").getImg()%>"
-                                        alt="product"></a>
-                            </div>
-                            <div class="product__footer">
-                                <h3><%=ProductDAO.getProductById("PR42").getName()%>
-                                </h3>
-                                <div class="rating">
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
-                                    </svg>
-                                </div>
-                                <div class="product__price">
-                                    <h4><%=ProductDAO.getProductById("PR42").getPrice()%> VNĐ</h4>
-                                </div>
-                                <a href="#">
-                                    <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                </a>
-                            </div>
-                            <ul>
-                                <li>
-                                    <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Compare" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="product">
-                            <div class="product__header">
-                                <a href="#"><img
-                                        src="  <%=ProductDAO.getProductById("PR7").getImg()%>"
-                                        alt="product"></a>
-                            </div>
-                            <div class="product__footer">
-                                <h3><%=ProductDAO.getProductById("PR7").getName()%>
-                                </h3>
-                                <div class="rating">
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
-                                    </svg>
-                                </div>
-                                <div class="product__price">
-                                    <h4><%=ProductDAO.getProductById("PR7").getPrice()%> VNĐ</h4>
-                                </div>
-                                <a href="#">
-                                    <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                </a>
-                            </div>
-                            <ul>
-                                <li>
-                                    <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Compare" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="product">
-                            <div class="product__header">
-                                <a href="#"><img
-                                        src="https://cdn.didongviet.vn/pub/media/catalog/product//s/a/sac-du-phong-mazer-infinite-boost-supermini-pocket-8.0-v2-8000mah-didongviet.jpg"
-                                        alt="product"></a>
-                            </div>
-                            <div class="product__footer">
-                                <h3>Pin sạc dự phòng Mazer </h3>
-                                <div class="rating">
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
-                                    </svg>
-                                </div>
-                                <div class="product__price">
-                                    <h4>550.000 VNĐ</h4>
-                                </div>
-                                <a href="#">
-                                    <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                </a>
-                            </div>
-                            <ul>
-                                <li>
-                                    <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Compare" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="glide__slide">
-                        <div class="product">
-                            <div class="product__header">
-                                <a href="#"><img
-                                        src="https://cdn.didongviet.vn/pub/media/catalog/product//p/i/pin-sac-du-phong-mophie-snap_-powerstation-stand-10000-mah-didongviet_1.jpg"
-                                        alt="product"></a>
-                            </div>
-                            <div class="product__footer">
-                                <h3>
-                                    Pin sạc dự phòng Mophie
-                                </h3>
-                                <div class="rating">
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
-                                    </svg>
-                                </div>
-                                <div class="product__price">
-                                    <h4>1.320.000 VNĐ</h4>
-                                </div>
-                                <a href="#">
-                                    <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                </a>
-                            </div>
-                            <ul>
-                                <li>
-                                    <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Compare" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="product">
-                            <div class="product__header">
-                                <a href="#"><img
-                                        src="https://cdn.didongviet.vn/pub/media/catalog/product//p/i/pin-sac-du-phong-aukey-basix-slim-pd-n99-10000mah-didongviet.jpg"
-                                        alt="product"></a>
-                            </div>
-                            <div class="product__footer">
-                                <h3>Pin sạc dự phòng Aukey </h3>
-                                <div class="rating">
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
-                                    </svg>
-                                </div>
-                                <div class="product__price">
-                                    <h4>250.000 VNĐ</h4>
-                                </div>
-                                <a href="#">
-                                    <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                </a>
-                            </div>
-                            <ul>
-                                <li>
-                                    <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Compare" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="product">
-                            <div class="product__header">
-                                <a href="#"><img
-                                        src="https://cdn.didongviet.vn/pub/media/catalog/product//p/i/pin-sac-du-phong-aukey-10000mah-pb-n83s-didongviet.jpg"
-                                        alt="product"></a>
-                            </div>
-                            <div class="product__footer">
-                                <h3>Pin sạc dự phòng Aukey </h3>
-                                <div class="rating">
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
-                                    </svg>
-                                </div>
-                                <div class="product__price">
-                                    <h4>550.000 VNĐ</h4>
-                                </div>
-                                <a href="#">
-                                    <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                </a>
-                            </div>
-                            <ul>
-                                <li>
-                                    <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Compare" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
+                    <%}%>
                 </ul>
             </div>
 
@@ -1291,77 +880,19 @@
     </div>
     <div class="container" data-aos="fade-up" data-aos-duration="1200">
         <div class="glide" id="glide_2">
+    <% Set<Product> listnew = ProductDAO.getProductsnew(request.getParameter("idProduct"));%>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides latest-center">
+               <% for (Product pr: listnew){%>
                     <li class="glide__slide">
                         <div class="product">
                             <div class="product__header">
                                 <a href="#"><img
-                                        src="https://cdn.didongviet.vn/pub/media/catalog/product//s/a/sac-du-phong-mazer-infinite-boost-supermini-pocket-8.0-v2-8000mah-didongviet.jpg"
+                                        src="<%=pr.getImg()%>"
                                         alt="product"></a>
                             </div>
                             <div class="product__footer">
-                                <h3>Pin sạc dự phòng Mazer </h3>
-                                <div class="rating">
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
-                                    </svg>
-                                </div>
-                                <div class="product__price">
-                                    <h4>550.000 VNĐ</h4>
-                                </div>
-                                <a href="#">
-                                    <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                </a>
-                            </div>
-                            <ul>
-                                <li>
-                                    <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Compare" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="glide__slide">
-                        <div class="product">
-                            <div class="product__header">
-                                <a href="#"><img
-                                        src="https://cdn.didongviet.vn/pub/media/catalog/product//p/i/pin-sac-du-phong-mophie-snap_-powerstation-stand-10000-mah-didongviet_1.jpg"
-                                        alt="product"></a>
-                            </div>
-                            <div class="product__footer">
-                                <h3>
-                                    Pin sạc dự phòng Mophie
+                                <h3><%=pr.getName()%>
                                 </h3>
                                 <div class="rating">
                                     <svg>
@@ -1381,22 +912,22 @@
                                     </svg>
                                 </div>
                                 <div class="product__price">
-                                    <h4>1.320.000 VNĐ</h4>
+                                    <h4><%=pr.getPrice()%> VNĐ</h4>
                                 </div>
-                                <a href="#">
+                                <a href="CartServlet?command=insert&idProduct=<%=ProductDAO.getProductById(request.getParameter("idProduct")).getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                     <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
                                 </a>
                             </div>
                             <ul>
                                 <li>
-                                    <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
+                                    <a data-tip="Quick View" data-place="left" href="product.jsp?idProduct=<%=pr.getId()%>">
                                         <svg>
                                             <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="#">
+                                    <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=ProductDAO.getProductById(request.getParameter("idProduct")).getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                         <svg>
                                             <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
@@ -1412,358 +943,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="glide__slide">
-                        <div class="product">
-                            <div class="product__header">
-                                <a href="#"><img
-                                        src="https://cdn.didongviet.vn/pub/media/catalog/product//p/i/pin-sac-du-phong-aukey-basix-slim-pd-n99-10000mah-didongviet.jpg"
-                                        alt="product"></a>
-                            </div>
-                            <div class="product__footer">
-                                <h3>Pin sạc dự phòng Aukey </h3>
-                                <div class="rating">
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
-                                    </svg>
-                                </div>
-                                <div class="product__price">
-                                    <h4>250.000 VNĐ</h4>
-                                </div>
-                                <a href="#">
-                                    <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                </a>
-                            </div>
-                            <ul>
-                                <li>
-                                    <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Compare" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="product">
-                            <div class="product__header">
-                                <a href="#"><img
-                                        src="https://cdn.didongviet.vn/pub/media/catalog/product//p/i/pin-sac-du-phong-aukey-10000mah-pb-n83s-didongviet.jpg"
-                                        alt="product"></a>
-                            </div>
-                            <div class="product__footer">
-                                <h3>Pin sạc dự phòng Aukey </h3>
-                                <div class="rating">
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
-                                    </svg>
-                                </div>
-                                <div class="product__price">
-                                    <h4>550.000 VNĐ</h4>
-                                </div>
-                                <a href="#">
-                                    <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                </a>
-                            </div>
-                            <ul>
-                                <li>
-                                    <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Compare" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="product">
-                            <div class="product__header">
-                                <a href="#"><img
-                                        src="https://cdn.didongviet.vn/pub/media/catalog/product//s/a/sac-du-phong-mazer-infinite-boost-supermini-pocket-8.0-v2-8000mah-didongviet.jpg"
-                                        alt="product"></a>
-                            </div>
-                            <div class="product__footer">
-                                <h3>Pin sạc dự phòng Mazer </h3>
-                                <div class="rating">
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
-                                    </svg>
-                                </div>
-                                <div class="product__price">
-                                    <h4>550.000 VNĐ</h4>
-                                </div>
-                                <a href="#">
-                                    <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                </a>
-                            </div>
-                            <ul>
-                                <li>
-                                    <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Compare" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="glide__slide">
-                        <div class="product">
-                            <div class="product__header">
-                                <a href="#"><img
-                                        src="https://cdn.didongviet.vn/pub/media/catalog/product//p/i/pin-sac-du-phong-mophie-snap_-powerstation-stand-10000-mah-didongviet_1.jpg"
-                                        alt="product"></a>
-                            </div>
-                            <div class="product__footer">
-                                <h3>
-                                    Pin sạc dự phòng Mophie
-                                </h3>
-                                <div class="rating">
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
-                                    </svg>
-                                </div>
-                                <div class="product__price">
-                                    <h4>1.320.000 VNĐ</h4>
-                                </div>
-                                <a href="#">
-                                    <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                </a>
-                            </div>
-                            <ul>
-                                <li>
-                                    <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Compare" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="product">
-                            <div class="product__header">
-                                <a href="#"><img
-                                        src="https://cdn.didongviet.vn/pub/media/catalog/product//p/i/pin-sac-du-phong-aukey-basix-slim-pd-n99-10000mah-didongviet.jpg"
-                                        alt="product"></a>
-                            </div>
-                            <div class="product__footer">
-                                <h3>Pin sạc dự phòng Aukey </h3>
-                                <div class="rating">
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
-                                    </svg>
-                                </div>
-                                <div class="product__price">
-                                    <h4>250.000 VNĐ</h4>
-                                </div>
-                                <a href="#">
-                                    <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                </a>
-                            </div>
-                            <ul>
-                                <li>
-                                    <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Compare" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="product">
-                            <div class="product__header">
-                                <a href="#"><img
-                                        src="https://cdn.didongviet.vn/pub/media/catalog/product//p/i/pin-sac-du-phong-aukey-10000mah-pb-n83s-didongviet.jpg"
-                                        alt="product"></a>
-                            </div>
-                            <div class="product__footer">
-                                <h3>Pin sạc dự phòng Aukey </h3>
-                                <div class="rating">
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                    </svg>
-                                    <svg>
-                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
-                                    </svg>
-                                </div>
-                                <div class="product__price">
-                                    <h4>550.000 VNĐ</h4>
-                                </div>
-                                <a href="#">
-                                    <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                </a>
-                            </div>
-                            <ul>
-                                <li>
-                                    <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-tip="Add To Compare" data-place="left" href="#">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
+                    <%}%>
                 </ul>
 
             </div>
