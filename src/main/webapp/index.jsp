@@ -1,11 +1,16 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.DB.DataDB" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
-<%@ page import="java.util.Set" %>
+
+<%@ page import="vn.edu.hcmuaf.fit.controller.Util" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Category" %>
-<%@ page import="java.util.List" %>
+
+<%@ page import="vn.edu.hcmuaf.fit.DB.DBConnect" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Cart" %>
 <%@ page import="vn.edu.hcmuaf.fit.DAO.CategoryDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.DAO.ProductDAO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Set" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,13 +39,14 @@
 </head>
 
 <body>
-<%
-    Cart cart =(Cart) session.getAttribute("cart");
-    if(cart ==null){
-        cart = new Cart();
-        session.setAttribute("cart",cart);
-    }
-%>
+                <%
+                    Cart cart =(Cart) session.getAttribute("cart");
+                    if(cart ==null){
+                        cart = new Cart();
+                        session.setAttribute("cart",cart);
+                    }
+                %>
+
 <!-- Header -->
 <!-- Header_top -->
 <header id="header" class="header">
@@ -160,9 +166,9 @@
                 </div>
 
                 <ul class="nav__list" id="nav__list_DANHMUC">
-                    <% List<Category> list = CategoryDAO.getCategoryHeader();%>
+                <% List<Category> list = CategoryDAO.getCategoryHeader();%>
                     <% for (int i = 0; i < list.size(); i++) {%>
-
+<%--    --%>
                     <div class="nav__icons_danhmuc">
                         <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="icon__item">
                             <img class="icon__itemdanhmuc" src="<%=list.get(i).getImg()%>"></img>
@@ -394,7 +400,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a data-tip="Add To Wishlist" data-place="left" href="#">
+                                            <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                                 <svg>
                                                     <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                                 </svg>
@@ -498,7 +504,7 @@
 
                                 <h4><%=pr.getPrice()+" VND"%></h4>
                             </div>
-                            <a href="#" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                            <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
                         </div>
                         <ul>
                             <li>
@@ -510,7 +516,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a data-tip="Add To Wishlist" data-place="left" href="#">
+                                <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                     <svg>
                                         <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                     </svg>
@@ -560,7 +566,7 @@
 
                                 <h4><%=pr.getPrice()+" VND"%></h4>
                             </div>
-                            <a href="#" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                            <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
                         </div>
                         <ul>
                             <li>
@@ -572,7 +578,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a data-tip="Add To Wishlist" data-place="left" href="#">
+                                <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                     <svg>
                                         <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                     </svg>
@@ -622,7 +628,7 @@
 
                                 <h4><%=pr.getPrice()+" VND"%></h4>
                             </div>
-                            <a href="#" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                            <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
                         </div>
                         <ul>
                             <li>
@@ -634,7 +640,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a data-tip="Add To Wishlist" data-place="left" href="#">
+                                <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                     <svg>
                                         <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                     </svg>
@@ -684,7 +690,7 @@
 
                                 <h4><%=pr.getPrice()+" VND"%></h4>
                             </div>
-                            <a href="#" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                            <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
                         </div>
                         <ul>
                             <li>
@@ -696,7 +702,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a data-tip="Add To Wishlist" data-place="left" href="#">
+                                <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                     <svg>
                                         <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                     </svg>

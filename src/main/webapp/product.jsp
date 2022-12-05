@@ -8,16 +8,10 @@
 
 <%@ page import="vn.edu.hcmuaf.fit.DB.DBConnect" %>
 
-<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
-
-<%@ page import="vn.edu.hcmuaf.fit.model.Producer" %>
-
-<%@ page import="vn.edu.hcmuaf.fit.model.Category" %>
-
 <%@ page import="vn.edu.hcmuaf.fit.DB.DataDB" %>
 <%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Review" %>
 <%@ page import="vn.edu.hcmuaf.fit.DAO.*" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.*" %>
 
 
 <%--<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>--%>
@@ -117,29 +111,55 @@
 
                     </ul>
                 </div>
-
+                <%if (session.getAttribute("user") == null) {%>
                 <div class="nav__icons">
-                    <a href="/phone_thuan/user.html" class="icon__item">
+                    <a href="/LoginServlet" class="icon__item">
                         <svg class="icon__user">
                             <use xlink:href="image/images/sprite.svg#icon-user"></use>
                         </svg>
                     </a>
+
                     <div class="nav__item_user" id="nav__item_user">
-                        <a href="#login" class="nav__link scroll-link">Hello Minh Thuận</a> <br>
-                        <!-- <a  href="#register" class="nav__link scroll-link">Đăng Ký</a><br> -->
+                        <a href="/LoginServlet" class="nav__link scroll-link">Đăng Nhập /</a>
+                        <a href="register.jsp" class="nav__link scroll-link">Đăng Ký</a><br>
                         <a href="" class="nav__link scroll-link">Thành Viên</a>
                     </div>
                 </div>
+                <%
+                } else {
+                    User user = (User) session.getAttribute("user");
+                %>
+                <div class="nav__icons">
+                    <a href="user.jsp" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
+                        <img src="<%=user.getImg()%>"
+                             style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%" alt="img">
+                    </a>
 
+                    <div class="nav__item_user" style="font-size: 1.2rem" id="nav__item_user1">
+                        <a href="user.jsp" class="nav__link scroll-link"
+                           style="line-height: 2"><%=user.getName()%>
+                        </a><br>
+                        <a href="" class="nav__link scroll-link">Thành Viên</a>
+                    </div>
+                </div>
+                <%}%>
+
+                <%
+                    if (session.getAttribute("user") != null) {
+                        User u = (User) session.getAttribute("user");
+                        int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
+                %>
                 <div class="nav__icons" id="nav__item_giohang">
-                    <a href="/phone_chuong/cart.html" class="icon__item">
+                    <a href="/image/login.html" class="icon__item">
                         <svg class="icon__cart">
                             <use xlink:href="image/images/sprite.svg#icon-shopping-basket"></use>
                         </svg>
-                        <span id="cart__total">4</span>
+
+                        <span id="cart__total"><%=numOfCartItems%></span>
                     </a>
-                    <a href="/phone_chuong/cart.html" class="nav__link_giohang">Giỏ Hàng</a>
+                    <a href="/image/login.html" class="nav__link_giohang">Giỏ Hàng</a>
                 </div>
+                <%}%>
             </nav>
         </div>
     </div>
@@ -153,6 +173,10 @@
 <div class="block-breadcrumbs">
 
     <div class="prefix">
+
+        <% DataDB data = new DataDB();%>
+
+
         <ul>
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10.633" viewBox="0 0 12 10.633">
                 <path id="home"
@@ -441,9 +465,14 @@
                 </div>
 
                 <div class="button">
-                    <button class="button__pay" id="button__cart"> THÊM VÀO <strong>GIỎ</strong> HÀNG</button>
+                    <a href="CartServlet?command=insert&idProduct=<%=ProductDAO.getProductById(request.getParameter("idProduct")).getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                        <button class="button__pay" id="button__cart" > THÊM VÀO <strong>GIỎ</strong> HÀNG</button>
+                    </a>
 
-                    <button class="button__pay" id="button__buy">MUA NGAY</button>
+                    <a href="CartServlet?command=insert&idProduct=<%=ProductDAO.getProductById(request.getParameter("idProduct")).getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                        <button class="button__pay" id="button__buy">MUA NGAY</button>
+                    </a>
+
 
                 </div>
 
@@ -659,7 +688,7 @@
 
             <div class="container__feedback">
 
-                <% List<Review> listreview = ReviewDAO.getReview(request.getParameter("idProduct")); %>
+                <% List<Review> listreview =  ReviewDAO.getReview(request.getParameter("idProduct")); %>
                 <% for (int i = 0; i < listreview.size() ; i++) { %>
 
                 <div class="container__feedback__name">
@@ -699,7 +728,7 @@
 
                     <h6><strong>Nhận xét:</strong> <%=listreview.get(i).getContent()%></h6>
                 </div>
-           <%}%>
+                <%}%>
 
             </div>
         </div>
@@ -882,11 +911,11 @@
                         <div class="product">
                             <div class="product__header">
                                 <a href="#"><img
-                                        src="  <%=data.getProductById("PR42").getImg()%>"
+                                        src="  <%=ProductDAO.getProductById("PR42").getImg()%>"
                                         alt="product"></a>
                             </div>
                             <div class="product__footer">
-                                <h3><%=data.getProductById("PR42").getName()%>
+                                <h3><%=ProductDAO.getProductById("PR42").getName()%>
                                 </h3>
                                 <div class="rating">
                                     <svg>
@@ -906,7 +935,7 @@
                                     </svg>
                                 </div>
                                 <div class="product__price">
-                                    <h4><%=data.getProductById("PR42").getPrice()%> VNĐ</h4>
+                                    <h4><%=ProductDAO.getProductById("PR42").getPrice()%> VNĐ</h4>
                                 </div>
                                 <a href="#">
                                     <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
@@ -941,11 +970,11 @@
                         <div class="product">
                             <div class="product__header">
                                 <a href="#"><img
-                                        src="  <%=data.getProductById("PR7").getImg()%>"
+                                        src="  <%=ProductDAO.getProductById("PR7").getImg()%>"
                                         alt="product"></a>
                             </div>
                             <div class="product__footer">
-                                <h3><%=data.getProductById("PR7").getName()%>
+                                <h3><%=ProductDAO.getProductById("PR7").getName()%>
                                 </h3>
                                 <div class="rating">
                                     <svg>

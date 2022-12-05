@@ -16,12 +16,12 @@ public class UserDAO {
         PreparedStatement sta = db.getStatement("select * from admin where email=?");
         sta.setString(1, userName);
         ResultSet rs = sta.executeQuery();
-        if (!rs.first()) {
+        if (!rs.next()) {
             rs.close();
             sta = db.getStatement("select * from user where email=?");
             sta.setString(1, userName);
             rs = sta.executeQuery();
-            if (!rs.first()) return null;
+            if (!rs.next()) return null;
             User res = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getDate(8), rs.getDate(10), rs.getInt(9));
             return res;
         } else {
@@ -32,11 +32,12 @@ public class UserDAO {
 
     public static User getUserById(String id) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
+        User res =null;
         PreparedStatement sta = db.getStatement("select * from user where id=?");
         sta.setString(1, id);
         ResultSet rs = sta.executeQuery();
-        if (!rs.first()) return null;
-        User res = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getDate(8), rs.getDate(10), rs.getInt(9));
+        if (!rs.next()) return null;
+            res = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getDate(8), rs.getDate(10), rs.getInt(9));
         return res;
     }
 
@@ -91,5 +92,9 @@ public class UserDAO {
         sta.setString(1,pass);
         sta.setString(2,email);
         return sta.execute();
+    }
+
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        System.out.println(getUserById("U1").getImg());
     }
 }
