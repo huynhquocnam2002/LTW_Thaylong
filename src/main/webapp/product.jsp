@@ -15,7 +15,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Category" %>
 
 <%@ page import="vn.edu.hcmuaf.fit.DB.DataDB" %>
-<%@ page import="vn.edu.hcmuaf.fit.DAO.CategoryDAO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Review" %>
 
 
 <%--<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>--%>
@@ -35,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="image/images/favicon.ico" type="image/x-icon"/>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" rel="stylesheet"/>
@@ -69,7 +70,7 @@
             <nav class="nav">
                 <div class="nav__hamburger">
                     <svg>
-                        <use xlink:href="./images/sprite.svg#icon-menu"></use>
+                        <use xlink:href="image/images/sprite.svg#icon-menu"></use>
                     </svg>
                 </div>
 
@@ -84,7 +85,7 @@
                         <span class="nav__category">PHONE</span>
                         <a href="#" class="close__toggle">
                             <svg>
-                                <use xlink:href="./images/sprite.svg#icon-cross"></use>
+                                <use xlink:href="image/images/sprite.svg#icon-cross"></use>
                             </svg>
                         </a>
                     </div>
@@ -100,7 +101,7 @@
                             <div class="nav__icons">
                                 <a href="#" class="icon__item" id="icon__item_seach">
                                     <svg class="icon__search">
-                                        <use xlink:href="./images/sprite.svg#icon-search"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-search"></use>
                                     </svg>
                                 </a>
                             </div>
@@ -119,7 +120,7 @@
                 <div class="nav__icons">
                     <a href="/phone_thuan/user.html" class="icon__item">
                         <svg class="icon__user">
-                            <use xlink:href="./images/sprite.svg#icon-user"></use>
+                            <use xlink:href="image/images/sprite.svg#icon-user"></use>
                         </svg>
                     </a>
                     <div class="nav__item_user" id="nav__item_user">
@@ -132,7 +133,7 @@
                 <div class="nav__icons" id="nav__item_giohang">
                     <a href="/phone_chuong/cart.html" class="icon__item">
                         <svg class="icon__cart">
-                            <use xlink:href="./images/sprite.svg#icon-shopping-basket"></use>
+                            <use xlink:href="image/images/sprite.svg#icon-shopping-basket"></use>
                         </svg>
                         <span id="cart__total">4</span>
                     </a>
@@ -152,6 +153,9 @@
 
     <div class="prefix">
 
+        <% DataDB data = new DataDB();%>
+
+
         <ul>
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10.633" viewBox="0 0 12 10.633">
                 <path id="home"
@@ -162,26 +166,25 @@
             <li class="item"></li>
             </li>
             <li>
-                    <%=CategoryDAO.getCategorysObject().getName()%>
+                    <%=data.getCategorysObject(request.getParameter("idProduct")).getName()%>
             <li class="item"></li>
             </li>
 
-            <li> <%=data.getProducersOject().getName()%>
+            <li> <%=data.getProducersOject(request.getParameter("idProduct")).getName()%>
             <li class="item"></li>
             </li>
 
 
 
-            <li><%=data.getProductById("PR40").getName()%>
+            <li><%=data.getProductById(request.getParameter("idProduct")).getName()%>
             </li>
 
 
         </ul>
     </div>
 </div>
-<h2 id="section__title__product"><%=data.getProductById("PR40").getName()%>
+<h2 id="section__title__product"><%=data.getProductById(request.getParameter("idProduct")).getName()%>
 </h2>
-<%--<%=data.getProductById(request.getParameter("idProduct")).getName()%>--%>
 
 <section id="section-detailsProduct">
 
@@ -202,7 +205,7 @@
                                         <div class="hero__left">
                                             <h1>TÍNH NĂNG NỔI BẬT</h1>
 
-                                            <img src="<%=data.getProductById("PR40").getImg()%>
+                                            <img src="<%=data.getProductById(request.getParameter("idProduct")).getImg()%>
                                             "
 
                                                  alt="img__product" id="image__detail__product">
@@ -230,7 +233,7 @@
                                         <div class="hero__left">
 
                                             <img src="
-                                     <%=data.getProductById("PR40").getImg()%>"
+                                                <%=data.getProductById(request.getParameter("idProduct")).getImg()%>"
                                                  style="width:375px!important;height: 375px !important; position: relative;top:-22px;padding: 10px;border-radius: 10px !important;">
 
                                         </div>
@@ -241,10 +244,9 @@
                                     <div class="hero__center">
                                         <div class="hero__left">
 
-                                            <img src="<%=data.getProductById("PR40").getImg()%>"
-                                                 alt="img__product" class="image__detail__product"
+                                            <img src="
+                                                <%=data.getProductById(request.getParameter("idProduct")).getImg()%>"
                                                  style="width:375px!important;height: 375px !important; position: relative;top:-22px;padding: 10px;border-radius: 10px !important;">
-
                                         </div>
 
                                     </div>
@@ -260,12 +262,12 @@
                         <div class="glide__arrows" data-glide-el="controls">
                             <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
                                 <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-arrow-left2"></use>
+                                    <use xlink:href="image/images/sprite.svg#icon-arrow-left2"></use>
                                 </svg>
                             </button>
                             <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
                                 <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-arrow-right2"></use>
+                                    <use xlink:href="image/images/sprite.svg#icon-arrow-right2"></use>
                                 </svg>
                             </button>
                         </div>
@@ -312,7 +314,7 @@
         <div class="product-detail__center">
 
 
-            <h3 style="color: red; "><%=data.getProductById("PR40").getPrice()%> đ
+            <h3 style="color: red; "><%=data.getProductById(request.getParameter("idProduct")).getPrice()%> đ
 
 
                 <p style="color:#707070; position: relative; left:90px; bottom:25px;">
@@ -325,7 +327,7 @@
             <div class="product__item">
 
                 <img
-                        src="<%=data.getProductById("PR40").getImg()%>"
+                        src="<%=data.getProductById(request.getParameter("idProduct")).getImg()%>"
                         alt="" style="width: 33px; height: 35px; object-fit: cover;">
 
                 <div class="product__title__item">
@@ -346,13 +348,13 @@
                 <div>
                     <button class="minus-btn" onclick="minus()">
                         <svg>
-                            <use xlink:href="./images/sprite.svg#icon-minus"></use>
+                            <use xlink:href="image/images/sprite.svg#icon-minus"></use>
                         </svg>
                     </button>
                     <input type="text" value="1" class="counter-btn" id="amount">
                     <button class="plus-btn" onclick="plus()">
                         <svg>
-                            <use xlink:href="./images/sprite.svg#icon-plus"></use>
+                            <use xlink:href="image/images/sprite.svg#icon-plus"></use>
                         </svg>
                     </button>
                 </div>
@@ -361,50 +363,7 @@
             <%--    Tang giam so luong         --%>
             <%--            js--%>
 
-            <script>
 
-                let amountElement = document.getElementById('amount');
-
-                let amount = amountElement.value;
-                let render = function (amount) {
-
-                    amountElement.value = amount;
-
-
-                }
-
-                let minus = function () {
-
-                    if (amount > 1)
-                        amount--
-                    render(amount);
-
-                }
-
-                let plus = function () {
-
-
-                    amount++
-                    render(amount);
-                }
-
-                amountElement.addEventListener('input', () => {
-
-                    amount = amountElement.value;
-
-                    amount = parseInt(amount);
-
-                    amount = (isNaN(amount) || amount == 0) ? 1 : amount;
-
-                    render(amount);
-
-                    console.log(amount);
-
-
-                });
-
-
-            </script>
 
             </li>
 
@@ -414,13 +373,12 @@
 
 
                     <span>Giá:</span>
-                    <a href="#" class="new__price"><%=data.getProductById("PR40").getPrice()%>VNĐ</a>
-<%--                    <%=data.getProductById(request.getParameter("idProduct")).getPrice()%>--%>
+                    <a href="#" class="new__price"><%=data.getProductById(request.getParameter("idProduct")).getPrice()%>VNĐ</a>
 
                 </li>
                 <li>
                     <span>Hãng:</span>
-                    <a href="#"><%=data.getProducersOject().getName()%>
+                    <a href="#"><%=data.getProducersOject(request.getParameter("idProduct")).getName()%>
                     </a>
 
 
@@ -428,19 +386,19 @@
 
                 <li>
                     <span>Loại sản phẩm:</span>
-                    <a href="#"><%= data.getCategorysObject().getName()%> </a>
+                    <a href="#"><%= data.getCategorysObject(request.getParameter("idProduct")).getName()%> </a>
 
                 </li>
                 <li>
                     <span>Hiện có:</span>
-                    <a href="#" class="in-stock">Trong kho (<%=data.getProductById("PR40").getQuantity()%> sản phẩm)</a>
+                    <a href="#" class="in-stock">Trong kho (<%=data.getProductById(request.getParameter("idProduct")).getQuantity()%> sản phẩm)</a>
                 </li>
                 </ul>
                 <div class="product-info__btn">
                     <a href="#">
               <span>
                 <svg>
-                  <use xlink:href="./images/sprite.svg#icon-crop"></use>
+                  <use xlink:href="image/images/sprite.svg#icon-crop"></use>
                 </svg>
               </span>&nbsp;
                         HƯỚNG DẪN KÍCH THƯỚC
@@ -448,7 +406,7 @@
                     <a href="#">
               <span>
                 <svg>
-                  <use xlink:href="./images/sprite.svg#icon-truck"></use>
+                  <use xlink:href="image/images/sprite.svg#icon-truck"></use>
                 </svg>
               </span>&nbsp;
                         VẬN CHUYỂN
@@ -456,7 +414,7 @@
                     <a href="#">
               <span>
                 <svg>
-                  <use xlink:href="./images/sprite.svg#icon-envelope-o"></use>
+                  <use xlink:href="image/images/sprite.svg#icon-envelope-o"></use>
                 </svg>&nbsp;
               </span>
                         HỎI VỀ SẢN PHẨM
@@ -504,7 +462,7 @@
 
                 <strong>Bảo hành </strong>
 
-                <p style="color:#333333; font-size:14px;">Bảo hành:<b<%=data.getProductById("PR40").getIns()%> tháng></b> chính hãng Energiner</p>
+                <p style="color:#333333; font-size:14px;">Bảo hành:<b<%=data.getProductById(request.getParameter("idProduct")).getIns()%> tháng></b> chính hãng Energiner</p>
 
 
 
@@ -568,7 +526,7 @@
 
 
             <img style="width:100% ;height: 495.23px; object-fit: cover; "
-                 src="<%=data.getProductById("PR40").getImg()%>"
+                 src="<%=data.getProductById(request.getParameter("idProduct")).getImg()%>"
                  alt="">
 
             <p>Hỗ trợ 3 chế độ sạc và công nghệ PD tiết kiệm thời gian sạc
@@ -619,19 +577,19 @@
                     <div class="rating">
 
                         <svg>
-                            <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                            <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                         </svg>
                         <svg>
-                            <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                            <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                         </svg>
                         <svg>
-                            <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                            <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                         </svg>
                         <svg>
-                            <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                            <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                         </svg>
                         <svg>
-                            <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                            <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                         </svg>
                     </div>
 
@@ -646,7 +604,7 @@
                         <tr>
                             <td>5
                                 <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                    <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                 </svg>
                             </td>
 
@@ -656,7 +614,7 @@
                         <tr>
                             <td>4
                                 <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                    <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                 </svg>
                             </td>
                             <td><input type="range" min="0" max="100" value="0" disabled></td>
@@ -665,7 +623,7 @@
                         <tr>
                             <td>3
                                 <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                    <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                 </svg>
                             </td>
                             <td><input type="range" min="0" max="100" value="0" disabled></td>
@@ -674,7 +632,7 @@
                         <tr>
                             <td>2
                                 <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                    <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                 </svg>
                             </td>
                             <td><input type="range" min="0" max="100" value="0" disabled></td>
@@ -683,7 +641,7 @@
                         <tr>
                             <td>1
                                 <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                    <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                 </svg>
                             </td>
                             <td><input type="range" min="0" max="100" value="0" disabled></td>
@@ -704,20 +662,20 @@
 
             <div class="container__feedback">
 
+                <% List<Review> listreview =  data.getReview(request.getParameter("idProduct")); %>
+                <% for (int i = 0; i < listreview.size() ; i++) { %>
 
                 <div class="container__feedback__name">
 
-
                     <div class="container__name__image" style="display: flex;align-items: center; ">
                         <img class="container__feedback__name--border"
-                             src="<%=data.getUserById("U1").getImg()%>"
+                             src="<%=data.getUserById(listreview.get(i).getId_user()).getImg()%>"
                              alt="">
-                        <h6> <%=data.getUserById("U1").getName()%></h6>
+                        <h6> <%=data.getUserById(listreview.get(i).getId_user()).getName()%></h6>
                     </div>
 
-                    <h6> <%=data.getReviewObjects("1").getReview_date()%></h6>
+                    <h6> <%=listreview.get(i).getReview_date()%></h6>
                 </div>
-
 
                 <div class="container__feedback__title">
 
@@ -725,193 +683,26 @@
                         <div class="rating">
 
                             <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                             </svg>
                             <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                             </svg>
                             <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                             </svg>
                             <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                             </svg>
                             <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                             </svg>
                         </div>
                     </h6>
 
-                    <h6><strong>Nhận xét:</strong> <%=data.getReviewObjects("1").getContent()%></h6>
+                    <h6><strong>Nhận xét:</strong> <%=listreview.get(i).getContent()%></h6>
                 </div>
-
-
-                <div class="container__feedback__name">
-
-                    <div class="container__name__image" style="display: flex;align-items: center; ">
-                        <img class="container__feedback__name--border"
-                             src="<%=data.getUserById("U2").getImg()%>"
-                             alt="">
-                        <h6><%=data.getUserById("U2").getName()%></h6>
-                    </div>
-
-                    <h6><%=data.getReviewObjects("2").getReview_date()%></h6>
-
-                </div>
-
-
-                <div class="container__feedback__title">
-
-                    <h6 style="display: flex;">Đánh giá
-                        <div class="rating">
-
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
-                            </svg>
-                        </div>
-                    </h6>
-
-                    <h6><strong>Nhận xét:</strong> <%=data.getReviewObjects("2").getContent()%></h6>
-                </div>
-
-
-                <div class="container__feedback__name">
-
-                    <div class="container__name__image" style="display: flex;align-items: center; ">
-                        <img class="container__feedback__name--border"
-
-                             src="<%=data.getUserById("U3").getImg()%>"
-                             alt="">
-                        <h6><%=data.getUserById("U3").getName()%></h6>
-                    </div>
-
-
-                    <h6><%=data.getReviewObjects("3").getReview_date()%></h6>
-                </div>
-
-
-                <div class="container__feedback__title">
-
-                    <h6 style="display: flex;">Đánh giá
-                        <div class="rating">
-
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
-                            </svg>
-                        </div>
-                    </h6>
-
-                    <h6><strong>Nhận xét:</strong><%=data.getReviewObjects("10").getContent()%></h6>
-                </div>
-
-
-                <div class="container__feedback__name">
-
-                    <div class="container__name__image" style="display: flex;align-items: center; ">
-                        <img class="container__feedback__name--border"
-
-                             src="<%=data.getUserById("U4").getImg()%>"
-                             alt="">
-                        <h6><%=data.getUserById("U4").getName()%></h6>
-                    </div>
-
-
-                    <h6><%=data.getReviewObjects("4").getReview_date()%></h6>
-                </div>
-
-
-                <div class="container__feedback__title">
-
-                    <h6 style="display: flex;">Đánh giá
-                        <div class="rating">
-
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
-                            </svg>
-                        </div>
-                    </h6>
-
-                    <h6><strong>Nhận xét:</strong><%=data.getReviewObjects("49").getContent()%></h6>
-                </div>
-
-
-                <div class="container__feedback__name">
-
-                    <div class="container__name__image" style="display: flex;align-items: center; ">
-                        <img class="container__feedback__name--border"
-
-                             src="<%=data.getUserById("U5").getImg()%>"
-                             alt="">
-                        <h6><%=data.getUserById("U5").getName()%></h6>
-                    </div>
-
-
-                    <h6><%=data.getReviewObjects("5").getReview_date()%></h6>
-                </div>
-
-
-                <div class="container__feedback__title">
-
-                    <h6 style="display: flex;">Đánh giá
-                        <div class="rating">
-
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
-                            </svg>
-                        </div>
-                    </h6>
-
-                    <h6><strong>Nhận xét:</strong><%=data.getReviewObjects("42").getContent()%></h6>
-                </div>
-
+           <%}%>
 
             </div>
         </div>
@@ -974,33 +765,33 @@
                         <div class="product">
                             <div class="product__header">
                                 <a href="#"><img
-                                        src="<%=data.getProductById("PR40").getImg()%>"
+                                        src="<%=data.getProductById(request.getParameter("idProduct")).getImg()%>"
                                         alt="product"></a>
                             </div>
                             <div class="product__footer">
-                                <h3><%=data.getProductById("PR40").getName()%>
+                                <h3><%=data.getProductById(request.getParameter("idProduct")).getName()%>
                                 </h3>
                                 <div class="rating">
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                                     </svg>
                                 </div>
                                 <div class="product__price">
-                                    <h4><%=data.getProductById("PR40").getPrice()%> VNĐ</h4>
+                                    <h4><%=data.getProductById(request.getParameter("idProduct")).getPrice()%> VNĐ</h4>
                                 </div>
-                                <a href="#">
+                                <a href="CartServlet?command=insert&idProduct=<%=data.getProductById(request.getParameter("idProduct")).getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                     <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
                                 </a>
                             </div>
@@ -1008,21 +799,21 @@
                                 <li>
                                     <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-eye"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Wishlist" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Compare" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-loop2"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                         </svg>
                                     </a>
                                 </li>
@@ -1043,19 +834,19 @@
                                 </h3>
                                 <div class="rating">
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                                     </svg>
                                 </div>
                                 <div class="product__price">
@@ -1069,21 +860,21 @@
                                 <li>
                                     <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-eye"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Wishlist" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Compare" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-loop2"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                         </svg>
                                     </a>
                                 </li>
@@ -1102,19 +893,19 @@
                                 </h3>
                                 <div class="rating">
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                                     </svg>
                                 </div>
                                 <div class="product__price">
@@ -1128,21 +919,21 @@
                                 <li>
                                     <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-eye"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Wishlist" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Compare" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-loop2"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                         </svg>
                                     </a>
                                 </li>
@@ -1161,19 +952,19 @@
                                 </h3>
                                 <div class="rating">
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                                     </svg>
                                 </div>
                                 <div class="product__price">
@@ -1187,21 +978,21 @@
                                 <li>
                                     <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-eye"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Wishlist" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Compare" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-loop2"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                         </svg>
                                     </a>
                                 </li>
@@ -1219,19 +1010,19 @@
                                 <h3>Pin sạc dự phòng Mazer </h3>
                                 <div class="rating">
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                                     </svg>
                                 </div>
                                 <div class="product__price">
@@ -1245,21 +1036,21 @@
                                 <li>
                                     <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-eye"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Wishlist" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Compare" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-loop2"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                         </svg>
                                     </a>
                                 </li>
@@ -1280,19 +1071,19 @@
                                 </h3>
                                 <div class="rating">
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                                     </svg>
                                 </div>
                                 <div class="product__price">
@@ -1306,21 +1097,21 @@
                                 <li>
                                     <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-eye"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Wishlist" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Compare" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-loop2"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                         </svg>
                                     </a>
                                 </li>
@@ -1338,19 +1129,19 @@
                                 <h3>Pin sạc dự phòng Aukey </h3>
                                 <div class="rating">
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                                     </svg>
                                 </div>
                                 <div class="product__price">
@@ -1364,21 +1155,21 @@
                                 <li>
                                     <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-eye"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Wishlist" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Compare" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-loop2"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                         </svg>
                                     </a>
                                 </li>
@@ -1396,19 +1187,19 @@
                                 <h3>Pin sạc dự phòng Aukey </h3>
                                 <div class="rating">
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                                     </svg>
                                 </div>
                                 <div class="product__price">
@@ -1422,21 +1213,21 @@
                                 <li>
                                     <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-eye"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Wishlist" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Compare" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-loop2"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                         </svg>
                                     </a>
                                 </li>
@@ -1451,13 +1242,13 @@
                 <button style="position: absolute; left:0; top:50%;" class="glide__arrow glide__arrow--left"
                         data-glide-dir="<">
                     <svg>
-                        <use xlink:href="./images/sprite.svg#icon-arrow-left2"></use>
+                        <use xlink:href="image/images/sprite.svg#icon-arrow-left2"></use>
                     </svg>
                 </button>
                 <button style="position: absolute; left:96%; top:50%;" class="glide__arrow glide__arrow--right"
                         data-glide-dir=">">
                     <svg>
-                        <use xlink:href="./images/sprite.svg#icon-arrow-right2"></use>
+                        <use xlink:href="image/images/sprite.svg#icon-arrow-right2"></use>
                     </svg>
                 </button>
             </div>
@@ -1487,19 +1278,19 @@
                                 <h3>Pin sạc dự phòng Mazer </h3>
                                 <div class="rating">
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                                     </svg>
                                 </div>
                                 <div class="product__price">
@@ -1513,21 +1304,21 @@
                                 <li>
                                     <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-eye"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Wishlist" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Compare" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-loop2"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                         </svg>
                                     </a>
                                 </li>
@@ -1548,19 +1339,19 @@
                                 </h3>
                                 <div class="rating">
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                                     </svg>
                                 </div>
                                 <div class="product__price">
@@ -1574,21 +1365,21 @@
                                 <li>
                                     <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-eye"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Wishlist" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Compare" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-loop2"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                         </svg>
                                     </a>
                                 </li>
@@ -1606,19 +1397,19 @@
                                 <h3>Pin sạc dự phòng Aukey </h3>
                                 <div class="rating">
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                                     </svg>
                                 </div>
                                 <div class="product__price">
@@ -1632,21 +1423,21 @@
                                 <li>
                                     <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-eye"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Wishlist" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Compare" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-loop2"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                         </svg>
                                     </a>
                                 </li>
@@ -1664,19 +1455,19 @@
                                 <h3>Pin sạc dự phòng Aukey </h3>
                                 <div class="rating">
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                                     </svg>
                                 </div>
                                 <div class="product__price">
@@ -1690,21 +1481,21 @@
                                 <li>
                                     <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-eye"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Wishlist" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Compare" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-loop2"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                         </svg>
                                     </a>
                                 </li>
@@ -1722,19 +1513,19 @@
                                 <h3>Pin sạc dự phòng Mazer </h3>
                                 <div class="rating">
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                                     </svg>
                                 </div>
                                 <div class="product__price">
@@ -1748,21 +1539,21 @@
                                 <li>
                                     <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-eye"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Wishlist" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Compare" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-loop2"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                         </svg>
                                     </a>
                                 </li>
@@ -1783,19 +1574,19 @@
                                 </h3>
                                 <div class="rating">
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                                     </svg>
                                 </div>
                                 <div class="product__price">
@@ -1809,21 +1600,21 @@
                                 <li>
                                     <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-eye"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Wishlist" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Compare" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-loop2"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                         </svg>
                                     </a>
                                 </li>
@@ -1841,19 +1632,19 @@
                                 <h3>Pin sạc dự phòng Aukey </h3>
                                 <div class="rating">
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                                     </svg>
                                 </div>
                                 <div class="product__price">
@@ -1867,21 +1658,21 @@
                                 <li>
                                     <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-eye"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Wishlist" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Compare" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-loop2"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                         </svg>
                                     </a>
                                 </li>
@@ -1899,19 +1690,19 @@
                                 <h3>Pin sạc dự phòng Aukey </h3>
                                 <div class="rating">
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
                                     </svg>
                                     <svg>
-                                        <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                                     </svg>
                                 </div>
                                 <div class="product__price">
@@ -1925,21 +1716,21 @@
                                 <li>
                                     <a data-tip="Quick View" data-place="left" href="/phone_chuong/product.html">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-eye"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Wishlist" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-heart-o"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
                                     <a data-tip="Add To Compare" data-place="left" href="#">
                                         <svg>
-                                            <use xlink:href="./images/sprite.svg#icon-loop2"></use>
+                                            <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
                                         </svg>
                                     </a>
                                 </li>
@@ -1955,13 +1746,13 @@
                 <button style="position: absolute; left:0; top:50%;" class="glide__arrow glide__arrow--left"
                         data-glide-dir="<">
                     <svg>
-                        <use xlink:href="./images/sprite.svg#icon-arrow-left2"></use>
+                        <use xlink:href="image/images/sprite.svg#icon-arrow-left2"></use>
                     </svg>
                 </button>
                 <button style="position: absolute; left: 96% ; top:50%;" class="glide__arrow glide__arrow--right"
                         data-glide-dir=">">
                     <svg>
-                        <use xlink:href="./images/sprite.svg#icon-arrow-right2"></use>
+                        <use xlink:href="image/images/sprite.svg#icon-arrow-right2"></use>
                     </svg>
                 </button>
             </div>
@@ -1976,7 +1767,7 @@
             <div class="facility__box">
                 <div class="facility-img__container">
                     <svg>
-                        <use xlink:href="./images/sprite.svg#icon-airplane"></use>
+                        <use xlink:href="image/images/sprite.svg#icon-airplane"></use>
                     </svg>
                 </div>
                 <p>MIỄN PHÍ VẬN CHUYỂN TOÀN CẦU</p>
@@ -1985,7 +1776,7 @@
             <div class="facility__box">
                 <div class="facility-img__container">
                     <svg>
-                        <use xlink:href="./images/sprite.svg#icon-credit-card-alt"></use>
+                        <use xlink:href="image/images/sprite.svg#icon-credit-card-alt"></use>
                     </svg>
                 </div>
                 <p>ĐẢM BẢO HOÀN TIỀN 100%</p>
@@ -1994,7 +1785,7 @@
             <div class="facility__box">
                 <div class="facility-img__container">
                     <svg>
-                        <use xlink:href="./images/sprite.svg#icon-credit-card"></use>
+                        <use xlink:href="image/images/sprite.svg#icon-credit-card"></use>
                     </svg>
                 </div>
                 <p>THANH TOÁN BẰNG THẺ</p>
@@ -2003,7 +1794,7 @@
             <div class="facility__box">
                 <div class="facility-img__container">
                     <svg>
-                        <use xlink:href="./images/sprite.svg#icon-headphones"></use>
+                        <use xlink:href="image/images/sprite.svg#icon-headphones"></use>
                     </svg>
                 </div>
                 <p>HỖ TRỢ TRỰC TUYẾN 24/7</p>
@@ -2067,7 +1858,7 @@
                 <div>
               <span>
                 <svg>
-                  <use xlink:href="./images/sprite.svg#icon-location"></use>
+                  <use xlink:href="image/images/sprite.svg#icon-location"></use>
                 </svg>
               </span>
                     <a
@@ -2077,7 +1868,7 @@
                 <div>
               <span>
                 <svg>
-                  <use xlink:href="./images/sprite.svg#icon-envelop"></use>
+                  <use xlink:href="image/images/sprite.svg#icon-envelop"></use>
                 </svg>
               </span>
                     JC-PHONEcompany@gmail.com
@@ -2085,7 +1876,7 @@
                 <div>
               <span>
                 <svg>
-                  <use xlink:href="./images/sprite.svg#icon-phone"></use>
+                  <use xlink:href="image/images/sprite.svg#icon-phone"></use>
                 </svg>
               </span>
                     08.999.999.99
@@ -2093,7 +1884,7 @@
                 <div>
               <span>
                 <svg>
-                  <use xlink:href="./images/sprite.svg#icon-paperplane"></use>
+                  <use xlink:href="image/images/sprite.svg#icon-paperplane"></use>
                 </svg>
               </span>
                     TOÀN VIỆT NAM
@@ -2115,10 +1906,55 @@
 
 <a href="#header" class="goto-top scroll-link">
     <svg>
-        <use xlink:href="./images/sprite.svg#icon-arrow-up"></use>
+        <use xlink:href="image/images/sprite.svg#icon-arrow-up"></use>
     </svg>
 </a>
 
+
+<script>
+
+    let amountElement = document.getElementById('amount');
+
+    let amount = amountElement.value;
+    let render = function (amount) {
+
+        amountElement.value = amount;
+
+
+    }
+
+    let minus = function () {
+
+        if (amount > 1)
+            amount--
+        render(amount);
+
+    }
+
+    let plus = function () {
+
+
+        amount++
+        render(amount);
+    }
+
+    amountElement.addEventListener('input', () => {
+
+        amount = amountElement.value;
+
+        amount = parseInt(amount);
+
+        amount = (isNaN(amount) || amount == 0) ? 1 : amount;
+
+        render(amount);
+
+        console.log(amount);
+
+
+    });
+
+
+</script>
 
 <!-- Glide Carousel Script -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
@@ -2127,7 +1963,7 @@
 
 <!-- Custom JavaScript -->
 <script src="./js/products.js"></script>
-<script src="./js/index.js"></script>
+<%--<script src="./js/index.js"></script>--%>
 <script src="./js/slider.js"></script>
 
 
