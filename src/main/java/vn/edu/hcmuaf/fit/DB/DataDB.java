@@ -16,7 +16,7 @@ public class DataDB {
     private DBConnect dbConnect = DBConnect.getInstance();
     private Statement statement;
 
-    public PreparedStatement getStatement(String query) throws SQLException {
+    public PreparedStatement getStatement(String query) throws SQLException, ClassNotFoundException {
         return dbConnect.getPreparedStatement(query);
     }
 
