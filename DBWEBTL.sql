@@ -432,16 +432,22 @@ INSERT INTO PRODUCER VALUES ('PRER14','Defunc','image/producer/producer14.png',1
 INSERT INTO PRODUCER VALUES ('PRER15','GOLF','image/producer/producer15.png',1);
 INSERT INTO PRODUCER VALUES ('PRER16','Aukey','image/producer/producer16.png',1);
 
-INSERT INTO CATEGORY VALUES ('CG1','Sạc','image/category/category1.png',1);
-INSERT INTO CATEGORY VALUES ('CG2','Sạc dự phòng','image/category/category2.png',1);
-INSERT INTO CATEGORY VALUES ('CG3','Ốp lưng','image/category/category3.png',1);
-INSERT INTO CATEGORY VALUES ('CG4','Dán PPF','image/category/category4.png',1);
-INSERT INTO CATEGORY VALUES ('CG5','Tai nghe','image/category/category5.png',1);
-INSERT INTO CATEGORY VALUES ('CG6','Kính cường lực','image/category/category6.png',1);
-INSERT INTO CATEGORY VALUES ('CG7','Dán camera','image/category/category7.png',1);
-INSERT INTO CATEGORY VALUES ('CG8','Phụ kiện apple','image/category/category8.png',1);
-INSERT INTO CATEGORY VALUES ('CG9','Giá đỡ điện thoại','image/category/category9.png',1);
-INSERT INTO CATEGORY VALUES ('CG10','Túi chống nước','image/category/category10.png',1);
+INSERT INTO `category` VALUES ('1', 'Ốp lưng', 'image/category/oplung.png', 1);
+INSERT INTO `category` VALUES ('10', 'Túi chống nước', 'image/category/tuichongnuoc.png', 1);
+INSERT INTO `category` VALUES ('11', 'Thẻ Cáp chuyển đổi', 'image/category/sacduphong.jpg', 1);
+INSERT INTO `category` VALUES ('12', 'Mic phụ', 'image/category/tainghe.png', 1);
+INSERT INTO `category` VALUES ('13', 'Đèn mini', 'image/category/capsac.png', 1);
+INSERT INTO `category` VALUES ('14', 'Khăn lau màn hình', 'image/category/kinhcuongluc.jpg', 1);
+INSERT INTO `category` VALUES ('15', 'Miếng DDF', 'image/category/apple1.png', 1);
+INSERT INTO `category` VALUES ('16', 'Dụng cụ vệ sinh', 'image/category/gaydienthoai.png', 1);
+INSERT INTO `category` VALUES ('2', 'Sạc dự phòng', 'image/category/sacduphong.jpg', 1);
+INSERT INTO `category` VALUES ('3', 'Tai nghe', 'image/category/tainghe.png', 1);
+INSERT INTO `category` VALUES ('4', 'Dán PPF', 'image/category/apple1.png', 1);
+INSERT INTO `category` VALUES ('5', 'Cap Sạc', 'image/category/capsac.png', 1);
+INSERT INTO `category` VALUES ('6', 'Kính cường lực', 'image/category/kinhcuongluc.jpg', 1);
+INSERT INTO `category` VALUES ('7', 'Bút cảm ứng', 'image/category/tuichongnuoc.png', 1);
+INSERT INTO `category` VALUES ('8', 'Phụ kiện apple', 'image/category/apple1.png', 1);
+INSERT INTO `category` VALUES ('9', 'Giá đỡ điện thoại', 'image/category/gaydienthoai.png', 1);
 
 INSERT INTO ADMIN VALUES ('ADM1','image/user/user1.png','Nguyễn Minh Thuận','0359681217','20130426@st.hcmuaf.edu.vn','123456','nam','1997/11/20',1,'2022/11/20');
 INSERT INTO ADMIN VALUES ('ADM2','image/user/user2.png','Huỳnh Quốc Nam','0111111111','20130074@st.hcmuaf.edu.vn','123456','nam','1997/11/20',1,'2022/11/20');
@@ -970,25 +976,6 @@ INSERT INTO PRODUCT_ORDER VALUES ('ORDER29','PR29',1,29000);
 INSERT INTO PRODUCT_ORDER VALUES ('ORDER30','PR30',1,30000);
 
 
-
-
-INSERT INTO CATEGORY VALUES ('1','Sạc','image/category/category1.png',1);
-INSERT INTO CATEGORY VALUES ('2','Sạc dự phòng','image/category/category2.png',1);
-INSERT INTO CATEGORY VALUES ('3','Ốp lưng','image/category/category3.png',1);
-INSERT INTO CATEGORY VALUES ('4','Dán PPF','image/category/category4.png',1);
-INSERT INTO CATEGORY VALUES ('5','Tai nghe','image/category/category5.png',1);
-INSERT INTO CATEGORY VALUES ('6','Kính cường lực','image/category/category6.png',1);
-INSERT INTO CATEGORY VALUES ('7','Dán camera','image/category/category7.png',1);
-INSERT INTO CATEGORY VALUES ('8','Phụ kiện apple','image/category/category8.png',1);
-INSERT INTO CATEGORY VALUES ('9','Giá đỡ điện thoại','image/category/category9.png',1);
-INSERT INTO CATEGORY VALUES ('10','Túi chống nước','image/category/category10.png',1);
-INSERT INTO CATEGORY VALUES ('11','Thẻ Cáp chuyển đổi','image/category/category11.png',1);
-INSERT INTO CATEGORY VALUES ('12','Mic phụ','image/category/category12.png',1);
-INSERT INTO CATEGORY VALUES ('13','Đèn mini','image/category/category13.png',1);
-INSERT INTO CATEGORY VALUES ('14','Khăn lau màn hình','image/category/category14.png',1);
-INSERT INTO CATEGORY VALUES ('15','Miếng dán decord','image/category/category15.png',1);
-INSERT INTO CATEGORY VALUES ('16','Dụng cụ vệ sinh','image/category/category16.png',1);
-INSERT INTO CATEGORY VALUES ('17','Bút cảm ứng','image/category/category17.png',1);
 
 
 INSERT INTO ADMIN VALUES ('1', 'Nguyễn Minh Thuận', '0359681217','20130426@st.hcmuaf.edu.vn','2002/1/1','nam','123');
