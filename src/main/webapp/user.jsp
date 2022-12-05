@@ -36,9 +36,6 @@
 <body>
 <%
     User user = (User) session.getAttribute("user");
-    if (user == null) {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
-    }
 %>
 <header id="header" class="header">
     <div class="navigation">

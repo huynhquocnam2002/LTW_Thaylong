@@ -5,6 +5,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.DB.DataDB" %>
 <%@ page import="vn.edu.hcmuaf.fit.DAO.ProductDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.User" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,84 +40,110 @@
         %>
  <!-- Header -->
     <!-- Header_top -->
-    <header id="header" class="header">
-        <div class="navigation">
-          <div class="container">
-            <nav class="nav">
-              <div class="nav__hamburger">
-                <svg>
-                  <use xlink:href="./images/sprite.svg#icon-menu"></use>
-                </svg>
-              </div>
-    
-              <div class="nav__logo">
-                <a href="/" class="scroll-link">
-                  JC SHOP
-                </a>
-              </div>
-    
-              <div class="nav__menu">
-                <div class="menu__top">
-                  <span class="nav__category">PHONE</span>
-                  <a href="#" class="close__toggle">
-                    <svg>
-                      <use xlink:href="./images/sprite.svg#icon-cross"></use>
-                    </svg>
-                  </a>
+        <header id="header" class="header">
+            <div class="navigation">
+                <div class="container">
+                    <nav class="nav">
+                        <div class="nav__hamburger">
+                            <svg>
+                                <use xlink:href="image/images/sprite.svg#icon-menu"></use>
+                            </svg>
+                        </div>
+
+                        <div class="nav__logo">
+                            <a href="/" class="scroll-link">
+                                JC SHOP
+                            </a>
+                        </div>
+
+                        <div class="nav__menu">
+                            <div class="menu__top">
+                                <span class="nav__category">PHONE</span>
+                                <a href="#" class="close__toggle">
+                                    <svg>
+                                        <use xlink:href="image/images/sprite.svg#icon-cross"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                            <ul class="nav__list">
+                                <li class="nav__item">
+                                    <a href="#header" class="nav__link scroll-link">Trang chủ</a>
+                                </li>
+                                <li class="nav__item">
+                                    <a href="#category" class="nav__link scroll-link">Sản phẩm</a>
+                                </li>
+                                <li class="nav__item_seach">
+                                    <input class="input_seach" id="input_seach" type="text" placeholder="seach...">
+                                    <div class="nav__icons">
+                                        <a href="#" class="icon__item" id="icon__item_seach">
+                                            <svg class="icon__search">
+                                                <use xlink:href="image/images/sprite.svg#icon-search"></use>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="nav__item">
+
+                                    <div class="nav__item_hotro">
+                                        <a href="#hotro" class="nav__link scroll-link">HOTLINE HỖ TRỢ</a> <br>
+                                        <a href="#hotro" class="nav__link scroll-link">0999.999.999</a>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <%if (session.getAttribute("user") == null) {%>
+                        <div class="nav__icons">
+                            <a href="/LoginServlet" class="icon__item">
+                                <svg class="icon__user">
+                                    <use xlink:href="image/images/sprite.svg#icon-user"></use>
+                                </svg>
+                            </a>
+
+                            <div class="nav__item_user" id="nav__item_user">
+                                <a href="/LoginServlet" class="nav__link scroll-link">Đăng Nhập /</a>
+                                <a href="register.jsp" class="nav__link scroll-link">Đăng Ký</a><br>
+                                <a href="" class="nav__link scroll-link">Thành Viên</a>
+                            </div>
+                        </div>
+                        <%
+                        } else {
+                            User user = (User) session.getAttribute("user");
+                        %>
+                        <div class="nav__icons">
+                            <a href="user.jsp" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
+                                <img src="<%=user.getImg()%>"
+                                     style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%" alt="img">
+                            </a>
+
+                            <div class="nav__item_user" style="font-size: 1.2rem" id="nav__item_user1">
+                                <a href="user.jsp" class="nav__link scroll-link"
+                                   style="line-height: 2"><%=user.getName()%>
+                                </a><br>
+                                <a href="" class="nav__link scroll-link">Thành Viên</a>
+                            </div>
+                        </div>
+                        <%}%>
+
+                        <%
+                            if (session.getAttribute("user") != null) {
+                                User u = (User) session.getAttribute("user");
+                                int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
+                        %>
+                        <div class="nav__icons" id="nav__item_giohang">
+                            <a href="/image/login.html" class="icon__item">
+                                <svg class="icon__cart">
+                                    <use xlink:href="image/images/sprite.svg#icon-shopping-basket"></use>
+                                </svg>
+
+                                <span id="cart__total"><%=numOfCartItems%></span>
+                            </a>
+                            <a href="/image/login.html" class="nav__link_giohang">Giỏ Hàng</a>
+                        </div>
+                        <%}%>
+                    </nav>
                 </div>
-                <ul class="nav__list">
-                  <li class="nav__item">
-                    <a href="#header" class="nav__link scroll-link">Trang chủ</a>
-                  </li>
-                  <li class="nav__item">
-                    <a href="#category" class="nav__link scroll-link">Sản phẩm</a>
-                  </li>
-                  <li class="nav__item_seach">
-                    <input class="input_seach"  id="input_seach" type="text" placeholder="seach...">
-                    <div class="nav__icons">
-                      <a href="#" class="icon__item" id="icon__item_seach">
-                        <svg class="icon__search">
-                          <use xlink:href="./images/sprite.svg#icon-search"></use>
-                        </svg>
-                      </a>
-                    </div>
-                  </li>
-                  <li class="nav__item">
-    
-                    <div class="nav__item_hotro">
-                      <a  href="#hotro" class="nav__link scroll-link">HOTLINE HỖ TRỢ</a> <br>
-                      <a  href="#hotro" class="nav__link scroll-link">0999.999.999</a>
-                    </div>
-                  </li>
-    
-                </ul>
-              </div>
-    
-              <div class="nav__icons">
-                <a href="/html/user.html" class="icon__item">
-                  <svg class="icon__user">
-                    <use xlink:href="./images/sprite.svg#icon-user"></use>
-                  </svg>
-                </a>
-                <div class="nav__item_user" id="nav__item_user">
-                  <a  href="#login" class="nav__link scroll-link">Hello Minh Thuận</a> <br>
-                  <!-- <a  href="#register" class="nav__link scroll-link">Đăng Ký</a><br> -->
-                  <a  href="" class="nav__link scroll-link">Thành Viên</a>
-                </div>
-                </div>
-    
-                <div class="nav__icons" id="nav__item_giohang">
-                <a href="/html/cart.html" class="icon__item">
-                  <svg class="icon__cart">
-                    <use xlink:href="./images/sprite.svg#icon-shopping-basket"></use>
-                  </svg>
-                  <span id="cart__total">4</span>
-                </a>
-                <a href="/html/cart.html" class="nav__link_giohang">Giỏ Hàng</a>
-              </div>
-            </nav>
-          </div>
-        </div>
+            </div>
         </header>
 
         <div class="block-breadcrumbs">

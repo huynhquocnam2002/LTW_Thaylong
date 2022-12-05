@@ -8,16 +8,10 @@
 
 <%@ page import="vn.edu.hcmuaf.fit.DB.DBConnect" %>
 
-<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
-
-<%@ page import="vn.edu.hcmuaf.fit.model.Producer" %>
-
-<%@ page import="vn.edu.hcmuaf.fit.model.Category" %>
-
 <%@ page import="vn.edu.hcmuaf.fit.DB.DataDB" %>
 <%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Review" %>
 <%@ page import="vn.edu.hcmuaf.fit.DAO.*" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.*" %>
 
 
 <%--<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>--%>
@@ -117,29 +111,55 @@
 
                     </ul>
                 </div>
-
+                <%if (session.getAttribute("user") == null) {%>
                 <div class="nav__icons">
-                    <a href="/phone_thuan/user.html" class="icon__item">
+                    <a href="/LoginServlet" class="icon__item">
                         <svg class="icon__user">
                             <use xlink:href="image/images/sprite.svg#icon-user"></use>
                         </svg>
                     </a>
+
                     <div class="nav__item_user" id="nav__item_user">
-                        <a href="#login" class="nav__link scroll-link">Hello Minh Thuận</a> <br>
-                        <!-- <a  href="#register" class="nav__link scroll-link">Đăng Ký</a><br> -->
+                        <a href="/LoginServlet" class="nav__link scroll-link">Đăng Nhập /</a>
+                        <a href="register.jsp" class="nav__link scroll-link">Đăng Ký</a><br>
                         <a href="" class="nav__link scroll-link">Thành Viên</a>
                     </div>
                 </div>
+                <%
+                } else {
+                    User user = (User) session.getAttribute("user");
+                %>
+                <div class="nav__icons">
+                    <a href="user.jsp" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
+                        <img src="<%=user.getImg()%>"
+                             style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%" alt="img">
+                    </a>
 
+                    <div class="nav__item_user" style="font-size: 1.2rem" id="nav__item_user1">
+                        <a href="user.jsp" class="nav__link scroll-link"
+                           style="line-height: 2"><%=user.getName()%>
+                        </a><br>
+                        <a href="" class="nav__link scroll-link">Thành Viên</a>
+                    </div>
+                </div>
+                <%}%>
+
+                <%
+                    if (session.getAttribute("user") != null) {
+                        User u = (User) session.getAttribute("user");
+                        int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
+                %>
                 <div class="nav__icons" id="nav__item_giohang">
-                    <a href="/phone_chuong/cart.html" class="icon__item">
+                    <a href="/image/login.html" class="icon__item">
                         <svg class="icon__cart">
                             <use xlink:href="image/images/sprite.svg#icon-shopping-basket"></use>
                         </svg>
-                        <span id="cart__total">4</span>
+
+                        <span id="cart__total"><%=numOfCartItems%></span>
                     </a>
-                    <a href="/phone_chuong/cart.html" class="nav__link_giohang">Giỏ Hàng</a>
+                    <a href="/image/login.html" class="nav__link_giohang">Giỏ Hàng</a>
                 </div>
+                <%}%>
             </nav>
         </div>
     </div>
