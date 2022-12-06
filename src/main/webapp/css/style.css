@@ -2488,7 +2488,6 @@ Cart Area Media Query
 
 .nav__item_seach {
     display: flex;
-    width: 37%;
     border: 2px solid rgb(197, 197, 197);
     border-radius: 50px;
     margin: 40px;
@@ -2507,6 +2506,8 @@ Cart Area Media Query
 }
 
 #icon__item_seach {
+    width: 1.6rem;
+    height: 1.6rem;
     border: 1px none var(--black);
 }
 
@@ -2576,7 +2577,10 @@ header>li {
 .nav__icons_danhmuc .icon__item:visited {
     color: var(--white);
 }
-
+.icon__search {
+    width: 2rem;
+    height: 2rem;
+}
 /* .nav__icons_danhmuc .icon__item:hover {
   background-color: var(--orange);
   border: 1px solid var(--black);
