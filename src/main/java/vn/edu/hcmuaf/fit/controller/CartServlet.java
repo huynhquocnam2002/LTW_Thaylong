@@ -37,7 +37,6 @@ public class CartServlet extends HttpServlet {
                 default:
                     break;
             }
-            System.out.println("aaa");
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } catch (Exception e) {
