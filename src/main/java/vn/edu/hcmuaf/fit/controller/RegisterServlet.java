@@ -14,8 +14,9 @@ import java.sql.SQLException;
 public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user=null;
         try {
-            User user= (User) request.getSession().getAttribute("user");
+            user= UserDAO.getUserBySessionID((String) request.getSession().getAttribute("user"));
             String email= user.getEmail();
             sendVerifyCode(request, response, email);
         } catch (SQLException e) {

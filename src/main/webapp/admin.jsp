@@ -1,6 +1,15 @@
-<!--
+<%@ page import="vn.edu.hcmuaf.fit.model.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.UserDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
+<%@ page import="java.util.Set" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.ProductDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Option" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.OrderDAO" %>
+<%@ page import="java.util.Map" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
--->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,11 +26,13 @@
             referrerpolicy="no-referrer"
     />
     <!-- Custom StyleSheet -->
-    <link rel="stylesheet" href="../css/cssheader.css"/>
-    <link rel="stylesheet" href="../css/admin.css"/>
+    <link rel="stylesheet" href="style/cssheader.css"/>
+    <link rel="stylesheet" href="style/admin.css"/>
 
     <title>Admin JC Shop</title>
 </head>
+
+<%User ad = UserDAO.getUserBySessionID((String) request.getSession().getAttribute("user"));%>
 
 <body>
 <header id="header" class="header">
@@ -96,15 +107,7 @@
         <!--            left-menu-->
         <div id="leftContainer">
             <ul class="list-tab">
-                <li class="list-tab-li home-li tab-active">
-                    <div class="tab-li-container">
-                        <div class="tab-li-container-name left-menu-item">
-                            <i class="icon-tab fa-solid fa-house"></i>
-                            <p class="li-container-text">Trang chủ</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-tab-li product-li">
+                <li class="list-tab-li product-li tab-active">
                     <div class="tab-li-container">
                         <div
                                 class="tab-li-container-name menu-left-show"
@@ -260,200 +263,32 @@
         </div>
         <!--            right-menu-->
         <div id="rightContainer">
-            <!--            home-->
-            <div class="right-tab home-tab active-right-tab">
-                <h1 class="tab-name">Thông tin của bạn</h1>
-                <p class="home-talking">
-                    Bạn có toàn quyền kiểm soát chỉ một thứ duy nhất trong vũ trụ này,
-                    đó là suy nghĩ của bạn.
-                </p>
-                <div class="home-container right-tab-container">
-                    <form action="" method="get" onsubmit="return false">
-                        <table class="info-table">
-                            <tr class="table-row">
-                                <td class="label-input">
-                                    <label for="admin-name">Tên:</label>
-                                </td>
-                                <td class="input-field">
-                                    <input
-                                            type="text"
-                                            disabled
-                                            class="input-info-admin admin-name"
-                                            value="Thuận than thở"
-                                            id="admin-name"
-                                    />
-                                </td>
-                            </tr>
-                            <tr class="table-row">
-                                <td class="label-input">
-                                    <label for="admin-email">Email:</label>
-                                </td>
-                                <td class="input-field">
-                                    <input
-                                            type="email"
-                                            disabled
-                                            class="input-info-admin admin-email"
-                                            name="email"
-                                            value="abcxyz@st.hcmuaf.edo.aa"
-                                            id="admin-email"
-                                    />
-                                </td>
-                            </tr>
-                            <tr class="table-row">
-                                <td class="label-input">
-                                    <label for="admin-phone-number">Số điện thoại:</label>
-                                </td>
-                                <td class="input-field">
-                                    <input
-                                            type="tel"
-                                            disabled
-                                            class="input-info-admin admin-phone-number"
-                                            name="phone_number"
-                                            value="0359123456"
-                                            pattern="[0]{1}[0-9]{9}"
-                                            placeholder="gồm 10 số và bắt đầu bằng số 0"
-                                            id="admin-phone-number"
-                                            title="gồm 10 số và bắt đầu bằng số 0"
-                                    />
-                                </td>
-                            </tr>
-                            <tr class="table-row">
-                                <td class="label-input">
-                                    <label for="gender-field">Giới tính:</label>
-                                </td>
-                                <td class="input-field" id="gender-field">
-                                    <input
-                                            type="radio"
-                                            disabled
-                                            name="gender"
-                                            value="male"
-                                            class="gender"
-                                            id="male"
-                                            checked
-                                    />
-                                    <label for="male">Nam</label>
-                                    <input
-                                            type="radio"
-                                            disabled
-                                            name="gender"
-                                            value="female"
-                                            class="gender"
-                                            id="female"
-                                    />
-                                    <label for="female">Nữ</label>
-                                    <input
-                                            type="radio"
-                                            disabled
-                                            name="gender"
-                                            value="other"
-                                            class="gender"
-                                            id="other"
-                                    />
-                                    <label for="other">Khác</label>
-                                </td>
-                            </tr>
-                            <tr class="table-row">
-                                <td class="label-input">
-                                    <label for="admin-birthday">Ngày sinh:</label>
-                                </td>
-                                <td class="input-field">
-                                    <input
-                                            type="date"
-                                            disabled
-                                            class="input-info-admin admin-birthday"
-                                            name="date"
-                                            id="admin-birthday"
-                                            value="2007-01-01"
-                                    />
-                                </td>
-                            </tr>
-                            <tr class="table-row">
-                                <td></td>
-                                <td>
-                                    <button class="change-info">Sửa đổi</button>
-                                    <button id="changePassBT">Đổi mật khẩu</button>
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
-                    <div class="more-info">
-                        <p>
-                            Lưu ý: Thành công và hạnh phúc nằm trong bàn tay bạn. Quyết
-                            tâm gìn giữ hạnh phúc và niềm vui sẽ đồng hành cùng bạn để
-                            hình thành đạo quân bất khả chiến bại chống lại mọi nghịch
-                            cảnh
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <!--            change password tab-->
-            <div class="change-pass">
-                <h1 class="tab-name">Đổi mật khẩu</h1>
-                <div class="change-pass-container right-tab-container">
-                    <form action="" method="" onsubmit="return false">
-                        <table class="change-pass-table">
-                            <tr>
-                                <td>
-                                    <label for="current-pass">Mật khẩu hiện tại:</label>
-                                </td>
-                                <td>
-                                    <input type="password" name="passcr" id="current-pass"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label for="new-pass">Mật khẩu mới:</label></td>
-                                <td>
-                                    <input
-                                            type="password"
-                                            name="newpass"
-                                            minlength="8"
-                                            id="new-pass"
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="confirm-pass">Xác nhận mật khẩu:</label>
-                                </td>
-                                <td>
-                                    <input
-                                            type="password"
-                                            name="confirmPass"
-                                            id="confirm-pass"
-                                            minlength="8"
-                                    />
-                                </td>
-                            </tr>
-                            <tr class="change-pass-buttons">
-                                <td></td>
-                                <td>
-                                    <button id="back">Trở về</button>
-                                    <button class="save-change">Xác nhận</button>
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
-            </div>
             <!--                manage products-->
-            <div class="right-tab manage-products">
+            <%
+                Set<Product> allProduct = ProductDAO.getProducts();
+                Set<Product> sellingProduct = ProductDAO.getProductsByStatus(1);
+                Set<Product> upcomingProduct = ProductDAO.getProductsByStatus(0);
+                Set<Product> stopingProduct = ProductDAO.getProductsByStatus(2);
+                Set<Product> deletedProduct = ProductDAO.getProductsByStatus(-1);
+            %>
+            <div class="right-tab manage-products active-right-tab">
                 <h1 class="tab-name">Quản lí sản phẩm</h1>
                 <button class="add-new-product">Thêm sản phẩm mới</button>
                 <div class="flex flex-manage-products">
                     <div class="flex-item active-tab">
-                        <p>Tất cả<span class="quantity">0</span></p>
+                        <p>Tất cả<span class="quantity"><%=allProduct.size()%></span></p>
                     </div>
                     <div class="flex-item">
-                        <p>Đang bán<span class="quantity">0</span></p>
+                        <p>Đang bán<span class="quantity"><%=sellingProduct.size()%></span></p>
                     </div>
                     <div class="flex-item">
-                        <p>Sắp bán<span class="quantity">0</span></p>
+                        <p>Sắp bán<span class="quantity"><%=upcomingProduct.size()%></span></p>
                     </div>
                     <div class="flex-item">
-                        <p>Dừng bán<span class="quantity">0</span></p>
+                        <p>Dừng bán<span class="quantity"><%=stopingProduct.size()%></span></p>
                     </div>
                     <div class="flex-item">
-                        <p>Đã xóa<span class="quantity">0</span></p>
+                        <p>Đã xóa<span class="quantity"><%=deletedProduct.size()%></span></p>
                     </div>
                 </div>
                 <!--                filter-div-->
@@ -573,19 +408,13 @@
                     </div>
                 </div>
                 <!--                all-products-->
-                <div
-                        class="manage-all-products-tab manage-products-flex-tab active-product-tab"
-                >
+                <div class="manage-all-products-tab manage-products-flex-tab active-product-tab">
                     <div class="table-manage-product-div">
                         <div class="table-row-div table-row-div-head-table">
                             <table class="manage-products-table">
                                 <tr class="table-row head-table">
                                     <th>
-                                        <input
-                                                type="checkbox"
-                                                name="check_all"
-                                                class="check-all"
-                                        />
+                                        <input type="checkbox" name="check_all" class="check-all"/>
                                     </th>
                                     <th>Sản phẩm</th>
                                     <th>Loại</th>
@@ -598,6 +427,7 @@
                             </table>
                         </div>
                         <div class="table-row-div table-row-div-product">
+                            <%for (Product p : allProduct) {%>
                             <table class="manage-products-table">
                                 <tr class="row-table row-table-main product-row">
                                     <td>
@@ -612,24 +442,18 @@
                                     <td class="product-name-col">
                                         <div class="product-name-container">
                                             <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
+                                                <img src="<%=p.getImg()%>" alt=""/>
                                             </div>
                                             <div class="container-info">
                                                 <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="2"
-                                      disabled
-                              >
-Sản phẩm 1 DHNL tphcm</textarea
-                              >
+                                                    <textarea name="product-name" class="product-name editable" rows="2"
+                                                              disabled><%=p.getName()%></textarea>
                                                     <i class="edit-button fa-solid fa-pen-clip"></i>
                                                     <i class="ok-button fa-solid fa-check"></i>
                                                 </div>
                                                 <div class="id-block">
                                                     <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
+                                                        ID: <span class="id-span"><%=p.getId()%></span>
                                                     </p>
                                                     <i class="fa-regular fa-copy copy-icon"></i>
                                                 </div>
@@ -638,7 +462,8 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     </td>
                                     <td class="product-type-col">
                                         <div class="product-type-div">
-                                            <p class="product-type">Ốp lưng</p>
+                                            <p class="product-type"><%=p.getCategory()%>
+                                            </p>
                                         </div>
                                     </td>
                                     <td class="product-quantity-col">
@@ -646,7 +471,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                             <input
                                                     type="text"
                                                     pattern="^\d+$"
-                                                    value="213"
+                                                    value="<%=p.getQuantity()%>"
                                                     name="product-quantity"
                                                     class="product-quantity editable"
                                                     disabled
@@ -659,7 +484,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                         <div class="unit-price-block">
                                             <input
                                                     type="text"
-                                                    value="2000000"
+                                                    value="<%=p.getPrice()%>"
                                                     pattern="^\d+$"
                                                     name="product-unit-price"
                                                     class="product-unit-price editable"
@@ -678,10 +503,26 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     </td>
                                     <td class="product-status-col">
                                         <div class="product-status-div">
+                                            <%if (p.getStatus() == -1) {%>
+                                            <p class="delete-p status active-status">Đã xóa</p>
+                                            <%} else {%>
                                             <p class="delete-p status">Đã xóa</p>
+                                            <%}%>
+                                            <%if (p.getStatus() == 0) {%>
+                                            <p class="upcoming-p status active-status">Sắp mở bán</p>
+                                            <%} else {%>
                                             <p class="upcoming-p status">Sắp mở bán</p>
+                                            <%}%>
+                                            <%if (p.getStatus() == 1) {%>
                                             <p class="selling-p status active-status">Đang bán</p>
+                                            <%} else {%>
+                                            <p class="selling-p status">Đang bán</p>
+                                            <%}%>
+                                            <%if (p.getStatus() == 2) {%>
+                                            <p class="stop-selling-p status active-status">Dừng kinh doanh</p>
+                                            <%} else {%>
                                             <p class="stop-selling-p status">Dừng kinh doanh</p>
+                                            <%}%>
                                             <select
                                                     name="product-status"
                                                     class="product-status editable"
@@ -710,6 +551,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                         </div>
                                     </td>
                                 </tr>
+                                <%for (Option op : p.getOptions()) {%>
                                 <tr class="row-table row-table-child product-row">
                                     <td>
                                         <div class="id-check-product-div">
@@ -723,23 +565,18 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     <td class="product-name-col">
                                         <div class="product-name-container">
                                             <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
+                                                <img src="<%=op.getImg()%>" alt=""/>
                                             </div>
                                             <div class="container-info">
                                                 <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="1"
-                                      disabled
-                              >
-Sản phẩm 1 DHNL tphcm</textarea
-                              >
+                                                    <textarea name="product-name" class="product-name editable" rows="1"
+                                                              disabled><%=p.getName()%></textarea>
                                                     <i class="edit-button fa-solid fa-pen-clip"></i>
                                                     <i class="ok-button fa-solid fa-check"></i>
                                                 </div>
                                                 <div class="id-block">
-                                                    <p class="product-id">ID: 0123456789</p>
+                                                    <p class="product-id">ID: <%=op.getId()%>
+                                                    </p>
                                                     <i class="fa-regular fa-copy copy-icon"></i>
                                                 </div>
                                             </div>
@@ -750,7 +587,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                             <input
                                                     type="text"
                                                     name="product-type"
-                                                    value="Đỏ"
+                                                    value="<%=op.getValue()%>"
                                                     class="product-type editable"
                                                     disabled
                                             />
@@ -763,7 +600,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                             <input
                                                     type="text"
                                                     pattern="^\d+$"
-                                                    value="213"
+                                                    value="<%=op.getQuantity()%>"
                                                     name="product-quantity"
                                                     class="product-quantity editable"
                                                     disabled
@@ -776,7 +613,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                         <div class="unit-price-block">
                                             <input
                                                     type="text"
-                                                    value="2000000"
+                                                    value="<%=op.getPrice()%>"
                                                     pattern="[0-9]"
                                                     name="product-unit-price"
                                                     class="product-unit-price editable"
@@ -795,10 +632,26 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     </td>
                                     <td class="product-status-col">
                                         <div class="product-status-div">
+                                            <%if (op.getStatus() == -1) {%>
+                                            <p class="delete-p status active-status">Đã xóa</p>
+                                            <%} else {%>
                                             <p class="delete-p status">Đã xóa</p>
+                                            <%}%>
+                                            <%if (op.getStatus() == 0) {%>
+                                            <p class="upcoming-p status active-status">Sắp mở bán</p>
+                                            <%} else {%>
                                             <p class="upcoming-p status">Sắp mở bán</p>
+                                            <%}%>
+                                            <%if (op.getStatus() == 1) {%>
                                             <p class="selling-p status active-status">Đang bán</p>
+                                            <%} else {%>
+                                            <p class="selling-p status">Đang bán</p>
+                                            <%}%>
+                                            <%if (op.getStatus() == 2) {%>
+                                            <p class="stop-selling-p status active-status">Dừng kinh doanh</p>
+                                            <%} else {%>
                                             <p class="stop-selling-p status">Dừng kinh doanh</p>
+                                            <%}%>
                                             <select
                                                     name="product-status"
                                                     class="product-status editable"
@@ -826,255 +679,22 @@ Sản phẩm 1 DHNL tphcm</textarea
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="row-table row-table-child product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="product-name-col">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="1"
-                                      disabled
-                              >
-Sản phẩm 1 DHNL tphcm</textarea
-                              >
-                                                    <i class="edit-button fa-solid fa-pen-clip"></i>
-                                                    <i class="ok-button fa-solid fa-check"></i>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">ID: 0123456789</p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <input
-                                                    type="text"
-                                                    name="product-type"
-                                                    value="Đỏ"
-                                                    class="product-type editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="quantity-block">
-                                            <input
-                                                    type="text"
-                                                    pattern="^\d+$"
-                                                    value="213"
-                                                    name="product-quantity"
-                                                    class="product-quantity editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="uint-price-col">
-                                        <div class="unit-price-block">
-                                            <input
-                                                    type="text"
-                                                    value="2000000"
-                                                    pattern="[0-9]"
-                                                    name="product-unit-price"
-                                                    class="product-unit-price editable"
-                                                    disabled
-                                            /><span><u>đ</u></span>
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã xóa</p>
-                                            <p class="upcoming-p status">Sắp mở bán</p>
-                                            <p class="selling-p status active-status">Đang bán</p>
-                                            <p class="stop-selling-p status">Dừng kinh doanh</p>
-                                            <select
-                                                    name="product-status"
-                                                    class="product-status editable"
-                                            >
-                                                <option class="delete-option" value="-1">
-                                                    Đã xóa
-                                                </option>
-                                                <option class="upcoming-option" value="0">
-                                                    Sắp mở bán
-                                                </option>
-                                                <option class="selling-option" value="1" selected>
-                                                    Đang bán
-                                                </option>
-                                                <option class="stop-selling-option" value="2">
-                                                    Dừng kinh doanh
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div">
-                                            <p class="edit-proceed">Chỉnh sửa</p>
-                                            <p class="accept-proceed">Ok</p>
-                                            <p class="delete-proceed">Xóa</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="row-table row-table-child product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="product-name-col">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="1"
-                                      disabled
-                              >
-Sản phẩm 1 DHNL tphcm</textarea
-                              >
-                                                    <i class="edit-button fa-solid fa-pen-clip"></i>
-                                                    <i class="ok-button fa-solid fa-check"></i>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">ID: 0123456789</p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <input
-                                                    type="text"
-                                                    name="product-type"
-                                                    value="Đỏ"
-                                                    class="product-type editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="quantity-block">
-                                            <input
-                                                    type="text"
-                                                    pattern="^\d+$"
-                                                    value="213"
-                                                    name="product-quantity"
-                                                    class="product-quantity editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="uint-price-col">
-                                        <div class="unit-price-block">
-                                            <input
-                                                    type="text"
-                                                    value="2000000"
-                                                    pattern="[0-9]"
-                                                    name="product-unit-price"
-                                                    class="product-unit-price editable"
-                                                    disabled
-                                            /><span><u>đ</u></span>
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã xóa</p>
-                                            <p class="upcoming-p status">Sắp mở bán</p>
-                                            <p class="selling-p status active-status">Đang bán</p>
-                                            <p class="stop-selling-p status">Dừng kinh doanh</p>
-                                            <select
-                                                    name="product-status"
-                                                    class="product-status editable"
-                                            >
-                                                <option class="delete-option" value="-1">
-                                                    Đã xóa
-                                                </option>
-                                                <option class="upcoming-option" value="0">
-                                                    Sắp mở bán
-                                                </option>
-                                                <option class="selling-option" value="1" selected>
-                                                    Đang bán
-                                                </option>
-                                                <option class="stop-selling-option" value="2">
-                                                    Dừng kinh doanh
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div">
-                                            <p class="edit-proceed">Chỉnh sửa</p>
-                                            <p class="accept-proceed">Ok</p>
-                                            <p class="delete-proceed">Xóa</p>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <%}%>
                                 <tr class="row-table row-table-end">
                                     <td></td>
                                     <td colspan="6">
                                         <p class="quantity-typeof-product">
-                                            Tổng <span class="quantity-type">0</span> mặt hàng
+                                            Tổng <span class="quantity-type"><%=p.getNumOfOptions()%></span> mặt hàng
                                         </p>
                                     </td>
-                                    <td class="show-all-type-product">
-                        <span class="extend-product">Mở rộng</span
-                        ><span class="min-product">Thu nhỏ</span>
-                                        <i
-                                                class="icon-down fa-sharp fa-solid fa-chevron-down"
-                                        ></i>
+                                    <td class="show-all-type-product"><span class="extend-product">Mở rộng</span><span
+                                            class="min-product">Thu nhỏ</span>
+                                        <i class="icon-down fa-sharp fa-solid fa-chevron-down"></i>
                                         <i class="icon-up fa-solid fa-chevron-up"></i>
                                     </td>
                                 </tr>
                             </table>
+                            <%}%>
                         </div>
                     </div>
                 </div>
@@ -1102,6 +722,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                             </table>
                         </div>
                         <div class="table-row-div table-row-div-product">
+                            <%for (Product p : sellingProduct) {%>
                             <table class="manage-products-table">
                                 <tr class="row-table row-table-main product-row">
                                     <td>
@@ -1116,24 +737,18 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     <td class="product-name-col">
                                         <div class="product-name-container">
                                             <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
+                                                <img src="<%=p.getImg()%>" alt=""/>
                                             </div>
                                             <div class="container-info">
                                                 <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="2"
-                                      disabled
-                              >
-                                Sản phẩm 1 DHNL tphcm</textarea
-                              >
+                                                    <textarea name="product-name" class="product-name editable" rows="2"
+                                                              disabled><%=p.getName()%></textarea>
                                                     <i class="edit-button fa-solid fa-pen-clip"></i>
                                                     <i class="ok-button fa-solid fa-check"></i>
                                                 </div>
                                                 <div class="id-block">
                                                     <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
+                                                        ID: <span class="id-span"><%=p.getId()%></span>
                                                     </p>
                                                     <i class="fa-regular fa-copy copy-icon"></i>
                                                 </div>
@@ -1142,7 +757,8 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     </td>
                                     <td class="product-type-col">
                                         <div class="product-type-div">
-                                            <p class="product-type">Ốp lưng</p>
+                                            <p class="product-type"><%=p.getCategory()%>
+                                            </p>
                                         </div>
                                     </td>
                                     <td class="product-quantity-col">
@@ -1150,7 +766,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                             <input
                                                     type="text"
                                                     pattern="^\d+$"
-                                                    value="213"
+                                                    value="<%=p.getQuantity()%>"
                                                     name="product-quantity"
                                                     class="product-quantity editable"
                                                     disabled
@@ -1163,7 +779,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                         <div class="unit-price-block">
                                             <input
                                                     type="text"
-                                                    value="2000000"
+                                                    value="<%=p.getPrice()%>"
                                                     pattern="^\d+$"
                                                     name="product-unit-price"
                                                     class="product-unit-price editable"
@@ -1182,10 +798,26 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     </td>
                                     <td class="product-status-col">
                                         <div class="product-status-div">
+                                            <%if (p.getStatus() == -1) {%>
+                                            <p class="delete-p status active-status">Đã xóa</p>
+                                            <%} else {%>
                                             <p class="delete-p status">Đã xóa</p>
+                                            <%}%>
+                                            <%if (p.getStatus() == 0) {%>
+                                            <p class="upcoming-p status active-status">Sắp mở bán</p>
+                                            <%} else {%>
                                             <p class="upcoming-p status">Sắp mở bán</p>
+                                            <%}%>
+                                            <%if (p.getStatus() == 1) {%>
                                             <p class="selling-p status active-status">Đang bán</p>
+                                            <%} else {%>
+                                            <p class="selling-p status">Đang bán</p>
+                                            <%}%>
+                                            <%if (p.getStatus() == 2) {%>
+                                            <p class="stop-selling-p status active-status">Dừng kinh doanh</p>
+                                            <%} else {%>
                                             <p class="stop-selling-p status">Dừng kinh doanh</p>
+                                            <%}%>
                                             <select
                                                     name="product-status"
                                                     class="product-status editable"
@@ -1214,6 +846,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                         </div>
                                     </td>
                                 </tr>
+                                <%for (Option op : p.getOptions()) {%>
                                 <tr class="row-table row-table-child product-row">
                                     <td>
                                         <div class="id-check-product-div">
@@ -1227,23 +860,18 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     <td class="product-name-col">
                                         <div class="product-name-container">
                                             <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
+                                                <img src="<%=op.getImg()%>" alt=""/>
                                             </div>
                                             <div class="container-info">
                                                 <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="1"
-                                      disabled
-                              >
-Sản phẩm 1 DHNL tphcm</textarea
-                              >
+                                                    <textarea name="product-name" class="product-name editable" rows="1"
+                                                              disabled><%=p.getName()%></textarea>
                                                     <i class="edit-button fa-solid fa-pen-clip"></i>
                                                     <i class="ok-button fa-solid fa-check"></i>
                                                 </div>
                                                 <div class="id-block">
-                                                    <p class="product-id">ID: 0123456789</p>
+                                                    <p class="product-id">ID: <%=op.getId()%>
+                                                    </p>
                                                     <i class="fa-regular fa-copy copy-icon"></i>
                                                 </div>
                                             </div>
@@ -1254,7 +882,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                             <input
                                                     type="text"
                                                     name="product-type"
-                                                    value="Đỏ"
+                                                    value="<%=op.getValue()%>"
                                                     class="product-type editable"
                                                     disabled
                                             />
@@ -1267,7 +895,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                             <input
                                                     type="text"
                                                     pattern="^\d+$"
-                                                    value="213"
+                                                    value="<%=op.getQuantity()%>"
                                                     name="product-quantity"
                                                     class="product-quantity editable"
                                                     disabled
@@ -1280,7 +908,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                         <div class="unit-price-block">
                                             <input
                                                     type="text"
-                                                    value="2000000"
+                                                    value="<%=op.getPrice()%>"
                                                     pattern="[0-9]"
                                                     name="product-unit-price"
                                                     class="product-unit-price editable"
@@ -1299,10 +927,26 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     </td>
                                     <td class="product-status-col">
                                         <div class="product-status-div">
+                                            <%if (op.getStatus() == -1) {%>
+                                            <p class="delete-p status active-status">Đã xóa</p>
+                                            <%} else {%>
                                             <p class="delete-p status">Đã xóa</p>
+                                            <%}%>
+                                            <%if (op.getStatus() == 0) {%>
+                                            <p class="upcoming-p status active-status">Sắp mở bán</p>
+                                            <%} else {%>
                                             <p class="upcoming-p status">Sắp mở bán</p>
+                                            <%}%>
+                                            <%if (op.getStatus() == 1) {%>
                                             <p class="selling-p status active-status">Đang bán</p>
+                                            <%} else {%>
+                                            <p class="selling-p status">Đang bán</p>
+                                            <%}%>
+                                            <%if (op.getStatus() == 2) {%>
+                                            <p class="stop-selling-p status active-status">Dừng kinh doanh</p>
+                                            <%} else {%>
                                             <p class="stop-selling-p status">Dừng kinh doanh</p>
+                                            <%}%>
                                             <select
                                                     name="product-status"
                                                     class="product-status editable"
@@ -1330,255 +974,22 @@ Sản phẩm 1 DHNL tphcm</textarea
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="row-table row-table-child product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="product-name-col">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="1"
-                                      disabled
-                              >
-Sản phẩm 1 DHNL tphcm</textarea
-                              >
-                                                    <i class="edit-button fa-solid fa-pen-clip"></i>
-                                                    <i class="ok-button fa-solid fa-check"></i>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">ID: 0123456789</p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <input
-                                                    type="text"
-                                                    name="product-type"
-                                                    value="Đỏ"
-                                                    class="product-type editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="quantity-block">
-                                            <input
-                                                    type="text"
-                                                    pattern="^\d+$"
-                                                    value="213"
-                                                    name="product-quantity"
-                                                    class="product-quantity editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="uint-price-col">
-                                        <div class="unit-price-block">
-                                            <input
-                                                    type="text"
-                                                    value="2000000"
-                                                    pattern="[0-9]"
-                                                    name="product-unit-price"
-                                                    class="product-unit-price editable"
-                                                    disabled
-                                            /><span><u>đ</u></span>
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã xóa</p>
-                                            <p class="upcoming-p status">Sắp mở bán</p>
-                                            <p class="selling-p status active-status">Đang bán</p>
-                                            <p class="stop-selling-p status">Dừng kinh doanh</p>
-                                            <select
-                                                    name="product-status"
-                                                    class="product-status editable"
-                                            >
-                                                <option class="delete-option" value="-1">
-                                                    Đã xóa
-                                                </option>
-                                                <option class="upcoming-option" value="0">
-                                                    Sắp mở bán
-                                                </option>
-                                                <option class="selling-option" value="1" selected>
-                                                    Đang bán
-                                                </option>
-                                                <option class="stop-selling-option" value="2">
-                                                    Dừng kinh doanh
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div">
-                                            <p class="edit-proceed">Chỉnh sửa</p>
-                                            <p class="accept-proceed">Ok</p>
-                                            <p class="delete-proceed">Xóa</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="row-table row-table-child product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="product-name-col">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="1"
-                                      disabled
-                              >
-Sản phẩm 1 DHNL tphcm</textarea
-                              >
-                                                    <i class="edit-button fa-solid fa-pen-clip"></i>
-                                                    <i class="ok-button fa-solid fa-check"></i>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">ID: 0123456789</p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <input
-                                                    type="text"
-                                                    name="product-type"
-                                                    value="Đỏ"
-                                                    class="product-type editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="quantity-block">
-                                            <input
-                                                    type="text"
-                                                    pattern="^\d+$"
-                                                    value="213"
-                                                    name="product-quantity"
-                                                    class="product-quantity editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="uint-price-col">
-                                        <div class="unit-price-block">
-                                            <input
-                                                    type="text"
-                                                    value="2000000"
-                                                    pattern="[0-9]"
-                                                    name="product-unit-price"
-                                                    class="product-unit-price editable"
-                                                    disabled
-                                            /><span><u>đ</u></span>
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã xóa</p>
-                                            <p class="upcoming-p status">Sắp mở bán</p>
-                                            <p class="selling-p status active-status">Đang bán</p>
-                                            <p class="stop-selling-p status">Dừng kinh doanh</p>
-                                            <select
-                                                    name="product-status"
-                                                    class="product-status editable"
-                                            >
-                                                <option class="delete-option" value="-1">
-                                                    Đã xóa
-                                                </option>
-                                                <option class="upcoming-option" value="0">
-                                                    Sắp mở bán
-                                                </option>
-                                                <option class="selling-option" value="1" selected>
-                                                    Đang bán
-                                                </option>
-                                                <option class="stop-selling-option" value="2">
-                                                    Dừng kinh doanh
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div">
-                                            <p class="edit-proceed">Chỉnh sửa</p>
-                                            <p class="accept-proceed">Ok</p>
-                                            <p class="delete-proceed">Xóa</p>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <%}%>
                                 <tr class="row-table row-table-end">
                                     <td></td>
                                     <td colspan="6">
                                         <p class="quantity-typeof-product">
-                                            Tổng <span class="quantity-type">0</span> mặt hàng
+                                            Tổng <span class="quantity-type"><%=p.getNumOfOptions()%></span> mặt hàng
                                         </p>
                                     </td>
-                                    <td class="show-all-type-product">
-                        <span class="extend-product">Mở rộng</span
-                        ><span class="min-product">Thu nhỏ</span>
-                                        <i
-                                                class="icon-down fa-sharp fa-solid fa-chevron-down"
-                                        ></i>
+                                    <td class="show-all-type-product"><span class="extend-product">Mở rộng</span><span
+                                            class="min-product">Thu nhỏ</span>
+                                        <i class="icon-down fa-sharp fa-solid fa-chevron-down"></i>
                                         <i class="icon-up fa-solid fa-chevron-up"></i>
                                     </td>
                                 </tr>
                             </table>
+                            <%}%>
                         </div>
                     </div>
                 </div>
@@ -1606,6 +1017,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                             </table>
                         </div>
                         <div class="table-row-div table-row-div-product">
+                            <%for (Product p : upcomingProduct) {%>
                             <table class="manage-products-table">
                                 <tr class="row-table row-table-main product-row">
                                     <td>
@@ -1620,24 +1032,18 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     <td class="product-name-col">
                                         <div class="product-name-container">
                                             <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
+                                                <img src="<%=p.getImg()%>" alt=""/>
                                             </div>
                                             <div class="container-info">
                                                 <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="1"
-                                      disabled
-                              >
-Sản phẩm 2 DHNL tphcm</textarea
-                              >
+                                                    <textarea name="product-name" class="product-name editable" rows="2"
+                                                              disabled><%=p.getName()%></textarea>
                                                     <i class="edit-button fa-solid fa-pen-clip"></i>
                                                     <i class="ok-button fa-solid fa-check"></i>
                                                 </div>
                                                 <div class="id-block">
                                                     <p class="product-id">
-                                                        ID: <span class="id-span">ken3983q1</span>
+                                                        ID: <span class="id-span"><%=p.getId()%></span>
                                                     </p>
                                                     <i class="fa-regular fa-copy copy-icon"></i>
                                                 </div>
@@ -1646,7 +1052,8 @@ Sản phẩm 2 DHNL tphcm</textarea
                                     </td>
                                     <td class="product-type-col">
                                         <div class="product-type-div">
-                                            <p class="product-type">Sạc</p>
+                                            <p class="product-type"><%=p.getCategory()%>
+                                            </p>
                                         </div>
                                     </td>
                                     <td class="product-quantity-col">
@@ -1654,7 +1061,7 @@ Sản phẩm 2 DHNL tphcm</textarea
                                             <input
                                                     type="text"
                                                     pattern="^\d+$"
-                                                    value="313"
+                                                    value="<%=p.getQuantity()%>"
                                                     name="product-quantity"
                                                     class="product-quantity editable"
                                                     disabled
@@ -1667,7 +1074,7 @@ Sản phẩm 2 DHNL tphcm</textarea
                                         <div class="unit-price-block">
                                             <input
                                                     type="text"
-                                                    value="600000"
+                                                    value="<%=p.getPrice()%>"
                                                     pattern="^\d+$"
                                                     name="product-unit-price"
                                                     class="product-unit-price editable"
@@ -1686,10 +1093,26 @@ Sản phẩm 2 DHNL tphcm</textarea
                                     </td>
                                     <td class="product-status-col">
                                         <div class="product-status-div">
+                                            <%if (p.getStatus() == -1) {%>
+                                            <p class="delete-p status active-status">Đã xóa</p>
+                                            <%} else {%>
                                             <p class="delete-p status">Đã xóa</p>
+                                            <%}%>
+                                            <%if (p.getStatus() == 0) {%>
+                                            <p class="upcoming-p status active-status">Sắp mở bán</p>
+                                            <%} else {%>
                                             <p class="upcoming-p status">Sắp mở bán</p>
+                                            <%}%>
+                                            <%if (p.getStatus() == 1) {%>
                                             <p class="selling-p status active-status">Đang bán</p>
+                                            <%} else {%>
+                                            <p class="selling-p status">Đang bán</p>
+                                            <%}%>
+                                            <%if (p.getStatus() == 2) {%>
+                                            <p class="stop-selling-p status active-status">Dừng kinh doanh</p>
+                                            <%} else {%>
                                             <p class="stop-selling-p status">Dừng kinh doanh</p>
+                                            <%}%>
                                             <select
                                                     name="product-status"
                                                     class="product-status editable"
@@ -1718,6 +1141,7 @@ Sản phẩm 2 DHNL tphcm</textarea
                                         </div>
                                     </td>
                                 </tr>
+                                <%for (Option op : p.getOptions()) {%>
                                 <tr class="row-table row-table-child product-row">
                                     <td>
                                         <div class="id-check-product-div">
@@ -1731,23 +1155,18 @@ Sản phẩm 2 DHNL tphcm</textarea
                                     <td class="product-name-col">
                                         <div class="product-name-container">
                                             <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
+                                                <img src="<%=op.getImg()%>" alt=""/>
                                             </div>
                                             <div class="container-info">
                                                 <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="1"
-                                      disabled
-                              >
-Sản phẩm 1 DHNL tphcm</textarea
-                              >
+                                                    <textarea name="product-name" class="product-name editable" rows="1"
+                                                              disabled><%=p.getName()%></textarea>
                                                     <i class="edit-button fa-solid fa-pen-clip"></i>
                                                     <i class="ok-button fa-solid fa-check"></i>
                                                 </div>
                                                 <div class="id-block">
-                                                    <p class="product-id">ID: 0123456789</p>
+                                                    <p class="product-id">ID: <%=op.getId()%>
+                                                    </p>
                                                     <i class="fa-regular fa-copy copy-icon"></i>
                                                 </div>
                                             </div>
@@ -1758,7 +1177,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                             <input
                                                     type="text"
                                                     name="product-type"
-                                                    value="Đỏ"
+                                                    value="<%=op.getValue()%>"
                                                     class="product-type editable"
                                                     disabled
                                             />
@@ -1771,7 +1190,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                             <input
                                                     type="text"
                                                     pattern="^\d+$"
-                                                    value="213"
+                                                    value="<%=op.getQuantity()%>"
                                                     name="product-quantity"
                                                     class="product-quantity editable"
                                                     disabled
@@ -1784,7 +1203,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                         <div class="unit-price-block">
                                             <input
                                                     type="text"
-                                                    value="600000"
+                                                    value="<%=op.getPrice()%>"
                                                     pattern="[0-9]"
                                                     name="product-unit-price"
                                                     class="product-unit-price editable"
@@ -1803,10 +1222,26 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     </td>
                                     <td class="product-status-col">
                                         <div class="product-status-div">
+                                            <%if (op.getStatus() == -1) {%>
+                                            <p class="delete-p status active-status">Đã xóa</p>
+                                            <%} else {%>
                                             <p class="delete-p status">Đã xóa</p>
+                                            <%}%>
+                                            <%if (op.getStatus() == 0) {%>
+                                            <p class="upcoming-p status active-status">Sắp mở bán</p>
+                                            <%} else {%>
                                             <p class="upcoming-p status">Sắp mở bán</p>
+                                            <%}%>
+                                            <%if (op.getStatus() == 1) {%>
                                             <p class="selling-p status active-status">Đang bán</p>
+                                            <%} else {%>
+                                            <p class="selling-p status">Đang bán</p>
+                                            <%}%>
+                                            <%if (op.getStatus() == 2) {%>
+                                            <p class="stop-selling-p status active-status">Dừng kinh doanh</p>
+                                            <%} else {%>
                                             <p class="stop-selling-p status">Dừng kinh doanh</p>
+                                            <%}%>
                                             <select
                                                     name="product-status"
                                                     class="product-status editable"
@@ -1834,255 +1269,22 @@ Sản phẩm 1 DHNL tphcm</textarea
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="row-table row-table-child product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="product-name-col">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="1"
-                                      disabled
-                              >
-Sản phẩm 1 DHNL tphcm</textarea
-                              >
-                                                    <i class="edit-button fa-solid fa-pen-clip"></i>
-                                                    <i class="ok-button fa-solid fa-check"></i>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">ID: 0123456789</p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <input
-                                                    type="text"
-                                                    name="product-type"
-                                                    value="Đỏ"
-                                                    class="product-type editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="quantity-block">
-                                            <input
-                                                    type="text"
-                                                    pattern="^\d+$"
-                                                    value="213"
-                                                    name="product-quantity"
-                                                    class="product-quantity editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="uint-price-col">
-                                        <div class="unit-price-block">
-                                            <input
-                                                    type="text"
-                                                    value="600000"
-                                                    pattern="[0-9]"
-                                                    name="product-unit-price"
-                                                    class="product-unit-price editable"
-                                                    disabled
-                                            /><span><u>đ</u></span>
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã xóa</p>
-                                            <p class="upcoming-p status">Sắp mở bán</p>
-                                            <p class="selling-p status active-status">Đang bán</p>
-                                            <p class="stop-selling-p status">Dừng kinh doanh</p>
-                                            <select
-                                                    name="product-status"
-                                                    class="product-status editable"
-                                            >
-                                                <option class="delete-option" value="-1">
-                                                    Đã xóa
-                                                </option>
-                                                <option class="upcoming-option" value="0">
-                                                    Sắp mở bán
-                                                </option>
-                                                <option class="selling-option" value="1" selected>
-                                                    Đang bán
-                                                </option>
-                                                <option class="stop-selling-option" value="2">
-                                                    Dừng kinh doanh
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div">
-                                            <p class="edit-proceed">Chỉnh sửa</p>
-                                            <p class="accept-proceed">Ok</p>
-                                            <p class="delete-proceed">Xóa</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="row-table row-table-child product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="product-name-col">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="1"
-                                      disabled
-                              >
-Sản phẩm 1 DHNL tphcm</textarea
-                              >
-                                                    <i class="edit-button fa-solid fa-pen-clip"></i>
-                                                    <i class="ok-button fa-solid fa-check"></i>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">ID: 0123456789</p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <input
-                                                    type="text"
-                                                    name="product-type"
-                                                    value="Đỏ"
-                                                    class="product-type editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="quantity-block">
-                                            <input
-                                                    type="text"
-                                                    pattern="^\d+$"
-                                                    value="213"
-                                                    name="product-quantity"
-                                                    class="product-quantity editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="uint-price-col">
-                                        <div class="unit-price-block">
-                                            <input
-                                                    type="text"
-                                                    value="600000"
-                                                    pattern="[0-9]"
-                                                    name="product-unit-price"
-                                                    class="product-unit-price editable"
-                                                    disabled
-                                            /><span><u>đ</u></span>
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã xóa</p>
-                                            <p class="upcoming-p status">Sắp mở bán</p>
-                                            <p class="selling-p status active-status">Đang bán</p>
-                                            <p class="stop-selling-p status">Dừng kinh doanh</p>
-                                            <select
-                                                    name="product-status"
-                                                    class="product-status editable"
-                                            >
-                                                <option class="delete-option" value="-1">
-                                                    Đã xóa
-                                                </option>
-                                                <option class="upcoming-option" value="0">
-                                                    Sắp mở bán
-                                                </option>
-                                                <option class="selling-option" value="1" selected>
-                                                    Đang bán
-                                                </option>
-                                                <option class="stop-selling-option" value="2">
-                                                    Dừng kinh doanh
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div">
-                                            <p class="edit-proceed">Chỉnh sửa</p>
-                                            <p class="accept-proceed">Ok</p>
-                                            <p class="delete-proceed">Xóa</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="row-table row-table-end product-row">
+                                <%}%>
+                                <tr class="row-table row-table-end">
                                     <td></td>
                                     <td colspan="6">
                                         <p class="quantity-typeof-product">
-                                            Tổng <span class="quantity-type">0</span> mặt hàng
+                                            Tổng <span class="quantity-type"><%=p.getNumOfOptions()%></span> mặt hàng
                                         </p>
                                     </td>
-                                    <td class="show-all-type-product">
-                        <span class="extend-product">Mở rộng</span
-                        ><span class="min-product">Thu nhỏ</span>
-                                        <i
-                                                class="icon-down fa-sharp fa-solid fa-chevron-down"
-                                        ></i>
+                                    <td class="show-all-type-product"><span class="extend-product">Mở rộng</span><span
+                                            class="min-product">Thu nhỏ</span>
+                                        <i class="icon-down fa-sharp fa-solid fa-chevron-down"></i>
                                         <i class="icon-up fa-solid fa-chevron-up"></i>
                                     </td>
                                 </tr>
                             </table>
+                            <%}%>
                         </div>
                     </div>
                 </div>
@@ -2109,7 +1311,276 @@ Sản phẩm 1 DHNL tphcm</textarea
                                 </tr>
                             </table>
                         </div>
-                        <div class="table-row-div table-row-div-product"></div>
+                        <div class="table-row-div table-row-div-product">
+                            <%for (Product p : stopingProduct) {%>
+                            <table class="manage-products-table">
+                                <tr class="row-table row-table-main product-row">
+                                    <td>
+                                        <div class="id-check-product-div">
+                                            <input
+                                                    type="checkbox"
+                                                    name="is-check"
+                                                    class="is-check"
+                                            />
+                                        </div>
+                                    </td>
+                                    <td class="product-name-col">
+                                        <div class="product-name-container">
+                                            <div class="container-img">
+                                                <img src="<%=p.getImg()%>" alt=""/>
+                                            </div>
+                                            <div class="container-info">
+                                                <div class="name-block">
+                                                    <textarea name="product-name" class="product-name editable" rows="2"
+                                                              disabled><%=p.getName()%></textarea>
+                                                    <i class="edit-button fa-solid fa-pen-clip"></i>
+                                                    <i class="ok-button fa-solid fa-check"></i>
+                                                </div>
+                                                <div class="id-block">
+                                                    <p class="product-id">
+                                                        ID: <span class="id-span"><%=p.getId()%></span>
+                                                    </p>
+                                                    <i class="fa-regular fa-copy copy-icon"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="product-type-col">
+                                        <div class="product-type-div">
+                                            <p class="product-type"><%=p.getCategory()%>
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td class="product-quantity-col">
+                                        <div class="quantity-block">
+                                            <input
+                                                    type="text"
+                                                    pattern="^\d+$"
+                                                    value="<%=p.getQuantity()%>"
+                                                    name="product-quantity"
+                                                    class="product-quantity editable"
+                                                    disabled
+                                            />
+                                            <i class="edit-button fa-solid fa-pen-clip"></i>
+                                            <i class="ok-button fa-solid fa-check"></i>
+                                        </div>
+                                    </td>
+                                    <td class="uint-price-col">
+                                        <div class="unit-price-block">
+                                            <input
+                                                    type="text"
+                                                    value="<%=p.getPrice()%>"
+                                                    pattern="^\d+$"
+                                                    name="product-unit-price"
+                                                    class="product-unit-price editable"
+                                                    disabled
+                                            /><span><u>đ</u></span>
+                                            <i class="edit-button fa-solid fa-pen-clip"></i>
+                                            <i class="ok-button fa-solid fa-check"></i>
+                                        </div>
+                                    </td>
+                                    <td class="update-date-col">
+                                        <div class="update-date-div">
+                                            <p class="product-update-date">
+                                                26/10/2022<br/>00:10
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td class="product-status-col">
+                                        <div class="product-status-div">
+                                            <%if (p.getStatus() == -1) {%>
+                                            <p class="delete-p status active-status">Đã xóa</p>
+                                            <%} else {%>
+                                            <p class="delete-p status">Đã xóa</p>
+                                            <%}%>
+                                            <%if (p.getStatus() == 0) {%>
+                                            <p class="upcoming-p status active-status">Sắp mở bán</p>
+                                            <%} else {%>
+                                            <p class="upcoming-p status">Sắp mở bán</p>
+                                            <%}%>
+                                            <%if (p.getStatus() == 1) {%>
+                                            <p class="selling-p status active-status">Đang bán</p>
+                                            <%} else {%>
+                                            <p class="selling-p status">Đang bán</p>
+                                            <%}%>
+                                            <%if (p.getStatus() == 2) {%>
+                                            <p class="stop-selling-p status active-status">Dừng kinh doanh</p>
+                                            <%} else {%>
+                                            <p class="stop-selling-p status">Dừng kinh doanh</p>
+                                            <%}%>
+                                            <select
+                                                    name="product-status"
+                                                    class="product-status editable"
+                                            >
+                                                <option class="delete-option" value="-1">
+                                                    Đã xóa
+                                                </option>
+                                                <option class="upcoming-option" value="0">
+                                                    Sắp mở bán
+                                                </option>
+                                                <option class="selling-option" value="1" selected>
+                                                    Đang bán
+                                                </option>
+                                                <option class="stop-selling-option" value="2">
+                                                    Dừng kinh doanh
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="proceed">
+                                        <div class="proceed-div">
+                                            <p class="edit-proceed">Chỉnh sửa</p>
+                                            <p class="accept-proceed">Ok</p>
+                                            <p class="delete-proceed">Xóa</p>
+                                            <p class="add-type-proceed">Thêm loại</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <%for (Option op : p.getOptions()) {%>
+                                <tr class="row-table row-table-child product-row">
+                                    <td>
+                                        <div class="id-check-product-div">
+                                            <input
+                                                    type="checkbox"
+                                                    name="is-check"
+                                                    class="is-check"
+                                            />
+                                        </div>
+                                    </td>
+                                    <td class="product-name-col">
+                                        <div class="product-name-container">
+                                            <div class="container-img">
+                                                <img src="<%=op.getImg()%>" alt=""/>
+                                            </div>
+                                            <div class="container-info">
+                                                <div class="name-block">
+                                                    <textarea name="product-name" class="product-name editable" rows="1"
+                                                              disabled><%=p.getName()%></textarea>
+                                                    <i class="edit-button fa-solid fa-pen-clip"></i>
+                                                    <i class="ok-button fa-solid fa-check"></i>
+                                                </div>
+                                                <div class="id-block">
+                                                    <p class="product-id">ID: <%=op.getId()%>
+                                                    </p>
+                                                    <i class="fa-regular fa-copy copy-icon"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="product-type-col">
+                                        <div class="product-type-div">
+                                            <input
+                                                    type="text"
+                                                    name="product-type"
+                                                    value="<%=op.getValue()%>"
+                                                    class="product-type editable"
+                                                    disabled
+                                            />
+                                            <i class="edit-button fa-solid fa-pen-clip"></i>
+                                            <i class="ok-button fa-solid fa-check"></i>
+                                        </div>
+                                    </td>
+                                    <td class="product-quantity-col">
+                                        <div class="quantity-block">
+                                            <input
+                                                    type="text"
+                                                    pattern="^\d+$"
+                                                    value="<%=op.getQuantity()%>"
+                                                    name="product-quantity"
+                                                    class="product-quantity editable"
+                                                    disabled
+                                            />
+                                            <i class="edit-button fa-solid fa-pen-clip"></i>
+                                            <i class="ok-button fa-solid fa-check"></i>
+                                        </div>
+                                    </td>
+                                    <td class="uint-price-col">
+                                        <div class="unit-price-block">
+                                            <input
+                                                    type="text"
+                                                    value="<%=op.getPrice()%>"
+                                                    pattern="[0-9]"
+                                                    name="product-unit-price"
+                                                    class="product-unit-price editable"
+                                                    disabled
+                                            /><span><u>đ</u></span>
+                                            <i class="edit-button fa-solid fa-pen-clip"></i>
+                                            <i class="ok-button fa-solid fa-check"></i>
+                                        </div>
+                                    </td>
+                                    <td class="update-date-col">
+                                        <div class="update-date-div">
+                                            <p class="product-update-date">
+                                                26/10/2022<br/>00:10
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td class="product-status-col">
+                                        <div class="product-status-div">
+                                            <%if (op.getStatus() == -1) {%>
+                                            <p class="delete-p status active-status">Đã xóa</p>
+                                            <%} else {%>
+                                            <p class="delete-p status">Đã xóa</p>
+                                            <%}%>
+                                            <%if (op.getStatus() == 0) {%>
+                                            <p class="upcoming-p status active-status">Sắp mở bán</p>
+                                            <%} else {%>
+                                            <p class="upcoming-p status">Sắp mở bán</p>
+                                            <%}%>
+                                            <%if (op.getStatus() == 1) {%>
+                                            <p class="selling-p status active-status">Đang bán</p>
+                                            <%} else {%>
+                                            <p class="selling-p status">Đang bán</p>
+                                            <%}%>
+                                            <%if (op.getStatus() == 2) {%>
+                                            <p class="stop-selling-p status active-status">Dừng kinh doanh</p>
+                                            <%} else {%>
+                                            <p class="stop-selling-p status">Dừng kinh doanh</p>
+                                            <%}%>
+                                            <select
+                                                    name="product-status"
+                                                    class="product-status editable"
+                                            >
+                                                <option class="delete-option" value="-1">
+                                                    Đã xóa
+                                                </option>
+                                                <option class="upcoming-option" value="0">
+                                                    Sắp mở bán
+                                                </option>
+                                                <option class="selling-option" value="1" selected>
+                                                    Đang bán
+                                                </option>
+                                                <option class="stop-selling-option" value="2">
+                                                    Dừng kinh doanh
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="proceed">
+                                        <div class="proceed-div">
+                                            <p class="edit-proceed">Chỉnh sửa</p>
+                                            <p class="accept-proceed">Ok</p>
+                                            <p class="delete-proceed">Xóa</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <%}%>
+                                <tr class="row-table row-table-end">
+                                    <td></td>
+                                    <td colspan="6">
+                                        <p class="quantity-typeof-product">
+                                            Tổng <span class="quantity-type"><%=p.getNumOfOptions()%></span> mặt hàng
+                                        </p>
+                                    </td>
+                                    <td class="show-all-type-product"><span class="extend-product">Mở rộng</span><span
+                                            class="min-product">Thu nhỏ</span>
+                                        <i class="icon-down fa-sharp fa-solid fa-chevron-down"></i>
+                                        <i class="icon-up fa-solid fa-chevron-up"></i>
+                                    </td>
+                                </tr>
+                            </table>
+                            <%}%>
+                        </div>
                     </div>
                 </div>
                 <!--                deleted-product-->
@@ -2136,6 +1607,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                             </table>
                         </div>
                         <div class="table-row-div table-row-div-product">
+                            <%for (Product p : deletedProduct) {%>
                             <table class="manage-products-table">
                                 <tr class="row-table row-table-main product-row">
                                     <td>
@@ -2150,24 +1622,18 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     <td class="product-name-col">
                                         <div class="product-name-container">
                                             <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
+                                                <img src="<%=p.getImg()%>" alt=""/>
                                             </div>
                                             <div class="container-info">
                                                 <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="2"
-                                      disabled
-                              >
-Sản phẩm 1 DHNL tphcm</textarea
-                              >
+                                                    <textarea name="product-name" class="product-name editable" rows="2"
+                                                              disabled><%=p.getName()%></textarea>
                                                     <i class="edit-button fa-solid fa-pen-clip"></i>
                                                     <i class="ok-button fa-solid fa-check"></i>
                                                 </div>
                                                 <div class="id-block">
                                                     <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
+                                                        ID: <span class="id-span"><%=p.getId()%></span>
                                                     </p>
                                                     <i class="fa-regular fa-copy copy-icon"></i>
                                                 </div>
@@ -2176,7 +1642,8 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     </td>
                                     <td class="product-type-col">
                                         <div class="product-type-div">
-                                            <p class="product-type">Ốp lưng</p>
+                                            <p class="product-type"><%=p.getCategory()%>
+                                            </p>
                                         </div>
                                     </td>
                                     <td class="product-quantity-col">
@@ -2184,7 +1651,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                             <input
                                                     type="text"
                                                     pattern="^\d+$"
-                                                    value="213"
+                                                    value="<%=p.getQuantity()%>"
                                                     name="product-quantity"
                                                     class="product-quantity editable"
                                                     disabled
@@ -2197,7 +1664,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                         <div class="unit-price-block">
                                             <input
                                                     type="text"
-                                                    value="2000000"
+                                                    value="<%=p.getPrice()%>"
                                                     pattern="^\d+$"
                                                     name="product-unit-price"
                                                     class="product-unit-price editable"
@@ -2216,10 +1683,26 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     </td>
                                     <td class="product-status-col">
                                         <div class="product-status-div">
+                                            <%if (p.getStatus() == -1) {%>
+                                            <p class="delete-p status active-status">Đã xóa</p>
+                                            <%} else {%>
                                             <p class="delete-p status">Đã xóa</p>
+                                            <%}%>
+                                            <%if (p.getStatus() == 0) {%>
+                                            <p class="upcoming-p status active-status">Sắp mở bán</p>
+                                            <%} else {%>
                                             <p class="upcoming-p status">Sắp mở bán</p>
+                                            <%}%>
+                                            <%if (p.getStatus() == 1) {%>
                                             <p class="selling-p status active-status">Đang bán</p>
+                                            <%} else {%>
+                                            <p class="selling-p status">Đang bán</p>
+                                            <%}%>
+                                            <%if (p.getStatus() == 2) {%>
+                                            <p class="stop-selling-p status active-status">Dừng kinh doanh</p>
+                                            <%} else {%>
                                             <p class="stop-selling-p status">Dừng kinh doanh</p>
+                                            <%}%>
                                             <select
                                                     name="product-status"
                                                     class="product-status editable"
@@ -2248,6 +1731,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                         </div>
                                     </td>
                                 </tr>
+                                <%for (Option op : p.getOptions()) {%>
                                 <tr class="row-table row-table-child product-row">
                                     <td>
                                         <div class="id-check-product-div">
@@ -2261,23 +1745,18 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     <td class="product-name-col">
                                         <div class="product-name-container">
                                             <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
+                                                <img src="<%=op.getImg()%>" alt=""/>
                                             </div>
                                             <div class="container-info">
                                                 <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="1"
-                                      disabled
-                              >
-Sản phẩm 1 DHNL tphcm</textarea
-                              >
+                                                    <textarea name="product-name" class="product-name editable" rows="1"
+                                                              disabled><%=p.getName()%></textarea>
                                                     <i class="edit-button fa-solid fa-pen-clip"></i>
                                                     <i class="ok-button fa-solid fa-check"></i>
                                                 </div>
                                                 <div class="id-block">
-                                                    <p class="product-id">ID: 0123456789</p>
+                                                    <p class="product-id">ID: <%=op.getId()%>
+                                                    </p>
                                                     <i class="fa-regular fa-copy copy-icon"></i>
                                                 </div>
                                             </div>
@@ -2288,7 +1767,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                             <input
                                                     type="text"
                                                     name="product-type"
-                                                    value="Đỏ"
+                                                    value="<%=op.getValue()%>"
                                                     class="product-type editable"
                                                     disabled
                                             />
@@ -2301,7 +1780,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                             <input
                                                     type="text"
                                                     pattern="^\d+$"
-                                                    value="213"
+                                                    value="<%=op.getQuantity()%>"
                                                     name="product-quantity"
                                                     class="product-quantity editable"
                                                     disabled
@@ -2314,7 +1793,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                         <div class="unit-price-block">
                                             <input
                                                     type="text"
-                                                    value="2000000"
+                                                    value="<%=op.getPrice()%>"
                                                     pattern="[0-9]"
                                                     name="product-unit-price"
                                                     class="product-unit-price editable"
@@ -2333,10 +1812,26 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     </td>
                                     <td class="product-status-col">
                                         <div class="product-status-div">
+                                            <%if (op.getStatus() == -1) {%>
+                                            <p class="delete-p status active-status">Đã xóa</p>
+                                            <%} else {%>
                                             <p class="delete-p status">Đã xóa</p>
+                                            <%}%>
+                                            <%if (op.getStatus() == 0) {%>
+                                            <p class="upcoming-p status active-status">Sắp mở bán</p>
+                                            <%} else {%>
                                             <p class="upcoming-p status">Sắp mở bán</p>
+                                            <%}%>
+                                            <%if (op.getStatus() == 1) {%>
                                             <p class="selling-p status active-status">Đang bán</p>
+                                            <%} else {%>
+                                            <p class="selling-p status">Đang bán</p>
+                                            <%}%>
+                                            <%if (op.getStatus() == 2) {%>
+                                            <p class="stop-selling-p status active-status">Dừng kinh doanh</p>
+                                            <%} else {%>
                                             <p class="stop-selling-p status">Dừng kinh doanh</p>
+                                            <%}%>
                                             <select
                                                     name="product-status"
                                                     class="product-status editable"
@@ -2364,732 +1859,22 @@ Sản phẩm 1 DHNL tphcm</textarea
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="row-table row-table-child product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="product-name-col">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="1"
-                                      disabled
-                              >
-Sản phẩm 1 DHNL tphcm</textarea
-                              >
-                                                    <i class="edit-button fa-solid fa-pen-clip"></i>
-                                                    <i class="ok-button fa-solid fa-check"></i>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">ID: 0123456789</p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <input
-                                                    type="text"
-                                                    name="product-type"
-                                                    value="Đỏ"
-                                                    class="product-type editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="quantity-block">
-                                            <input
-                                                    type="text"
-                                                    pattern="^\d+$"
-                                                    value="213"
-                                                    name="product-quantity"
-                                                    class="product-quantity editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="uint-price-col">
-                                        <div class="unit-price-block">
-                                            <input
-                                                    type="text"
-                                                    value="2000000"
-                                                    pattern="[0-9]"
-                                                    name="product-unit-price"
-                                                    class="product-unit-price editable"
-                                                    disabled
-                                            /><span><u>đ</u></span>
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã xóa</p>
-                                            <p class="upcoming-p status">Sắp mở bán</p>
-                                            <p class="selling-p status active-status">Đang bán</p>
-                                            <p class="stop-selling-p status">Dừng kinh doanh</p>
-                                            <select
-                                                    name="product-status"
-                                                    class="product-status editable"
-                                            >
-                                                <option class="delete-option" value="-1">
-                                                    Đã xóa
-                                                </option>
-                                                <option class="upcoming-option" value="0">
-                                                    Sắp mở bán
-                                                </option>
-                                                <option class="selling-option" value="1" selected>
-                                                    Đang bán
-                                                </option>
-                                                <option class="stop-selling-option" value="2">
-                                                    Dừng kinh doanh
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div">
-                                            <p class="edit-proceed">Chỉnh sửa</p>
-                                            <p class="accept-proceed">Ok</p>
-                                            <p class="delete-proceed">Xóa</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="row-table row-table-child product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="product-name-col">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="1"
-                                      disabled
-                              >
-Sản phẩm 1 DHNL tphcm</textarea
-                              >
-                                                    <i class="edit-button fa-solid fa-pen-clip"></i>
-                                                    <i class="ok-button fa-solid fa-check"></i>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">ID: 0123456789</p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <input
-                                                    type="text"
-                                                    name="product-type"
-                                                    value="Đỏ"
-                                                    class="product-type editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="quantity-block">
-                                            <input
-                                                    type="text"
-                                                    pattern="^\d+$"
-                                                    value="213"
-                                                    name="product-quantity"
-                                                    class="product-quantity editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="uint-price-col">
-                                        <div class="unit-price-block">
-                                            <input
-                                                    type="text"
-                                                    value="2000000"
-                                                    pattern="[0-9]"
-                                                    name="product-unit-price"
-                                                    class="product-unit-price editable"
-                                                    disabled
-                                            /><span><u>đ</u></span>
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã xóa</p>
-                                            <p class="upcoming-p status">Sắp mở bán</p>
-                                            <p class="selling-p status active-status">Đang bán</p>
-                                            <p class="stop-selling-p status">Dừng kinh doanh</p>
-                                            <select
-                                                    name="product-status"
-                                                    class="product-status editable"
-                                            >
-                                                <option class="delete-option" value="-1">
-                                                    Đã xóa
-                                                </option>
-                                                <option class="upcoming-option" value="0">
-                                                    Sắp mở bán
-                                                </option>
-                                                <option class="selling-option" value="1" selected>
-                                                    Đang bán
-                                                </option>
-                                                <option class="stop-selling-option" value="2">
-                                                    Dừng kinh doanh
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div">
-                                            <p class="edit-proceed">Chỉnh sửa</p>
-                                            <p class="accept-proceed">Ok</p>
-                                            <p class="delete-proceed">Xóa</p>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <%}%>
                                 <tr class="row-table row-table-end">
                                     <td></td>
                                     <td colspan="6">
                                         <p class="quantity-typeof-product">
-                                            Tổng <span class="quantity-type">0</span> mặt hàng
+                                            Tổng <span class="quantity-type"><%=p.getNumOfOptions()%></span> mặt hàng
                                         </p>
                                     </td>
-                                    <td class="show-all-type-product">
-                        <span class="extend-product">Mở rộng</span
-                        ><span class="min-product">Thu nhỏ</span>
-                                        <i
-                                                class="icon-down fa-sharp fa-solid fa-chevron-down"
-                                        ></i>
+                                    <td class="show-all-type-product"><span class="extend-product">Mở rộng</span><span
+                                            class="min-product">Thu nhỏ</span>
+                                        <i class="icon-down fa-sharp fa-solid fa-chevron-down"></i>
                                         <i class="icon-up fa-solid fa-chevron-up"></i>
                                     </td>
                                 </tr>
                             </table>
-                            <table class="manage-products-table">
-                                <tr class="row-table row-table-main product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="product-name-col">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="1"
-                                      disabled
-                              >
-Sản phẩm 2 DHNL tphcm</textarea
-                              >
-                                                    <i class="edit-button fa-solid fa-pen-clip"></i>
-                                                    <i class="ok-button fa-solid fa-check"></i>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">ken3983q1</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Sạc</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="quantity-block">
-                                            <input
-                                                    type="text"
-                                                    pattern="^\d+$"
-                                                    value="313"
-                                                    name="product-quantity"
-                                                    class="product-quantity editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="uint-price-col">
-                                        <div class="unit-price-block">
-                                            <input
-                                                    type="text"
-                                                    value="600000"
-                                                    pattern="^\d+$"
-                                                    name="product-unit-price"
-                                                    class="product-unit-price editable"
-                                                    disabled
-                                            /><span><u>đ</u></span>
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã xóa</p>
-                                            <p class="upcoming-p status">Sắp mở bán</p>
-                                            <p class="selling-p status active-status">Đang bán</p>
-                                            <p class="stop-selling-p status">Dừng kinh doanh</p>
-                                            <select
-                                                    name="product-status"
-                                                    class="product-status editable"
-                                            >
-                                                <option class="delete-option" value="-1">
-                                                    Đã xóa
-                                                </option>
-                                                <option class="upcoming-option" value="0">
-                                                    Sắp mở bán
-                                                </option>
-                                                <option class="selling-option" value="1" selected>
-                                                    Đang bán
-                                                </option>
-                                                <option class="stop-selling-option" value="2">
-                                                    Dừng kinh doanh
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div">
-                                            <p class="edit-proceed">Chỉnh sửa</p>
-                                            <p class="accept-proceed">Ok</p>
-                                            <p class="delete-proceed">Xóa</p>
-                                            <p class="add-type-proceed">Thêm loại</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="row-table row-table-child product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="product-name-col">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="1"
-                                      disabled
-                              >
-Sản phẩm 1 DHNL tphcm</textarea
-                              >
-                                                    <i class="edit-button fa-solid fa-pen-clip"></i>
-                                                    <i class="ok-button fa-solid fa-check"></i>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">ID: 0123456789</p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <input
-                                                    type="text"
-                                                    name="product-type"
-                                                    value="Đỏ"
-                                                    class="product-type editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="quantity-block">
-                                            <input
-                                                    type="text"
-                                                    pattern="^\d+$"
-                                                    value="213"
-                                                    name="product-quantity"
-                                                    class="product-quantity editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="uint-price-col">
-                                        <div class="unit-price-block">
-                                            <input
-                                                    type="text"
-                                                    value="600000"
-                                                    pattern="[0-9]"
-                                                    name="product-unit-price"
-                                                    class="product-unit-price editable"
-                                                    disabled
-                                            /><span><u>đ</u></span>
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã xóa</p>
-                                            <p class="upcoming-p status">Sắp mở bán</p>
-                                            <p class="selling-p status active-status">Đang bán</p>
-                                            <p class="stop-selling-p status">Dừng kinh doanh</p>
-                                            <select
-                                                    name="product-status"
-                                                    class="product-status editable"
-                                            >
-                                                <option class="delete-option" value="-1">
-                                                    Đã xóa
-                                                </option>
-                                                <option class="upcoming-option" value="0">
-                                                    Sắp mở bán
-                                                </option>
-                                                <option class="selling-option" value="1" selected>
-                                                    Đang bán
-                                                </option>
-                                                <option class="stop-selling-option" value="2">
-                                                    Dừng kinh doanh
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div">
-                                            <p class="edit-proceed">Chỉnh sửa</p>
-                                            <p class="accept-proceed">Ok</p>
-                                            <p class="delete-proceed">Xóa</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="row-table row-table-child product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="product-name-col">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="1"
-                                      disabled
-                              >
-Sản phẩm 1 DHNL tphcm</textarea
-                              >
-                                                    <i class="edit-button fa-solid fa-pen-clip"></i>
-                                                    <i class="ok-button fa-solid fa-check"></i>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">ID: 0123456789</p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <input
-                                                    type="text"
-                                                    name="product-type"
-                                                    value="Đỏ"
-                                                    class="product-type editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="quantity-block">
-                                            <input
-                                                    type="text"
-                                                    pattern="^\d+$"
-                                                    value="213"
-                                                    name="product-quantity"
-                                                    class="product-quantity editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="uint-price-col">
-                                        <div class="unit-price-block">
-                                            <input
-                                                    type="text"
-                                                    value="600000"
-                                                    pattern="[0-9]"
-                                                    name="product-unit-price"
-                                                    class="product-unit-price editable"
-                                                    disabled
-                                            /><span><u>đ</u></span>
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã xóa</p>
-                                            <p class="upcoming-p status">Sắp mở bán</p>
-                                            <p class="selling-p status active-status">Đang bán</p>
-                                            <p class="stop-selling-p status">Dừng kinh doanh</p>
-                                            <select
-                                                    name="product-status"
-                                                    class="product-status editable"
-                                            >
-                                                <option class="delete-option" value="-1">
-                                                    Đã xóa
-                                                </option>
-                                                <option class="upcoming-option" value="0">
-                                                    Sắp mở bán
-                                                </option>
-                                                <option class="selling-option" value="1" selected>
-                                                    Đang bán
-                                                </option>
-                                                <option class="stop-selling-option" value="2">
-                                                    Dừng kinh doanh
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div">
-                                            <p class="edit-proceed">Chỉnh sửa</p>
-                                            <p class="accept-proceed">Ok</p>
-                                            <p class="delete-proceed">Xóa</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="row-table row-table-child product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="product-name-col">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                              <textarea
-                                      name="product-name"
-                                      class="product-name editable"
-                                      rows="1"
-                                      disabled
-                              >
-Sản phẩm 1 DHNL tphcm</textarea
-                              >
-                                                    <i class="edit-button fa-solid fa-pen-clip"></i>
-                                                    <i class="ok-button fa-solid fa-check"></i>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">ID: 0123456789</p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <input
-                                                    type="text"
-                                                    name="product-type"
-                                                    value="Đỏ"
-                                                    class="product-type editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="quantity-block">
-                                            <input
-                                                    type="text"
-                                                    pattern="^\d+$"
-                                                    value="213"
-                                                    name="product-quantity"
-                                                    class="product-quantity editable"
-                                                    disabled
-                                            />
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="uint-price-col">
-                                        <div class="unit-price-block">
-                                            <input
-                                                    type="text"
-                                                    value="600000"
-                                                    pattern="[0-9]"
-                                                    name="product-unit-price"
-                                                    class="product-unit-price editable"
-                                                    disabled
-                                            /><span><u>đ</u></span>
-                                            <i class="edit-button fa-solid fa-pen-clip"></i>
-                                            <i class="ok-button fa-solid fa-check"></i>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã xóa</p>
-                                            <p class="upcoming-p status">Sắp mở bán</p>
-                                            <p class="selling-p status active-status">Đang bán</p>
-                                            <p class="stop-selling-p status">Dừng kinh doanh</p>
-                                            <select
-                                                    name="product-status"
-                                                    class="product-status editable"
-                                            >
-                                                <option class="delete-option" value="-1">
-                                                    Đã xóa
-                                                </option>
-                                                <option class="upcoming-option" value="0">
-                                                    Sắp mở bán
-                                                </option>
-                                                <option class="selling-option" value="1" selected>
-                                                    Đang bán
-                                                </option>
-                                                <option class="stop-selling-option" value="2">
-                                                    Dừng kinh doanh
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div">
-                                            <p class="edit-proceed">Chỉnh sửa</p>
-                                            <p class="accept-proceed">Ok</p>
-                                            <p class="delete-proceed">Xóa</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="row-table row-table-end product-row">
-                                    <td></td>
-                                    <td colspan="6">
-                                        <p class="quantity-typeof-product">
-                                            Tổng <span class="quantity-type">0</span> mặt hàng
-                                        </p>
-                                    </td>
-                                    <td class="show-all-type-product">
-                        <span class="extend-product">Mở rộng</span
-                        ><span class="min-product">Thu nhỏ</span>
-                                        <i
-                                                class="icon-down fa-sharp fa-solid fa-chevron-down"
-                                        ></i>
-                                        <i class="icon-up fa-solid fa-chevron-up"></i>
-                                    </td>
-                                </tr>
-                            </table>
+                            <%}%>
                         </div>
                     </div>
                 </div>
@@ -3286,24 +2071,31 @@ Sản phẩm 1 DHNL tphcm</textarea
             <!--            manage-order-->
             <div class="right-tab manage-orders">
                 <h1 class="tab-name">Quản lí đơn hàng</h1>
+                <%List<Order> allOrder= OrderDAO.getAllOrders();
+                    List<Order> verifyOrder= OrderDAO.getVerifyOrders(allOrder);
+                    List<Order> getOrder= OrderDAO.getGettingOrders(allOrder);
+                    List<Order> shippingOrder= OrderDAO.getShippingOrders(allOrder);
+                    List<Order> shippedOrder= OrderDAO.getShippedOrders(allOrder);
+                    List<Order> cancelledOrder= OrderDAO.getCanceledOrders(allOrder);
+                %>
                 <div class="flex flex-manage-orders">
                     <div class="flex-item active-tab">
-                        <p>Tất cả<span class="quantity">0</span></p>
+                        <p>Tất cả<span class="quantity"><%=allOrder.size()%></span></p>
                     </div>
                     <div class="flex-item">
-                        <p>Chờ xác nhận<span class="quantity">0</span></p>
+                        <p>Chờ xác nhận<span class="quantity"><%=verifyOrder.size()%></span></p>
                     </div>
                     <div class="flex-item">
-                        <p>Đang giao<span class="quantity">0</span></p>
+                        <p>Đang giao<span class="quantity"><%=getOrder.size()%></span></p>
                     </div>
                     <div class="flex-item">
-                        <p>Thành công<span class="quantity">0</span></p>
+                        <p>Thành công<span class="quantity"><%=shippingOrder.size()%></span></p>
                     </div>
                     <div class="flex-item">
-                        <p>Yêu cầu hủy<span class="quantity">0</span></p>
+                        <p>Yêu cầu hủy<span class="quantity"><%=shippedOrder.size()%></span></p>
                     </div>
                     <div class="flex-item">
-                        <p>Đã hủy<span class="quantity">0</span></p>
+                        <p>Đã hủy<span class="quantity"><%=cancelledOrder.size()%></span></p>
                     </div>
                 </div>
                 <!--                filter-div-->
@@ -3417,19 +2209,13 @@ Sản phẩm 1 DHNL tphcm</textarea
                     </div>
                 </div>
                 <!--                all-order-->
-                <div
-                        class="manage-all-orders-tab manage-orders-flex-tab active-order-tab"
-                >
+                <div class="manage-all-orders-tab manage-orders-flex-tab active-order-tab">
                     <div class="table-manage-order-div">
                         <div class="table-row-div table-row-div-head-table">
                             <table class="manage-order-table-head">
                                 <tr class="table-row head-table">
                                     <th>
-                                        <input
-                                                type="checkbox"
-                                                name="check_all"
-                                                class="check-all"
-                                        />
+                                        <input type="checkbox" name="check_all" class="check-all"/>
                                     </th>
                                     <th>Mã đơn hàng</th>
                                     <th>Người đặt</th>
@@ -3441,6 +2227,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                             </table>
                         </div>
                         <div class="table-row-div table-row-div-order">
+                            <%for (Order o: allOrder){%>
                             <table class="manage-order-table">
                                 <tr class="row-table row-table-main product-row">
                                     <td>
@@ -3455,16 +2242,16 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     <td class="order-id-col">
                                         <div class="order-id-div">
                                             <p class="order-id">
-                                                <span class="id-span">DH0100001</span>
+                                                <span class="id-span"><%=o.getId()%></span>
                                             </p>
                                             <i class="fa-regular fa-copy copy-icon"></i>
                                         </div>
                                     </td>
                                     <td class="user-name-col">
                                         <div class="user-name-div">
-                                            <p class="user-name">Nguyễn Minh Thuận</p>
+                                            <p class="user-name"><%=o.getUserName()%></p>
                                             <p class="user-id id-text">
-                                                ID: <span class="id-span">20130426</span>
+                                                ID: <span class="id-span"><%=o.getUserId()%></span>
                                             </p>
                                             <i class="fa-regular fa-copy copy-icon"></i>
                                         </div>
@@ -3472,7 +2259,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     <td class="unit-price-col">
                                         <div class="unit-price-block">
                                             <p class="product-unit-price editable" disabled>
-                                                2000000<span><u>đ</u></span>
+                                                <%=o.getAmount()%><span><u>đ</u></span>
                                             </p>
                                         </div>
                                     </td>
@@ -3485,31 +2272,52 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     </td>
                                     <td class="product-status-col">
                                         <div class="product-status-div">
+                                            <%if (o.getStatus()==1){%>
+                                            <p class="delete-p status">Đã hủy</p>
+                                            <%} else {%>
                                             <p class="delete-p status active-status">Đã hủy</p>
+                                            <%}%>
+                                            <%if (o.getStatus()==2){%>
                                             <p class="upcoming-p status">Chờ xác nhận</p>
+                                            <%} else {%>
+                                            <p class="upcoming-p status active-status">Chờ xác nhận</p>
+                                            <%}%>
+                                            <%if (o.getStatus()==3){%>
                                             <p class="selling-p status">Đang giao</p>
+                                            <%} else {%>
+                                            <p class="selling-p status active-status">Đang giao</p>
+                                            <%}%>
+                                            <%if (o.getStatus()==4){%>
                                             <p class="stop-selling-p status">Hoàn thành</p>
+                                            <%} else {%>
+                                            <p class="stop-selling-p status active-status">Hoàn thành</p>
+                                            <%}%>
+                                            <%if (o.getStatus()==5){%>
                                             <p class="cancel-request status">Yêu cầu hủy</p>
+                                            <%} else {%>
+                                            <p class="cancel-request status active-status">Yêu cầu hủy</p>
+                                            <%}%>
                                         </div>
                                     </td>
                                     <td class="proceed">
                                         <div class="proceed-div"></div>
                                     </td>
                                 </tr>
+                                <%for (Map.Entry<Product, Integer> e: o.getListPd().entrySet()){%>
                                 <tr class="row-table row-table-child">
                                     <td></td>
                                     <td class="product-name-col" colspan="2">
                                         <div class="product-name-container">
                                             <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
+                                                <img src="<%=e.getKey().getImg()%>" alt=""/>
                                             </div>
                                             <div class="container-info">
                                                 <div class="name-block">
-                                                    <p class="product-name">Sản phẩm 1 DHNL tphcm</p>
+                                                    <p class="product-name"><%=e.getKey().getName()%></p>
                                                 </div>
                                                 <div class="id-block">
                                                     <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
+                                                        ID: <span class="id-span"><%=e.getKey().getId()%></span>
                                                     </p>
                                                     <i class="fa-regular fa-copy copy-icon"></i>
                                                 </div>
@@ -3523,138 +2331,18 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     </td>
                                     <td class="product-quantity-col">
                                         <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
+                                            <p class="quantity-p"><%=e.getValue()%></p>
                                         </div>
                                     </td>
                                     <td class="product-price-col">
                                         <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
+                                            <p class="product-price"><%=e.getKey().getPrice()*e.getValue()%><u>đ</u></p>
                                         </div>
                                     </td>
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-
+                                <%}%>
                                 <tr class="row-table row-table-end">
                                     <td></td>
                                     <td colspan="5">
@@ -3672,2365 +2360,8 @@ Sản phẩm 1 DHNL tphcm</textarea
                                     </td>
                                 </tr>
                             </table>
-                            <table class="manage-order-table">
-                                <tr class="row-table row-table-main product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="order-id-col">
-                                        <div class="order-id-div">
-                                            <p class="order-id">
-                                                <span class="id-span">DH0100001</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="user-name-col">
-                                        <div class="user-name-div">
-                                            <p class="user-name">Nguyễn Minh Thuận</p>
-                                            <p class="user-id id-text">
-                                                ID: <span class="id-span">20130426</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="unit-price-col">
-                                        <div class="unit-price-block">
-                                            <p class="product-unit-price editable" disabled>
-                                                2000000<span><u>đ</u></span>
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã hủy</p>
-                                            <p class="upcoming-p status active-status">
-                                                Chờ xác nhận
-                                            </p>
-                                            <p class="selling-p status">Đang giao</p>
-                                            <p class="stop-selling-p status">Hoàn thành</p>
-                                            <p class="cancel-request status">Yêu cầu hủy</p>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div">
-                                            <p class="delete-proceed">Hủy đơn</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-
-                                <tr class="row-table row-table-end">
-                                    <td></td>
-                                    <td colspan="5">
-                                        <p class="quantity-typeof-product">
-                                            Tổng <span class="quantity-type">0</span> mặt hàng
-                                        </p>
-                                    </td>
-                                    <td class="show-all-type-product">
-                        <span class="extend-product">Mở rộng</span
-                        ><span class="min-product">Thu nhỏ</span>
-                                        <i
-                                                class="icon-down fa-sharp fa-solid fa-chevron-down"
-                                        ></i>
-                                        <i class="icon-up fa-solid fa-chevron-up"></i>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table class="manage-order-table">
-                                <tr class="row-table row-table-main product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="order-id-col">
-                                        <div class="order-id-div">
-                                            <p class="order-id">
-                                                <span class="id-span">DH0100001</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="user-name-col">
-                                        <div class="user-name-div">
-                                            <p class="user-name">Nguyễn Minh Thuận</p>
-                                            <p class="user-id id-text">
-                                                ID: <span class="id-span">20130426</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="unit-price-col">
-                                        <div class="unit-price-block">
-                                            <p class="product-unit-price editable" disabled>
-                                                2000000<span><u>đ</u></span>
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã hủy</p>
-                                            <p class="upcoming-p status active-status">
-                                                Chờ xác nhận
-                                            </p>
-                                            <p class="selling-p status">Đang giao</p>
-                                            <p class="stop-selling-p status">Hoàn thành</p>
-                                            <p class="cancel-request status">Yêu cầu hủy</p>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div">
-                                            <p class="delete-proceed">Hủy đơn</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-
-                                <tr class="row-table row-table-end">
-                                    <td></td>
-                                    <td colspan="5">
-                                        <p class="quantity-typeof-product">
-                                            Tổng <span class="quantity-type">0</span> mặt hàng
-                                        </p>
-                                    </td>
-                                    <td class="show-all-type-product">
-                        <span class="extend-product">Mở rộng</span
-                        ><span class="min-product">Thu nhỏ</span>
-                                        <i
-                                                class="icon-down fa-sharp fa-solid fa-chevron-down"
-                                        ></i>
-                                        <i class="icon-up fa-solid fa-chevron-up"></i>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table class="manage-order-table">
-                                <tr class="row-table row-table-main product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="order-id-col">
-                                        <div class="order-id-div">
-                                            <p class="order-id">
-                                                <span class="id-span">DH0100001</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="user-name-col">
-                                        <div class="user-name-div">
-                                            <p class="user-name">Nguyễn Minh Thuận</p>
-                                            <p class="user-id id-text">
-                                                ID: <span class="id-span">20130426</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="unit-price-col">
-                                        <div class="unit-price-block">
-                                            <p class="product-unit-price editable" disabled>
-                                                2000000<span><u>đ</u></span>
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã hủy</p>
-                                            <p class="upcoming-p status">Chờ xác nhận</p>
-                                            <p class="selling-p status active-status">
-                                                Đang giao
-                                            </p>
-                                            <p class="stop-selling-p status">Hoàn thành</p>
-                                            <p class="cancel-request status">Yêu cầu hủy</p>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div">
-                                            <p class="delete-proceed">Hủy đơn</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-
-                                <tr class="row-table row-table-end">
-                                    <td></td>
-                                    <td colspan="5">
-                                        <p class="quantity-typeof-product">
-                                            Tổng <span class="quantity-type">0</span> mặt hàng
-                                        </p>
-                                    </td>
-                                    <td class="show-all-type-product">
-                        <span class="extend-product">Mở rộng</span
-                        ><span class="min-product">Thu nhỏ</span>
-                                        <i
-                                                class="icon-down fa-sharp fa-solid fa-chevron-down"
-                                        ></i>
-                                        <i class="icon-up fa-solid fa-chevron-up"></i>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table class="manage-order-table">
-                                <tr class="row-table row-table-main product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="order-id-col">
-                                        <div class="order-id-div">
-                                            <p class="order-id">
-                                                <span class="id-span">DH0100001</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="user-name-col">
-                                        <div class="user-name-div">
-                                            <p class="user-name">Nguyễn Minh Thuận</p>
-                                            <p class="user-id id-text">
-                                                ID: <span class="id-span">20130426</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="unit-price-col">
-                                        <div class="unit-price-block">
-                                            <p class="product-unit-price editable" disabled>
-                                                2000000<span><u>đ</u></span>
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã hủy</p>
-                                            <p class="upcoming-p status">Chờ xác nhận</p>
-                                            <p class="selling-p status active-status">
-                                                Đang giao
-                                            </p>
-                                            <p class="stop-selling-p status">Hoàn thành</p>
-                                            <p class="cancel-request status">Yêu cầu hủy</p>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div">
-                                            <p class="delete-proceed">Hủy đơn</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-
-                                <tr class="row-table row-table-end">
-                                    <td></td>
-                                    <td colspan="5">
-                                        <p class="quantity-typeof-product">
-                                            Tổng <span class="quantity-type">0</span> mặt hàng
-                                        </p>
-                                    </td>
-                                    <td class="show-all-type-product">
-                        <span class="extend-product">Mở rộng</span
-                        ><span class="min-product">Thu nhỏ</span>
-                                        <i
-                                                class="icon-down fa-sharp fa-solid fa-chevron-down"
-                                        ></i>
-                                        <i class="icon-up fa-solid fa-chevron-up"></i>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table class="manage-order-table">
-                                <tr class="row-table row-table-main product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="order-id-col">
-                                        <div class="order-id-div">
-                                            <p class="order-id">
-                                                <span class="id-span">DH0100001</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="user-name-col">
-                                        <div class="user-name-div">
-                                            <p class="user-name">Nguyễn Minh Thuận</p>
-                                            <p class="user-id id-text">
-                                                ID: <span class="id-span">20130426</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="unit-price-col">
-                                        <div class="unit-price-block">
-                                            <p class="product-unit-price editable" disabled>
-                                                2000000<span><u>đ</u></span>
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã hủy</p>
-                                            <p class="upcoming-p status">Chờ xác nhận</p>
-                                            <p class="selling-p status active-status">
-                                                Đang giao
-                                            </p>
-                                            <p class="stop-selling-p status">Hoàn thành</p>
-                                            <p class="cancel-request status">Yêu cầu hủy</p>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div">
-                                            <p class="delete-proceed">Hủy đơn</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-
-                                <tr class="row-table row-table-end">
-                                    <td></td>
-                                    <td colspan="5">
-                                        <p class="quantity-typeof-product">
-                                            Tổng <span class="quantity-type">0</span> mặt hàng
-                                        </p>
-                                    </td>
-                                    <td class="show-all-type-product">
-                        <span class="extend-product">Mở rộng</span
-                        ><span class="min-product">Thu nhỏ</span>
-                                        <i
-                                                class="icon-down fa-sharp fa-solid fa-chevron-down"
-                                        ></i>
-                                        <i class="icon-up fa-solid fa-chevron-up"></i>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table class="manage-order-table">
-                                <tr class="row-table row-table-main product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="order-id-col">
-                                        <div class="order-id-div">
-                                            <p class="order-id">
-                                                <span class="id-span">DH0100001</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="user-name-col">
-                                        <div class="user-name-div">
-                                            <p class="user-name">Nguyễn Minh Thuận</p>
-                                            <p class="user-id id-text">
-                                                ID: <span class="id-span">20130426</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="unit-price-col">
-                                        <div class="unit-price-block">
-                                            <p class="product-unit-price editable" disabled>
-                                                2000000<span><u>đ</u></span>
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã hủy</p>
-                                            <p class="upcoming-p status">Chờ xác nhận</p>
-                                            <p class="selling-p status">Đang giao</p>
-                                            <p class="stop-selling-p status active-status">
-                                                Hoàn thành
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div"></div>
-                                    </td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-
-                                <tr class="row-table row-table-end">
-                                    <td></td>
-                                    <td colspan="5">
-                                        <p class="quantity-typeof-product">
-                                            Tổng <span class="quantity-type">0</span> mặt hàng
-                                        </p>
-                                    </td>
-                                    <td class="show-all-type-product">
-                        <span class="extend-product">Mở rộng</span
-                        ><span class="min-product">Thu nhỏ</span>
-                                        <i
-                                                class="icon-down fa-sharp fa-solid fa-chevron-down"
-                                        ></i>
-                                        <i class="icon-up fa-solid fa-chevron-up"></i>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table class="manage-order-table">
-                                <tr class="row-table row-table-main product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="order-id-col">
-                                        <div class="order-id-div">
-                                            <p class="order-id">
-                                                <span class="id-span">DH0100001</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="user-name-col">
-                                        <div class="user-name-div">
-                                            <p class="user-name">Nguyễn Minh Thuận</p>
-                                            <p class="user-id id-text">
-                                                ID: <span class="id-span">20130426</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="unit-price-col">
-                                        <div class="unit-price-block">
-                                            <p class="product-unit-price editable" disabled>
-                                                2000000<span><u>đ</u></span>
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã hủy</p>
-                                            <p class="upcoming-p status">Chờ xác nhận</p>
-                                            <p class="selling-p status">Đang giao</p>
-                                            <p class="stop-selling-p status active-status">
-                                                Hoàn thành
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div"></div>
-                                    </td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-
-                                <tr class="row-table row-table-end">
-                                    <td></td>
-                                    <td colspan="5">
-                                        <p class="quantity-typeof-product">
-                                            Tổng <span class="quantity-type">0</span> mặt hàng
-                                        </p>
-                                    </td>
-                                    <td class="show-all-type-product">
-                        <span class="extend-product">Mở rộng</span
-                        ><span class="min-product">Thu nhỏ</span>
-                                        <i
-                                                class="icon-down fa-sharp fa-solid fa-chevron-down"
-                                        ></i>
-                                        <i class="icon-up fa-solid fa-chevron-up"></i>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table class="manage-order-table">
-                                <tr class="row-table row-table-main product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="order-id-col">
-                                        <div class="order-id-div">
-                                            <p class="order-id">
-                                                <span class="id-span">DH0100001</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="user-name-col">
-                                        <div class="user-name-div">
-                                            <p class="user-name">Nguyễn Minh Thuận</p>
-                                            <p class="user-id id-text">
-                                                ID: <span class="id-span">20130426</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="unit-price-col">
-                                        <div class="unit-price-block">
-                                            <p class="product-unit-price editable" disabled>
-                                                2000000<span><u>đ</u></span>
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã hủy</p>
-                                            <p class="upcoming-p status">Chờ xác nhận</p>
-                                            <p class="selling-p status">Đang giao</p>
-                                            <p class="stop-selling-p status active-status">
-                                                Hoàn thành
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div"></div>
-                                    </td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-
-                                <tr class="row-table row-table-end">
-                                    <td></td>
-                                    <td colspan="5">
-                                        <p class="quantity-typeof-product">
-                                            Tổng <span class="quantity-type">0</span> mặt hàng
-                                        </p>
-                                    </td>
-                                    <td class="show-all-type-product">
-                        <span class="extend-product">Mở rộng</span
-                        ><span class="min-product">Thu nhỏ</span>
-                                        <i
-                                                class="icon-down fa-sharp fa-solid fa-chevron-down"
-                                        ></i>
-                                        <i class="icon-up fa-solid fa-chevron-up"></i>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table class="manage-order-table">
-                                <tr class="row-table row-table-main product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="order-id-col">
-                                        <div class="order-id-div">
-                                            <p class="order-id">
-                                                <span class="id-span">DH0100001</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="user-name-col">
-                                        <div class="user-name-div">
-                                            <p class="user-name">Nguyễn Minh Thuận</p>
-                                            <p class="user-id id-text">
-                                                ID: <span class="id-span">20130426</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="unit-price-col">
-                                        <div class="unit-price-block">
-                                            <p class="product-unit-price editable" disabled>
-                                                2000000<span><u>đ</u></span>
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã hủy</p>
-                                            <p class="upcoming-p status">Chờ xác nhận</p>
-                                            <p class="selling-p status">Đang giao</p>
-                                            <p class="stop-selling-p status active-status">
-                                                Hoàn thành
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div"></div>
-                                    </td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-
-                                <tr class="row-table row-table-end">
-                                    <td></td>
-                                    <td colspan="5">
-                                        <p class="quantity-typeof-product">
-                                            Tổng <span class="quantity-type">0</span> mặt hàng
-                                        </p>
-                                    </td>
-                                    <td class="show-all-type-product">
-                        <span class="extend-product">Mở rộng</span
-                        ><span class="min-product">Thu nhỏ</span>
-                                        <i
-                                                class="icon-down fa-sharp fa-solid fa-chevron-down"
-                                        ></i>
-                                        <i class="icon-up fa-solid fa-chevron-up"></i>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table class="manage-order-table">
-                                <tr class="row-table row-table-main product-row">
-                                    <td>
-                                        <div class="id-check-product-div">
-                                            <input
-                                                    type="checkbox"
-                                                    name="is-check"
-                                                    class="is-check"
-                                            />
-                                        </div>
-                                    </td>
-                                    <td class="order-id-col">
-                                        <div class="order-id-div">
-                                            <p class="order-id">
-                                                <span class="id-span">DH0100001</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="user-name-col">
-                                        <div class="user-name-div">
-                                            <p class="user-name">Nguyễn Minh Thuận</p>
-                                            <p class="user-id id-text">
-                                                ID: <span class="id-span">20130426</span>
-                                            </p>
-                                            <i class="fa-regular fa-copy copy-icon"></i>
-                                        </div>
-                                    </td>
-                                    <td class="unit-price-col">
-                                        <div class="unit-price-block">
-                                            <p class="product-unit-price editable" disabled>
-                                                2000000<span><u>đ</u></span>
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="update-date-col">
-                                        <div class="update-date-div">
-                                            <p class="product-update-date">
-                                                26/10/2022<br/>00:10
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="product-status-col">
-                                        <div class="product-status-div">
-                                            <p class="delete-p status">Đã hủy</p>
-                                            <p class="upcoming-p status">Chờ xác nhận</p>
-                                            <p class="selling-p status">Đang giao</p>
-                                            <p class="stop-selling-p status">Hoàn thành</p>
-                                            <p class="cancel-request status active-status">
-                                                Yêu cầu hủy
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="proceed">
-                                        <div class="proceed-div">
-                                            <p class="accept-proceed">Chấp nhận hủy</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr class="row-table row-table-child">
-                                    <td></td>
-                                    <td class="product-name-col" colspan="2">
-                                        <div class="product-name-container">
-                                            <div class="container-img">
-                                                <img src="../phone_thuan/images/addImage.png" alt=""/>
-                                            </div>
-                                            <div class="container-info">
-                                                <div class="name-block">
-                                                    <p class="product-name editable">
-                                                        Sản phẩm 1 DHNL tphcm
-                                                    </p>
-                                                </div>
-                                                <div class="id-block">
-                                                    <p class="product-id">
-                                                        ID: <span class="id-span">0123456789</span>
-                                                    </p>
-                                                    <i class="fa-regular fa-copy copy-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-type-col">
-                                        <div class="product-type-div">
-                                            <p class="product-type">Màu: Đỏ</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-quantity-col">
-                                        <div class="product-quantity-div">
-                                            <p class="quantity-p">Số lượng: 1</p>
-                                        </div>
-                                    </td>
-                                    <td class="product-price-col">
-                                        <div class="product-price-div">
-                                            <p class="product-price">2000000<u>đ</u></p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-
-                                <tr class="row-table row-table-end">
-                                    <td></td>
-                                    <td colspan="5">
-                                        <p class="quantity-typeof-product">
-                                            Tổng <span class="quantity-type">0</span> mặt hàng
-                                        </p>
-                                    </td>
-                                    <td class="show-all-type-product">
-                        <span class="extend-product">Mở rộng</span
-                        ><span class="min-product">Thu nhỏ</span>
-                                        <i
-                                                class="icon-down fa-sharp fa-solid fa-chevron-down"
-                                        ></i>
-                                        <i class="icon-up fa-solid fa-chevron-up"></i>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+                            <%}%>
+                            </div>
                     </div>
                 </div>
                 <!--                waiting-order-->
@@ -8743,12 +5074,9 @@ Sản phẩm 1 DHNL tphcm</textarea
                                             Tổng <span class="quantity-type">0</span> mặt hàng
                                         </p>
                                     </td>
-                                    <td class="show-all-type-product">
-                        <span class="extend-product">Mở rộng</span
-                        ><span class="min-product">Thu nhỏ</span>
-                                        <i
-                                                class="icon-down fa-sharp fa-solid fa-chevron-down"
-                                        ></i>
+                                    <td class="show-all-type-product"><span class="extend-product">Mở rộng</span><span
+                                            class="min-product">Thu nhỏ</span>
+                                        <i class="icon-down fa-sharp fa-solid fa-chevron-down"></i>
                                         <i class="icon-up fa-solid fa-chevron-up"></i>
                                     </td>
                                 </tr>
@@ -8757,6 +5085,7 @@ Sản phẩm 1 DHNL tphcm</textarea
                     </div>
                 </div>
             </div>
+
             <!--            manage-category-->
             <div class="right-tab manage-categorys">
                 <h1 class="tab-name">Quản lí danh mục</h1>
@@ -12466,6 +8795,6 @@ Sản phẩm 2 DHNL tphcm</textarea
 </section>
 
 <!--    --------------------JS-------------------------------->
-<script src="../js/mainAdmin.js"></script>
+<script src="js/mainAdmin.js"></script>
 </body>
 </html>

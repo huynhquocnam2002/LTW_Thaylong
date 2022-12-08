@@ -20,14 +20,15 @@ public class VerifyRegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session=request.getSession();
+        HttpSession session = request.getSession();
         String code = (String) session.getAttribute("confirmCode");
         if (code != null) {
             String clientCode = request.getParameter("confirmCode");
             if (clientCode.equals(code)) {
                 try {
                     if (session.getAttribute("user") != null) {
-                        UserDAO.activeUser((User) session.getAttribute("user"));
+                        User user = UserDAO.getUserBySessionID((String) session.getAttribute("user"));
+                        UserDAO.activeUser(user);
                         request.getRequestDispatcher("index.jsp").forward(request, response);
                     }
                 } catch (SQLException e) {

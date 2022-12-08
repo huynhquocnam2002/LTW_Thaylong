@@ -24,7 +24,15 @@ public class ChangeInfoUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = ((User) request.getSession().getAttribute("user")).getId();
+        String sessionID= (String) request.getSession().getAttribute("user");
+        String id = null;
+        try {
+            id = UserDAO.getUserBySessionID(sessionID).getId();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
@@ -37,7 +45,7 @@ public class ChangeInfoUserServlet extends HttpServlet {
             InputStream fileContent = filePart.getInputStream();
             File file = new File("D:\\Code_Web\\Project_Web\\src\\main\\webapp\\image\\user\\user_" + id + ".png");
             FileOutputStream out = new FileOutputStream(file);
-            File file2 = new File("D:\\Code_Web\\Project_Web\\target\\image\\user\\user_" + id + ".png");
+            File file2 = new File("D:\\Code_Web\\Project_Web\\target\\Project_Web-1.0-SNAPSHOT\\image\\user\\user_" + id + ".png");
             FileOutputStream out2 = new FileOutputStream(file2);
             int i = fileContent.read();
             while (i != -1) {
@@ -52,7 +60,6 @@ public class ChangeInfoUserServlet extends HttpServlet {
 
         try {
             boolean change = UserDAO.changeInfoUser(id, name, email, phone, gender, bday, img);
-            request.getSession().setAttribute("user", UserDAO.getUserById(id));
             request.getRequestDispatcher("user.jsp").forward(request, response);
         } catch (SQLException e) {
             throw new RuntimeException(e);

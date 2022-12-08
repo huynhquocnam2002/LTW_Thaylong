@@ -20,24 +20,29 @@ public class ChangePassServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String crpass = request.getParameter("passcr");
         String pass = request.getParameter("newPass");
         String confirm = request.getParameter("confirmPass");
-        if (pass.equals(confirm)) {
-            String email = (String) request.getSession().getAttribute("email");
-            if (email==null) email=((User) request.getSession().getAttribute("user")).getEmail();
-            if (email != null)
-                try {
-                    UserDAO.changeUserPassword(email, pass);
-                    request.getSession().invalidate();
-                    response.sendRedirect("login.jsp");
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                } catch (ClassNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
-            else request.getRequestDispatcher("forgetPassword.jsp").forward(request, response);
+        User user = null;
+        try {
+            user = UserDAO.getUserBySessionID((String) request.getSession().getAttribute("user"));
+        } catch (SQLException e) {
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        } catch (ClassNotFoundException e) {
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+        if (pass.equals(confirm) && user.isPassword(crpass)) {
+            String email = user.getEmail();
+            try {
+                UserDAO.changeUserPassword(email, pass);
+                request.getRequestDispatcher("user.jsp").forward(request, response);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         } else {
-            request.getRequestDispatcher("changepass.jsp").forward(request, response);
+            request.getRequestDispatcher("user.jsp").forward(request, response);
         }
     }
 }

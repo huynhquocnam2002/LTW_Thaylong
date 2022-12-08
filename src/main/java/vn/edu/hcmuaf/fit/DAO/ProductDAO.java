@@ -20,23 +20,27 @@ public class ProductDAO {
         PreparedStatement sta=db.getStatement("select * from product");
         ResultSet rs = sta.executeQuery();
         while (rs.next()) {
-            res.add(new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
+            Product p=new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
                     rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
-                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12)));
+                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12));
+            p.addOption(OptionDAO.getOptions(p));
+            res.add(p);
         }
         return res;
     }
 
-    public static Map<Product, Integer> getCartItems(User u) throws SQLException, ClassNotFoundException {
+    public static Set<Product> getProductsByStatus(int status) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
-        Map<Product, Integer> res = new HashMap<Product, Integer>();
-        PreparedStatement sta= db.getStatement("select product.*, cart.quantity from cart, product where cart.id_user=? and cart.id_product=product.id");
-        sta.setString(1, u.getId());
+        Set<Product> res = new HashSet<Product>();
+        PreparedStatement sta=db.getStatement("select * from product where status=?");
+        sta.setInt(1,status);
         ResultSet rs = sta.executeQuery();
         while (rs.next()) {
-            res.put(new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
+            Product p=new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
                     rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
-                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12)), rs.getInt(13));
+                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12));
+            p.addOption(OptionDAO.getOptions(p));
+            res.add(p);
         }
         return res;
     }
@@ -51,6 +55,7 @@ public class ProductDAO {
             res = new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
                     rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
                     rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12));
+            res.addOption(OptionDAO.getOptions(res));
         }
         return res;
     }
@@ -62,9 +67,11 @@ public class ProductDAO {
         sta.setString(1, name);
         ResultSet rs = sta.executeQuery();
         while (rs.next()) {
-            res.add(new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
+            Product p=new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
                     rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
-                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12)));
+                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12));
+            p.addOption(OptionDAO.getOptions(p));
+            res.add(p);
         }
         return res;
     }
@@ -76,9 +83,11 @@ public class ProductDAO {
         sta.setString(1, name);
         ResultSet rs = sta.executeQuery();
         while (rs.next()) {
-            res.add(new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
+            Product p=new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
                     rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
-                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12)));
+                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12));
+            p.addOption(OptionDAO.getOptions(p));
+            res.add(p);
         }
 
         return res;
@@ -138,9 +147,11 @@ public class ProductDAO {
         sta.setString(1, name);
         ResultSet rs = sta.executeQuery();
         while (rs.next()) {
-            res.add(new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
+            Product p=new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
                     rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
-                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12)));
+                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12));
+            p.addOption(OptionDAO.getOptions(p));
+            res.add(p);
         }
 
         return res;
@@ -183,9 +194,11 @@ public class ProductDAO {
         sta.setString(1, name);
         ResultSet rs = sta.executeQuery();
         while (rs.next()) {
-            res.add(new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
+            Product p=new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
                     rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
-                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12)));
+                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12));
+            p.addOption(OptionDAO.getOptions(p));
+            res.add(p);
         }
 
         return res;

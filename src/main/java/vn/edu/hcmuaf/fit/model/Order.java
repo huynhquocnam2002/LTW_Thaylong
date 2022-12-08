@@ -3,7 +3,7 @@ package vn.edu.hcmuaf.fit.model;
 import java.util.*;
 
 public class Order {
-    private String id, userId, status, deliveryAddressId, note;
+    private String id, userId, status, deliveryAddressId, note, userName;
     private long amount;
     private Date orderDate;
 
@@ -16,6 +16,20 @@ public class Order {
         this.deliveryAddressId = deliveryAddressId;
         this.note = note;
         this.orderDate = orderDate;
+    }
+
+    public Order(String id, String userId, String status, String deliveryAddressId, String note, Date orderDate, String userName) {
+        this.id = id;
+        this.userId = userId;
+        this.status = status;
+        this.deliveryAddressId = deliveryAddressId;
+        this.note = note;
+        this.orderDate = orderDate;
+        this.userId=userName;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 
     public long computeAmount(){
@@ -39,16 +53,9 @@ public class Order {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getUserId() {
         return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getDeliveryAddressId() {
@@ -75,8 +82,12 @@ public class Order {
         this.amount = amount;
     }
 
-    public String getStatus() {
-        return status;
+    public int getStatus() {
+        if (status.equals("Chờ xác nhận")) return 1;
+        if (status.equals("Chờ lấy hàng")) return 2;
+        if (status.equals("Đang giao")) return 3;
+        if (status.equals("Đã giao")) return 4;
+        else return 5;
     }
 
     public void setStatus(String status) {
