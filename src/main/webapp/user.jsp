@@ -6,6 +6,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.DAO.OrderDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.DAO.AnnouncementDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.DAO.VoucherDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.UserDAO" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +36,7 @@
 
 <body>
 <%
-    User user = (User) session.getAttribute("user");
+    User user = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
 %>
 <header id="header" class="header">
     <div class="navigation">

@@ -91,17 +91,29 @@ public class Util {
     }
 
     public static String reverseDate(String str) {
-        String[] arr=str.split("-/");
+        String[] arr = str.split("-/");
         String res = "";
-        for (int i= arr.length-1; i>=0; i--)
-            res+=arr[i]+"-";
-        return res.substring(0, res.length()-1);
+        for (int i = arr.length - 1; i >= 0; i--)
+            res += arr[i] + "-";
+        return res.substring(0, res.length() - 1);
     }
 
-    public static String createOTP(){
+    public static String createOTP() {
         Random rd = new Random();
         String confirmCode = rd.nextInt(1000000) + "";
         return confirmCode;
+    }
+
+    public static String createSessionID() {
+        Random rd = new Random();
+        char[] arr = new char[26];
+        for (int i = 0; i < 26; i++) {
+            arr[i] = (char) ('a' + i);
+        }
+        String id = "";
+        for (int i = 0; i < 15; i++)
+            id += arr[rd.nextInt(26)];
+        return id;
     }
 
 

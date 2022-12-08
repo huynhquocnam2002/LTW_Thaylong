@@ -40,7 +40,7 @@
         <div class="login-contains">
             <h3>Quên Mật Khẩu</h3>
             <div class="form">
-                <form action="/ChangePassServlet" method="post">
+                <form action="/ChangePassFOrgetServlet" method="post">
                     <div class="field password">
                         <div class="form-text">
                             <input
