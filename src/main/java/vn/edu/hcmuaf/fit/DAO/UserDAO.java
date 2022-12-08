@@ -4,7 +4,6 @@ import vn.edu.hcmuaf.fit.DB.DataDB;
 import vn.edu.hcmuaf.fit.controller.Util;
 import vn.edu.hcmuaf.fit.model.User;
 
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -120,6 +119,6 @@ public class UserDAO {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-
+        System.out.println(getUserById("U1").getImg());
     }
 }

@@ -73,15 +73,18 @@
                                 <li class="nav__item">
                                     <a href="#category" class="nav__link scroll-link">Sản phẩm</a>
                                 </li>
-                                <li class="nav__item_seach">
-                                    <input class="input_seach" id="input_seach" type="text" placeholder="seach...">
-                                    <div class="nav__icons">
-                                        <a href="#" class="icon__item" id="icon__item_seach">
-                                            <svg class="icon__search">
-                                                <use xlink:href="image/images/sprite.svg#icon-search"></use>
-                                            </svg>
-                                        </a>
-                                    </div>
+                                <li >
+                                    <form action="DanhmucServlet" method="post" class="nav__item_seach">
+                                        <input class="input_seach" id="input_seach" type="text" name="input_seach" placeholder="seach...">
+
+                                        <div class="nav__icons">
+                                            <button  class="icon__item" id="icon__item_seach" type="submit" name="btnseach" value="Go">
+                                                <svg class="icon__search">
+                                                    <use xlink:href="image/images/sprite.svg#icon-search"></use>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </form>
                                 </li>
                                 <li class="nav__item">
 
@@ -132,14 +135,14 @@
                                 int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
                         %>
                         <div class="nav__icons" id="nav__item_giohang">
-                            <a href="/image/login.html" class="icon__item">
+                            <a href="cart.jsp" class="icon__item">
                                 <svg class="icon__cart">
                                     <use xlink:href="image/images/sprite.svg#icon-shopping-basket"></use>
                                 </svg>
 
                                 <span id="cart__total"><%=numOfCartItems%></span>
                             </a>
-                            <a href="/image/login.html" class="nav__link_giohang">Giỏ Hàng</a>
+                            <a href="cart.jsp" class="nav__link_giohang">Giỏ Hàng</a>
                         </div>
                         <%}%>
                     </nav>

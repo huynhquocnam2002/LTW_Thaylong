@@ -7,7 +7,6 @@
 <%@ page import="vn.edu.hcmuaf.fit.DAO.ProductDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Cart" %>
-<%@ page import="vn.edu.hcmuaf.fit.DAO.UserDAO" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -111,7 +110,7 @@
           </div>
           <%
           } else {
-            User user = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
+            User user = (User) session.getAttribute("user");
           %>
           <div class="nav__icons">
             <a href="user.jsp" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
@@ -130,7 +129,7 @@
 
           <%
             if (session.getAttribute("user") != null) {
-              User u = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
+              User u = (User) session.getAttribute("user");
               int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
           %>
           <div class="nav__icons" id="nav__item_giohang">
@@ -203,11 +202,11 @@
   <!-- Main -->
   <main id="main">
     <div class="container">
-      <% Set<Product> ProductsByCatory = CategoryDAO.getProductsByCatory(request.getParameter("idcategory"));%>
-       <% List<String> listname = CategoryDAO.getnameCatory(request.getParameter("idcategory"));%>
+      <% Set<Product> ProductSeach = ProductDAO.getProductSeach((String) session.getAttribute("txt"));%>
+       <% String txt = (String) session.getAttribute("txt"); %>
       <!-- label thong bao -->
       <div class="label_seach">
-        <p class="label_seach_p">Tìm kiếm sản phẩm với từ khóa: "<%=listname.get(0)+""%>"</p>
+        <p class="label_seach_p">Tìm kiếm sản phẩm với từ khóa: "<%=txt%>"</p>
       </div>
 
 
@@ -250,7 +249,7 @@
 
         <div class="category__container" id="category__container__all" style="display: block" data-aos="fade-up" data-aos-duration="1200">
           <div class="category__center">
-            <%for(Product pr: ProductsByCatory){%>
+            <%for(Product pr: ProductSeach){%>
             <div class="product category__products">
               <div class="product__header">
                 <img src="<%=pr.getImg()%>" alt="product">
@@ -309,7 +308,7 @@
           </div>
         </div>
 
-        <% Set<Product> rshot = ProductDAO.getProductsByCatorynew(request.getParameter("idcategory"));%>
+        <% Set<Product> rshot = ProductDAO.getProductsSeachnew((String) session.getAttribute("txt"));%>
         <div class="category__container" id="category__container__hot" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
           <div class="category__center">
             <%for(Product pr: rshot){%>
@@ -371,7 +370,7 @@
           </div>
         </div>
 
-        <% Set<Product> rsnew = ProductDAO.getProductsByCatoryASC(request.getParameter("idcategory"));%>
+        <% Set<Product> rsnew = ProductDAO.getProductSeachASC((String) session.getAttribute("txt"));%>
         <div class="category__container" id="category__container__new" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
           <div class="category__center">
             <%for(Product pr: rsnew){%>
@@ -433,7 +432,7 @@
           </div>
         </div>
 
-        <% Set<Product> rssalerun = ProductDAO.getProductsByCatoryDESC(request.getParameter("idcategory"));%>
+        <% Set<Product> rssalerun = ProductDAO.getProductSeachDESC((String) session.getAttribute("txt"));%>
         <div class="category__container" id="category__container__salerun" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
           <div class="category__center">
             <%for(Product pr: rssalerun){%>
