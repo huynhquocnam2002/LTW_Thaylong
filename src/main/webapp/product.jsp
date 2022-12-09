@@ -838,6 +838,7 @@
 
                     <h6><strong>Nhận xét:</strong> <%=listreview.get(i).getContent()%></h6>
                 </div>
+
                 <%}%>
 
             </div>
@@ -1414,7 +1415,7 @@
                                         alt="product"></a>
                             </div>
                             <div class="product__footer">
-                                <h3><%=pr.getName()%>
+                                <h3><%=.getName()%>
                                 </h3>
                                 <div class="rating">
                                     <svg>
