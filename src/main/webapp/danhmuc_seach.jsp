@@ -7,6 +7,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.DAO.ProductDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Cart" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.UserDAO" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,15 +72,18 @@
               <li class="nav__item">
                 <a href="#category" class="nav__link scroll-link">Sản phẩm</a>
               </li>
-              <li class="nav__item_seach">
-                <input class="input_seach" id="input_seach" type="text" placeholder="seach...">
-                <div class="nav__icons">
-                  <a href="#" class="icon__item" id="icon__item_seach">
-                    <svg class="icon__search">
-                      <use xlink:href="image/images/sprite.svg#icon-search"></use>
-                    </svg>
-                  </a>
-                </div>
+              <li >
+                <form action="DanhmucServlet" method="post" class="nav__item_seach">
+                  <input class="input_seach" id="input_seach" type="text" name="input_seach" placeholder="seach...">
+
+                  <div class="nav__icons">
+                    <button  class="icon__item" id="icon__item_seach" type="submit" name="btnseach" value="Go">
+                      <svg class="icon__search">
+                        <use xlink:href="image/images/sprite.svg#icon-search"></use>
+                      </svg>
+                    </button>
+                  </div>
+                </form>
               </li>
               <li class="nav__item">
 
@@ -107,7 +111,7 @@
           </div>
           <%
           } else {
-            User user = (User) session.getAttribute("user");
+            User user = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
           %>
           <div class="nav__icons">
             <a href="user.jsp" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
@@ -126,7 +130,7 @@
 
           <%
             if (session.getAttribute("user") != null) {
-              User u = (User) session.getAttribute("user");
+              User u = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
               int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
           %>
           <div class="nav__icons" id="nav__item_giohang">

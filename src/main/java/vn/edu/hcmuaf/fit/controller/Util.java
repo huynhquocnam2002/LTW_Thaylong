@@ -104,6 +104,18 @@ public class Util {
         return confirmCode;
     }
 
+    public static String createSessionID() {
+        Random rd = new Random();
+        char[] arr = new char[26];
+        for (int i = 0; i < 26; i++) {
+            arr[i] = (char) ('a' + i);
+        }
+        String id = "";
+        for (int i = 0; i < 15; i++)
+            id += arr[rd.nextInt(26)];
+        return id;
+    }
+
 
 
 

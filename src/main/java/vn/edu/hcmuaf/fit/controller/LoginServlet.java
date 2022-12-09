@@ -16,13 +16,14 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.removeAttribute("user");
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
+        String sessionID = session.getAttribute("user") +"";
+        System.out.println(sessionID);
+        if (sessionID.equals("null")) {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             try {
-                if (user.equals(UserDAO.getUserByEmail(user.getEmail()))) {
-                    response.sendRedirect("index.jsp");
+                if (UserDAO.getUserBySessionID(sessionID)!=null) {
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -42,10 +43,11 @@ public class LoginServlet extends HttpServlet {
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
                 if (user.isPassword(request.getParameter("pass"))) {
-                    session.setAttribute("user", user);
+                    String ssID=UserDAO.updateSessionID(user.getId());
+                    session.setAttribute("user", ssID);
                     if (user.getRole() == 0)
-                        response.sendRedirect("index.jsp");
-                    else if (user.getRole()==1) response.sendRedirect("admin.jsp");
+                        request.getRequestDispatcher("index.jsp").forward(request,response);
+                    else if (user.getRole()==1) request.getRequestDispatcher("admin.jsp").forward(request, response);
                 } else {
                     request.setAttribute("error", "Email hoặc mật khẩu không chính xác");
                     request.getRequestDispatcher("login.jsp").forward(request, response);

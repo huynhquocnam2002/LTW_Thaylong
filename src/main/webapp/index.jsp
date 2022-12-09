@@ -1,4 +1,5 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.DB.DataDB" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 
 <%@ page import="vn.edu.hcmuaf.fit.controller.Util" %>
@@ -10,7 +11,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.DAO.ProductDAO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Set" %>
-<%@ page import="vn.edu.hcmuaf.fit.DAO.*" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.UserDAO" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,13 +40,14 @@
 </head>
 
 <body>
-<%
-    Cart cart = (Cart) session.getAttribute("cart");
-    if (cart == null) {
-        cart = new Cart();
-        session.setAttribute("cart", cart);
-    }
-%>
+                <%
+                    Cart cart =(Cart) session.getAttribute("cart");
+                    if(cart ==null){
+                        cart = new Cart();
+                        session.setAttribute("cart",cart);
+                    }
+                %>
+
 <!-- Header -->
 <!-- Header_top -->
 <header id="header" class="header">
@@ -100,13 +102,7 @@
 
                     </ul>
                 </div>
-                <%
-                    User u = null;
-                    if (session.getAttribute("user") != null) {
-                        u = (User) session.getAttribute("user");
-                        int numOfCartItems = ((Cart) session.getAttribute("cart")).getSize();
-                %>
-
+                <%if (session.getAttribute("user") == null) {%>
                 <div class="nav__icons">
                     <a href="/LoginServlet" class="icon__item">
                         <svg class="icon__user">
@@ -122,16 +118,16 @@
                 </div>
                 <%
                 } else {
-                    User user = (User) session.getAttribute("user");
+                    User user = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
                 %>
                 <div class="nav__icons">
-                    <a href="user.jsp" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
+                    <a href="/UserServlet" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
                         <img src="<%=user.getImg()%>"
                              style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%" alt="img">
                     </a>
 
                     <div class="nav__item_user" style="font-size: 1.2rem" id="nav__item_user1">
-                        <a href="user.jsp" class="nav__link scroll-link"
+                        <a href="/UserServlet" class="nav__link scroll-link"
                            style="line-height: 2"><%=user.getName()%>
                         </a><br>
                         <a href="" class="nav__link scroll-link">Thành Viên</a>
@@ -141,18 +137,18 @@
 
                 <%
                     if (session.getAttribute("user") != null) {
-                        User user = (User) session.getAttribute("user");
-                        int numOfCartItems = ((Cart) session.getAttribute("cart")).getSize();
+                        User u = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
+                        int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
                 %>
                 <div class="nav__icons" id="nav__item_giohang">
-                    <a href="/image/login.html" class="icon__item">
+                    <a href="cart.jsp" class="icon__item">
                         <svg class="icon__cart">
                             <use xlink:href="image/images/sprite.svg#icon-shopping-basket"></use>
                         </svg>
 
                         <span id="cart__total"><%=numOfCartItems%></span>
                     </a>
-                    <a href="/image/login.html" class="nav__link_giohang">Giỏ Hàng</a>
+                    <a href="cart.jsp" class="nav__link_giohang">Giỏ Hàng</a>
                 </div>
                 <%}%>
             </nav>
@@ -171,48 +167,15 @@
                 </div>
 
                 <ul class="nav__list" id="nav__list_DANHMUC">
-                    <% List<Category> list = CategoryDAO.getCategoryHeader();%>
+                <% List<Category> list = CategoryDAO.getCategoryHeader();%>
                     <% for (int i = 0; i < list.size(); i++) {%>
-                    <%--    --%>
-
-
-                    <div class="nav__icons_danhmuc">
-                        <a href="../html/indexseach.html" class="icon__item">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/oplung.png"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="../html/indexseach.html" class="scroll-linkDANHMUC">ỐP LƯNG</a>
-                        </li>
-                    </div>
-
-
-                    <div class="nav__icons_danhmuc">
-                        <a href="/phone_nam/indexseach.html" class="icon__item">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/sacduphong.jpg"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/phone_nam/indexseach.html" class="scroll-linkDANHMUC">SẠC DỰ PHÒNG</a>
-                        </li>
-                    </div>
-
-
-                    <div class="nav__icons_danhmuc">
-                        <a href="/phone_nam/indexseach.html" class="icon__item">
-                            <img class="icon__itemdanhmuc" src="phone_nam/icon/tainghe.png"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="/phone_nam/indexseach.html" class="scroll-linkDANHMUC">TAI NGHE</a>
-                        </li>
-                    </div>
-
+<%--    --%>
                     <div class="nav__icons_danhmuc">
                         <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="icon__item">
                             <img class="icon__itemdanhmuc" src="<%=list.get(i).getImg()%>"></img>
                         </a>
                         <li class="nav__item">
-                            <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="scroll-linkDANHMUC">
-                                <%=list.get(i).getName()%>
-                            </a>
+                            <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="scroll-linkDANHMUC"><%=list.get(i).getName()%></a>
                         </li>
                     </div>
 
@@ -296,1100 +259,779 @@
 
 <!-- Main -->
 <main id="main">
-    <!-- Collection -->
-    <section id="collection" class="section collection">
-        <div class="collection__container" data-aos="fade-up" data-aos-duration="1200">
-            <div class="collection__box">
-                <div class="img__container">
-                    <img class="collection_02" src="image/images/collection_02.png" alt="">
+    <div class="container">
+        <!-- Collection -->
+        <section id="collection" class="section collection">
+            <div class="collection__container" data-aos="fade-up" data-aos-duration="1200">
+                <div class="collection__box">
+                    <div class="img__container">
+                        <img class="collection_02" src="image/images/collection_02.png" alt="">
+                    </div>
+                    <div class="collection__content">
+                        <div class="collection__data">
+                            <span>Ra mắt với nhiều màu sắc mới</span>
+                            <h1>HEADPHONES</h1>
+                            <a href="/phone_chuong/product.html">MUA NGAY</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="collection__content">
-                    <div class="collection__data">
-                        <span>Ra mắt với nhiều màu sắc mới</span>
-                        <h1>HEADPHONES</h1>
-                        <a href="/phone_chuong/product.html">MUA NGAY</a>
+                <div class="collection__box">
+                    <div class="img__container">
+                        <img class="collection_01" src="image/images/sacnhanh1.png" alt="">
+                    </div>
+                    <div class="collection__content">
+                        <div class="collection__data">
+                            <span>Đặt trước sãn phẩm</span>
+                            <h1>SẠC SIÊU NHANH</h1>
+                            <a href="/phone_chuong/product.html">MUA NGAY</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="collection__box">
-                <div class="img__container">
-                    <img class="collection_01" src="image/images/sacnhanh1.png" alt="">
-                </div>
-                <div class="collection__content">
-                    <div class="collection__data">
-                        <span>Đặt trước sãn phẩm</span>
-                        <h1>SẠC SIÊU NHANH</h1>
-                        <a href="/phone_chuong/product.html">MUA NGAY</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
 
-    <!-- DANH MUC SÃN PHẨM -->
-    <section class="section section-danhmuc" id="sectiondanhmuc2">
-        <div>
-            <% List<Category> rsCategory = CategoryDAO.getCategory();%>
-            <ul class="nav__list" id="nav__list_DANHMUC11">
+        <!-- DANH MUC SÃN PHẨM -->
+        <section class="section section-danhmuc" id="sectiondanhmuc2">
+            <div>
+                <% List<Category> rsCategory = CategoryDAO.getCategory();%>
+                <ul class="nav__list" id="nav__list_DANHMUC11">
 
-                <%for (int i = 0; i < (rsCategory.size() / 2 + 1); i++) {%>
-                <div class="nav__icons_danhmuc1">
-                    <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>" class="icon__item1">
-                        <img class="icon__itemdanhmuc" src="<%=rsCategory.get(i).getImg()%>"></img>
-                    </a>
-                    <li class="nav__item">
-                        <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>
-                " class="scroll-linkDANHMUC"><%=rsCategory.get(i).getName()%>
+                    <%for(int i =0 ; i< (rsCategory.size()/2+1) ; i++){%>
+                    <div class="nav__icons_danhmuc1">
+                        <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>" class="icon__item1">
+                            <img class="icon__itemdanhmuc" src="<%= rsCategory.get(i).getImg()%>"></img>
                         </a>
-                    </li>
-                </div>
+                        <li class="nav__item">
+                            <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>" class="scroll-linkDANHMUC"><%= rsCategory.get(i).getName()%></a>
+                        </li>
+                    </div>
 
-                <%}%>
-            </ul>
-        </div>
-        <div>
-            <ul class="nav__list" id="nav__list_DANHMUC1">
-                <%for (int i = rsCategory.size() / 2 + 1; i < (rsCategory.size()); i++) {%>
-                <div class="nav__icons_danhmuc1">
-                    <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>" class="icon__item1">
-                        <img class="icon__itemdanhmuc" src="<%=rsCategory.get(i).getImg()%>"></img>
-                    </a>
-                    <li class="nav__item">
-                        <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>
-                " class="scroll-linkDANHMUC"><%=rsCategory.get(i).getName()%>
-                        </a>
-                    </li>
-                </div>
-                <%}%>
-            </ul>
-        </div>
-    </section>
-
-
-    <!-- Latest Products -->
-    <section class="section latest__products" id="latest">
-        <div class="title__container">
-            <div class="section__title active" data-id="Latest Products">
-                <span class="dot"></span>
-                <h1 class="primary__title">SÃN PHẨM HOT</h1>
-            </div>
-        </div>
-        <div class="container" id="containersale" data-aos="fade-up" data-aos-duration="1200">
-            <div class="glide" id="glide_2">
-                <div class="Flashsale">
-                    <div class="Flashsale-left">
-                        <div class="Flashsale-phukien">Phụ Kiện</div>
-                        <div class="Flashsale-title">Flash Sale</div>
-                    </div>
-                    <div class="Flashsale-time">
-                        <ul class="Flashsale-time_list">
-                            <li class="Flashsale-time_list_cham">Bắt đầu sau</li>
-                            <li class="Flashsale-time_list_cham">:</li>
-                            <li class="Flashsale-time_list_time">00</li>
-                            <li class="Flashsale-time_list_cham">:</li>
-                            <li class="Flashsale-time_list_time">36</li>
-                            <li class="Flashsale-time_list_cham">:</li>
-                            <li class="Flashsale-time_list_time">29</li>
-                            <li class="Flashsale-time_list_cham">:</li>
-                            <li class="Flashsale-time_list_time">57</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="glide__track" data-glide-el="track">
-                    <ul class="glide__slides latest-center">
-                            <% Set<Product> flastsale = ProductDAO.getProductsKind("flastsale");%>
-                            <%for (Product pr : flastsale) {%>
-                        <li class="glide__slide">
-                            <div class="product">
-                                <div class="product__header">
-                                    <img src="<%=pr.getImg()%>" alt="product">
-                                </div>
-                                <div class="product__footer">
-                                    <h3><%=pr.getName()%>
-                                    </h3>
-                                    <div class="rating">
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                        </svg>
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                        </svg>
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                        </svg>
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                        </svg>
-                                        <svg>
-                                            <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
-                                        </svg>
-                                    </div>
-                                    <div class="product__price" style="color: red">
-                                        <h4><%=pr.getPrice()%>
-                                        </h4>
-                                    </div>
-                                    <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=
-                <%=System.currentTimeMillis()%>">
-                                        <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                                    </a>
-                                </div>
-                                <ul>
-                                    <li>
-                                        <a data-tip="Quick View" data-place="left"
-                                           href="product.jsp?idProduct=<%=pr.getId()%>">
-                                            <svg>
-                                                <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                            </svg>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=
-                <%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
-                                            <svg>
-                                                <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                            </svg>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-tip="Add To Compare" data-place="left" href="#">
-                                            <svg>
-                                                <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                            </svg>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <img src="phone_nam/images_phukien/gay1.jpg" alt="product">
-                </div>
-                <div class="product__footer">
-                    <h3>Gậy tự sướng nhập khẩu</h3>
-                    <div class="rating">
-                        <svg>
-                            <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                        </svg>
-                        <svg>
-                            <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                        </svg>
-                        <svg>
-                            <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                        </svg>
-                        <svg>
-                            <use xlink:href="phone_nam/images/sprite.svg#icon-star-full"></use>
-                        </svg>
-                        <svg>
-                            <use xlink:href="phone_nam/images/sprite.svg#icon-star-empty"></use>
-                        </svg>
-                    </div>
-                    <div class="product__price" style="color: red">
-                        <h4>500.000 VNĐ</h4>
-                    </div>
-                    <a href="#">
-                        <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
-                    </a>
-                </div>
-                <ul>
-                    <li>
-                        <a data-tip="Quick View" data-place="left"
-                           href="/phone_chuong/product.html">
-                            <svg>
-                                <use xlink:href="phone_nam/images/sprite.svg#icon-eye"></use>
-                            </svg>
-                        </a>
-                    </li>
-                    <li>
-                        <a data-tip="Add To Wishlist" data-place="left" href="#">
-                            <svg>
-                                <use xlink:href="phone_nam/images/sprite.svg#icon-heart-o"></use>
-                            </svg>
-                        </a>
-                    </li>
-                    <li>
-                        <a data-tip="Add To Compare" data-place="left" href="#">
-                            <svg>
-                                <use xlink:href="phone_nam/images/sprite.svg#icon-loop2"></use>
-                            </svg>
-                        </a>
-                    </li>
+                    <%}%>
                 </ul>
             </div>
-            </li>
-            <%}%>
-            </ul>
-        </div>
-
-        <div class="glide__arrows" data-glide-el="controls">
-            <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
-                <svg>
-                    <use xlink:href="image/images/sprite.svg#icon-arrow-left2"></use>
-                </svg>
-            </button>
-            <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
-                <svg>
-                    <use xlink:href="image/images/sprite.svg#icon-arrow-right2"></use>
-                </svg>
-            </button>
-        </div>
-
-
-        </div>
-    </section>
-
-
-    <section class="category__section section" id="category">
-        <div class="tab__list">
-            <div class="title__container tabs">
-                <div class="section__titles category__titles ">
-                    <div class="section__title filter-btn active" id="All" name="All" onclick="checkKind('all')">
-                        <span class="dot"></span>
-                        <h1 class="primary__title">Tất cả</h1>
-                    </div>
-                </div>
-                <div class="section__titles">
-                    <div class="section__title filter-btn" id="hot" name="hot" onclick="checkKind('hot')">
-                        <span class="dot"></span>
-                        <h1 class="primary__title">Xu hướng</h1>
-                    </div>
-                </div>
-
-                <div class="section__titles">
-                    <div class="section__title filter-btn" id="new" name="new" onclick="checkKind('new')">
-                        <span class="dot"></span>
-                        <h1 class="primary__title">Mới Nhất</h1>
-                    </div>
-                </div>
-
-                <div class="section__titles">
-                    <div class="section__title filter-btn" id="salerun" name="salerun" onclick="checkKind('salerun')">
-                        <span class="dot"></span>
-                        <h1 class="primary__title">Bán chạy</h1>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
-        <% Set<Product> rs = ProductDAO.getProducts();%>
-        <div class="category__container" id="category__container__all" style="display: block;" data-aos="fade-up"
-             data-aos-duration="1200">
-            <div class="category__center">
-                <%for (Product pr : rs) {%>
-                <div class="product category__products">
-                    <div class="product__header">
-                        <img src="<%=pr.getImg()%>" alt="product">
-                    </div>
-                    <div class="product__footer">
-                        <h3><%=pr.getName()%>
-                        </h3>
-                        <div class="rating">
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
-                            </svg>
-                        </div>
-                        <div class="product__price" style="color: red">
-
-                            <h4><%=pr.getPrice() + " VND"%>
-                            </h4>
-                        </div>
-                        <a href="#" style="opacity: 0;">
-                            <button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button>
+            <div>
+                <ul class="nav__list" id="nav__list_DANHMUC1">
+                    <%for(int i =rsCategory.size()/2+1 ; i< (rsCategory.size()) ; i++){%>
+                    <div class="nav__icons_danhmuc1">
+                        <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>" class="icon__item1">
+                            <img class="icon__itemdanhmuc" src="<%= rsCategory.get(i).getImg()%>"></img>
                         </a>
+                        <li class="nav__item">
+                            <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>" class="scroll-linkDANHMUC"><%= rsCategory.get(i).getName()%></a>
+                        </li>
                     </div>
-                    <ul>
-                        <li>
-                            <a data-tip="Quick View" data-place="left"
-                               href="product.jsp?idProduct=<%=pr.getId()%>">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-tip="Add To Compare" data-place="left" href="#">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <%}%>
+                    <%}%>
+                </ul>
             </div>
-        </div>
-
-        <% Set<Product> rshot = ProductDAO.getProductsKind("hot");%>
-        <div class="category__container" id="category__container__hot" style="display: none;" data-aos="fade-up"
-             data-aos-duration="1200">
-            <div class="category__center">
-                <%for (Product pr : rshot) {%>
-                <div class="product category__products">
-                    <div class="product__header">
-                        <img src="<%=pr.getImg()%>" alt="product">
-                    </div>
-                    <div class="product__footer">
-                        <h3><%=pr.getName()%>
-                        </h3>
-                        <div class="rating">
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
-                            </svg>
-                        </div>
-                        <div class="product__price" style="color: red">
-
-                            <h4><%=pr.getPrice() + " VND"%>
-                            </h4>
-                        </div>
-                        <a href="#" style="opacity: 0;">
-                            <button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button>
-                        </a>
-                    </div>
-                    <ul>
-                        <li>
-                            <a data-tip="Quick View" data-place="left"
-                               href="product.jsp?idProduct=<%=pr.getId()%>">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-tip="Add To Compare" data-place="left" href="#">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <%}%>
-            </div>
-        </div>
-
-        <% Set<Product> rsnew = ProductDAO.getProductsKind("new");%>
-        <div class="category__container" id="category__container__new" style="display: none;" data-aos="fade-up"
-             data-aos-duration="1200">
-            <div class="category__center">
-                <%for (Product pr : rsnew) {%>
-                <div class="product category__products">
-                    <div class="product__header">
-                        <img src="<%=pr.getImg()%>" alt="product">
-                    </div>
-                    <div class="product__footer">
-                        <h3><%=pr.getName()%>
-                        </h3>
-                        <div class="rating">
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
-                            </svg>
-                        </div>
-                        <div class="product__price" style="color: red">
-
-                            <h4><%=pr.getPrice() + " VND"%>
-                            </h4>
-                        </div>
-                        <a href="#" style="opacity: 0;">
-                            <button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button>
-                        </a>
-                    </div>
-                    <ul>
-                        <li>
-                            <a data-tip="Quick View" data-place="left"
-                               href="product.jsp?idProduct=<%=pr.getId()%>">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <%}%>
-                    </ul>
-                </div>
-
-                <div class="glide__arrows" data-glide-el="controls">
-                    <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
-                        <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-arrow-left2"></use>
-                        </svg>
-                    </button>
-                    <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
-                        <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-arrow-right2"></use>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
 
-    <section class="category__section section" id="category">
-        <div class="tab__list">
-            <div class="title__container tabs">
-                <div class="section__titles category__titles ">
-                    <div class="section__title filter-btn active" id="All" name="All" onclick="checkKind('all')">
-                        <span class="dot"></span>
-                        <h1 class="primary__title">Tất cả</h1>
-                    </div>
-                </div>
-                <div class="section__titles">
-                    <div class="section__title filter-btn" id="hot" name="hot" onclick="checkKind('hot')">
-                        <span class="dot"></span>
-                        <h1 class="primary__title">Xu hướng</h1>
-                    </div>
-                </div>
-
-                <div class="section__titles">
-                    <div class="section__title filter-btn" id="new" name="new" onclick="checkKind('new')">
-                        <span class="dot"></span>
-                        <h1 class="primary__title">Mới Nhất</h1>
-                    </div>
-                </div>
-
-                <div class="section__titles">
-                    <div class="section__title filter-btn" id="salerun" name="salerun" onclick="checkKind('salerun')">
-                        <span class="dot"></span>
-                        <h1 class="primary__title">Bán chạy</h1>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
-        <% Set<Product> rsProducts = ProductDAO.getProducts();%>
-        <div class="category__container" id="category__container__all" style="display: block;" data-aos="fade-up"
-             data-aos-duration="1200">
-            <div class="category__center">
-                <%for (Product pr : rsProducts) {%>
-                <div class="product category__products">
-                    <div class="product__header">
-                        <img src="<%=pr.getImg()%>" alt="product">
-                    </div>
-                    <div class="product__footer">
-                        <h3><%=pr.getName()%>
-                        </h3>
-                        <div class="rating">
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
-                            </svg>
-                        </div>
-                        <div class="product__price" style="color: red">
-
-                            <h4><%=pr.getPrice() + " VND"%>
-                            </h4>
-                        </div>
-                        <a href="#" style="opacity: 0;">
-                            <button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button>
-                        </a>
-                    </div>
-                    <ul>
-                        <li>
-                            <a data-tip="Quick View" data-place="left"
-                               href="product.jsp?idProduct=<%=pr.getId()%>">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-tip="Add To Compare" data-place="left" href="#">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <%}%>
-            </div>
-        </div>
-
-        <% Set<Product> rshotProducts = ProductDAO.getProductsKind("hot");%>
-        <div class="category__container" id="category__container__hot" style="display: none;" data-aos="fade-up"
-             data-aos-duration="1200">
-            <div class="category__center">
-                <%for (Product pr : rshotProducts) {%>
-                <div class="product category__products">
-                    <div class="product__header">
-                        <img src="<%=pr.getImg()%>" alt="product">
-                    </div>
-                    <div class="product__footer">
-                        <h3><%=pr.getName()%>
-                        </h3>
-                        <div class="rating">
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
-                            </svg>
-                        </div>
-                        <div class="product__price" style="color: red">
-
-                            <h4><%=pr.getPrice() + " VND"%>
-                            </h4>
-                        </div>
-                        <a href="#" style="opacity: 0;">
-                            <button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button>
-                        </a>
-                    </div>
-                    <ul>
-                        <li>
-                            <a data-tip="Quick View" data-place="left"
-                               href="product.jsp?idProduct=<%=pr.getId()%>">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-tip="Add To Compare" data-place="left" href="#">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <%}%>
-            </div>
-        </div>
-
-        <% Set<Product> rsnewProducts = ProductDAO.getProductsKind("new");%>
-        <div class="category__container" id="category__container__new" style="display: none;" data-aos="fade-up"
-             data-aos-duration="1200">
-            <div class="category__center">
-                <%for (Product pr : rsnewProducts) {%>
-                <div class="product category__products">
-                    <div class="product__header">
-                        <img src="<%=pr.getImg()%>" alt="product">
-                    </div>
-                    <div class="product__footer">
-                        <h3><%=pr.getName()%>
-                        </h3>
-                        <div class="rating">
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
-                            </svg>
-                        </div>
-                        <div class="product__price" style="color: red">
-
-                            <h4><%=pr.getPrice() + " VND"%>
-                            </h4>
-                        </div>
-                        <a href="#" style="opacity: 0;">
-                            <button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button>
-                        </a>
-                    </div>
-                    <ul>
-                        <li>
-                            <a data-tip="Quick View" data-place="left"
-                               href="product.jsp?idProduct=<%=pr.getId()%>">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-tip="Add To Compare" data-place="left" href="#">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <%}%>
-            </div>
-        </div>
-
-        <% Set<Product> rssalerun = ProductDAO.getProductsKind("salerun");%>
-        <div class="category__container" id="category__container__salerun" style="display: none;" data-aos="fade-up"
-             data-aos-duration="1200">
-            <div class="category__center">
-                <%for (Product pr : rssalerun) {%>
-                <div class="product category__products">
-                    <div class="product__header">
-                        <img src="<%=pr.getImg()%>" alt="product">
-                    </div>
-                    <div class="product__footer">
-                        <h3><%=pr.getName()%>
-                        </h3>
-                        <div class="rating">
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                            </svg>
-                            <svg>
-                                <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
-                            </svg>
-                        </div>
-                        <div class="product__price" style="color: red">
-
-                            <h4><%=pr.getPrice() + " VND"%>
-                            </h4>
-                        </div>
-                        <a href="#" style="opacity: 0;">
-                            <button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button>
-                        </a>
-                    </div>
-                    <ul>
-                        <li>
-                            <a data-tip="Quick View" data-place="left"
-                               href="product.jsp?idProduct=<%=pr.getId()%>">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-eye"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-tip="Add To Wishlist" data-place="left" href="#">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-tip="Add To Compare" data-place="left" href="#">
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <%}%>
-            </div>
-        </div>
-
-
-    </section>
-
-
-    <!-- Facility Section -->
-    <section class="facility__section section" id="facility">
-        <div class="container">
-            <div class="facility__contianer" data-aos="fade-up" data-aos-duration="1200">
-                <div class="facility__box">
-                    <div class="facility-img__container">
-                        <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-airplane"></use>
-                        </svg>
-                    </div>
-                    <p>MIỄN PHÍ VẬN CHUYỂN TOÀN CẦU</p>
-                </div>
-
-                <div class="facility__box">
-                    <div class="facility-img__container">
-                        <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-credit-card-alt"></use>
-                        </svg>
-                    </div>
-                    <p>HOÀN TIỀN 100%</p>
-                </div>
-
-                <div class="facility__box">
-                    <div class="facility-img__container">
-                        <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-credit-card"></use>
-                        </svg>
-                    </div>
-                    <p>NHIỀU HÌNH THỨC THANH TOÁN</p>
-                </div>
-
-                <div class="facility__box">
-                    <div class="facility-img__container">
-                        <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-headphones"></use>
-                        </svg>
-                    </div>
-                    <p>HỖ TRỢ 24/7</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Testimonial Section -->
-    <section class="section testimonial" id="testimonial">
-        <div class="testimonial__container">
-            <div class="glide" id="glide_4">
-                <div class="glide__track" data-glide-el="track">
-                    <ul class="glide__slides">
-                        <li class="glide__slide">
-                            <div class="testimonial__box">
-                                <div class="client__image">
-                                    <img src="image/img/voucher2.png" alt="profile">
-                                </div>
-                                <p>Sử dụng mã giảm 80% phí vận chuyển (tối đa 15K) đơn hàng từ 0Đ cho sản phẩm thuộc
-                                    gian hàng Freeship Extra.
-                                    Đơn vị vận chuyển khả dụng: Nhanh
-                                    Áp dụng trên ứng dụng JC SHOP.
-                                    Mã chỉ được hoàn theo quy định của JC SHOP.
-                                    Số lượt sử dụng có hạn, chương trình và mã có thể kết thúc khi hết lượt ưu đãi
-                                    hoặc
-                                    khi hết hạn ưu đãi, tuỳ điều kiện nào đến trước.</p>
-                                <div class="client__info">
-                                    <a href="https://www.facebook.com/profile.php?id=100015179019358">
-                                        <h3>GIẢM 15%</h3>
-                                    </a>
-                                    <span>đến hết ngày 22/11/2022</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="glide__slide">
-                            <div class="testimonial__box">
-                                <div class="client__image">
-                                    <img src="image/img/voucher2.png" alt="profile">
-                                </div>
-                                <p>Sử dụng mã giảm 50% phí vận chuyển (tối đa 30K) đơn hàng từ 0Đ cho sản phẩm thuộc
-                                    gian hàng Freeship Extra.
-                                    Đơn vị vận chuyển khả dụng: Nhanh
-                                    Áp dụng trên ứng dụng JC SHOP.
-                                    Mã chỉ được hoàn theo quy định của JC SHOP.
-                                    Số lượt sử dụng có hạn, chương trình và mã có thể kết thúc khi hết lượt ưu đãi
-                                    hoặc
-                                    khi hết hạn ưu đãi, tuỳ điều kiện nào đến trước.</p>
-                                <div class="client__info">
-                                    <a href="https://www.facebook.com/Nam.74.76.76">
-                                        <h3>GIẢM 30k</h3>
-                                    </a>
-                                    <span>đến hết ngày 22/12/2022</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="glide__slide">
-                            <div class="testimonial__box">
-                                <div class="client__image">
-                                    <img src="image/img/voucher2.png" alt="profile">
-                                </div>
-                                <p>Mã CCBDPBL1022A hoàn 5% tối đa 100K Xu cho đơn hàng hợp lệ từ 50K từ shop Hoàn Xu
-                                    Xtra trên ứng dụng Shopee. HSD: 28/10/2022 23:59. Số lượng có hạn. Mỗi khách
-                                    hàng
-                                    chỉ sử dụng 1 lần. Số Shopee Xu hoàn được tính trên giá trị đơn hàng (sau khi
-                                    trừ
-                                    khuyến mãi, số Shopee Xu và không bao gồm phí vận chuyển).</p>
-                                <div class="client__info">
-                                    <a href="https://www.facebook.com/canh.nguyenhua">
-                                        <h3>GIẢM 100k</h3>
-                                    </a>
-                                    <span>đến hết ngày 22/12/2022</span>
-                                </div>
-                            </div>
-
-                        </li>
-                        <li class="glide__slide">
-                            <div class="testimonial__box">
-                                <div class="client__image">
-                                    <img src="image/img/voucher2.png" alt="">
-                                </div>
-                                <p>Sử dụng mã miễn phí vận chuyển cho sản phẩm thuộc gian hàng FreeShip Xtra:
-                                    + Miễn phí vận chuyển tối đa 15,000đ cho đơn hàng từ 50,000đ.
-                                    + Miễn phí vận chuyển tối đa 25,000đ cho đơn hàng từ 150,000đ dành riêng gian
-                                    hàng
-                                    quốc tế.
-                                    + Miễn phí vận chuyển tối đa 70,000đ cho đơn hàng từ 300,000đ.
-                                    + Miễn phí vận chuyển tối đa 25,000đ cho đơn hàng từ 200,000đ dành riêng gian
-                                    hàng
-                                    trong nước ( chỉ áp dụng vào thứ 4 hàng tuần ).
-                                    Đơn vị vận chuyển khả dụng: Nhanh
-                                    Số lượt sử dụng có hạn, chương trình và mã có thể kết thúc khi hết lượt ưu đãi
-                                    hoặc
-                                    khi hết hạn ưu đãi, tuỳ điều kiện nào đến trước.</p>
-                                <div class="client__info">
-                                    <a href="https://www.facebook.com/profile.php?id=100024761910958">
-                                        <h3>MIỄN PHÍ VẪN CHUYỂN</h3>
-                                    </a>
-                                    <span>đến hết ngày 22/12/2022</span>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="glide__slide">
-                            <div class="testimonial__box">
-                                <div class="client__image">
-                                    <img src="image/img/voucher2.png" alt="">
-                                </div>
-                                <p>Sử dụng mã miễn phí vận chuyển cho đơn hàng thỏa điều kiện ưu đãi tại ứng
-                                    dụng
-                                    JC SHOP .
-                                    Kênh vận chuyển khả dụng: Nhanh.
-                                    Chỉ áp dụng cho một số người bán tham gia chương trình Hoàn Xu Xtra, Freeship
-                                    Xtra,
-                                    JC SHOP Mall.
-                                    Mã chỉ được hoàn theo quy định của JC SHOP
-                                    Số lượt sử dụng có hạn, chương trình và mã có thể kết thúc khi hết lượt ưu đãi
-                                    hoặc
-                                    khi hết hạn ưu đãi, tuỳ điều kiện nào đến trước.</p>
-                                <div class="client__info">
-                                    <a href="https://www.facebook.com/songchongtao.thichet/">
-                                        <h3>MIỄN PHÍ 1 ĐƠN HÀNG</h3>
-                                    </a>
-                                    <span>diễn ra vào ngày 30 hàng tháng</span>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="glide__bullets" data-glide-el="controls[nav]">
-                    <button class="glide__bullet" data-glide-dir="=0"></button>
-                    <button class="glide__bullet" data-glide-dir="=1"></button>
-                    <button class="glide__bullet" data-glide-dir="=2"></button>
-                    <button class="glide__bullet" data-glide-dir="=3"></button>
-                    <button class="glide__bullet" data-glide-dir="=4"></button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!--New Section  -->
-    <section class="section news" id="news">
-        <div class="container">
+        <!-- Latest Products -->
+        <section class="section latest__products" id="latest">
             <div class="title__container">
-                <div class="section__titles">
-                    <div class="section__title active">
-                        <span class="dot"></span>
-                        <h1 class="primary__title">Tin Tức</h1>
+                <div class="section__title active" data-id="Latest Products">
+                    <span class="dot"></span>
+                    <h1 class="primary__title">SÃN PHẨM HOT</h1>
+                </div>
+            </div>
+            <div class="container" id="containersale" data-aos="fade-up" data-aos-duration="1200">
+                <div class="glide" id="glide_2">
+                    <div class="Flashsale">
+                        <div class="Flashsale-left">
+                            <div class="Flashsale-phukien">Phụ Kiện</div>
+                            <div class="Flashsale-title">Flash Sale</div>
+                        </div>
+                        <div class="Flashsale-time">
+                            <ul class="Flashsale-time_list">
+                                <li class="Flashsale-time_list_cham">Bắt đầu sau</li>
+                                <li class="Flashsale-time_list_cham">:</li>
+                                <li class="Flashsale-time_list_time">00</li>
+                                <li class="Flashsale-time_list_cham">:</li>
+                                <li class="Flashsale-time_list_time">36</li>
+                                <li class="Flashsale-time_list_cham">:</li>
+                                <li class="Flashsale-time_list_time">29</li>
+                                <li class="Flashsale-time_list_cham">:</li>
+                                <li class="Flashsale-time_list_time">57</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="glide__track" data-glide-el="track">
+                        <ul class="glide__slides latest-center">
+                            <% Set<Product> flastsale = ProductDAO.getProductsKind("flastsale");%>
+                            <%for(Product pr: flastsale){%>
+                            <li class="glide__slide">
+                                <div class="product">
+                                    <div class="product__header">
+                                        <img src="<%=pr.getImg()%>" alt="product">
+                                    </div>
+                                    <div class="product__footer">
+                                        <h3><%=pr.getName()%></h3>
+                                        <div class="rating">
+                                            <svg>
+                                                <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                            <svg>
+                                                <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                            <svg>
+                                                <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                            <svg>
+                                                <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                            <svg>
+                                                <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
+                                            </svg>
+                                        </div>
+                                        <div class="product__price" style="color: red">
+                                            <h4><%=pr.getPrice()%></h4>
+                                        </div>
+                                        <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                            <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
+                                        </a>
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            <a data-tip="Quick View" data-place="left"
+                                               href="product.jsp?idProduct=<%=pr.getId()%>">
+                                                <svg>
+                                                    <use xlink:href="image/images/sprite.svg#icon-eye"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                                <svg>
+                                                    <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-tip="Add To Compare" data-place="left" href="#">
+                                                <svg>
+                                                    <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <%}%>
+                        </ul>
+                    </div>
+
+                    <div class="glide__arrows" data-glide-el="controls">
+                        <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
+                            <svg>
+                                <use xlink:href="image/images/sprite.svg#icon-arrow-left2"></use>
+                            </svg>
+                        </button>
+                        <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
+                            <svg>
+                                <use xlink:href="image/images/sprite.svg#icon-arrow-right2"></use>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="news__container">
-                <div class="glide" id="glide_5">
+        </section>
+
+
+
+        <section class="category__section section" id="category">
+            <div class="tab__list">
+                <div class="title__container tabs">
+                    <div class="section__titles category__titles ">
+                        <div class="section__title filter-btn active" id="All" name="All" onclick="checkKind('all')">
+                            <span class="dot"></span>
+                            <h1 class="primary__title">Tất cả</h1>
+                        </div>
+                    </div>
+                    <div class="section__titles">
+                        <div class="section__title filter-btn" id="hot" name="hot" onclick="checkKind('hot')">
+                            <span class="dot"></span>
+                            <h1 class="primary__title">Xu hướng</h1>
+                        </div>
+                    </div>
+
+                    <div class="section__titles">
+                        <div class="section__title filter-btn" id="new" name="new" onclick="checkKind('new')">
+                            <span class="dot"></span>
+                            <h1 class="primary__title">Mới Nhất</h1>
+                        </div>
+                    </div>
+
+                    <div class="section__titles">
+                        <div class="section__title filter-btn" id="salerun" name="salerun" onclick="checkKind('salerun')">
+                            <span class="dot"></span>
+                            <h1 class="primary__title">Bán chạy</h1>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <% Set<Product> rs = ProductDAO.getProducts();%>
+            <div class="category__container" id="category__container__all" style="display: block;" data-aos="fade-up" data-aos-duration="1200">
+                <div class="category__center">
+                    <%for(Product pr: rs){%>
+                    <div class="product category__products">
+                        <div class="product__header">
+                            <img src="<%=pr.getImg()%>" alt="product">
+                        </div>
+                        <div class="product__footer">
+                            <h3><%=pr.getName()%></h3>
+                            <div class="rating">
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                </svg>
+                            </div>
+                            <div class="product__price" style="color: red">
+
+                                <h4><%=pr.getPrice()+" VND"%></h4>
+                            </div>
+                            <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                        </div>
+                        <ul>
+                            <li>
+                                <a data-tip="Quick View" data-place="left"
+                                   href="product.jsp?idProduct=<%=pr.getId()%>">
+                                    <svg>
+                                        <use xlink:href="image/images/sprite.svg#icon-eye"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                    <svg>
+                                        <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-tip="Add To Compare" data-place="left" href="#">
+                                    <svg>
+                                        <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+
+            <% Set<Product> rshot = ProductDAO.getProductsKind("hot");%>
+            <div class="category__container" id="category__container__hot" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
+                <div class="category__center">
+                    <%for(Product pr: rshot){%>
+                    <div class="product category__products">
+                        <div class="product__header">
+                            <img src="<%=pr.getImg()%>" alt="product">
+                        </div>
+                        <div class="product__footer">
+                            <h3><%=pr.getName()%></h3>
+                            <div class="rating">
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                </svg>
+                            </div>
+                            <div class="product__price" style="color: red">
+
+                                <h4><%=pr.getPrice()+" VND"%></h4>
+                            </div>
+                            <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                        </div>
+                        <ul>
+                            <li>
+                                <a data-tip="Quick View" data-place="left"
+                                   href="product.jsp?idProduct=<%=pr.getId()%>">
+                                    <svg>
+                                        <use xlink:href="image/images/sprite.svg#icon-eye"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                    <svg>
+                                        <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-tip="Add To Compare" data-place="left" href="#">
+                                    <svg>
+                                        <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+
+            <% Set<Product> rsnew = ProductDAO.getProductsKind("new");%>
+            <div class="category__container" id="category__container__new" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
+                <div class="category__center">
+                    <%for(Product pr: rsnew){%>
+                    <div class="product category__products">
+                        <div class="product__header">
+                            <img src="<%=pr.getImg()%>" alt="product">
+                        </div>
+                        <div class="product__footer">
+                            <h3><%=pr.getName()%></h3>
+                            <div class="rating">
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                </svg>
+                            </div>
+                            <div class="product__price" style="color: red">
+
+                                <h4><%=pr.getPrice()+" VND"%></h4>
+                            </div>
+                            <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                        </div>
+                        <ul>
+                            <li>
+                                <a data-tip="Quick View" data-place="left"
+                                   href="product.jsp?idProduct=<%=pr.getId()%>">
+                                    <svg>
+                                        <use xlink:href="image/images/sprite.svg#icon-eye"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                    <svg>
+                                        <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-tip="Add To Compare" data-place="left" href="#">
+                                    <svg>
+                                        <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+
+            <% Set<Product> rssalerun = ProductDAO.getProductsKind("salerun");%>
+            <div class="category__container" id="category__container__salerun" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
+                <div class="category__center">
+                    <%for(Product pr: rssalerun){%>
+                    <div class="product category__products">
+                        <div class="product__header">
+                            <img src="<%=pr.getImg()%>" alt="product">
+                        </div>
+                        <div class="product__footer">
+                            <h3><%=pr.getName()%></h3>
+                            <div class="rating">
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                </svg>
+                            </div>
+                            <div class="product__price" style="color: red">
+
+                                <h4><%=pr.getPrice()+" VND"%></h4>
+                            </div>
+                            <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                        </div>
+                        <ul>
+                            <li>
+                                <a data-tip="Quick View" data-place="left"
+                                   href="product.jsp?idProduct=<%=pr.getId()%>">
+                                    <svg>
+                                        <use xlink:href="image/images/sprite.svg#icon-eye"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                    <svg>
+                                        <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-tip="Add To Compare" data-place="left" href="#">
+                                    <svg>
+                                        <use xlink:href="image/images/sprite.svg#icon-loop2"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+
+
+        </section>
+
+
+
+        <!-- Facility Section -->
+        <section class="facility__section section" id="facility">
+            <div class="container">
+                <div class="facility__contianer" data-aos="fade-up" data-aos-duration="1200">
+                    <div class="facility__box">
+                        <div class="facility-img__container">
+                            <svg>
+                                <use xlink:href="image/images/sprite.svg#icon-airplane"></use>
+                            </svg>
+                        </div>
+                        <p>MIỄN PHÍ VẬN CHUYỂN TOÀN CẦU</p>
+                    </div>
+
+                    <div class="facility__box">
+                        <div class="facility-img__container">
+                            <svg>
+                                <use xlink:href="image/images/sprite.svg#icon-credit-card-alt"></use>
+                            </svg>
+                        </div>
+                        <p>HOÀN TIỀN 100%</p>
+                    </div>
+
+                    <div class="facility__box">
+                        <div class="facility-img__container">
+                            <svg>
+                                <use xlink:href="image/images/sprite.svg#icon-credit-card"></use>
+                            </svg>
+                        </div>
+                        <p>NHIỀU HÌNH THỨC THANH TOÁN</p>
+                    </div>
+
+                    <div class="facility__box">
+                        <div class="facility-img__container">
+                            <svg>
+                                <use xlink:href="image/images/sprite.svg#icon-headphones"></use>
+                            </svg>
+                        </div>
+                        <p>HỖ TRỢ 24/7</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Testimonial Section -->
+        <section class="section testimonial" id="testimonial">
+            <div class="testimonial__container">
+                <div class="glide" id="glide_4">
                     <div class="glide__track" data-glide-el="track">
                         <ul class="glide__slides">
                             <li class="glide__slide">
-                                <div class="new__card">
-                                    <div class="card__header">
-                                        <img src="image/images/news1.jpg" alt="">
+                                <div class="testimonial__box">
+                                    <div class="client__image">
+                                        <img src="image/img/voucher2.png" alt="profile">
                                     </div>
-                                    <div class="card__footer">
-                                        <h3>Khai Trương Tưng Bừng Sale Cực Lớn</h3>
-                                        <span>By Admin Nam</span>
-                                        <p>Sự nhiệt tình và quy cách phục vụ chuyên nghiệp tại
-                                            JC PHONE khiến ca nghệ sĩ rất hài lòng. Các nghệ sĩ nổi tiếng cho biết
-                                            rất
-                                            là an tâm hơn,...</p>
-                                        <a href="#">
-                                            <button>Xem Thêm</button>
+                                    <p>Sử dụng mã giảm 80% phí vận chuyển (tối đa 15K) đơn hàng từ 0Đ cho sản phẩm thuộc
+                                        gian hàng Freeship Extra.
+                                        Đơn vị vận chuyển khả dụng: Nhanh
+                                        Áp dụng trên ứng dụng JC SHOP.
+                                        Mã chỉ được hoàn theo quy định của JC SHOP.
+                                        Số lượt sử dụng có hạn, chương trình và mã có thể kết thúc khi hết lượt ưu đãi
+                                        hoặc
+                                        khi hết hạn ưu đãi, tuỳ điều kiện nào đến trước.</p>
+                                    <div class="client__info">
+                                        <a href="https://www.facebook.com/profile.php?id=100015179019358">
+                                            <h3>GIẢM 15%</h3>
                                         </a>
+                                        <span>đến hết ngày 22/11/2022</span>
                                     </div>
                                 </div>
                             </li>
                             <li class="glide__slide">
-                                <div class="new__card">
-                                    <div class="card__header">
-                                        <img src="image/images/news2.jpg" alt="">
+                                <div class="testimonial__box">
+                                    <div class="client__image">
+                                        <img src="image/img/voucher2.png" alt="profile">
                                     </div>
-                                    <div class="card__footer">
-                                        <h3>Khai Trương Tưng Bừng Sale Cực Lớn</h3>
-                                        <span>By Admin Cảnh</span>
-                                        <p>Sự nhiệt tình và quy cách phục vụ chuyên nghiệp tại
-                                            JC PHONE khiến ca nghệ sĩ rất hài lòng. Các nghệ sĩ nổi tiếng cho biết
-                                            rất
-                                            là an tâm hơn,...</p>
-                                        <a href="#">
-                                            <button>Xem Thêm</button>
+                                    <p>Sử dụng mã giảm 50% phí vận chuyển (tối đa 30K) đơn hàng từ 0Đ cho sản phẩm thuộc
+                                        gian hàng Freeship Extra.
+                                        Đơn vị vận chuyển khả dụng: Nhanh
+                                        Áp dụng trên ứng dụng JC SHOP.
+                                        Mã chỉ được hoàn theo quy định của JC SHOP.
+                                        Số lượt sử dụng có hạn, chương trình và mã có thể kết thúc khi hết lượt ưu đãi
+                                        hoặc
+                                        khi hết hạn ưu đãi, tuỳ điều kiện nào đến trước.</p>
+                                    <div class="client__info">
+                                        <a href="https://www.facebook.com/Nam.74.76.76">
+                                            <h3>GIẢM 30k</h3>
                                         </a>
+                                        <span>đến hết ngày 22/12/2022</span>
                                     </div>
                                 </div>
                             </li>
                             <li class="glide__slide">
-                                <div class="new__card">
-                                    <div class="card__header">
-                                        <img src="image/images/news3.jpg" alt="">
+                                <div class="testimonial__box">
+                                    <div class="client__image">
+                                        <img src="image/img/voucher2.png" alt="profile">
                                     </div>
-                                    <div class="card__footer">
-                                        <h3>Khai Trương Tưng Bừng Sale Cực Lớn</h3>
-                                        <span>By Admin Thuận</span>
-                                        <p>Sự nhiệt tình và quy cách phục vụ chuyên nghiệp tại
-                                            JC PHONE khiến ca nghệ sĩ rất hài lòng. Các nghệ sĩ nổi tiếng cho biết
-                                            rất
-                                            là an tâm hơn,...</p>
-                                        <a href="#">
-                                            <button>Xem Thêm</button>
+                                    <p>Mã CCBDPBL1022A hoàn 5% tối đa 100K Xu cho đơn hàng hợp lệ từ 50K từ shop Hoàn Xu
+                                        Xtra trên ứng dụng Shopee. HSD: 28/10/2022 23:59. Số lượng có hạn. Mỗi khách
+                                        hàng
+                                        chỉ sử dụng 1 lần. Số Shopee Xu hoàn được tính trên giá trị đơn hàng (sau khi
+                                        trừ
+                                        khuyến mãi, số Shopee Xu và không bao gồm phí vận chuyển).</p>
+                                    <div class="client__info">
+                                        <a href="https://www.facebook.com/canh.nguyenhua">
+                                            <h3>GIẢM 100k</h3>
                                         </a>
+                                        <span>đến hết ngày 22/12/2022</span>
                                     </div>
                                 </div>
+
                             </li>
                             <li class="glide__slide">
-                                <div class="new__card">
-                                    <div class="card__header">
-                                        <img src="image/images/news4.jpg" alt="">
+                                <div class="testimonial__box">
+                                    <div class="client__image">
+                                        <img src="image/img/voucher2.png" alt="">
                                     </div>
-                                    <div class="card__footer">
-                                        <h3>Khai Trương Tưng Bừng Sale Cực Lớn</h3>
-                                        <span>By Admin Biên</span>
-                                        <p>Sự nhiệt tình và quy cách phục vụ chuyên nghiệp tại
-                                            JC PHONE khiến ca nghệ sĩ rất hài lòng. Các nghệ sĩ nổi tiếng cho biết
-                                            rất
-                                            là an tâm hơn,...</p>
-                                        <a href="#">
-                                            <button>Xem Thêm</button>
+                                    <p>Sử dụng mã miễn phí vận chuyển cho sản phẩm thuộc gian hàng FreeShip Xtra:
+                                        + Miễn phí vận chuyển tối đa 15,000đ cho đơn hàng từ 50,000đ.
+                                        + Miễn phí vận chuyển tối đa 25,000đ cho đơn hàng từ 150,000đ dành riêng gian
+                                        hàng
+                                        quốc tế.
+                                        + Miễn phí vận chuyển tối đa 70,000đ cho đơn hàng từ 300,000đ.
+                                        + Miễn phí vận chuyển tối đa 25,000đ cho đơn hàng từ 200,000đ dành riêng gian
+                                        hàng
+                                        trong nước ( chỉ áp dụng vào thứ 4 hàng tuần ).
+                                        Đơn vị vận chuyển khả dụng: Nhanh
+                                        Số lượt sử dụng có hạn, chương trình và mã có thể kết thúc khi hết lượt ưu đãi
+                                        hoặc
+                                        khi hết hạn ưu đãi, tuỳ điều kiện nào đến trước.</p>
+                                    <div class="client__info">
+                                        <a href="https://www.facebook.com/profile.php?id=100024761910958">
+                                            <h3>MIỄN PHÍ VẪN CHUYỂN</h3>
                                         </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="glide__slide">
-                                <div class="new__card">
-                                    <div class="card__header">
-                                        <img src="image/images/news5.jpg" alt="">
-                                    </div>
-                                    <div class="card__footer">
-                                        <h3>Khai Trương Tưng Bừng Sale Cực Lớn</h3>
-                                        <span>By Admin Hoài</span>
-                                        <p>Sự nhiệt tình và quy cách phục vụ chuyên nghiệp tại
-                                            JC PHONE khiến ca nghệ sĩ rất hài lòng. Các nghệ sĩ nổi tiếng cho biết
-                                            rất
-                                            là an tâm hơn,...</p>
-                                        <a href="#">
-                                            <button>Xem Thêm</button>
-                                        </a>
+                                        <span>đến hết ngày 22/12/2022</span>
                                     </div>
                                 </div>
                             </li>
 
-
+                            <li class="glide__slide">
+                                <div class="testimonial__box">
+                                    <div class="client__image">
+                                        <img src="image/img/voucher2.png" alt="">
+                                    </div>
+                                    <p>Sử dụng mã miễn phí vận chuyển cho đơn hàng thỏa điều kiện ưu đãi tại ứng
+                                        dụng
+                                        JC SHOP .
+                                        Kênh vận chuyển khả dụng: Nhanh.
+                                        Chỉ áp dụng cho một số người bán tham gia chương trình Hoàn Xu Xtra, Freeship
+                                        Xtra,
+                                        JC SHOP Mall.
+                                        Mã chỉ được hoàn theo quy định của JC SHOP
+                                        Số lượt sử dụng có hạn, chương trình và mã có thể kết thúc khi hết lượt ưu đãi
+                                        hoặc
+                                        khi hết hạn ưu đãi, tuỳ điều kiện nào đến trước.</p>
+                                    <div class="client__info">
+                                        <a href="https://www.facebook.com/songchongtao.thichet/">
+                                            <h3>MIỄN PHÍ 1 ĐƠN HÀNG</h3>
+                                        </a>
+                                        <span>diễn ra vào ngày 30 hàng tháng</span>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                     </div>
-                </div>
 
-            </div>
-        </div>
-    </section>
-
-    <!-- NewsLetter -->
-    <section class="section newsletter" id="contact">
-        <div class="container">
-            <div class="newsletter__content">
-                <div class="newsletter__data">
-                    <h3>THEO DÕI BẢN TIN JC-TEAM</h3>
-                    <p>Hãy đăng ký để có thể biết được những voucher, những sản phẩm mới sớm nhất!!</p>
+                    <div class="glide__bullets" data-glide-el="controls[nav]">
+                        <button class="glide__bullet" data-glide-dir="=0"></button>
+                        <button class="glide__bullet" data-glide-dir="=1"></button>
+                        <button class="glide__bullet" data-glide-dir="=2"></button>
+                        <button class="glide__bullet" data-glide-dir="=3"></button>
+                        <button class="glide__bullet" data-glide-dir="=4"></button>
+                    </div>
                 </div>
-                <form action="#">
-                    <input type="email" placeholder="Nhập địa chỉ Email của bạn" class="newsletter__email">
-                    <a class="newsletter__link" href="#">Đăng Ký</a>
-                </form>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!--New Section  -->
+        <section class="section news" id="news">
+            <div class="container">
+                <div class="title__container">
+                    <div class="section__titles">
+                        <div class="section__title active">
+                            <span class="dot"></span>
+                            <h1 class="primary__title">Tin Tức</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="news__container">
+                    <div class="glide" id="glide_5">
+                        <div class="glide__track" data-glide-el="track">
+                            <ul class="glide__slides">
+                                <li class="glide__slide">
+                                    <div class="new__card">
+                                        <div class="card__header">
+                                            <img src="image/images/news1.jpg" alt="">
+                                        </div>
+                                        <div class="card__footer">
+                                            <h3>Khai Trương Tưng Bừng Sale Cực Lớn</h3>
+                                            <span>By Admin Nam</span>
+                                            <p>Sự nhiệt tình và quy cách phục vụ chuyên nghiệp tại
+                                                JC PHONE khiến ca nghệ sĩ rất hài lòng. Các nghệ sĩ nổi tiếng cho biết
+                                                rất
+                                                là an tâm hơn,...</p>
+                                            <a href="#">
+                                                <button>Xem Thêm</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="glide__slide">
+                                    <div class="new__card">
+                                        <div class="card__header">
+                                            <img src="image/images/news2.jpg" alt="">
+                                        </div>
+                                        <div class="card__footer">
+                                            <h3>Khai Trương Tưng Bừng Sale Cực Lớn</h3>
+                                            <span>By Admin Cảnh</span>
+                                            <p>Sự nhiệt tình và quy cách phục vụ chuyên nghiệp tại
+                                                JC PHONE khiến ca nghệ sĩ rất hài lòng. Các nghệ sĩ nổi tiếng cho biết
+                                                rất
+                                                là an tâm hơn,...</p>
+                                            <a href="#">
+                                                <button>Xem Thêm</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="glide__slide">
+                                    <div class="new__card">
+                                        <div class="card__header">
+                                            <img src="image/images/news3.jpg" alt="">
+                                        </div>
+                                        <div class="card__footer">
+                                            <h3>Khai Trương Tưng Bừng Sale Cực Lớn</h3>
+                                            <span>By Admin Thuận</span>
+                                            <p>Sự nhiệt tình và quy cách phục vụ chuyên nghiệp tại
+                                                JC PHONE khiến ca nghệ sĩ rất hài lòng. Các nghệ sĩ nổi tiếng cho biết
+                                                rất
+                                                là an tâm hơn,...</p>
+                                            <a href="#">
+                                                <button>Xem Thêm</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="glide__slide">
+                                    <div class="new__card">
+                                        <div class="card__header">
+                                            <img src="image/images/news4.jpg" alt="">
+                                        </div>
+                                        <div class="card__footer">
+                                            <h3>Khai Trương Tưng Bừng Sale Cực Lớn</h3>
+                                            <span>By Admin Biên</span>
+                                            <p>Sự nhiệt tình và quy cách phục vụ chuyên nghiệp tại
+                                                JC PHONE khiến ca nghệ sĩ rất hài lòng. Các nghệ sĩ nổi tiếng cho biết
+                                                rất
+                                                là an tâm hơn,...</p>
+                                            <a href="#">
+                                                <button>Xem Thêm</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="glide__slide">
+                                    <div class="new__card">
+                                        <div class="card__header">
+                                            <img src="image/images/news5.jpg" alt="">
+                                        </div>
+                                        <div class="card__footer">
+                                            <h3>Khai Trương Tưng Bừng Sale Cực Lớn</h3>
+                                            <span>By Admin Hoài</span>
+                                            <p>Sự nhiệt tình và quy cách phục vụ chuyên nghiệp tại
+                                                JC PHONE khiến ca nghệ sĩ rất hài lòng. Các nghệ sĩ nổi tiếng cho biết
+                                                rất
+                                                là an tâm hơn,...</p>
+                                            <a href="#">
+                                                <button>Xem Thêm</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- NewsLetter -->
+        <section class="section newsletter" id="contact">
+            <div class="container">
+                <div class="newsletter__content">
+                    <div class="newsletter__data">
+                        <h3>THEO DÕI BẢN TIN JC-TEAM</h3>
+                        <p>Hãy đăng ký để có thể biết được những voucher, những sản phẩm mới sớm nhất!!</p>
+                    </div>
+                    <form action="#">
+                        <input type="email" placeholder="Nhập địa chỉ Email của bạn" class="newsletter__email">
+                        <a class="newsletter__link" href="#">Đăng Ký</a>
+                    </form>
+                </div>
+            </div>
+        </section>
 
     </div>
 </main>
