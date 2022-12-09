@@ -54,41 +54,41 @@ public class OrderDAO {
         return res;
     }
 
-    public static List<Order> getVerifyOrders(List<Order> all) {
-        List<Order> res = new ArrayList<Order>();
-        for (Order o : all) {
-            if (o.getStatus().equals("Chờ xác nhận")) res.add(o);
-        }
-        return res;
-    }
+//    public static List<Order> getVerifyOrders(List<Order> all) {
+//        List<Order> res = new ArrayList<Order>();
+//        for (Order o : all) {
+//            if (o.getStatus().equals("Chờ xác nhận")) res.add(o);
+//        }
+//        return res;
+//    }
 
-    public static List<Order> getGettingOrders(List<Order> all) {
-        List<Order> res = new ArrayList<Order>();
-        for (Order o : all) {
-            if (o.getStatus().equals("Chờ lấy hàng")) res.add(o);
-        }
-        return res;
-    }
-
-    public static List<Order> getShippingOrders(List<Order> all) {
-        List<Order> res = new ArrayList<Order>();
-        for (Order o : all) {
-            if (o.getStatus().equals("Đang giao")) res.add(o);
-        }
-        return res;
-    }
-    public static List<Order> getShippedOrders(List<Order> all) {
-        List<Order> res = new ArrayList<Order>();
-        for (Order o : all) {
-            if (o.getStatus().equals("Đã giao")) res.add(o);
-        }
-        return res;
-    }
-    public static List<Order> getCanceledOrders(List<Order> all) {
-        List<Order> res = new ArrayList<Order>();
-        for (Order o : all) {
-            if (o.getStatus().equals("Đã hủy")) res.add(o);
-        }
-        return res;
-    }
+//    public static List<Order> getGettingOrders(List<Order> all) {
+//        List<Order> res = new ArrayList<Order>();
+//        for (Order o : all) {
+//            if (o.getStatus().equals("Chờ lấy hàng")) res.add(o);
+//        }
+//        return res;
+//    }
+//
+//    public static List<Order> getShippingOrders(List<Order> all) {
+//        List<Order> res = new ArrayList<Order>();
+//        for (Order o : all) {
+//            if (o.getStatus().equals("Đang giao")) res.add(o);
+//        }
+//        return res;
+//    }
+//    public static List<Order> getShippedOrders(List<Order> all) {
+//        List<Order> res = new ArrayList<Order>();
+//        for (Order o : all) {
+//            if (o.getStatus().equals("Đã giao")) res.add(o);
+//        }
+//        return res;
+//    }
+//    public static List<Order> getCanceledOrders(List<Order> all) {
+//        List<Order> res = new ArrayList<Order>();
+//        for (Order o : all) {
+//            if (o.getStatus().equals("Đã hủy")) res.add(o);
+//        }
+//        return res;
+//    }
 }

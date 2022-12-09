@@ -31,20 +31,20 @@ public class Util {
         return id;
     }
 
-    public static List<Order> getOrdersByStatus(List<Order> list, String status) {
-        List<Order> res = new ArrayList<Order>();
-        for (Order o : list) {
-            if (o.getStatus().equals(status)) res.add(o);
-        }
-        return res;
-    }
+//    public static List<Order> getOrdersByStatus(List<Order> list, String status) {
+//        List<Order> res = new ArrayList<Order>();
+//        for (Order o : list) {
+//            if (o.getStatus().equals(status)) res.add(o);
+//        }
+//        return res;
+//    }
 
-    public static boolean containStatus(List<Order> list, String status) {
-        for (Order o : list) {
-            if (o.getStatus().equals(status)) return true;
-        }
-        return false;
-    }
+//    public static boolean containStatus(List<Order> list, String status) {
+//        for (Order o : list) {
+//            if (o.getStatus().equals(status)) return true;
+//        }
+//        return false;
+//    }
 
     static boolean sendEmail(String to, String code) {
         String from = "20130426@st.hcmuaf.edu.vn";
