@@ -219,6 +219,17 @@ public class ProductDAO {
         return res;
     }
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        System.out.println(getProductSeach("sac").size());
+//        System.out.println(getProductSeach("sac").size());
+
+//        Set<Product> rshot = ProductDAO.getProductsKind("hot");
+//
+//        for(Product pr: rshot) {
+//            System.out.println(pr.getName());
+//
+//        }
+
+
+        System.out.println(getProductById("PR17").getName());
+
     }
 }

@@ -31,7 +31,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.theme.min.css
 ">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
-
+    <%
+        String contextPath = request.getContextPath();
+    %>
+    <%System.out.println(contextPath);%>
     <!-- Custom StyleSheet -->
     <link rel="stylesheet" href="/css/style.css"/>
 
@@ -547,21 +550,21 @@
                         <div class="product__footer">
                             <h3><%=pr.getName()%></h3>
                             <div class="rating">
-                                <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                                </svg>
-                                <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                                </svg>
-                                <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                                </svg>
-                                <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                                </svg>
-                                <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
-                                </svg>
+<%--                                <svg>--%>
+<%--                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>--%>
+<%--                                </svg>--%>
+<%--                                <svg>--%>
+<%--                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>--%>
+<%--                                </svg>--%>
+<%--                                <svg>--%>
+<%--                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>--%>
+<%--                                </svg>--%>
+<%--                                <svg>--%>
+<%--                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>--%>
+<%--                                </svg>--%>
+<%--                                <svg>--%>
+<%--                                    <use xlink:href="./images/sprite.svg#icon-star-empty"></use>--%>
+<%--                                </svg>--%>
                             </div>
                             <div class="product__price" style="color: red">
 
