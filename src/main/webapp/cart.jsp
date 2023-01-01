@@ -225,7 +225,7 @@
                                             <div class="price">
                                                 <span class="new__price"><%=pr.getPrice()%></span>
                                             </div>
-                                            <a href="#" class="remove__cart-item">
+                                            <a  href="#" class="remove__cart-item">
                                                 <svg>
                                                     <use xlink:href="./images/sprite.svg#icon-trash"></use>
                                                 </svg>
@@ -436,7 +436,7 @@
             for (let i = 0; i < products.length; i++) {
                 $('#' + products[i].id).click(function () {
                     deleteProduct(i)
-                    updateValue()
+
                 })
             }
         }

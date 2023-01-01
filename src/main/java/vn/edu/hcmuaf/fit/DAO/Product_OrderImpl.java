@@ -14,7 +14,7 @@ public class Product_OrderImpl {
 
 
 
-    public void addOrder(Order o) throws SQLException, ClassNotFoundException {
+    public List<Category> addOrder(Order o) throws SQLException, ClassNotFoundException {
 
         DataDB db = new DataDB();
         List<Category> list = new ArrayList<Category>();
@@ -38,4 +38,5 @@ public class Product_OrderImpl {
 
 }
 
-}
+
+

@@ -3,7 +3,6 @@ package vn.edu.hcmuaf.fit.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.edu.hcmuaf.fit.DAO.OrderImpl;
 import vn.edu.hcmuaf.fit.DAO.Product_OrderImpl;
 
 import java.io.IOException;
@@ -11,7 +10,7 @@ import java.io.IOException;
 @WebServlet(name = "PayServlet", value = "/PayServlet")
 public class PayServlet extends HttpServlet {
 
-    private OrderImpl oDao = new OrderImpl();
+
 
     private Product_OrderImpl poDao = new Product_OrderImpl();
 

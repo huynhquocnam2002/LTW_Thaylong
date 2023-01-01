@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.DAO;
 
+import vn.edu.hcmuaf.fit.model.Category;
 import vn.edu.hcmuaf.fit.model.Order;
 
 import java.sql.SQLException;
@@ -7,7 +8,7 @@ import java.sql.SQLException;
 public interface IOrder {
 
 
-    public void addOrder(Order o) throws SQLException, ClassNotFoundException;
+    public Category addOrder(Order o) throws SQLException, ClassNotFoundException;
 
 
 

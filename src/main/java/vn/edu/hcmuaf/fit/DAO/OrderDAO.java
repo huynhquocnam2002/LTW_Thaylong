@@ -55,6 +55,8 @@ public class OrderDAO {
         return res;
     }
 
+}
+
 //    public static List<Order> getVerifyOrders(List<Order> all) {
 //        List<Order> res = new ArrayList<Order>();
 //        for (Order o : all) {
@@ -92,4 +94,5 @@ public class OrderDAO {
 //        }
 //        return res;
 //    }
-}
+
+
