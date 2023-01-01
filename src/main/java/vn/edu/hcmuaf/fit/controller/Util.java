@@ -31,20 +31,20 @@ public class Util {
         return id;
     }
 
-    public static List<Order> getOrdersByStatus(List<Order> list, String status) {
-        List<Order> res = new ArrayList<Order>();
-        for (Order o : list) {
-            if (o.getStatus().equals(status)) res.add(o);
-        }
-        return res;
-    }
+//    public static List<Order> getOrdersByStatus(List<Order> list, String status) {
+//        List<Order> res = new ArrayList<Order>();
+//        for (Order o : list) {
+//            if (o.getStatus().equals(status)) res.add(o);
+//        }
+//        return res;
+//    }
 
-    public static boolean containStatus(List<Order> list, String status) {
-        for (Order o : list) {
-            if (o.getStatus().equals(status)) return true;
-        }
-        return false;
-    }
+//    public static boolean containStatus(List<Order> list, String status) {
+//        for (Order o : list) {
+//            if (o.getStatus().equals(status)) return true;
+//        }
+//        return false;
+//    }
 
     static boolean sendEmail(String to, String code) {
         String from = "20130426@st.hcmuaf.edu.vn";
@@ -117,19 +117,23 @@ public class Util {
     }
 
 
-    public static void main(String[] args) {
-        Date d1 = new Date(2022, 11, 27);
-        Date d2 = new Date(2023, 1, 11);
-        System.out.println(d1);
-        Calendar c1 = Calendar.getInstance();
-        Calendar c2 = Calendar.getInstance();
-        c1.setTime(d1);
-        c2.setTime(d2);
 
-        System.out.println(d1.compareTo(d2));
-        LocalDateTime now = LocalDateTime.now();
-        System.out.println((c2.getTime().getTime() - c1.getTime().getTime()) / (1000 * 60 * 60 * 24));
-        System.out.println((-new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth()).getTime() + d2.getTime()) / (24 * 3600 * 1000));
+
+
+    public static void main(String[] args) {
+//        Date d1 = new Date(2022, 11, 27);
+//        Date d2 = new Date(2023, 1, 11);
+//        System.out.println(d1);
+//        Calendar c1 = Calendar.getInstance();
+//        Calendar c2 = Calendar.getInstance();
+//        c1.setTime(d1);
+//        c2.setTime(d2);
+//
+//        System.out.println(d1.compareTo(d2));
+//        LocalDateTime now = LocalDateTime.now();
+//        System.out.println((c2.getTime().getTime() - c1.getTime().getTime()) / (1000 * 60 * 60 * 24));
+//        System.out.println((-new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth()).getTime() + d2.getTime()) / (24 * 3600 * 1000));
+
 
     }
 }

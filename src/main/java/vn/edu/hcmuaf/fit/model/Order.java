@@ -9,6 +9,11 @@ public class Order {
 
     private Map<Product, Integer> listPd= new HashMap<Product, Integer>();
 
+
+    public Order(){
+
+
+    }
     public Order(String id, String userId, String status, String deliveryAddressId, String note, Date orderDate) {
         this.id = id;
         this.userId = userId;

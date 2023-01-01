@@ -41,6 +41,10 @@ public class User {
         return role;
     }
 
+    public User(){
+
+    }
+
     public String getId() {
         return id;
     }
