@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.controller;
 
+import jakarta.servlet.http.Part;
 import vn.edu.hcmuaf.fit.model.Order;
 
 import javax.mail.MessagingException;
@@ -8,6 +9,10 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -131,5 +136,23 @@ public class Util {
         System.out.println((c2.getTime().getTime() - c1.getTime().getTime()) / (1000 * 60 * 60 * 24));
         System.out.println((-new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth()).getTime() + d2.getTime()) / (24 * 3600 * 1000));
 
+    }
+
+    public static void uploadImage(Part filePart, String imgLink) throws IOException {
+        if (!filePart.getSubmittedFileName().equals("")) {
+            InputStream fileContent = filePart.getInputStream();
+            File file = new File("D:\\Code_Web\\Project_Web\\src\\main\\webapp\\"+imgLink);
+            FileOutputStream out = new FileOutputStream(file);
+            File file2 = new File("D:\\Code_Web\\Project_Web\\target\\Project_Web-1.0-SNAPSHOT\\"+imgLink);
+            FileOutputStream out2 = new FileOutputStream(file2);
+            int i = fileContent.read();
+            while (i != -1) {
+                out.write(i);
+                out2.write(i);
+                i = fileContent.read();
+            }
+            out.close();
+            out2.close();
+        }
     }
 }

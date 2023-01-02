@@ -5,9 +5,18 @@ import vn.edu.hcmuaf.fit.controller.Util;
 import java.util.Date;
 
 public class Voucher {
-    private String id, name, type;
+    private String id, name, type, description;
     private long discount, minPrice;
     private Date startDate, endDate;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     private int status;
 
     public Voucher(String id, String type, String name, long discount, long minPrice, Date startDate, Date endDate, int status) {
@@ -19,6 +28,17 @@ public class Voucher {
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
+    }
+    public Voucher(String id, String type, String name, long discount, long minPrice, Date startDate, Date endDate, int status, String description) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.discount = discount;
+        this.minPrice = minPrice;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+        this.description= description;
     }
 
     public String getId() {
