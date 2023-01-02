@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
     public static User getUserByEmail(String userName) throws SQLException, ClassNotFoundException {
@@ -118,7 +120,34 @@ public class UserDAO {
         return ssID;
     }
 
+    public static List<User> getAllUser() throws SQLException, ClassNotFoundException {
+        List<User> res= new ArrayList<User>();
+        DataDB db= new DataDB();
+        PreparedStatement sta= db.getStatement("select * from user");
+        ResultSet rs= sta.executeQuery();
+        while (rs.next())
+            res.add(new User(rs.getString(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getDate(8), rs.getDate(10), rs.getInt(9),rs.getInt(11)));
+        return res;
+    }
+
+    public static int getNumUserByStatus(int status) throws SQLException, ClassNotFoundException {
+        DataDB db= new DataDB();
+        PreparedStatement sta= db.getStatement("select count(id) from user where status=?");
+        sta.setInt(1, status);
+        ResultSet rs= sta.executeQuery();
+        rs.next();
+        return rs.getInt(1);
+    }
+
+    public static List<User> getListUserByStatus(List<User> list, int status){
+        List<User> res = new ArrayList<User>();
+        for (User u: list){
+            if (u.getStatus()==status) res.add(u);
+        }
+        return res;
+    }
+
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        System.out.println(getUserById("U1").getImg());
+        System.out.println(getNumUserByStatus(-1));
     }
 }

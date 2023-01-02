@@ -26,6 +26,8 @@ public class Product {
 
     private int status;
 
+    private String optionName;
+
     private List<Option> options = new ArrayList<Option>();
 
     public Product(String id, String name, long price, String img) {
@@ -153,6 +155,10 @@ public class Product {
     public void setIns(int ins) {
         this.ins = ins;
     }
+
+    public String getOptionName() {return this.optionName;}
+
+    public void setOptionName(String optionName){ this.optionName=optionName;}
 
     @Override
     public boolean equals(Object o) {

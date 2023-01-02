@@ -30,7 +30,7 @@ public class Order {
         this.deliveryAddressId = deliveryAddressId;
         this.note = note;
         this.orderDate = orderDate;
-        this.userId=userName;
+        this.userName=userName;
     }
 
     public String getUserName() {
@@ -87,12 +87,17 @@ public class Order {
         this.amount = amount;
     }
 
-    public int getStatus() {
+    public String getStatus() {
+        return this.status;
+    }
+
+    public int getNumStatus(){
         if (status.equals("Chờ xác nhận")) return 1;
         if (status.equals("Chờ lấy hàng")) return 2;
         if (status.equals("Đang giao")) return 3;
         if (status.equals("Đã giao")) return 4;
-        else return 5;
+        if (status.equals("Yêu cầu hủy")) return 5;
+        else return 6;
     }
 
     public void setStatus(String status) {
