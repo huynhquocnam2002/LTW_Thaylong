@@ -18,7 +18,7 @@ public class OptionDAO {
         sta.setString(1, p.getId());
         ResultSet rs = sta.executeQuery();
         while (rs.next()) {
-            res.add(new Option(rs.getString(1), rs.getString(3), rs.getLong(4), rs.getInt(5), rs.getString(6), rs.getInt(7)));
+            res.add(new Option(rs.getString(1), rs.getString(2), rs.getLong(3), rs.getInt(4), rs.getString(5), rs.getInt(6)));
         }
         return res;
     }

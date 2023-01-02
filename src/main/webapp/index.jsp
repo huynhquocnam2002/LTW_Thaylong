@@ -31,7 +31,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.theme.min.css
 ">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
-
+    <%
+        String contextPath = request.getContextPath();
+    %>
+    <%System.out.println(contextPath);%>
     <!-- Custom StyleSheet -->
     <link rel="stylesheet" href="/css/style.css"/>
 
@@ -167,19 +170,19 @@
                 </div>
 
                 <ul class="nav__list" id="nav__list_DANHMUC">
-                <% List<Category> list = CategoryDAO.getCategoryHeader();%>
-                    <% for (int i = 0; i < list.size(); i++) {%>
-<%--    --%>
+<%--                <% List<Category> list = CategoryDAO.getCategoryHeader();%>--%>
+<%--                    <% for (int i = 0; i < list.size(); i++) {%>--%>
+<%--&lt;%&ndash;    &ndash;%&gt;--%>
                     <div class="nav__icons_danhmuc">
-                        <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="icon__item">
-                            <img class="icon__itemdanhmuc" src="<%=list.get(i).getImg()%>"></img>
+<%--                        <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="icon__item">--%>
+<%--                            <img class="icon__itemdanhmuc" src="<%=list.get(i).getImg()%>"></img>--%>
                         </a>
                         <li class="nav__item">
-                            <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="scroll-linkDANHMUC"><%=list.get(i).getName()%></a>
+<%--                            <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="scroll-linkDANHMUC"><%=list.get(i).getName()%></a>--%>
                         </li>
                     </div>
 
-                    <% }%>
+<%--                    <% }%>--%>
                     <div class="nav__icons_danhmuc">
                         <a href="#sectiondanhmuc2" class="icon__item">
                             <img class="icon__itemdanhmuc" src="image/icon/khac.jpg"></img>
@@ -547,21 +550,21 @@
                         <div class="product__footer">
                             <h3><%=pr.getName()%></h3>
                             <div class="rating">
-                                <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                                </svg>
-                                <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                                </svg>
-                                <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                                </svg>
-                                <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
-                                </svg>
-                                <svg>
-                                    <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
-                                </svg>
+<%--                                <svg>--%>
+<%--                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>--%>
+<%--                                </svg>--%>
+<%--                                <svg>--%>
+<%--                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>--%>
+<%--                                </svg>--%>
+<%--                                <svg>--%>
+<%--                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>--%>
+<%--                                </svg>--%>
+<%--                                <svg>--%>
+<%--                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>--%>
+<%--                                </svg>--%>
+<%--                                <svg>--%>
+<%--                                    <use xlink:href="./images/sprite.svg#icon-star-empty"></use>--%>
+<%--                                </svg>--%>
                             </div>
                             <div class="product__price" style="color: red">
 
