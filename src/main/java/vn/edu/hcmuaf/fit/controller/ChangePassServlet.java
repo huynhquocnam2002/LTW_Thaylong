@@ -29,7 +29,7 @@ public class ChangePassServlet extends HttpServlet {
                 try {
                     UserDAO.changeUserPassword(email, pass);
                     request.getSession().invalidate();
-                    response.sendRedirect("login.jsp");
+                    response.sendRedirect("/");
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 } catch (ClassNotFoundException e) {

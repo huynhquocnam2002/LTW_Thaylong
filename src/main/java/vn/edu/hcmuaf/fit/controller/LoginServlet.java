@@ -13,7 +13,7 @@ import java.sql.SQLException;
 @WebServlet(name = "LoginServlet", value = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request , HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.removeAttribute("user");
         User user = (User) session.getAttribute("user");
@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             try {
                 if (user.equals(UserDAO.getUserByEmail(user.getEmail()))) {
-                    response.sendRedirect("index.jsp");
+                    response.sendRedirect("/");
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
                 if (user.isPassword(request.getParameter("pass"))) {
                     session.setAttribute("user", user);
                     if (user.getRole() == 0)
-                        response.sendRedirect("index.jsp");
+                        response.sendRedirect("/");
                     else if (user.getRole()==1) response.sendRedirect("admin.jsp");
                 } else {
                     request.setAttribute("error", "Email hoặc mật khẩu không chính xác");

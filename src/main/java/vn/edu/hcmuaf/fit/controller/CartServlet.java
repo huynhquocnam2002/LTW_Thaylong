@@ -3,6 +3,7 @@ package vn.edu.hcmuaf.fit.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.hcmuaf.fit.DAO.ProductDAO;
 import vn.edu.hcmuaf.fit.DB.DataDB;
 import vn.edu.hcmuaf.fit.model.Cart;
 import vn.edu.hcmuaf.fit.model.Product;
@@ -28,14 +29,42 @@ public class CartServlet extends HttpServlet {
         String url = "cart.jsp";
 
         try {
+
             switch (command) {
                 case "insert":
                     if(cart == null) cart = new Cart();
+                    cart.insertToCart(msp);
+                    session.setAttribute("cart", cart);
+                    url = "cart.jsp";
+                    break;
+
+                case "plus":
+                    if(cart.getList().containsKey(msp)){
                         cart.insertToCart(msp);
                         session.setAttribute("cart", cart);
+                    }
+                    url = "cart.jsp";
+                    break;
+                case "minus":
+                    if(cart == null) cart = new Cart();
+                    cart.subTocart(msp);
+                    session.setAttribute("cart", cart);
+                    url = "cart.jsp";
+                    break;
+                case "delete":
+                    if(cart == null) cart = new Cart();
+                    cart.deleteCart(msp);
+                    session.setAttribute("cart", cart);
+                    url = "cart.jsp";
+                    break;
+                case "changenumber":
+                    if(cart == null) cart = new Cart();
+//                    cart.changenumber(msp, slnew);
+                    session.setAttribute("cart", cart);
+                    url = "cart.jsp";
                     break;
                 default:
-                    break;
+
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

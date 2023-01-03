@@ -143,6 +143,24 @@ public class Product {
     }
 
     @Override
+    public String toString() {
+        return "Product{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", img='" + img + '\'' +
+                ", ins=" + ins +
+                ", category='" + category + '\'' +
+                ", tag='" + tag + '\'' +
+                ", ID_producer='" + ID_producer + '\'' +
+                ", add_date=" + add_date +
+                ", quantity=" + quantity +
+                ", detail='" + detail + '\'' +
+                ", status=" + status +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Product)) return false;
