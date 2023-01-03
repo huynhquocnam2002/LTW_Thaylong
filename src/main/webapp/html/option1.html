@@ -5,348 +5,352 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-       <!-- font awesome -->
-       <link
-       rel="stylesheet"
-       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-       integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-       crossorigin="anonymous"
-       referrerpolicy="no-referrer"
-   />
-   <!-- Custom StyleSheet -->
-   <link rel="stylesheet" href="../style/cssheader.css"/>
-   <link rel="stylesheet" href="../css/option.css"/>
-   
-   
-   <script src="../js/ckeditor/ckeditor.js"></script>
+    <!-- font awesome -->
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+            integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    />
+    <!-- Custom StyleSheet -->
+    <link rel="stylesheet" href="../style/cssheader.css"/>
+    <link rel="stylesheet" href="../css/option.css"/>
+
+
+    <script src="../js/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 
-    <header id="header" class="header">
-        <div class="navigation">
-          <div class="container">
+<header id="header" class="header">
+    <div class="navigation">
+        <div class="container">
             <nav class="nav">
-              <div class="nav__hamburger">
-                <svg>
-                  <use xlink:href="./images/sprite.svg#icon-menu"></use>
-                </svg>
-              </div>
-  
-              <div class="nav__logo">
-                <a href="/phone_nam/home.html" class="scroll-link"> JC SHOP </a>
-              </div>
-  
-              <div class="nav__menu">
-                <div class="menu__top">
-                  <span class="nav__category">PHONE</span>
-                  <a href="#" class="close__toggle">
+                <div class="nav__hamburger">
                     <svg>
-                      <use xlink:href="./images/sprite.svg#icon-cross"></use>
+                        <use xlink:href="./images/sprite.svg#icon-menu"></use>
                     </svg>
-                  </a>
                 </div>
-                <ul class="nav__list">
-                  <li class="nav__item">
-                    <a href="/phone_nam/home.html" class="nav__link scroll-link"
-                      >Trang chủ</a
-                    >
-                  </li>
-                  <!--                        <li class="nav__item">-->
-                  <!--                            <a href="#category" class="nav__link scroll-link">Sản phẩm</a>-->
-                  <!--                        </li>-->
-                  <li class="nav__item_seach">
-                    <input
-                      class="input_seach"
-                      id="input_seach"
-                      type="text"
-                      placeholder="seach..."
-                    />
-                    <div class="nav__icons">
-                      <a href="#" class="icon__item" id="icon__item_seach">
-                        <svg class="icon__search">
-                          <use xlink:href="./images/sprite.svg#icon-search"></use>
-                        </svg>
-                      </a>
-                    </div>
-                  </li>
-                  <!--                        <li class="nav__item">-->
-  
-                  <!--                            <div class="nav__item_hotro">-->
-                  <!--                                <a  href="#hotro" class="nav__link scroll-link">HOTLINE HỖ TRỢ</a> <br>-->
-                  <!--                                <a  href="#hotro" class="nav__link scroll-link">0797.74.76.76</a>-->
-                  <!--                            </div>-->
-                  <!--                        </li>-->
-                </ul>
-              </div>
-  
-              <div class="nav__icons">
-                <a href="../../../../../Project_Web2/src/main/webapp/html/user.html" class="icon__item">
-                  <svg class="icon__user">
-                    <use xlink:href="./images/sprite.svg#icon-user"></use>
-                  </svg>
-                </a>
-                <div class="nav__item_user" id="nav__item_user">
-                  <a href="#login" class="nav__link scroll-link">Hello </a>
-                  <a href="#register" class="nav__link scroll-link">Minh Thuan</a
-                  ><br />
-                  <a href="" class="nav__link scroll-link">Admin</a>
-                </div>
-              </div>
-            </nav>
-          </div>
-  
-          <!--1-->
-        </div>
-      </header>
 
-      <section id="admin-content" class="section">
-        <div class="container" style="position: relative;" >
-            <h1 class="tab-name" style=" overflow: hidden; position: absolute; left: 100px;top:0px; z-index: 999;  white-space: nowrap;
+                <div class="nav__logo">
+                    <a href="/phone_nam/home.html" class="scroll-link"> JC SHOP </a>
+                </div>
+
+                <div class="nav__menu">
+                    <div class="menu__top">
+                        <span class="nav__category">PHONE</span>
+                        <a href="#" class="close__toggle">
+                            <svg>
+                                <use xlink:href="./images/sprite.svg#icon-cross"></use>
+                            </svg>
+                        </a>
+                    </div>
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a href="/phone_nam/home.html" class="nav__link scroll-link"
+                            >Trang chủ</a
+                            >
+                        </li>
+                        <!--                        <li class="nav__item">-->
+                        <!--                            <a href="#category" class="nav__link scroll-link">Sản phẩm</a>-->
+                        <!--                        </li>-->
+                        <li class="nav__item_seach">
+                            <input
+                                    class="input_seach"
+                                    id="input_seach"
+                                    type="text"
+                                    placeholder="seach..."
+                            />
+                            <div class="nav__icons">
+                                <a href="#" class="icon__item" id="icon__item_seach">
+                                    <svg class="icon__search">
+                                        <use xlink:href="./images/sprite.svg#icon-search"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </li>
+                        <!--                        <li class="nav__item">-->
+
+                        <!--                            <div class="nav__item_hotro">-->
+                        <!--                                <a  href="#hotro" class="nav__link scroll-link">HOTLINE HỖ TRỢ</a> <br>-->
+                        <!--                                <a  href="#hotro" class="nav__link scroll-link">0797.74.76.76</a>-->
+                        <!--                            </div>-->
+                        <!--                        </li>-->
+                    </ul>
+                </div>
+
+                <div class="nav__icons">
+                    <a href="../../../../../Project_Web2/src/main/webapp/html/user.html" class="icon__item">
+                        <svg class="icon__user">
+                            <use xlink:href="./images/sprite.svg#icon-user"></use>
+                        </svg>
+                    </a>
+                    <div class="nav__item_user" id="nav__item_user">
+                        <a href="#login" class="nav__link scroll-link">Hello </a>
+                        <a href="#register" class="nav__link scroll-link">Minh Thuan</a
+                        ><br/>
+                        <a href="" class="nav__link scroll-link">Admin</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!--1-->
+    </div>
+</header>
+
+<section id="admin-content" class="section">
+    <div class="container" style="position: relative;">
+        <h1 class="tab-name" style=" overflow: hidden; position: absolute; left: 100px;top:0px; z-index: 999;  white-space: nowrap;
             overflow: hidden; color:var(--black4)">Thêm lựa chọn mới</h1>
-            <div id="rightContainer">
-      <div class="right-tab add-new-product add-tab">
-      
-        <div class="right-tab-container" style="position: relative">
-          <form action="" onsubmit="return false">
-            <table class="add-new-product-table">
-           
-           
-              <tr class="table-row">
-                <td class="label-col">
-                  <label for="new-product-unit-price">Đơn giá:</label>
-                </td>
-                <td class="input-col">
-                  <input
-                    type="text"
-                    name="unitPrice"
-                    id="new-product-unit-price"
-                    class="new-product-unit-price-input input-field"
-                  />
-                </td>
-              </tr>
-          
-              <tr class="table-row">
-                <td class="label-col">
-                  <label for="new-product-quantity">Số lượng: </label>
-                </td>
-                <td class="input-col">
-                <input
-                    type="text"
-                    name="unitPrice"
-                    id="new-product-quantity"
-                    class="new-product-unit-price-input input-field"
-                  />
-                </td>
-              </tr>
-             
-              <tr class="table-row">
-                <td class="label-col">
-                  <label for="new-product-attributes">Thuộc tính:</label>
-                </td>
-                <td class="input-col">
-                <input
-                    type="text"
-                    name="unitPrice"
-                    id="new-product-attributes"
-                    class="new-product-unit-price-input input-field"
-                  />
-                </td>
-              </tr>
-             
-              <tr class="table-row">
-                <td class="label-col">
-                  <label for="new-product-status"
-                    >Trạng thái sản phẩm:</label
-                  >
-                </td>
-                <td class="input-col">
-                  <select
-                    name="status"
-                    id="new-product-status"
-                    class="new-product-status-input input-field"
-                  >
-                    <option value="-1" class="new-product-status-option">
-                      Đã xóa
-                    </option>
-                    <option
-                      value="0"
-                      class="new-product-status-option"
-                      selected
-                    >
-                      Sắp mở bán
-                    </option>
-                    <option value="1" class="new-product-status-option">
-                      Đang bán
-                    </option>
-                    <option value="2" class="new-product-status-option">
-                      Dừng kinh doanh
-                    </option>
-                  </select>
-                </td>
-              </tr>
-             
-          
-              <tr class="table-row">
-                <td class="label-col">
-                  <label for="new-product-image">Thêm hình ảnh:</label>
-                </td>
-                <td class="input-col">
-                    <main >
-                        <div class="container imageUploadContainer" style = "width:264px; flex-direction: column; float: left;">
-                          <div>
-                            <img src="img/default.jpg" alt="Ảnh xem trước" id="imagePreview" style="width:142px;height: 90px;border-radius: 0.3em;" />
-                          </div>
-                          <div class="imageUpload">
-                            <input type="file" id="imageUploadInput" accept=".jpg,.png" value=""  /> 
-                 
-                          </div>
-                          <div id="uploadFileStatus" ></div>
-                          <div class="fileInfomation" style="display:none;">
-                            <p>
-                              Tên file:
-                              <span id="fileInfomation_name">----</span>
-                            </p>
-                            <p>
-                              Định dạng:
-                              <span id="fileInfomation_type">----</span>
-                            </p>
-                            <p>
-                              Dung lượng:
-                              <span id="fileInfomation_size">----</span>
-                            </p>
-                          </div>
-                        </div>
-                      </main>
-                </td>
-              </tr>
-              <tr class="table-row">
-                <td class="label-col"></td>
-                <td class="input-col">
-                  <button  onclick="history.back()" class="cancel-button">Trở lại</button>
-                  <button class="confirm-button">Xác nhận</button>
-                </td>
-              </tr>
-            </table>
-          </form>
+        <div id="rightContainer">
+            <div class="right-tab add-new-product add-tab">
+
+                <div class="right-tab-container" style="position: relative">
+                    <form action="" onsubmit="return false">
+                        <table class="add-new-product-table">
+
+
+                            <tr class="table-row">
+                                <td class="label-col">
+                                    <label for="new-product-unit-price">Đơn giá:</label>
+                                </td>
+                                <td class="input-col">
+                                    <input
+                                            type="text"
+                                            name="unitPrice"
+                                            id="new-product-unit-price"
+                                            class="new-product-unit-price-input input-field"
+                                    />
+                                </td>
+                            </tr>
+
+                            <tr class="table-row">
+                                <td class="label-col">
+                                    <label for="new-product-quantity">Số lượng: </label>
+                                </td>
+                                <td class="input-col">
+                                    <input
+                                            type="text"
+                                            name="unitPrice"
+                                            id="new-product-quantity"
+                                            class="new-product-unit-price-input input-field"
+                                    />
+                                </td>
+                            </tr>
+
+                            <tr class="table-row">
+                                <td class="label-col">
+                                    <label for="new-product-attributes">Thuộc tính:</label>
+                                </td>
+                                <td class="input-col">
+                                    <input
+                                            type="text"
+                                            name="unitPrice"
+                                            id="new-product-attributes"
+                                            class="new-product-unit-price-input input-field"
+                                    />
+                                </td>
+                            </tr>
+
+                            <tr class="table-row">
+                                <td class="label-col">
+                                    <label for="new-product-status"
+                                    >Trạng thái sản phẩm:</label
+                                    >
+                                </td>
+                                <td class="input-col">
+                                    <select
+                                            name="status"
+                                            id="new-product-status"
+                                            class="new-product-status-input input-field"
+                                    >
+                                        <option value="-1" class="new-product-status-option">
+                                            Đã xóa
+                                        </option>
+                                        <option
+                                                value="0"
+                                                class="new-product-status-option"
+                                                selected
+                                        >
+                                            Sắp mở bán
+                                        </option>
+                                        <option value="1" class="new-product-status-option">
+                                            Đang bán
+                                        </option>
+                                        <option value="2" class="new-product-status-option">
+                                            Dừng kinh doanh
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+
+
+                            <tr class="table-row">
+                                <td class="label-col">
+                                    <label for="imageUploadInput">Thêm hình ảnh:</label>
+                                </td>
+                                <td class="input-col">
+                                    <main>
+                                        <div class="container imageUploadContainer"
+                                             style="width:264px; flex-direction: column; float: left;">
+                                            <div>
+                                                <img src="img/default.jpg" alt="Ảnh xem trước" id="imagePreview"
+                                                     style="width:142px;height: 90px;border-radius: 0.3em;"/>
+                                            </div>
+                                            <div class="imageUpload">
+                                                <input type="file" id="imageUploadInput" accept="image/*" value=""/>
+                                            </div>
+                                            <div id="uploadFileStatus"></div>
+                                            <div class="fileInfomation" style="display:none;">
+                                                <p>
+                                                    Tên file:
+                                                    <span id="fileInfomation_name">----</span>
+                                                </p>
+                                                <p>
+                                                    Định dạng:
+                                                    <span id="fileInfomation_type">----</span>
+                                                </p>
+                                                <p>
+                                                    Dung lượng:
+                                                    <span id="fileInfomation_size">----</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </main>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="label-col"></td>
+                                <td class="input-col">
+                                    <button onclick="history.back()" class="cancel-button">Trở lại</button>
+                                    <button class="confirm-button">Xác nhận</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-    
-
-    
-    <script>
+</section>
 
 
-        (function () {
-              var imageUpload = function () {
-                var self = this;
-                this.selector = {
-                  fileInput: document.getElementById("imageUploadInput"),
-                  fileInputBtn: document.getElementById("imageUploadInputBtn"),
-                  imagePreview: document.getElementById("imagePreview"),
-                  status: document.getElementById("uploadFileStatus"),
-                  sendBtn: document.getElementById("sendData"),
-                  infoName: document.getElementById("fileInfomation_name"),
-                  infoType: document.getElementById("fileInfomation_type"),
-                  infoSize: document.getElementById("fileInfomation_size"),
-                };
-                this.imageData = "";
-                this.fileTypes = ["image/png", "image/jpeg"];
-                this.maxSize = 30 * 1024 * 1024; // 30MB
-                this.uploadUrl = "https://tutrithuc.com/TestAPI/imageUpload";
-                this.onChangeInput = function (e) {
-                  // Reset file data / image preview
-                  self.selector.status.innerHTML = "";
-                  self.selector.imagePreview.setAttribute("src", "img/default.jpg");
-                  self.imageData = "";
-        
-                  // Get the current file upload
-                  var file = e.target.files[0];
-                  this.selector.infoName.innerHTML = file.name;
-                  this.selector.infoType.innerHTML = file.type;
-                  this.selector.infoSize.innerHTML = file.size + " bytes"; // in bytes
-        
-                  // Validate file type
-                  if (this.fileTypes.indexOf(file.type) == -1) {
+<script>
+
+
+    (function () {
+        var imageUpload = function () {
+            var self = this;
+            this.selector = {
+                fileInput: document.getElementById("imageUploadInput"),
+                fileInputBtn: document.getElementById("imageUploadInputBtn"),
+                imagePreview: document.getElementById("imagePreview"),
+                status: document.getElementById("uploadFileStatus"),
+                sendBtn: document.getElementById("sendData"),
+                infoName: document.getElementById("fileInfomation_name"),
+                infoType: document.getElementById("fileInfomation_type"),
+                infoSize: document.getElementById("fileInfomation_size"),
+            };
+            this.imageData = "";
+            this.fileTypes = ["image/png", "image/jpeg"];
+            this.maxSize = 30 * 1024 * 1024; // 30MB
+            this.uploadUrl = "https://tutrithuc.com/TestAPI/imageUpload";
+            this.onChangeInput = function (e) {
+                // Reset file data / image preview
+                self.selector.status.innerHTML = "";
+                self.selector.imagePreview.setAttribute("src", "img/default.jpg");
+                self.imageData = "";
+
+                // Get the current file upload
+                var file = e.target.files[0];
+                this.selector.infoName.innerHTML = file.name;
+                this.selector.infoType.innerHTML = file.type;
+                this.selector.infoSize.innerHTML = file.size + " bytes"; // in bytes
+
+                // Validate file type
+                if (this.fileTypes.indexOf(file.type) == -1) {
                     self.selector.status.innerHTML =
-                      "File không hợp lệ (chỉ file hình jpg và hình png được chấp nhận)";
+                        "File không hợp lệ (chỉ file hình jpg và hình png được chấp nhận)";
                     return;
-                  }
-        
-                  // Validate file size
-                  if (file.size > this.maxSize) {
+                }
+
+                // Validate file size
+                if (file.size > this.maxSize) {
                     self.selector.status.innerHTML =
-                      "Dung lượng file vượt quá giới hạn (tối đa 30MB được chấp nhận)";
+                        "Dung lượng file vượt quá giới hạn (tối đa 30MB được chấp nhận)";
                     return;
-                  }
-        
-                  var reader = new FileReader();
-                  reader.onload = function (e) {
+                }
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
                     self.imageData = e.target.result;
-        
+
                     // Validate file content
                     self.selector.imagePreview.onerror = function () {
-                      self.imageData = "";
-                      self.selector.imagePreview.setAttribute("src", "img/default.jpg");
-                      self.selector.status.innerHTML = "Nội dung hình không hợp lệ";
+                        self.imageData = "";
+                        self.selector.imagePreview.setAttribute("src", "img/default.jpg");
+                        self.selector.status.innerHTML = "Nội dung hình không hợp lệ";
                     };
                     self.selector.imagePreview.setAttribute("src", self.imageData);
-                  };
-                  reader.readAsDataURL(file);
                 };
-                this.sendData = function () {
-                  // Validate when file content is empty
-                  if (this.imageData == "") {
+                reader.readAsDataURL(file);
+            };
+            this.sendData = function () {
+                // Validate when file content is empty
+                if (this.imageData == "") {
                     self.selector.status.innerHTML = "Vui lòng chọn hình để tải lên";
                     return;
-                  }
-        
-                  // Prevent double click
-                  var data = {
+                }
+
+                // Prevent double click
+                var data = {
                     imageData: this.imageData,
-                  };
-                  this.imageData = "";
-        
-                  var request = new XMLHttpRequest();
-                  request.open("POST", this.uploadUrl);
-                  request.setRequestHeader(
+                };
+                this.imageData = "";
+
+                var request = new XMLHttpRequest();
+                request.open("POST", this.uploadUrl);
+                request.setRequestHeader(
                     "Content-Type",
                     "application/json; charset=UTF-8"
-                  );
-                  request.onreadystatechange = function () {
+                );
+                request.onreadystatechange = function () {
                     if (this.readyState === 4 && this.status === 200) {
-                      self.selector.status.innerHTML = "Upload thành công";
+                        self.selector.status.innerHTML = "Upload thành công";
                     } else {
-                      console.log(this.responseText);
-                      self.selector.status.innerHTML =
-                        "Đã có lỗi xảy ra, không upload được hình";
+                        console.log(this.responseText);
+                        self.selector.status.innerHTML =
+                            "Đã có lỗi xảy ra, không upload được hình";
                     }
-                  };
-        
-                  // Send request to server
-                  request.send(JSON.stringify(data));
                 };
-        
-                /*
-                 * Event trigger
-                 */
-                this.selector.fileInput.addEventListener("change", function (e) {
-                  self.onChangeInput(e);
-                });
-                this.selector.fileInputBtn.addEventListener("click", function () {
-                  self.selector.fileInput.click();
-                });
-                this.selector.sendBtn.addEventListener("click", function () {
-                  self.sendData();
-                });
-              };
-              window.addEventListener("DOMContentLoaded", function () {
-                console.log("DOM is loaded");
-                new imageUpload();
-              });
-            })();
 
-    </script>
-        
+                // Send request to server
+                request.send(JSON.stringify(data));
+            };
+
+            /*
+             * Event trigger
+             */
+            this.selector.fileInput.addEventListener("change", function (e) {
+                self.onChangeInput(e);
+            });
+            this.selector.fileInputBtn.addEventListener("click", function () {
+                self.selector.fileInput.click();
+            });
+            this.selector.sendBtn.addEventListener("click", function () {
+                self.sendData();
+            });
+        };
+        window.addEventListener("DOMContentLoaded", function () {
+            console.log("DOM is loaded");
+            new imageUpload();
+        });
+    })();
+
+</script>
+
+
 </body>
 
 

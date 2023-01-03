@@ -73,11 +73,14 @@ public class UserDAO {
 
     public static boolean changeInfoUser(String userId, String name, String email, String phone, String gender, String bday, String img) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
-        PreparedStatement sta = db.getStatement("update user set name=?, email=?, phone_number=?, gender=?, birthday=" + bday + ",img='" + img + "' where id='" + userId + "';");
+        PreparedStatement sta = db.getStatement("update user set name=?, email=?, phone_number=?, gender=?, birthday=?,img=? where id=?;");
         sta.setString(1, name);
         sta.setString(2, email);
         sta.setString(3, phone);
         sta.setString(4, gender);
+        sta.setString(5, bday);
+        sta.setString(6, img);
+        sta.setString(7, userId);
         return sta.execute();
     }
 

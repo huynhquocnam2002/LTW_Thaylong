@@ -43,54 +43,10 @@ let list_left_menu_item_show = document.querySelectorAll('#admin-content #leftCo
 let filter_price_order = document.querySelector("#rightContainer > div.manage-orders > div.manage-orders-filter-container > div > div > select.price-filter-select.filter-select")
 let sort_order_input = document.querySelector("#rightContainer > div.manage-orders > div.manage-orders-filter-container > div > div > select.other-filter-select.filter-select")
 let reset_tool_bt = document.querySelector("#rightContainer > div.manage-orders > div.manage-orders-filter-container > div > div > button")
-
-function getVariable() {
-    list_icon_up = document.querySelectorAll('#admin-content #leftContainer .icon-up')
-    list_extend_button = document.querySelectorAll('#admin-content #rightContainer .row-table-end .show-all-type-product')
-    list_checkbox_all_product = document.querySelectorAll('#admin-content #rightContainer .check-all')
-    list_checkbox_product = document.querySelectorAll('#admin-content #rightContainer .is-check')
-    list_checkbox_main_product = document.querySelectorAll('#admin-content #rightContainer .row-table-main .is-check')
-    list_checkbox_child_product = document.querySelectorAll('#admin-content #rightContainer .row-table-child .is-check')
-    list_product_tab = document.querySelectorAll('#admin-content #rightContainer .manage-products-flex-tab')
-    list_product_tab_head = document.querySelectorAll('#admin-content #rightContainer .flex-manage-products .flex-item')
-    list_edit_button = document.querySelectorAll('#admin-content #rightContainer .manage-products .edit-button')
-    list_edit_ok_button = document.querySelectorAll('#admin-content #rightContainer .manage-products .ok-button')
-    list_edit_proceed_button = document.querySelectorAll('#admin-content #rightContainer .manage-products .edit-proceed')
-    list_accept_proceed_button = document.querySelectorAll('#admin-content #rightContainer .manage-products .accept-proceed')
-    list_delete_proceed_button = document.querySelectorAll('#admin-content #rightContainer .manage-products .delete-proceed')
-    list_add_type_proceed_button = document.querySelectorAll('#admin-content #rightContainer .manage-products .add-type-proceed')
-    list_quantity_type_of_product = document.querySelectorAll('#admin-content #rightContainer .row-table-end .quantity-type')
-    list_quantity_product_in_tab = document.querySelectorAll('#admin-content #rightContainer .flex-item span.quantity')
-    quantity_checked_product = document.querySelector('#admin-content #rightContainer .manage-products .manage-products-filter-container .quantity')
-    quantity_checked_order = document.querySelector('#admin-content #rightContainer .manage-orders .manage-orders-filter-container .quantity')
-    list_copy_button = document.querySelectorAll('#admin-content #rightContainer .copy-icon')
-    tool_selling_button = document.querySelector('#admin-content #rightContainer .manage-products .tool-button.selling-button')
-    tool_stop_selling_button = document.querySelector('#admin-content #rightContainer .manage-products .tool-button.stop-selling-button')
-    tool_delete_button = document.querySelector('#admin-content #rightContainer .manage-products .tool-button.dee-button')
-    list_product_tool_button = document.querySelectorAll('#admin-content #rightContainer .manage-products .tool-button')
-    list_order_tool_button = document.querySelectorAll('#admin-content #rightContainer .manage-orders .tool-button')
-    search_product_button = document.querySelector('#admin-content #rightContainer .manage-products .input-filter .id-product-filter-div button .search-icon').parentElement
-    search_order_button = document.querySelector('#admin-content #rightContainer .manage-orders .input-filter .id-order-filter-div button .search-icon').parentElement
-    search_product_input = document.querySelector('#admin-content #rightContainer .manage-products .input-filter .id-product-filter-div .id-product-filter').parentElement
-    search_order_input = document.querySelector('#admin-content #rightContainer .manage-orders .input-filter .id-order-filter-div .id-order-filter').parentElement
-    price_filter_input = document.querySelector('#admin-content #rightContainer .manage-products .input-filter .price-filter-select')
-    category_filter_input = document.querySelector('#admin-content #rightContainer .manage-products .category-filter-select')
-    sort_filter_input = document.querySelector('#admin-content #rightContainer .manage-products .other-filter-select')
-    reset_filter_button = document.querySelector('#admin-content #rightContainer .manage-products .reset-filter-button')
-    list_left_menu_item = document.querySelectorAll('#admin-content #leftContainer .list-tab .list-tab-li .left-menu-item')
-    list_right_tab_item = document.querySelectorAll('#admin-content #rightContainer .right-tab')
-    change_info_home_button = document.querySelector('#admin-content #rightContainer .info-table tr td .change-info')
-    list_orders_tab = document.querySelectorAll('#admin-content #rightContainer .manage-orders .manage-orders-flex-tab')
-    list_users_tab = document.querySelectorAll('#admin-content #rightContainer .manage-users .manage-orders-flex-tab')
-    list_vouchers_tab = document.querySelectorAll('#admin-content #rightContainer .manage-vouchers .manage-vouchers-flex-tab')
-    list_orders_tab_head = document.querySelectorAll('#admin-content #rightContainer .manage-orders .flex-item')
-    list_users_tab_head = document.querySelectorAll('#admin-content #rightContainer .manage-users .flex-item')
-    list_vouchers_tab_head = document.querySelectorAll('#admin-content #rightContainer .manage-vouchers .flex-item')
-    list_left_menu_item_show = document.querySelectorAll('#admin-content #leftContainer .list-tab .list-tab-li .menu-left-show')
-    change_pass_bt = document.querySelector('#changePassBT')
-    cancel_change_pass_bt = document.querySelector('#back')
-
-}
+let search_category_bt = document.querySelector("#rightContainer > div.right-tab.manage-categorys > div.manage-orders-filter-container > div > div > div > button")
+let search_category_input = document.querySelector("#rightContainer > div.right-tab.manage-categorys > div.manage-orders-filter-container > div > div > div > input")
+let filter_category = document.querySelector("#rightContainer > div.right-tab.manage-categorys > div.manage-orders-filter-container > div > div > select")
+let reset_category =document.querySelector("#rightContainer > div.right-tab.manage-categorys > div.manage-orders-filter-container > div > div > button")
 
 
 //show list child in left menu admin
@@ -111,18 +67,9 @@ function showChild(li, num) {
 
 
 function run() {
-    getVariable()
+
 
     let list_product = document.querySelectorAll('#admin-content #rightContainer .manage-products .table-row-div-product .manage-products-table')
-    // for (let i of list_product) {
-    //     let status = i.querySelectorAll('.row-table-main .product-status-col p')
-    //     let select = i.querySelector('.row-table-main .product-status').value
-    //     for (let j of status) {
-    //         if (j.className.indexOf('active-status') != -1)
-    //             j.className = j.className.slice(0, j.className.indexOf('active-status') - 1)
-    //     }
-    //     status[parseInt(select)+1].className += ' active-status'
-    // }
 
     //change tab by left menu
     for (let i = 0; i < list_left_menu_item.length; i++) {
@@ -265,12 +212,8 @@ function run() {
         let input_text = parent.querySelector('.id-product-filter').value
         findProductByNameOrId(input_text)
     }
-    search_product_input.onkeydown = function (event) {
-        if (event.key == 'Enter') {
-            let parent = search_product_input.parentElement
-            let input_text = parent.querySelector('.id-product-filter').value
-            findProductByNameOrId(input_text)
-        }
+    search_product_input.querySelector('.id-product-filter').onkeyup = function () {
+        findProductByNameOrId(search_product_input.querySelector('.id-product-filter').value)
     }
 
     //tool: search order by order-id or product-id or user-id
@@ -279,12 +222,18 @@ function run() {
         let input_text = parent.querySelector('.id-order-filter').value
         findOrderByNameOrId(input_text)
     }
-    search_order_input.onkeydown = function (event) {
-        if (event.key == 'Enter') {
-            let parent = search_order_input.parentElement
-            let input_text = parent.querySelector('.id-order-filter').value
-            findOrderByNameOrId(input_text)
-        }
+    search_order_input.querySelector('.id-order-filter').onkeyup = function () {
+        findOrderByNameOrId(search_order_input.querySelector('.id-order-filter').value)
+    }
+
+    //search category
+    search_category_bt.onclick = function () {
+        let parent = search_category_bt.parentElement
+        let input_text = parent.querySelector('.id-order-filter').value
+        findCategory(input_text)
+    }
+    search_category_input.onkeyup = function () {
+        findCategory(this.value)
     }
 
     price_filter_input.onchange = filterByPrice
@@ -307,6 +256,12 @@ function run() {
     // reset order filter
     reset_tool_bt.onclick = resetOrderFilter
 
+    //sort category
+    filter_category.onchange = sortCategory
+
+    //reset category
+    reset_category.onclick = resetCategoryFilter
+
 }
 
 function resetFilter() {
@@ -327,6 +282,13 @@ function resetOrderFilter() {
     filterOrderByPrice()
     sortOrderByFilter()
     search_order_button.click()
+}
+
+function resetCategoryFilter(){
+    filter_category.value = '0'
+    search_category_input.value = ''
+    sortCategory()
+    search_category_bt.click()
 }
 
 function filterByPrice() {
@@ -713,6 +675,43 @@ function sortOrderByFilter() {
 
 }
 
+function sortCategory() {
+    let input_sort = document.querySelector("#rightContainer > div.right-tab.manage-categorys.active-right-tab > div.manage-orders-filter-container > div > div > select").value
+    let container = document.querySelector('#admin-content #rightContainer .manage-categorys .table-row-div-order')
+    let list = document.querySelectorAll('#admin-content #rightContainer .manage-categorys .table-row-div-order .manage-order-table')
+    let arr = []
+    for (let i of list) {
+        arr.push(i)
+    }
+    switch (input_sort) {
+        case '0':
+            arr.sort((a, b) => {
+                return a.querySelector('.row-table-main .order-id .id-span').innerText.localeCompare(b.querySelector('.row-table-main .order-id .id-span').innerText);
+            })
+            for (let i of arr) {
+                container.appendChild(i)
+            }
+            break
+        case 'decrease-price':
+            arr.sort((a, b) => {
+                return a.querySelector('.row-table-main .product-unit-price').innerText.localeCompare(b.querySelector('.row-table-main .product-unit-price').innerText);
+            })
+            for (let i of arr) {
+                container.appendChild(i)
+            }
+            break
+        case 'increase-price':
+            arr.sort((a, b) => {
+                return -a.querySelector('.row-table-main .product-unit-price').innerText.localeCompare(b.querySelector('.row-table-main .product-unit-price').innerText);
+            })
+            for (let i of arr) {
+                container.appendChild(i)
+            }
+            break
+    }
+
+}
+
 function findProductByNameOrId(input_text) {
     let manage_products = document.querySelector('.manage-products')
     let list_product = manage_products.querySelectorAll('.active-product-tab .table-row-div-product .row-table-main')
@@ -724,6 +723,22 @@ function findProductByNameOrId(input_text) {
                 i.parentElement.parentElement.classList.add('search-hide')
             } else {
                 i.parentElement.parentElement.classList.remove('search-hide')
+            }
+        }
+    }
+}
+
+function findCategory(input_text) {
+    let manage_products = document.querySelector('.manage-categorys')
+    let list_product = manage_products.querySelectorAll('.table-row-div-order table.manage-order-table')
+    for (let i of list_product) {
+        if (i.querySelector('.order-id') != null) {
+            let name = i.querySelector('p.product-unit-price').innerHTML.toLowerCase()
+            let id = i.querySelector('.order-id .id-span').innerHTML
+            if (name.indexOf(input_text.toLowerCase()) == -1 && id.indexOf(input_text) == -1) {
+                i.classList.add('search-hide')
+            } else {
+                i.classList.remove('search-hide')
             }
         }
     }
@@ -752,9 +767,9 @@ function findOrderByNameOrId(input_text) {
             }
         }
         if (order_id.indexOf(input_text) == -1 && user_id.indexOf(input_text) == -1 && user_name.indexOf(input_text) == -1 && !isContainProductName && !isContainProductId) {
-            i.style.display = 'none'
+            i.classList.add('search-hide')
         } else {
-            i.style.display = 'table'
+            i.classList.remove('search-hide')
         }
     }
 }
