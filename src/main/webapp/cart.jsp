@@ -210,13 +210,13 @@
                                             <div class="input-counter">
                                                 <div>
 
-                                                    <a class="minus-btn" href="CartServlet?command=minus&idProduct=<%=pr.getId()%>&cartID=<%=Long.parseLong(request.getParameter("cartID"))%>">
+                                                    <a class="minus-btn" href="CartServlet?command=minus&idProduct=<%=pr.getId()%>&cartID=<%=Long.parseLong((String) session.getAttribute("cartID"))%>">
                                                         <svg>
                                                             <use xlink:href="./images/sprite.svg#icon-minus"></use>
                                                         </svg>
                                                     </a>
                                                     <input  type="text" min="1" value="<%=list.get(ds.getKey())%>" max="100" class="counter-btn" >
-                                                    <a class="plus-btn" href="CartServlet?command=plus&idProduct=<%=pr.getId()%>&cartID=<%=Long.parseLong(request.getParameter("cartID"))%>">
+                                                    <a class="plus-btn" href="CartServlet?command=plus&idProduct=<%=pr.getId()%>&cartID=<%=Long.parseLong((String) session.getAttribute("cartID"))%>">
                                                         <svg>
                                                             <use xlink:href="./images/sprite.svg#icon-plus"></use>
                                                         </svg>
@@ -228,7 +228,7 @@
                                             <div class="price">
                                                 <span class="new__price"><%=list.get(ds.getKey())*pr.getPrice()%> VNĐ</span>
                                             </div>
-                                            <a href="CartServlet?command=delete&idProduct=<%=pr.getId()%>&cartID=<%=Long.parseLong(request.getParameter("cartID"))%>" class="remove__cart-item">
+                                            <a href="CartServlet?command=delete&idProduct=<%=pr.getId()%>&cartID=<%=Long.parseLong((String) session.getAttribute("cartID"))%>" class="remove__cart-item">
                                                 <svg>
                                                     <use xlink:href="./images/sprite.svg#icon-trash"></use>
                                                 </svg>

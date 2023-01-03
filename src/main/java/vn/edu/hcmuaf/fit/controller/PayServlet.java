@@ -11,16 +11,16 @@ import java.io.IOException;
 public class PayServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
+        doPost(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        if(user ==null){
+        if (user == null) {
             request.getRequestDispatcher("LoginServlet").forward(request, response);
-        }else{
+        } else {
             request.getRequestDispatcher("/").forward(request, response);
         }
     }

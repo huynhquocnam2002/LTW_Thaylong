@@ -26,6 +26,8 @@ public class CartServlet extends HttpServlet {
         Cart cart = (Cart) session.getAttribute("cart");
         String msp = request.getParameter("idProduct");
         String command = request.getParameter("command");
+        String cartID = request.getParameter("cartID");
+        session.setAttribute("cartID" ,cartID);
         String url = "cart.jsp";
 
         try {
