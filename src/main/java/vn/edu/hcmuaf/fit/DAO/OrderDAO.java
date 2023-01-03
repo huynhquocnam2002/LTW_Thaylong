@@ -124,4 +124,12 @@ public class OrderDAO {
         }
         System.out.println();
     }
+
+    public static void changeStatusOrder(String id, String status) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        PreparedStatement sta = db.getStatement("update orders set id_status_order=? where id=?");
+        sta.setString(1, status);
+        sta.setString(2, id);
+        sta.executeUpdate();
+    }
 }

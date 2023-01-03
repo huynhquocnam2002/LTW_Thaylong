@@ -93,11 +93,10 @@ public class Order {
 
     public int getNumStatus(){
         if (status.equals("Chờ xác nhận")) return 1;
-        if (status.equals("Chờ lấy hàng")) return 2;
-        if (status.equals("Đang giao")) return 3;
-        if (status.equals("Đã giao")) return 4;
-        if (status.equals("Yêu cầu hủy")) return 5;
-        else return 6;
+        if (status.equals("Đang giao")) return 2;
+        if (status.equals("Đã giao")) return 3;
+        if (status.equals("Yêu cầu hủy")) return 4;
+        else return 5;
     }
 
     public void setStatus(String status) {

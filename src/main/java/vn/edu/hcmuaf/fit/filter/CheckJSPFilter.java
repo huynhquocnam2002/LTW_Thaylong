@@ -21,7 +21,7 @@ public class CheckJSPFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         System.out.println(req.getRequestURI());
         String uri = req.getRequestURI();
-        if (uri.equals("/") || uri.equals("/index.jsp") || uri.equals("/register.jsp") || uri.equals("/login.jsp") || uri.equals("/danhmuc_seach.jsp") || uri.equals("/forgetPassword.jsp")) chain.doFilter(request, response);
+        if (uri.equals("/") || uri.equals("/index.jsp") || uri.equals("/register.jsp") || uri.equals("/login.jsp") || uri.equals("/danhmuc_seach.jsp") || uri.equals("/forgetPassword.jsp") || uri.equals("/product.jsp")) chain.doFilter(request, response);
         else
             request.getRequestDispatcher("index.jsp").forward(request, response);
     }

@@ -11,7 +11,7 @@ import vn.edu.hcmuaf.fit.model.User;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebFilter(filterName = "LoginFilter", urlPatterns = {"/UserServlet","/AnnouncementServlet","/ChangeInfoUserServlet","/VerifyRegisterServlet","/WelcomeAdminServlet","/ChangePassServlet","/AdminServlet"})
+@WebFilter(filterName = "LoginFilter", urlPatterns = {"/UserServlet", "/AnnouncementServlet", "/ChangeInfoUserServlet", "/VerifyRegisterServlet", "/WelcomeAdminServlet", "/ChangePassServlet", "/AdminServlet", "/ModifyProductServlet", "/StopSellProductServlet", "/AddOptionServlet", "/InfoOptionServlet","/InfoCategoryServlet","/AddCategoryServlet"})
 public class LoginFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }
@@ -21,11 +21,11 @@ public class LoginFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
-        HttpServletRequest req= (HttpServletRequest) request;
-        HttpServletResponse res=(HttpServletResponse) response;
-        HttpSession session=req.getSession();
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
+        HttpSession session = req.getSession();
         try {
-            if (session == null || session.getAttribute("user") == null || UserDAO.getUserBySessionID((String) session.getAttribute("user"))==null) {
+            if (session == null || session.getAttribute("user") == null || UserDAO.getUserBySessionID((String) session.getAttribute("user")) == null) {
                 res.sendRedirect("login.jsp"); // No logged-in user found, so redirect to login page.
             } else {
                 res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.

@@ -15,10 +15,10 @@ public class ProductDAO {
     public static Set<Product> getProducts() throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
         Set<Product> res = new HashSet<Product>();
-        PreparedStatement sta=db.getStatement("select product.*, category.name from product, category where category.id=product.id_category");
+        PreparedStatement sta = db.getStatement("select product.*, category.name from product, category where category.id=product.id_category");
         ResultSet rs = sta.executeQuery();
         while (rs.next()) {
-            Product p=new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
+            Product p = new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
                     rs.getString(4), rs.getInt(5), rs.getString(13), rs.getString(7),
                     rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12));
             p.addOption(OptionDAO.getOptions(p));
@@ -27,10 +27,10 @@ public class ProductDAO {
         return res;
     }
 
-    public static Set<Product> getProductsByStatus(Set<Product> set,int status) throws SQLException, ClassNotFoundException {
+    public static Set<Product> getProductsByStatus(Set<Product> set, int status) throws SQLException, ClassNotFoundException {
         Set<Product> res = new HashSet<Product>();
-        for (Product p: set){
-            if (p.getStatus()==status) res.add(p);
+        for (Product p : set) {
+            if (p.getStatus() == status) res.add(p);
         }
         return res;
     }
@@ -215,18 +215,19 @@ public class ProductDAO {
         //
         return res;
     }
+
     public static void stopSellProduct(String id) throws SQLException, ClassNotFoundException {
-        DataDB db= new DataDB();
-        PreparedStatement sta= db.getStatement("update product set status=2 where id=?");
+        DataDB db = new DataDB();
+        PreparedStatement sta = db.getStatement("update product set status=2 where id=?");
         sta.setString(1, id);
         sta.executeUpdate();
     }
 
     public static void addProduct(Product p) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
-        PreparedStatement sta= db.getStatement("Insert into product values (?,?,?,?,?,?,?,?,?,?,?,?)");
+        PreparedStatement sta = db.getStatement("Insert into product values (?,?,?,?,?,?,?,?,?,?,?,?)");
         sta.setString(1, p.getId());
-        sta.setString(2,p.getName());
+        sta.setString(2, p.getName());
         sta.setLong(3, p.getPrice());
         sta.setString(4, p.getImg());
         sta.setInt(5, p.getIns());
@@ -263,7 +264,31 @@ public class ProductDAO {
 
     }
 
+    public static void changeInfo(Product product) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        PreparedStatement sta = db.getStatement("update product set name=?, unit_price=?, img=?, insurance=?, id_category=?, tag=?, id_producer=?, status=?, quantity=?, details=? where id=?");
+        sta.setString(1, product.getName());
+        sta.setLong(2, product.getPrice());
+        sta.setString(3, product.getImg());
+        sta.setInt(4, product.getIns());
+        sta.setString(5, product.getCategory());
+        sta.setString(6, product.getTag());
+        sta.setString(7, product.getID_producer());
+        sta.setInt(8, product.getStatus());
+        sta.setInt(9, product.getQuantity());
+        sta.setString(10, product.getDetail());
+        sta.setString(11, product.getId());
+        sta.executeUpdate();
+    }
+
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        System.out.println(getProductSeach("sac").size());
+        Set<Product> allProduct = ProductDAO.getProducts();
+        for (Product p : allProduct) {
+            if (p.getName().equalsIgnoreCase("Nguyễn Minh Thuận")) {
+                System.out.println(p);
+                System.out.println(p.getOptions().size());
+
+            }
+        }
     }
 }

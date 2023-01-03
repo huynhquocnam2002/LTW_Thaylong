@@ -619,8 +619,19 @@ body{
     width: fit-content;
     margin: auto;
 }
+#rightContainer .proceed-div a{
+    text-decoration: none;
+}
 #admin-content input:focus-visible{
     outline: none;
+}
+#rightContainer > div.right-tab.manage-products > div.manage-all-products-tab.manage-products-flex-tab > div > div.table-row-div.table-row-div-product > table > tbody > tr > td.product-quantity-col > div > input {
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+#rightContainer .search-hide{
+    display: none;
 }
 #admin-content .manage-products-table .row-table .quantity-block .product-quantity{
     background-color: var(--white);
