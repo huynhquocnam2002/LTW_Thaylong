@@ -13,17 +13,16 @@ import java.sql.SQLException;
 @WebServlet(name = "LoginServlet", value = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request , HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.removeAttribute("user");
-        String sessionID = session.getAttribute("user") +"";
-        System.out.println(sessionID);
-        if (sessionID.equals("null")) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             try {
-                if (UserDAO.getUserBySessionID(sessionID)!=null) {
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                if (user.equals(UserDAO.getUserByEmail(user.getEmail()))) {
+                    response.sendRedirect("/");
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -43,11 +42,10 @@ public class LoginServlet extends HttpServlet {
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
                 if (user.isPassword(request.getParameter("pass"))) {
-                    String ssID=UserDAO.updateSessionID(user.getId());
-                    session.setAttribute("user", ssID);
+                    session.setAttribute("user", user);
                     if (user.getRole() == 0)
-                        request.getRequestDispatcher("index.jsp").forward(request,response);
-                    else if (user.getRole()==1) response.sendRedirect("/AdminServlet");
+                        response.sendRedirect("/");
+                    else if (user.getRole()==1) response.sendRedirect("admin.jsp");
                 } else {
                     request.setAttribute("error", "Email hoặc mật khẩu không chính xác");
                     request.getRequestDispatcher("login.jsp").forward(request, response);

@@ -18,7 +18,7 @@
 <body>
 <!-- header -->
 <div class="container">
-    <a href="index.jsp">
+    <a href="/">
         <img class="homelogin" src="image/icon/back7.png" alt=""/>
     </a>
 </div>

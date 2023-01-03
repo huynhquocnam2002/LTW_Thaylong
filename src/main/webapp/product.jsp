@@ -125,7 +125,7 @@
 
                     <div class="nav__item_user" id="nav__item_user">
                         <a href="/LoginServlet" class="nav__link scroll-link">Đăng Nhập /</a>
-                        <a href="register.jsp" class="nav__link scroll-link">Đăng Ký</a><br>
+                        <a href="RegisterServlet" class="nav__link scroll-link">Đăng Ký</a><br>
                         <a href="" class="nav__link scroll-link">Thành Viên</a>
                     </div>
                 </div>
@@ -134,13 +134,13 @@
                     User user = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
                 %>
                 <div class="nav__icons">
-                    <a href="user.jsp" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
+                    <a href="UserServlet" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
                         <img src="<%=user.getImg()%>"
                              style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%" alt="img">
                     </a>
 
                     <div class="nav__item_user" style="font-size: 1.2rem" id="nav__item_user1">
-                        <a href="user.jsp" class="nav__link scroll-link"
+                        <a href="UserServlet" class="nav__link scroll-link"
                            style="line-height: 2"><%=user.getName()%>
                         </a><br>
                         <a href="" class="nav__link scroll-link">Thành Viên</a>
@@ -154,14 +154,14 @@
                         int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
                 %>
                 <div class="nav__icons" id="nav__item_giohang">
-                    <a href="cart.jsp" class="icon__item">
+                    <a href="CartServlet" class="icon__item">
                         <svg class="icon__cart">
                             <use xlink:href="image/images/sprite.svg#icon-shopping-basket"></use>
                         </svg>
 
                         <span id="cart__total"><%=numOfCartItems%></span>
                     </a>
-                    <a href="cart.jsp" class="nav__link_giohang">Giỏ Hàng</a>
+                    <a href="CartServlet" class="nav__link_giohang">Giỏ Hàng</a>
                 </div>
                 <%}%>
             </nav>
@@ -823,20 +823,20 @@
                                 <div class="product__price">
                                     <h4><%=pr.getPrice()%> VNĐ</h4>
                                 </div>
-                                <a href="CartServlet?command=insert&idProduct=<%=ProductDAO.getProductById(request.getParameter("idProduct")).getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                     <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
                                 </a>
                             </div>
                             <ul>
                                 <li>
-                                    <a data-tip="Quick View" data-place="left" href="product.jsp?idProduct=<%=pr.getId()%>">
+                                    <a data-tip="Quick View" data-place="left" href="Product?idProduct=<%=pr.getId()%>">
                                         <svg>
                                             <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=ProductDAO.getProductById(request.getParameter("idProduct")).getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                    <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                         <svg>
                                             <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
@@ -917,20 +917,20 @@
                                 <div class="product__price">
                                     <h4><%=pr.getPrice()%> VNĐ</h4>
                                 </div>
-                                <a href="CartServlet?command=insert&idProduct=<%=ProductDAO.getProductById(request.getParameter("idProduct")).getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                     <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
                                 </a>
                             </div>
                             <ul>
                                 <li>
-                                    <a data-tip="Quick View" data-place="left" href="product.jsp?idProduct=<%=pr.getId()%>">
+                                    <a data-tip="Quick View" data-place="left" href="Product?idProduct=<%=pr.getId()%>">
                                         <svg>
                                             <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=ProductDAO.getProductById(request.getParameter("idProduct")).getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                    <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                         <svg>
                                             <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
@@ -1040,62 +1040,62 @@
         <div class="footer__top">
             <div class="footer-top__box">
                 <h3>BỔ SUNG</h3>
-                <a href="/phone_nam/htmlfooter/nhanhieu.html">Nhãn hiệu</a>
-                <a href="/phone_nam/htmlfooter/phieuquatang.html">Phiếu quà tặng</a>
-                <a href="/phone_nam/htmlfooter/chinhanh.html">Chi nhánh</a>
+                <a href="nhanhieu.jsp">Nhãn hiệu</a>
+                <a href="phieuquatang.jsp">Phiếu quà tặng</a>
+                <a href="chinhanh.jsp">Chi nhánh</a>
                 <a href="#">Đặc biệt</a>
-                <a href="/phone_nam/htmlfooter/sodoweb.html">Sơ đồ trang Web</a>
+                <a href="sodoweb.jsp">Sơ đồ trang Web</a>
             </div>
             <div class="footer-top__box">
                 <h3>THÔNG TIN</h3>
-                <a href="/phone_nam/htmlfooter/vechungtoi.html">Về chúng tôi</a>
-                <a href="/phone_nam/htmlfooter/chinhsachbaomat.html">Chính sách bảo mật</a>
-                <a href="/phone_nam/htmlfooter/dieukhoanvadieukien.html">Các điều khoản và điều kiện</a>
-                <a href="/phone_nam/htmlfooter/lienhechungtoi.html">Liên hệ chúng tôi</a>
-                <a href="/phone_nam/htmlfooter/sodoweb.html">Sơ đồ trang Web</a>
+                <a href="vechungtoi.jsp">Về chúng tôi</a>
+                <a href="chinhsachbaomat.jsp">Chính sách bảo mật</a>
+                <a href="dieukhoanvadieukien.jsp">Các điều khoản và điều kiện</a>
+                <a href="lienhechungtoi.jsp">Liên hệ chúng tôi</a>
+                <a href="sodoweb.jsp">Sơ đồ trang Web</a>
             </div>
             <div class="footer-top__box">
                 <h3>TÀI KHOẢN CỦA TÔI</h3>
-                <a href="/phone_thuan/user.html">Tài khoản của tôi</a>
-                <a href="/phone_thuan/user.html">Lịch sử đơn hàng</a>
-                <a href="/phone_chuong/cart.html">Danh sách mong muốn</a>
+                <a href="/css/login.css">Tài khoản của tôi</a>
+                <a href="/css/login.css">Lịch sử đơn hàng</a>
+                <a href="/css/login.css">Danh sách mong muốn</a>
                 <a href="#">Cung cấp thông tin</a>
-                <a href="/phone_nam/indexLogin.html">Quay lại</a>
+                <a href="/">Quay lại</a>
             </div>
             <div class="footer-top__box">
                 <h3>CONTACT US</h3>
                 <div>
-              <span>
-                <svg>
-                  <use xlink:href="image/images/sprite.svg#icon-location"></use>
-                </svg>
-              </span>
+            <span>
+              <svg>
+                <use xlink:href="image/images/sprite.svg#icon-location"></use>
+              </svg>
+            </span>
                     <a
                             href="https://www.google.com/maps/dir/10.8840587,106.7833045/t%C3%B2a+b5+ktx+khu+b+%C4%91hqg+tphcm/@10.8838766,106.7809145,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3174d890227de92d:0x99150888f275361b!2m2!1d106.7829712!2d10.8839777">
                         Tòa B5, KTX_B ĐHQG TPHCM, Linh Trung, Thủ Đức, TPHCM</a>
                 </div>
                 <div>
-              <span>
-                <svg>
-                  <use xlink:href="image/images/sprite.svg#icon-envelop"></use>
-                </svg>
-              </span>
+            <span>
+              <svg>
+                <use xlink:href="image/images/sprite.svg#icon-envelop"></use>
+              </svg>
+            </span>
                     JC-PHONEcompany@gmail.com
                 </div>
                 <div>
-              <span>
-                <svg>
-                  <use xlink:href="image/images/sprite.svg#icon-phone"></use>
-                </svg>
-              </span>
+            <span>
+              <svg>
+                <use xlink:href="image/images/sprite.svg#icon-phone"></use>
+              </svg>
+            </span>
                     08.999.999.99
                 </div>
                 <div>
-              <span>
-                <svg>
-                  <use xlink:href="image/images/sprite.svg#icon-paperplane"></use>
-                </svg>
-              </span>
+            <span>
+              <svg>
+                <use xlink:href="image/images/sprite.svg#icon-paperplane"></use>
+              </svg>
+            </span>
                     TOÀN VIỆT NAM
                 </div>
             </div>

@@ -909,6 +909,7 @@ span.dot::before {
     color: var(--colorhome);
     cursor: pointer;
     background: white;
+    border-radius: 50px 50px;
 }
 
 .product__btn:focus {
@@ -1067,8 +1068,18 @@ ai biết :((
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 3rem 2rem;
 }
+.category__center .category__products:hover {
+    box-shadow: -1px 5px 20px 0 rgb(0 0 0 / 43%);
+}
+.category__center .category__products .product__footer>a{
+    transform: translate(-50%, -50%) scale(0.7);
+    transition: all 0.7s ease-in-out;
+    opacity: 0;
+
+}
 .category__center .category__products:hover .product__footer>a{
     opacity: 1;
+
 }
 
 @media only screen and (max-width: 999px) {
@@ -2506,8 +2517,6 @@ Cart Area Media Query
 }
 
 #icon__item_seach {
-    width: 1.6rem;
-    height: 1.6rem;
     border: 1px none var(--black);
 }
 

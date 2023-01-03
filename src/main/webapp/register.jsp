@@ -17,7 +17,7 @@
 <body>
 <!-- header -->
 <div class="container">
-    <a href="index.jsp">
+    <a href="/">
         <img class="homelogin" src="image/icon/back7.png" alt=""/>
     </a>
 </div>
@@ -101,7 +101,7 @@
                     <input class="login1" type="submit" value="Đăng kí"/>
                     <div class="two-a">
                         <p class="left" href="">Đã Có Tài Khoản</p>
-                        <a class="right" href="login.jsp">Đăng Nhập</a>
+                        <a class="right" href="LoginServlet">Đăng Nhập</a>
                     </div>
                 </form>
             </div>
