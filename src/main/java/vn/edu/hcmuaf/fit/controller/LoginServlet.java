@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("user", user);
                     if (user.getRole() == 0)
                         response.sendRedirect("/");
-                    else if (user.getRole()==1) response.sendRedirect("admin.jsp");
+                    else if (user.getRole()==1) response.sendRedirect("AdminServlet");
                 } else {
                     request.setAttribute("error", "Email hoặc mật khẩu không chính xác");
                     request.getRequestDispatcher("login.jsp").forward(request, response);

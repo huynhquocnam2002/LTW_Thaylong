@@ -194,21 +194,4 @@ public class Product {
         return options.size();
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", img='" + img + '\'' +
-                ", ins=" + ins +
-                ", category='" + category + '\'' +
-                ", tag='" + tag + '\'' +
-                ", ID_producer='" + ID_producer + '\'' +
-                ", add_date=" + add_date +
-                ", quantity=" + quantity +
-                ", detail='" + detail + '\'' +
-                ", status=" + status +
-                '}';
-    }
 }

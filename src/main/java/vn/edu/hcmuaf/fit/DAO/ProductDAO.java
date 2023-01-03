@@ -284,11 +284,8 @@ public class ProductDAO {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         Set<Product> allProduct = ProductDAO.getProducts();
         for (Product p : allProduct) {
-            if (p.getName().equalsIgnoreCase("Nguyễn Minh Thuận")) {
-                System.out.println(p);
-                System.out.println(p.getOptions().size());
+                System.out.println(p.toString());
 
-            }
         }
     }
 }
