@@ -19,9 +19,9 @@ public class VoucherDAO {
         sta.setString(1,userId);
         ResultSet rs = sta.executeQuery();
         while (rs.next()) {
-            int quantity = rs.getInt(10);
+            int quantity = rs.getInt(11);
             for (int i = 0; i < quantity; i++)
-                res.add(new Voucher(rs.getString(1), rs.getString(9), rs.getString(3), rs.getLong(4), rs.getLong(5), rs.getDate(6), rs.getDate(7), rs.getInt(8)));
+                res.add(new Voucher(rs.getString(1), rs.getString(10), rs.getString(3), rs.getLong(4), rs.getLong(5), rs.getDate(6), rs.getDate(7), rs.getInt(8)));
         }
         return res;
     }
@@ -60,5 +60,30 @@ public class VoucherDAO {
             if (v.getType().equals("Giảm giá")) res.add(v);
         }
         return res;
+    }
+
+    public static List<Voucher> getListVoucher() throws SQLException, ClassNotFoundException {
+        List<Voucher> res= new ArrayList<Voucher>();
+        DataDB db = new DataDB();
+        PreparedStatement sta= db.getStatement("select *, t.name from voucher v, voucher_type t where v.id_type=t.id");
+        ResultSet rs= sta.executeQuery();
+        while (rs.next())
+            res.add(new Voucher(rs.getString(1),rs.getString(10), rs.getString(3), rs.getLong(4), rs.getLong(5), rs.getDate(6), rs.getDate(7), rs.getInt(8), rs.getString(9)));
+        return res;
+    }
+
+    public static List<Voucher> getListVoucherByStatus(List<Voucher> list, int status ){
+        List<Voucher> res = new ArrayList<Voucher>();
+        for (Voucher v: list){
+            if (v.getStatus()==status) res.add(v);
+        }
+        return res;
+    }
+
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        List<Voucher> vouchers= getVouchers("U1");
+        for (Voucher v: vouchers){
+            System.out.println(v);
+        }
     }
 }

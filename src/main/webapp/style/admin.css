@@ -460,7 +460,7 @@ body{
 }
 #admin-content .table-manage-product-div table tr td:nth-child(3),
 #admin-content .table-manage-product-div table tr th:nth-child(3){
-    width: 10%;
+    width: 15%;
 }
 #admin-content .table-manage-order-div table tr td:nth-child(2),
 #admin-content .table-manage-order-div table tr th:nth-child(2){
@@ -468,7 +468,7 @@ body{
 }
 #admin-content .table-manage-product-div table tr td:nth-child(4),
 #admin-content .table-manage-product-div table tr th:nth-child(4){
-    width: 8%;
+    width: 10%;
 }
 #admin-content .table-manage-order-div table tr td:nth-child(4),
 #admin-content .table-manage-order-div table tr th:nth-child(4){
@@ -476,7 +476,7 @@ body{
 }
 #admin-content .table-manage-product-div table tr td:nth-child(5),
 #admin-content .table-manage-product-div table tr th:nth-child(5){
-    width: 12%;
+    width: 17%;
 }
 #admin-content .table-manage-order-div table tr td:nth-child(5),
 #admin-content .table-manage-order-div table tr th:nth-child(5){
@@ -484,7 +484,7 @@ body{
 }
 #admin-content .table-manage-product-div table tr td:nth-child(6),
 #admin-content .table-manage-product-div table tr th:nth-child(6){
-    width: 13%;
+    width: 15%;
 }
 #admin-content .table-manage-order-div table tr td:nth-child(6),
 #admin-content .table-manage-order-div table tr th:nth-child(6){
@@ -492,7 +492,7 @@ body{
 }
 #admin-content .table-manage-product-div table tr td:nth-child(7),
 #admin-content .table-manage-product-div table tr th:nth-child(7){
-    width: 13%;
+    width: 10%;
 }
 #admin-content .table-manage-order-div table tr td:nth-child(7),
 #admin-content .table-manage-order-div table tr th:nth-child(7){
@@ -586,10 +586,52 @@ body{
 #admin-content .manage-products-table .row-table .product-type-col .product-type{
     text-align: center;
     border: none;
-    width: 4rem;
+}
+
+#rightContainer > div.right-tab.manage-products.active-right-tab > div.manage-all-products-tab.manage-products-flex-tab.active-product-tab > div > div.table-row-div.table-row-div-product > table > tbody > tr.row-table.row-table-main.product-row > td.uint-price-col > div > p{
+    text-align: center;
+}
+
+#rightContainer > div.right-tab.manage-products.active-right-tab > div.manage-all-products-tab.manage-products-flex-tab.active-product-tab > div > div.table-row-div.table-row-div-product > table > tbody > tr.row-table.row-table-main.product-row > td.product-quantity-col > div > input{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+#rightContainer > div.right-tab.manage-products.active-right-tab > div.manage-all-products-tab.manage-products-flex-tab.active-product-tab > div > div.table-row-div.table-row-div-product > table > tbody > tr.row-table.row-table-main.product-row > td.proceed > div p{
+    text-align: center;
+}
+#rightContainer .price-hide{
+    display: none;
+    margin-bottom: 0;
+}
+#rightContainer > div.right-tab.add-new-product.add-tab > div > form > table > tbody > tr:nth-child(11) > td.input-col > button{
+    margin-left: 15rem;
+}
+#rightContainer > div.right-tab.manage-categorys.active-right-tab > div.manage-all-orders-tab.manage-orders-flex-tab.active-order-tab > div > div.table-row-div.table-row-div-order > table > tbody > tr > td.order-id-col > div{
+    margin: auto;
+    width: fit-content;
+}
+#rightContainer > div.right-tab.manage-categorys.active-right-tab > div.manage-all-orders-tab.manage-orders-flex-tab.active-order-tab > div > div.table-row-div.table-row-div-order > table > tbody > tr > td.user-name-col > div > img{
+    display: block;
+    margin: auto;
+}
+#rightContainer > div.right-tab.manage-categorys.active-right-tab > div.manage-all-orders-tab.manage-orders-flex-tab.active-order-tab > div > div.table-row-div.table-row-div-order > table > tbody > tr > td.unit-price-col > div{
+    width: fit-content;
+    margin: auto;
+}
+#rightContainer .proceed-div a{
+    text-decoration: none;
 }
 #admin-content input:focus-visible{
     outline: none;
+}
+#rightContainer > div.right-tab.manage-products > div.manage-all-products-tab.manage-products-flex-tab > div > div.table-row-div.table-row-div-product > table > tbody > tr > td.product-quantity-col > div > input {
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+#rightContainer .search-hide{
+    display: none;
 }
 #admin-content .manage-products-table .row-table .quantity-block .product-quantity{
     background-color: var(--white);
@@ -689,6 +731,9 @@ body{
 #admin-content .manage-products-flex-tab .manage-products-table{
     border-spacing: 0;
 }
+#admin-content .manage-products-table .row-table-child .unit-price-block p{
+    text-align: center;
+}
 #admin-content #rightContainer .manage-products-flex-tab,
 #admin-content #rightContainer .manage-orders-flex-tab,
 #admin-content #rightContainer .manage-vouchers-flex-tab{
@@ -700,11 +745,18 @@ body{
     display: block;
     min-height: 20rem;
 }
-#admin-content #rightContainer .right-tab.row-table-main.price-hide,
-#admin-content #rightContainer .right-tab.row-table-main.category-hide,
-#admin-content #rightContainer .right-tab.row-table-end.price-hide,
-#admin-content #rightContainer .right-tab.row-table-end.category-hide{
+#admin-content #rightContainer .right-tab .manage-products-table.price-hide,
+#admin-content #rightContainer .right-tab .manage-products-table.category-hide,
+#admin-content #rightContainer .right-tab .manage-products-table.search-hide{
     display: none;
+    margin-bottom: 0;
+}
+#admin-content #rightContainer .right-tab .row-table-main.price-hide,
+#admin-content #rightContainer .right-tab .row-table-main.category-hide,
+#admin-content #rightContainer .right-tab .row-table-end.price-hide,
+#admin-content #rightContainer .right-tab .row-table-end.category-hide{
+    display: none;
+    margin-bottom: 0;
 }
 
 /*add new product*/

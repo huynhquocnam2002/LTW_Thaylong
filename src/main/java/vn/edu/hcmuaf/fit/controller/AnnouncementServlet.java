@@ -4,6 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.hcmuaf.fit.DAO.AnnouncementDAO;
+import vn.edu.hcmuaf.fit.DAO.UserDAO;
 import vn.edu.hcmuaf.fit.DB.DataDB;
 import vn.edu.hcmuaf.fit.model.User;
 
@@ -15,7 +16,16 @@ public class AnnouncementServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String method=request.getParameter("method");
-        String userId=((User)request.getSession().getAttribute("user")).getId();
+        String sessionID= (String) request.getSession().getAttribute("user");
+        User user = null;
+        try {
+            user = UserDAO.getUserBySessionID(sessionID);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String userId=user.getId();
         switch (method){
             case "deleteAll":
                 try {

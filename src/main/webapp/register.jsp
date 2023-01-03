@@ -114,13 +114,13 @@
             </div>
             <div class="icon">
                 <div class="item-icon">
-                    <img src="phone_nam/icon/facebook.png" alt="logo facebook"/>
+                    <img src="image/icon/facebook.png" alt="logo facebook"/>
                 </div>
                 <div class="item-icon">
-                    <img src="phone_nam/icon/google-plus.png" alt="logo google-plus"/>
+                    <img src="image/icon/google-plus.png" alt="logo google-plus"/>
                 </div>
                 <div class="item-icon">
-                    <img src="phone_nam/icon/twitter.png" alt="logo twitter"/>
+                    <img src="image/icon/twitter.png" alt="logo twitter"/>
                 </div>
             </div>
         </div>

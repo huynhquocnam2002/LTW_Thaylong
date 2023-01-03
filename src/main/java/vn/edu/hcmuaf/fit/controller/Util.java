@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.controller;
 
+import jakarta.servlet.http.Part;
 import vn.edu.hcmuaf.fit.model.Order;
 
 import javax.mail.MessagingException;
@@ -8,6 +9,10 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -39,12 +44,12 @@ public class Util {
         return res;
     }
 
-    public static boolean containStatus(List<Order> list, String status) {
-        for (Order o : list) {
-            if (o.getStatus().equals(status)) return true;
-        }
-        return false;
-    }
+//    public static boolean containStatus(List<Order> list, String status) {
+//        for (Order o : list) {
+//            if (o.getStatus().equals(status)) return true;
+//        }
+//        return false;
+//    }
 
     static boolean sendEmail(String to, String code) {
         String from = "20130426@st.hcmuaf.edu.vn";
@@ -91,33 +96,67 @@ public class Util {
     }
 
     public static String reverseDate(String str) {
-        String[] arr=str.split("-/");
+        String[] arr = str.split("-/");
         String res = "";
-        for (int i= arr.length-1; i>=0; i--)
-            res+=arr[i]+"-";
-        return res.substring(0, res.length()-1);
+        for (int i = arr.length - 1; i >= 0; i--)
+            res += arr[i] + "-";
+        return res.substring(0, res.length() - 1);
     }
 
-    public static String createOTP(){
+    public static String createOTP() {
         Random rd = new Random();
         String confirmCode = rd.nextInt(1000000) + "";
         return confirmCode;
     }
 
+    public static String createSessionID() {
+        Random rd = new Random();
+        char[] arr = new char[26];
+        for (int i = 0; i < 26; i++) {
+            arr[i] = (char) ('a' + i);
+        }
+        String id = "";
+        for (int i = 0; i < 15; i++)
+            id += arr[rd.nextInt(26)];
+        return id;
+    }
+
+
+
+
 
     public static void main(String[] args) {
-        Date d1 = new Date(2022, 11, 27);
-        Date d2 = new Date(2023, 1, 11);
-        System.out.println(d1);
-        Calendar c1 = Calendar.getInstance();
-        Calendar c2 = Calendar.getInstance();
-        c1.setTime(d1);
-        c2.setTime(d2);
+//        Date d1 = new Date(2022, 11, 27);
+//        Date d2 = new Date(2023, 1, 11);
+//        System.out.println(d1);
+//        Calendar c1 = Calendar.getInstance();
+//        Calendar c2 = Calendar.getInstance();
+//        c1.setTime(d1);
+//        c2.setTime(d2);
+//
+//        System.out.println(d1.compareTo(d2));
+//        LocalDateTime now = LocalDateTime.now();
+//        System.out.println((c2.getTime().getTime() - c1.getTime().getTime()) / (1000 * 60 * 60 * 24));
+//        System.out.println((-new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth()).getTime() + d2.getTime()) / (24 * 3600 * 1000));
 
-        System.out.println(d1.compareTo(d2));
-        LocalDateTime now = LocalDateTime.now();
-        System.out.println((c2.getTime().getTime() - c1.getTime().getTime()) / (1000 * 60 * 60 * 24));
-        System.out.println((-new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth()).getTime() + d2.getTime()) / (24 * 3600 * 1000));
 
+    }
+
+    public static void uploadImage(Part filePart, String imgLink) throws IOException {
+        if (!filePart.getSubmittedFileName().equals("")) {
+            InputStream fileContent = filePart.getInputStream();
+            File file = new File("D:\\Code_Web\\Project_Web\\src\\main\\webapp\\"+imgLink);
+            FileOutputStream out = new FileOutputStream(file);
+            File file2 = new File("D:\\Code_Web\\Project_Web\\target\\Project_Web-1.0-SNAPSHOT\\"+imgLink);
+            FileOutputStream out2 = new FileOutputStream(file2);
+            int i = fileContent.read();
+            while (i != -1) {
+                out.write(i);
+                out2.write(i);
+                i = fileContent.read();
+            }
+            out.close();
+            out2.close();
+        }
     }
 }

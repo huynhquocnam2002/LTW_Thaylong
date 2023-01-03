@@ -1,0 +1,698 @@
+:root {
+    --primaryColor: #f1f1f1;
+    --button: blue;
+    --buttonHover: #BE1E2D;
+    --active: blue;
+    --black: #222;
+    --black2: #555;
+    --black3: #252525;
+    --black4: #000;
+    --black5: #212529;
+    --orange: #eb0028;
+    --white: #fff;
+    --grey: #959595;
+    --grey2: #666;
+    --grey3: #ccc;
+    --secondaryColor: #2b1f4d;
+    --yellow: #ffcc00;
+    --green: #5ac50d;
+    --blue: rgb(56, 10, 223);
+    --red: rgb(255, 0, 0);
+}
+
+
+body {
+    margin: 0;
+    font-family: "Archivo", sans-serif;
+  background-color: var(--primaryColor);
+}
+
+
+
+  #admin-content {
+    color: var(--black2);
+    font-size: 15px;
+    background-color: var(--primaryColor);
+    height: 100%;
+  }
+  
+  #admin-content ul {
+    padding-inline-start: 10px;
+  }
+  
+  #admin-content button {
+    background-color: var(--button);
+    color: white;
+  }
+ 
+  
+  #admin-content .container {
+    width: 1200px;
+    overflow: auto;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    
+  }
+  
+  #admin-content .flex {
+    display: flex;
+    margin-top: 1rem;
+  }
+  
+  #admin-content .quantity {
+    color: var(--grey);
+    margin-left: 5px;
+  }
+  
+  #admin-content i {
+    color: var(--grey);
+  }
+  
+  #admin-content .id-text {
+    display: inline-block;
+    font-size: 0.8em;
+    margin: 0;
+  }
+  
+  #admin-content #rightContainer .right-tab .tab-name {
+    color: black;
+    margin-bottom: 0.2rem;
+  
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  #admin-content #rightContainer .right-tab-container {
+    background-color: var(--white);
+    border-radius: 0.5em;
+    min-height: 28.5rem;
+  
+  
+  }
+.right-tab{
+
+    border-radius: 0.5em !important;
+  
+  }
+
+
+  .right-tab .add-new-product .add-tab .active-right-tab {
+    width: 1000px;
+  }
+  
+  .right-tab,
+  .right-tab-container {
+    width: 1000px;
+  
+    display: flex;
+  
+    justify-content: space-evenly;
+  
+    background-color: var(--white);
+  
+    margin-top: 50px;
+  }
+  
+  .right-tab .right-tab-container .right-tab-option {
+    width: 250px;
+  
+    height: 300px;
+  
+    border: 1px solid var(--grey);
+  
+    margin: 50px 70px 0 0;
+  
+    border-radius: 0.5em;
+  
+    padding: 0 0 0 10px;
+  }
+  
+  .input-field {
+    border-radius: 0.3em;
+    border: 1px solid var(--grey);
+    padding: 0.5em 0.3em;
+    width: 80% !important;
+    margin: 8px 0;
+  }
+  .table-row .label-col .input-col {
+
+    min-width: 80% !important;
+  }
+  
+  .right-tab .right-tab-container .right-tab-option .label-col   {
+    -width: 90px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  #admin-content #rightContainer .add-tab .right-tab-container form {
+    width: 80%;
+    margin: 2.5rem -6rem 0 !important;
+  }
+  
+  #admin-content
+    #rightContainer
+    .add-tab
+    .right-tab-container
+    form
+    .add-new-product-table {
+    width: 100%;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  #admin-content
+    #rightContainer
+    .add-tab
+    .right-tab-container
+    form
+    .add-new-product-table
+    tr {
+    height: 2.5rem;
+  }
+  
+  #admin-content
+    #rightContainer
+    .add-tab
+    .right-tab-container
+    form
+    .add-new-product-table
+    tr
+    td:first-child {
+    width: 28%;
+    text-align: right;
+    padding-right: 1.5rem;
+  }
+  
+  #admin-content
+    #rightContainer
+    .add-tab
+    .right-tab-container
+    form
+    .add-new-product-table
+    tr
+    td:last-child {
+    width: 70%;
+  }
+  
+  #admin-content
+    #rightContainer
+    .add-tab
+    .right-tab-container
+    form
+    .add-new-product-table
+    tr
+    td:last-child
+    .input-field {
+    border-radius: 0.3em;
+    border: 1px solid var(--grey);
+    padding: 0.5em 0.3em;
+    width: 90%;
+  
+    margin: 8px 0;
+  }
+  
+  #admin-content
+    #rightContainer
+    .add-tab
+    .right-tab-container
+    form
+    .add-new-product-table
+    tr
+    td:last-child
+    button {
+    border-radius: 3px;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-right: 3rem;
+    min-width: 4rem;
+  }
+  
+  #admin-content
+    #rightContainer
+    .add-tab
+    .right-tab-container
+    form
+    .add-new-product-table
+    tr
+    td:last-child
+    button:hover {
+    cursor: pointer;
+    background-color: var(--buttonHover);
+  }
+  
+  #admin-content #rightContainer .manage-order-table .row-table .order-id-col p {
+    display: inline-block;
+  }
+  
+
+  
+  #admin-content
+    #rightContainer
+    .manage-order-table
+    .row-table
+    .product-status-col
+    .status.active-status {
+    display: block;
+  }
+  
+  #admin-content #rightContainer .manage-order-table-head {
+    margin: 0.5rem 0;
+    width: 100%;
+  }
+  
+  #admin-content #rightContainer .manage-order-table tr:first-child td {
+    vertical-align: top;
+    horiz-align: center;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-order-table
+    .row-table-main
+    tr:first-child
+    td
+    > div:first-child {
+    margin: auto;
+    width: fit-content;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-order-table
+    .row-table-main
+    td:first-child {
+    vertical-align: middle;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-order-table
+    .row-table-main
+    .update-date-col
+    .product-update-date {
+    text-align: center;
+  }
+  
+  #admin-content #rightContainer .manage-order-table .row-table-main .proceed p {
+    text-align: center;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-order-table
+    .row-table-main
+    td:first-child
+    div {
+    width: fit-content;
+    margin: auto;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-order-table
+    .row-table-main
+    .user-name-col
+    .product-name-container {
+    margin: 0;
+  }
+  
+  #admin-content #rightContainer .manage-order-table tr .proceed .proceed-div p {
+    color: var(--active);
+    margin-bottom: 0.7em;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-order-table
+    tr
+    .proceed
+    .proceed-div
+    p:hover {
+    color: var(--buttonHover);
+    cursor: pointer;
+  }
+  
+  #admin-content #rightContainer .manage-order-table tr .product-type-col {
+    width: 10%;
+  }
+  
+  #admin-content #rightContainer .manage-order-table tr .product-type-col p {
+    text-align: center;
+  }
+  
+  #admin-content #rightContainer .manage-order-table tr .product-quantity-col {
+    width: 14%;
+  }
+  
+  #admin-content #rightContainer .manage-order-table tr .product-quantity-col p {
+    text-align: center;
+  }
+  
+  #admin-content #rightContainer .manage-order-table tr .product-price-col p {
+    text-align: center;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-order-table
+    .row-table-child
+    .product-name-container
+    .container-info {
+    width: 80%;
+    vertical-align: top;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-order-table
+    .row-table-child
+    .product-name-container
+    .product-name {
+    margin-top: 0.3em;
+  }
+  
+  #admin-content
+    #rightContainer
+    .right-tab
+    .row-table-main
+    .user-name-col
+    img.category-img {
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  #admin-content
+    #rightContainer
+    .right-tab
+    .row-table-main
+    .user-name-col
+    .input-category-img {
+    display: none;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-categorys
+    .manage-order-table-head
+    th:nth-child(3),
+  #admin-content
+    #rightContainer
+    .manage-categorys
+    .manage-order-table
+    td:nth-child(3) {
+    width: 15%;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-categorys
+    .manage-order-table-head
+    th:nth-child(2),
+  #admin-content
+    #rightContainer
+    .manage-categorys
+    .manage-order-table
+    td:nth-child(2) {
+    width: 15%;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-producer
+    .manage-order-table-head
+    th:nth-child(3),
+  #admin-content
+    #rightContainer
+    .manage-producer
+    .manage-order-table
+    td:nth-child(3) {
+    width: 15%;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-producer
+    .manage-order-table-head
+    th:nth-child(2),
+  #admin-content
+    #rightContainer
+    .manage-producer
+    .manage-order-table
+    td:nth-child(2) {
+    width: 15%;
+  }
+  
+  #admin-content
+    #rightContainer
+    .right-tab
+    .manage-order-table
+    .unit-price-col
+    .product-unit-price {
+    display: inline-block;
+  }
+  
+  #admin-content
+    #rightContainer
+    .right-tab
+    .manage-order-table
+    .product-status-col
+    .category-status {
+    display: none;
+  }
+  
+  #admin-content #rightContainer .right-tab .manage-order-table .accept-proceed {
+    display: none;
+  }
+  
+  #admin-content #rightContainer .add-new-category .right-tab-container form {
+    padding-top: 4rem;
+  }
+  
+  #admin-content #rightContainer .add-new-producer .right-tab-container form {
+    padding-top: 4rem;
+  }
+  
+  #admin-content #rightContainer .change-pass {
+    display: none;
+  }
+  
+  #admin-content #rightContainer .change-pass.show {
+    display: block;
+  }
+  
+  #admin-content #rightContainer .manage-users .user-name-col .container-img {
+    display: inline-block;
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+  }
+  
+  #admin-content #rightContainer .manage-users .user-name-col .container-info {
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  #admin-content #rightContainer .manage-users .user-name-col img {
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-users
+    .row-table-end
+    .show-all-type-product {
+    text-align: center;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-users
+    .user-name-col
+    .container-info
+    .user-name {
+    margin-top: 1em;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-users
+    .manage-order-table-head
+    th:nth-child(3),
+  #admin-content
+    #rightContainer
+    .manage-users
+    .manage-order-table
+    td:nth-child(3) {
+    width: 10%;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-users
+    .manage-order-table-head
+    th:nth-child(2),
+  #admin-content
+    #rightContainer
+    .manage-users
+    .manage-order-table
+    td:nth-child(2) {
+    width: 25%;
+  }
+  
+  #admin-content #rightContainer .manage-users .number-phone-col .phone-number-p {
+    display: inline-block;
+  }
+  
+  #admin-content #rightContainer .manage-vouchers .user-name-col img {
+    width: 5rem;
+    height: 3rem;
+  }
+  
+  #admin-content #rightContainer .manage-vouchers .user-name-col .container-info {
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  #admin-content #rightContainer .manage-vouchers .user-name-col .container-img {
+    display: inline-block;
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+  }
+  
+  #admin-content #rightContainer .manage-vouchers .ok-button {
+    display: none;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-vouchers
+    .manage-order-table-head
+    th:nth-child(2),
+  #admin-content
+    #rightContainer
+    .manage-vouchers
+    .manage-order-table
+    td:nth-child(2) {
+    width: 30%;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-vouchers
+    .manage-order-table-head
+    th:nth-child(3),
+  #admin-content
+    #rightContainer
+    .manage-vouchers
+    .manage-order-table
+    td:nth-child(3) {
+    width: 12%;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-vouchers
+    .manage-order-table-head
+    th:nth-child(4),
+  #admin-content
+    #rightContainer
+    .manage-vouchers
+    .manage-order-table
+    td:nth-child(4) {
+    width: 14%;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-vouchers
+    .manage-order-table-head
+    th:nth-child(5),
+  #admin-content
+    #rightContainer
+    .manage-vouchers
+    .manage-order-table
+    td:nth-child(5) {
+    width: 14%;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-vouchers
+    .manage-order-table-head
+    th:nth-child(6),
+  #admin-content
+    #rightContainer
+    .manage-vouchers
+    .manage-order-table
+    td:nth-child(6) {
+    width: 12%;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-vouchers
+    .manage-order-table-head
+    th:nth-child(7),
+  #admin-content
+    #rightContainer
+    .manage-vouchers
+    .manage-order-table
+    td:nth-child(7) {
+    width: 12%;
+  }
+  
+  #admin-content #rightContainer .manage-vouchers .manage-order-table input {
+    background-color: var(--white);
+    border: none;
+    border-radius: 0.3em;
+    text-align: center;
+    margin-top: 0.5em;
+  }
+  
+  #admin-content #rightContainer .manage-vouchers select {
+    display: none;
+  }
+  
+  #admin-content
+    #rightContainer
+    .manage-vouchers
+    .discount-div
+    .product-unit-price {
+    width: 6rem;
+    text-align: right;
+  }
+  
+  #admin-content #rightContainer .manage-vouchers .proceed p {
+    margin: 0 0 0.6em 0;
+  }
+  
+  #admin-content #rightContainer .manage-vouchers i {
+    cursor: pointer;
+  }
+  
+  #admin-content #rightContainer .manage-turnover .input-filter {
+    height: unset;
+  }
+  
+  #admin-content #rightContainer .manage-turnover .container-img {
+    display: inline-block;
+  }
+  
+  #admin-content #rightContainer .manage-turnover .container-img img {
+    width: 3rem;
+  }
+  
+  #admin-content #rightContainer .manage-turnover .container-info {
+    display: inline-block;
+  }
+  

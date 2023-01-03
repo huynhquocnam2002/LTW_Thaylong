@@ -6,6 +6,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.DAO.OrderDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.DAO.AnnouncementDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.DAO.VoucherDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.UserDAO" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +36,7 @@
 
 <body>
 <%
-    User user = (User) session.getAttribute("user");
+    User user = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
 %>
 <header id="header" class="header">
     <div class="navigation">
@@ -481,6 +482,7 @@
                                                             <td>
                                                                 <input type="text" name="name"
                                                                        value="<%=user.getName()%>" required id="ten">
+
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -511,19 +513,19 @@
                                                                 <label for="male">Giới tính:</label>
                                                             </td>
                                                             <td>
-                                                                <%if (user.getGender().equals("nam")) {%>
+                                                                <%if (user.getGender().equalsIgnoreCase("nam")) {%>
                                                                 <input type="radio" name="gender" id="male" value="nam"
                                                                        class="gt" checked><%} else {%>
                                                                 <input type="radio" name="gender" id="male" value="nam"
                                                                        class="gt"><%}%>
                                                                 <label for="male">Nam</label>
-                                                                <%if (user.getGender().equals("nu")) {%>
+                                                                <%if (user.getGender().equalsIgnoreCase("nu")) {%>
                                                                 <input type="radio" name="gender" id="female" value="nu"
                                                                        class="gt" checked><%} else {%>
                                                                 <input type="radio" name="gender" id="female" value="nu"
                                                                        class="gt"><%}%>
                                                                 <label for="female">Nữ</label>
-                                                                <%if (user.getGender().equals("UKN")) {%>
+                                                                <%if (user.getGender().equalsIgnoreCase("UKN")) {%>
                                                                 <input type="radio" name="gender" id="unset" value="ukn"
                                                                        class="gt" checked><%} else {%>
                                                                 <input type="radio" name="gender" id="unset" value="ukn"
@@ -531,6 +533,7 @@
                                                                 <label for="female">Ẩn</label>
                                                             </td>
                                                         </tr>
+
                                                         <tr>
                                                             <td>
                                                                 <label for="birthDay">Ngày sinh:</label>
@@ -559,6 +562,7 @@
                                                 </form>
                                             </div>
                                         </div>
+
                                         <div id="tab3">
                                             <div class="thong_bao_control">
                                                 <form action="/AnnouncementServlet">
