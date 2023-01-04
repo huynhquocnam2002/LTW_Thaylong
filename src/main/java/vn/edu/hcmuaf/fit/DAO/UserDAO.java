@@ -36,6 +36,14 @@ public class UserDAO {
         return res;
     }
 
+    public static boolean containID(String id) throws SQLException, ClassNotFoundException {
+        DataDB db= new DataDB();
+        PreparedStatement sta = db.getStatement("select * from user where id=?");
+        sta.setString(1, id);
+        ResultSet rs= sta.executeQuery();
+        return rs.next();
+    }
+
     public static boolean register(String id, String email, String pass) throws SQLException, ClassNotFoundException, IOException {
         DataDB db = new DataDB();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -53,7 +61,7 @@ public class UserDAO {
         }
         out.close();
         out2.close();
-        PreparedStatement sta = db.getStatement("insert into user values (?,?,?,null,?,?,?,null,0,?);");
+        PreparedStatement sta = db.getStatement("insert into user values (?,?,?,null,?,?,?,null,0,?,0,null);");
         sta.setString(1, id);
         sta.setString(2, "image/user/user_" + id + ".png");
         sta.setString(3, "user " + id);

@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.model;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Order {
@@ -13,7 +14,7 @@ public class Order {
     private TreeMap<String, Integer> list;
 
 
-    public Order(){
+    public Order() {
 
         this.listPd = new TreeMap<>();
 
@@ -43,9 +44,10 @@ public class Order {
         this.deliveryAddressId = deliveryAddressId;
         this.note = note;
         this.orderDate = orderDate;
-        this.userName=userName;
+        this.userName = userName;
     }
-    public Order(String id, String userId, String status, String deliveryAddressId,long amount, String note, Date orderDate ) {
+
+    public Order(String id, String userId, String status, String deliveryAddressId, long amount, String note, Date orderDate) {
         this.id = id;
         this.userId = userId;
         this.status = status;
@@ -71,7 +73,7 @@ public class Order {
 
     public void addProduct(Map<Product, Integer> list) {
         this.listPd = list;
-        computeAmount();
+        //computeAmount();
     }
 
     public Map<Product, Integer> getListPd() {
@@ -118,7 +120,7 @@ public class Order {
         return this.status;
     }
 
-    public int getNumStatus(){
+    public int getNumStatus() {
         if (status.equals("Chờ xác nhận")) return 1;
         if (status.equals("Đang giao")) return 2;
         if (status.equals("Đã giao")) return 3;
@@ -144,6 +146,13 @@ public class Order {
         if (!(o instanceof Order)) return false;
         Order order = (Order) o;
         return getAmount() == order.getAmount() && Objects.equals(getId(), order.getId()) && Objects.equals(getUserId(), order.getUserId()) && Objects.equals(getStatus(), order.getStatus()) && Objects.equals(getDeliveryAddressId(), order.getDeliveryAddressId()) && Objects.equals(getNote(), order.getNote()) && Objects.equals(getOrderDate(), order.getOrderDate()) && Objects.equals(getListPd(), order.getListPd());
+    }
+
+    public String getDateString() {
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        Date d= new Date();
+        f.format(d);
+        return f.format(this.orderDate);
     }
 
 }

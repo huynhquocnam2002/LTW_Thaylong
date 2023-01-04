@@ -246,8 +246,7 @@
                                 <a href="/">Tiếp tục mua sắm</a>
                             </div>
                             <div class="check__shipping">
-                                <input type="checkbox">
-                                <span>Vận chuyển(+10000 VNĐ)</span>
+
                             </div>
                         </div>
 

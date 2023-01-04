@@ -7,10 +7,14 @@ import java.util.TreeMap;
 
 public class Cart {
 
-    private TreeMap<String , Integer> list ;
+    private TreeMap<String , Integer> list;
 
     public Cart() {
         this.list = new TreeMap<>();
+    }
+
+    public void  clearCart(){
+        this.list.clear();
     }
 
     public TreeMap<String, Integer> getList() {

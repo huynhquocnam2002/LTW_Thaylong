@@ -9,9 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class VoucherDAO {
     public static List<Voucher> getVouchers(String userId) throws SQLException, ClassNotFoundException {
@@ -145,8 +143,32 @@ public class VoucherDAO {
         changeStatus(id,0);
     }
 
+    public static Map<String, Long> getVoucherPay(String uId, long price) throws SQLException, ClassNotFoundException {
+        Map<String, Long> res= new HashMap<String, Long>();
+        DataDB db = new DataDB();
+        PreparedStatement sta = db.getStatement("select v.id, v.discount from voucher v, user_voucher u where v.id=u.id_voucher and u.id_user=? and min_price<? and u.quantity>0");
+        sta.setString(1, uId);
+        sta.setLong(2, price);
+        ResultSet rs= sta.executeQuery();
+        while (rs.next())
+            res.put(rs.getString(1), rs.getLong(2));
+        return res;
+    }
+
+    public static void remove(String idu, String idv) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        PreparedStatement sta = db.getStatement("update user_voucher set QUANTITY=(SELECT QUANTITY-1 FROM user_voucher where ID_USER=? and ID_VOUCHER=?) where ID_USER=? and ID_VOUCHER=?");
+        sta.setString(1, idu);
+        sta.setString(2, idv);
+        sta.setString(3, idu);
+        sta.setString(4, idv);
+        sta.executeUpdate();
+    }
+
+
+
     public static void main(String[] args) throws SQLException, ClassNotFoundException, ParseException {
-        Date d= new SimpleDateFormat("yyyy-MM-dd").parse("2023-1-4");
-        System.out.println(d);
+        Map<String, Long> v=getVoucherPay("U1", 1000000);
+        System.out.println(v.size());
     }
 }

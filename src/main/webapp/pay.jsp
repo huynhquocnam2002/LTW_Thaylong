@@ -5,7 +5,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.DAO.UserDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="java.util.Map" %>
-<%@ page import="vn.edu.hcmuaf.fit.DAO.ProductDAO" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.DAO.ProductDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.VoucherDAO" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 12/4/2022
@@ -129,44 +130,25 @@
                     </ul>
                 </div>
 
-                <%if (session.getAttribute("user") == null) {%>
-                <div class="nav__icons">
-                    <a href="/LoginServlet" class="icon__item">
-                        <svg class="icon__user">
-                            <use xlink:href="image/images/sprite.svg#icon-user"></use>
-                        </svg>
-                    </a>
 
-                    <div class="nav__item_user" id="nav__item_user">
-                        <a href="/LoginServlet" class="nav__link scroll-link">Đăng Nhập /</a>
-                        <a href="register.jsp" class="nav__link scroll-link">Đăng Ký</a><br>
-                        <a href="" class="nav__link scroll-link">Thành Viên</a>
-                    </div>
-                </div>
-                <%
-                } else {
-                    User user = UserDAO.getUserBySessionID(session.getAttribute("user") + "");
-                %>
+                <% User user = UserDAO.getUserBySessionID(session.getAttribute("user") + "");%>
+
                 <div class="nav__icons">
-                    <a href="user.jsp" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
+                    <a href="/UserServlet" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
                         <img src="<%=user.getImg()%>"
                              style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%" alt="img">
                     </a>
 
                     <div class="nav__item_user" style="font-size: 1.2rem" id="nav__item_user1">
-                        <a href="user.jsp" class="nav__link scroll-link"
+                        <a href="/UserServlet" class="nav__link scroll-link"
                            style="line-height: 2"><%=user.getName()%>
                         </a><br>
                         <a href="" class="nav__link scroll-link">Thành Viên</a>
                     </div>
                 </div>
-                <%}%>
 
-                <%
-                    if (session.getAttribute("user") != null) {
-                        User u = UserDAO.getUserBySessionID(session.getAttribute("user") + "");
-                        int numOfCartItems = ((Cart) session.getAttribute("cart")).getSize();
-                %>
+                <%int numOfCartItems = ((Cart) session.getAttribute("cart")).getSize();%>
+
                 <div class="nav__icons" id="nav__item_giohang">
                     <a href="cart.jsp" class="icon__item">
                         <svg class="icon__cart">
@@ -177,7 +159,7 @@
                     </a>
                     <a href="cart.jsp" class="nav__link_giohang">Giỏ Hàng</a>
                 </div>
-                <%}%>
+
             </nav>
         </div>
     </div>
@@ -210,7 +192,7 @@
         <section class="section cart__area">
             <div class="container" style="height: 800px;">
                 <div class="responsive__cart-area">
-                    <form class="cart__form">
+                    <form class="cart__form" action="/PayServlet" method="post">
                         <section class="cart__table table-responsive">
 
 
@@ -224,80 +206,40 @@
                                 <div class="section__cart__pay__step1">
 
                                     <div class="header__step1">
-
                                         1 &emsp; ĐỊA CHỈ NHẬN HÀNG
                                     </div>
 
                                     <div class="form">
+                                        <input type="hidden" name="iduser" value="<%=user.getId()%>">
+                                        <label for="dress__lastname">Tên</label>
+                                        <input type="text" name="name" value="<%=user.getName()%>" class="dress__input"
+                                               id="dress__lastname" required>
+                                        <label for="dress__phone">Số điện thoại</label>
+                                        <input type="tel" name="phone" value="<%=user.getPhone()%>" class="dress__input"
+                                               id="dress__phone" required/>
+                                        <label for="dress__homedress">Địa chỉ nhà</label>
+                                        <input type="text" name="address" class="dress__input" id="dress__homedress"
+                                               required>
+                                        <label for="note">Ghi chú:</label>
+                                        <input type="text" name="note" class="dress__input" id="note"
+                                               required>
 
-                                        <form action="/PayServlet" method="post">
-
-                                            <label for="dress__email">Email</label>
-                                            <input name="email" type="email" class="dress__input" id="dress__email" required  oninput="checkEmail()">
-                                            <p id = "result1"></p>
-                                            <label for="dress__firstname">Họ</label>
-                                            <input type="text" class="dress__input"id="dress__firstname" required oninput="checkFirstName()">
-                                            <p id = "result2"></p>
-                                            <label for="dress__lastname">Tên</label>
-                                            <input type="text" class="dress__input"id="dress__lastname" required oninput="checkLastName()">
-                                            <p id = "result3"></p>
-                                            <label for="dress__phone">Số điện thoại</label>
-                                            <input type="tel" class="dress__input" id="dress__phone" required oninput="checkNumber()" />
-                                            <p id = "result4"></p>
-                                            <label for="dress__homedress">Địa chỉ nhà</label>
-                                            <input type="text" class="dress__input"id="dress__homedress" required oninput="checkHomeDress()">
-                                            <p id = "result5"></p>
-
-
-
-                                        </form>
                                     </div>
                                 </div>
 
 
                                 <div class="section__cart__pay__container">
-                                    <div class="section__cart__pay__step2">
-
-
-                                        <div class="header__step2">
-
-                                            2 &emsp; PHƯƠNG THỨC VẬN CHUYỂN
-                                        </div>
-
-                                        <table>
-
-                                            <tr>
-                                                <td><input type="radio" style="vertical-align:middle;">&emsp;&emsp;</td>
-                                                <td>0<u>đ</u>&emsp;&emsp;</td>
-                                                <td>Nhận<br> hàng tại<br> cửa hàng&emsp;</td>
-                                                <td>Nhận hàng tại cửa hàng</td>
-                                            </tr>
-
-                                            <div id="hr"></div>
-
-
-                                            <tr>
-                                                <td><input type="radio"></td>
-                                                <td>0<u>đ</u></td>
-                                                <td>Vận<br> chuyển <br>tiêu<br> chuẩn</td>
-                                                <td>Miễn phí với đơn hàng phụ kiện trên 500.000đ</td>
-                                            </tr>
-
-
-                                        </table>
-
-                                    </div>
                                     <div class="section__cart__pay__step3">
 
                                         <div class="header__step3">
 
-                                            3 &emsp; PHƯƠNG THỨC THANH TOÁN
+                                            2 &emsp; PHƯƠNG THỨC THANH TOÁN
                                         </div>
 
                                         <table>
 
                                             <tr>
-                                                <td><input type="radio"> &ensp;</td>
+                                                <td><input type="radio" checked></td>
                                                 <td>Thanh toán khi nhận hàng</td>
                                             </tr>
                                         </table>
@@ -308,7 +250,7 @@
 
                                     <div class="header__step2">
 
-                                        4 &emsp; THÔNG TIN THANH TOÁN
+                                        3 &emsp; THÔNG TIN THANH TOÁN
                                     </div>
 
                                     <table>
@@ -320,80 +262,89 @@
 
 
                                         </tr>
-
-                                        <div id="hr2"></div>
+                                        <input type="hidden" name="numProduct" value="<%=list.size()%>">
 
                                         <% Product pr;
+                                            long total = 0;
+                                            int count=0;
                                             for (Map.Entry<String, Integer> ds : list.entrySet()) {
                                                 pr = ProductDAO.getProductById(ds.getKey());
+                                                total += pr.getPrice() * ds.getValue();
                                         %>
                                         <tr>
                                             <td style="display: flex; align-items: center; width:150px;"><img
                                                     style="width:58.36px;height: 75px;vertical-align: middle;"
                                                     src="<%= pr.getImg()%>"
-
                                                     alt="">
                                                 <span><%= pr.getName()%></span></td>
-                                            <td><input type="number" value="<%= pr.getQuantity()%>"
+                                            <input type="hidden" name="idProduct<%=count%>" value="<%=pr.getId()%>">
+                                            <input type="hidden" name="quantity<%=count%>" value="<%=ds.getValue()%>">
+                                            <td><input type="number" value="<%=ds.getValue()%>"
                                                        style="width: 23.98px; height:20px; padding-left: 15px;"
                                                        disabled></td>
-                                            <td><%= pr.getPrice()%> <u>đ</u></td>
+                                            <td><%= pr.getPrice() * ds.getValue()%> <u>đ</u></td>
+                                            <input type="hidden" name="amount<%=count%>" value="<%= pr.getPrice() * ds.getValue()%>">
                                         </tr>
-
+                                        <%count++;
+                                            }%>
+                                        <input type="hidden" name="amount" value="<%=total%>">
                                     </table>
                                     <div id="hr3"></div>
 
 
                                     <table>
                                         <tr>
-                                            <th style="vertical-align: middle;">Tạm tính
-                                            <td style="text-align:center;">
-                                                900.000 <u>đ</u>
+                                            <th style="vertical-align: middle; height: 20px">Tạm tính
+                                            <td style="text-align:center; height: 20px">
+                                                <%=total%> <u>đ</u>
                                             </td>
                                             </th>
 
                                         </tr>
 
                                         <tr>
-                                            <th style="text-align:start;">Vận chuyển Nhận hàng tại cửa hàng - Nhận hàng
-                                                tại cửa hàng
-                                            <td style="text-align:center;">
-                                                0 <u>đ</u>
+                                            <th style="text-align:start; height: 20px">Vận chuyển:
+                                            <td style="text-align:center; height: 20px">
+                                                30,000 <u>đ</u>
                                             </td>
                                             </th>
 
                                         </tr>
 
                                         <tr style="background-color:#f2f2f2;">
-                                            <th style="position: relative; top:20px;left:10px;">THÀNH TIỀN
-                                            <td style="text-align:start;position: relative;right:2px;">
+                                            <th style="height: 20px">THÀNH TIỀN
+                                            <td style="height: 20px; text-align: center">
                                                 <span id="section__cart__pay__step4__price">
-                                                    <%= nf.format(pr.getQuantity() * pr.getPrice())%> <u>đ</u></span>
+                                                    <%= nf.format(total + 30000)%> <u>đ</u></span>
                                             </td>
                                             </th>
-
                                         </tr>
-
-
                                     </table>
+                                    <div class="before__pay" style="position: unset">
+                                        <div class="section__cart__pay__step4__voucher">
+                                            <%
+                                                Map<String, Long> vouchers = VoucherDAO.getVoucherPay(user.getId(), total);%>
+                                            <select name="discountt" id=""
+                                                    style="height: 35px;border: 1px solid #f2f2f2;border-radius: 5px;">
+                                                <option value="0" class="0" selected><span></span>---Voucher---</option>
+                                                <%for (Map.Entry<String, Long> e : vouchers.entrySet()) {%>
+                                                <option value="<%=e.getValue()%>" class="<%=e.getKey()%>"><span><%=e.getKey()%></span>(Giảm <%=e.getValue()%>
+                                                    )
+                                                </option>
+                                                <%}%>
+                                            </select>
+                                            <input type="hidden" name="discount" value="0">
+                                            <button class="button__apply">Áp dụng</button>
 
+
+                                        </div>
+
+
+                                        <button class="button__order" style="background-color: #BE1E2D;">Đặt hàng
+                                        </button>
+                                    </div>
 
                                 </div>
-
-
-                            </div>
-
-                            <div class="before__pay">
-                                <div class="section__cart__pay__step4__voucher">
-                                    <input type="text" class="input__voucher" placeholder="Vui lòng nhập mã giảm giá">
-
-                                    <button class="button__apply">Áp dụng</button>
-
-
-                                </div>
-
-
-                                <button class="button__order" style="background-color: #BE1E2D;">Đặt hàng</button>
                             </div>
 
 
@@ -401,15 +352,8 @@
 
                     </form>
                 </div>
-
-                </form>
-
-
             </div>
         </section>
-
-        </section>
-
     </main>
 
 
@@ -493,138 +437,26 @@
     <!-- End Footer -->
 
     <script>
-
-
-        const email = document.getElementById('dress__email').value;
-
-
-        const firstName = document.getElementById('dress__firstname').value;
-
-
-        const lastName = document.getElementById('dress__lastname').value;
-
-
-        const phone = document.getElementById('dress__phone').value;
-
-
-        const homedress = document.getElementById('dress__homedress').value;
-
-        const direct = document.getElementById('dress__direct').value;
-
-
-        const result1 = document.getElementById('result1');
-
-        const result2 = document.getElementById('result2');
-
-        const result3 = document.getElementById('result3');
-
-        const result4 = document.getElementById('result4');
-
-        const result5 = document.getElementById('result5');
-        const result6 = document.getElementById('result6');
-
-
-        const checkEmail = function () {
-
-            var x = document.getElementById('dress__email').value;
-            if (x.length == "") {
-                document.getElementById('dress__email').style.border = "1px solid red";
-
-                result1.innerHTML = "Bạn cần nhập vào trường này";
-
-
-            }
-
-
-        }
-
-        const checkFirstName = function () {
-
-            var x = document.getElementById('dress__firstname').value;
-            if (x.length == "") {
-                document.getElementById('dress__firstname').style.border = "1px solid red";
-
-                result2.innerHTML = "Bạn cần nhập vào trường này";
-
-
+        let total_label = document.querySelector("#section__cart__pay__step4__price")
+        let total_input = document.querySelector("#main > section > div > div > form > section > div > div.section__cart__pay__step4 > table:nth-child(2) > tbody > input[type=hidden]:nth-child(4)")
+        const total = parseFloat(total_input.value) + 30000
+        let voucher = document.querySelector("#main > section > div > div > form > section > div > div.section__cart__pay__step4 > div.before__pay > div > select")
+        let voucherid = document.querySelector("#main > section > div > div > form > section > div > div.section__cart__pay__step4 > div.before__pay > div > input[type=hidden]")
+        voucher.onchange = function () {
+            let amount = total - parseInt(voucher.value)
+            total_label.innerHTML = amount
+            total_input.value = amount
+            let list = voucher.querySelectorAll('option')
+            for (let i of list){
+                if (i.selected) voucherid.value = i.className
             }
         }
-        const checkLastName = function () {
-
-            var x = document.getElementById('dress__lastname').value;
-            if (x.length == "") {
-                document.getElementById('dress__lastname').style.border = "1px solid red";
-
-                result3.innerHTML = "Bạn cần nhập vào trường này";
-
-
-            }
-        }
-
-        const checkNumber = function () {
-            var x = document.getElementById('dress__phone').value;
-            if (x.length == "") {
-                document.getElementById('dress__phone').style.border = "1px solid red";
-
-                result4.innerHTML = "Bạn cần nhập vào trường này";
-
-
-            } else {
-
-            }
-
-        }
-        const checkHomeDress = function () {
-
-            var x = document.getElementById('dress__homedress').value;
-            if (x.length == "") {
-                document.getElementById('dress__homedress').style.border = "1px solid red";
-
-                result5.innerHTML = "Bạn cần nhập vào trường này";
-
-
-            }
-        }
-
-        const checkDirect = function () {
-
-            var x = document.getElementById('dress__direct').value;
-            if (x.length == "") {
-                document.getElementById('dress__direct').style.border = "1px solid red";
-
-                result6.innerHTML = "Bạn cần nhập vào trường này";
-
-
-            }
-        }
-
-
-        var btnOrder = document.getElementsByClassName('button__order');
-
-
-        button__order.addEventListener('click', function () {
-
-                const checkNumber = function () {
-                    var x = document.getElementById('dress__phone').value;
-                    if (x.length() == "") {
-                        document.getElementById('dress__phone').style.border = "1px solid red";
-
-                        result4.innerHTML = "Bạn cần nhập vào trường này";
-
-
-                    }
-
-                }
-
-
-            }
-        );
 
 
     </script>
 
 
-        <%}
+        <%
         }
          %>
 

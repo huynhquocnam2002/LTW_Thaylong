@@ -192,7 +192,7 @@
                         <li><a href="#tabs-5">Đã giao</a></li>
                         <li><a href="#tabs-6">Đã hủy</a></li>
                     </ul>
-                        <%List<Order> list = OrderDAO.getOrders(user.getId());%>
+                        <%List<Order> list = OrderDAO.getOrderByUserId(user.getId());%>
                     <div id="tabs-1">
                             <%
                             if (list.size() != 0) {
@@ -223,9 +223,8 @@
                                                 class="tien"><%=order.getAmount()%>VND</span></p>
                                     </div>
                                     <div class="buttons">
-                                        <button class="mua_lai">Mua lại</button>
                                         <%if (order.getStatus().equals("Chờ xác nhận")) {%>
-                                        <button class="phan_hoi">Hủy đơn</button>
+                                        <a href="/ChangeStatusOrderServlet?id=<%=order.getId()%>&status=5"><button class="phan_hoi">Hủy đơn</button></a>
                                         <%}%>
                                     </div>
                                 </div>
@@ -270,8 +269,7 @@
                                                     class="tien"><%=order.getAmount()%>VND</span></p>
                                         </div>
                                         <div class="buttons">
-                                            <button class="mua_lai">Mua lại</button>
-                                            <button class="phan_hoi">Hủy đơn</button>
+                                            <a href="/ChangeStatusOrderServlet?id=<%=order.getId()%>&status=5"><button class="phan_hoi">Hủy đơn</button></a>
                                         </div>
                                     </div>
                                 </div>

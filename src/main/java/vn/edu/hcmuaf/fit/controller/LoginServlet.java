@@ -17,7 +17,6 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         session.removeAttribute("user");
         String sessionID = session.getAttribute("user") +"";
-        System.out.println(sessionID);
         if (sessionID.equals("null")) {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {

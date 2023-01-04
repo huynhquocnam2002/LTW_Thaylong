@@ -40,9 +40,12 @@ public class RegisterServlet extends HttpServlet {
                     request.setAttribute("error","Email bạn nhập đã được sử dụng");
                     request.getRequestDispatcher("register.jsp").forward(request, response);
                 } else {
-                    while (!UserDAO.register(Util.getRandomId(), email, pass)) ;
+                    while (UserDAO.containID(id)){
+                        id = "US" + Util.getRandomId();
+                    }
+                    UserDAO.register(id, email, pass);
                     HttpSession session = request.getSession();
-                    session.setAttribute("user", (User) UserDAO.getUserByEmail(email));
+                    session.setAttribute("user", UserDAO.updateSessionID(id));
                     doGet(request, response);
                 }
             } catch (SQLException e) {
