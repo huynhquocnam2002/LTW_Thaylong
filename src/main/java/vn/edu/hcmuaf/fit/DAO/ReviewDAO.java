@@ -22,7 +22,7 @@ public class ReviewDAO {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        List<Review> l = getReview("PR1");
+        List<Review> l = getReview("PR2");
 
         System.out.println(l.size());
     }

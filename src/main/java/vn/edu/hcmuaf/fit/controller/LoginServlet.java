@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             try {
                 if (user.equals(UserDAO.getUserByEmail(user.getEmail()))) {
-                    response.sendRedirect("/");
+                    response.sendRedirect("home");
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
                 if (user.isPassword(request.getParameter("pass"))) {
                     session.setAttribute("user", user);
                     if (user.getRole() == 0)
-                        response.sendRedirect("/");
+                        response.sendRedirect("home");
                     else if (user.getRole()==1) response.sendRedirect("AdminServlet");
                 } else {
                     request.setAttribute("error", "Email hoặc mật khẩu không chính xác");

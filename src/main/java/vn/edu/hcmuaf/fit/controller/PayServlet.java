@@ -51,7 +51,6 @@ public class PayServlet extends HttpServlet {
         String note = request.getParameter("note");
 
 
-        HttpSession session = request.getSession();
 
         Cart cart = (Cart) session.getAttribute("cart");
 

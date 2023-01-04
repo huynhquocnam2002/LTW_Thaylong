@@ -110,14 +110,14 @@
                 </div>
                 <%if (session.getAttribute("user") == null) {%>
                 <div class="nav__icons">
-                    <a href="/LoginServlet" class="icon__item">
+                    <a href="LoginServlet" class="icon__item">
                         <svg class="icon__user">
                             <use xlink:href="image/images/sprite.svg#icon-user"></use>
                         </svg>
                     </a>
 
                     <div class="nav__item_user" id="nav__item_user">
-                        <a href="/LoginServlet" class="nav__link scroll-link">Đăng Nhập /</a>
+                        <a href="LoginServlet" class="nav__link scroll-link">Đăng Nhập /</a>
                         <a href="register.jsp" class="nav__link scroll-link">Đăng Ký</a><br>
                         <a href="" class="nav__link scroll-link">Thành Viên</a>
                     </div>
@@ -127,13 +127,14 @@
                     User user = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
                 %>
                 <div class="nav__icons">
-                    <a href="/UserServlet" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
+                    <a href="UserServlet" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
                         <img src="<%=user.getImg()%>"
                              style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%" alt="img">
+
                     </a>
 
                     <div class="nav__item_user" style="font-size: 1.2rem" id="nav__item_user1">
-                        <a href="/UserServlet" class="nav__link scroll-link"
+                        <a href="UserServlet" class="nav__link scroll-link"
                            style="line-height: 2"><%=user.getName()%>
                         </a><br>
                         <a href="" class="nav__link scroll-link">Thành Viên</a>
@@ -147,14 +148,14 @@
                         int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
                 %>
                 <div class="nav__icons" id="nav__item_giohang">
-                    <a href="cart.jsp" class="icon__item">
+                    <a href="CartServlet" class="icon__item">
                         <svg class="icon__cart">
                             <use xlink:href="image/images/sprite.svg#icon-shopping-basket"></use>
                         </svg>
 
                         <span id="cart__total"><%=numOfCartItems%></span>
                     </a>
-                    <a href="cart.jsp" class="nav__link_giohang">Giỏ Hàng</a>
+                    <a href="CartServlet" class="nav__link_giohang">Giỏ Hàng</a>
                 </div>
                 <%}%>
             </nav>
@@ -1070,7 +1071,7 @@
                 <a href="/css/login.css">Lịch sử đơn hàng</a>
                 <a href="/css/login.css">Danh sách mong muốn</a>
                 <a href="#">Cung cấp thông tin</a>
-                <a href="index.jsp">Quay lại</a>
+                <a href="/">Quay lại</a>
             </div>
             <div class="footer-top__box">
                 <h3>CONTACT US</h3>

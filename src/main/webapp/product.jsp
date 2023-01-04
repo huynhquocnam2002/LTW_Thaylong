@@ -502,214 +502,109 @@
     </div>
 </section>
 
-<div class="product-detail__bottom">
-    <div class="title__container tabs">
+    <section class="section section-review">
+    <div class="product-detail__bottom">
+        <div class="title__container tabs">
 
-        <div class="section__titles category__titles ">
-            <div class="section__title detail-btn active" data-id="description">
-                <span class="dot"></span>
-                <h1 class="primary__title">Mô tả</h1>
-            </div>
-        </div>
-
-        <div class="section__titles">
-            <div class="section__title detail-btn" data-id="reviews">
-                <span class="dot"></span>
-                <h1 class="primary__title">Đánh giá</h1>
-            </div>
-        </div>
-
-        <div class="section__titles">
-            <div class="section__title detail-btn" data-id="shipping">
-                <span class="dot"></span>
-                <h1 class="primary__title">Chi tiết vận chuyển</h1>
-            </div>
-        </div>
-    </div>
-
-    <div class="detail__content">
-        <div class="content active" id="description">
-
-            <h2>Đặc điểm nổi bật</h2>
-            <ul>
-                <li>Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị</li>
-                <li>Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo</li>
-                <li>Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C</li>
-                <li>Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp</li>
-            </ul>
-            <h2>Pin sạc dự phòng Anker PowerSlim 10000mAh PD A1244 – Mỏng nhẹ và nhanh chóng</h2>
-            <ul>
-                <li>Các sản phẩm pin sạc dự phòng Anker luôn là lựa chọn hàng đầu của nhiều người dùng về chất lượng
-                    cũng như kiểu dáng.
-                </li>
-                <li><span style="color:#D70018;font-weight: 200;">Pin sạc dự phòng </span>Anker PowerSlim 10000mAh PD
-                    A1244 với kiểu dáng mỏng nhẹ số 1 thế giới, hỗ trợ sạc 3 chế độ,…
-                </li>
-                <li>chính là một phụ kiện vô cùng hợp lý.</li>
-
-            </ul>
-            <h2>Kiểu dáng mỏng nhẹ hàng đầu với nguồn sức mạnh to lớn 10000mAh</h2>
-            <p>Pin sạc dự phòng Anker PowerSlim 10000mAh PD A1244 có kiểu dáng giống với tên gọi “PowerSlim” của mình –
-                mỏng nhẹ
-
-                <span id="dots">...</span></p>
-
-
-            <img style="width:100% ;height: 495.23px; object-fit: cover; "
-                 src="<%=ProductDAO.getProductById(request.getParameter("idProduct")).getImg()%>"
-                 alt="">
-
-            <p>Hỗ trợ 3 chế độ sạc và công nghệ PD tiết kiệm thời gian sạc
-                Pin sạc dự phòng Anker PowerSlim 10000mAh PD A1244 cung cấp <br> cho người dùng 3 chế độ sạc bao gồm sạc
-                nhanh 20W USB-C,sạc 12W USB-A cùng công nghệ PowerIQ, cuối cùng là sạc nhỏ giọt<br> Trickle-Charging phù
-                hợp với những thiết bị có dòng sạc thấp.</p>
-            <!--
-
-                 <br>
-
-
-
-                 <div id="more" style="position: relative;" >
-
-                  <p style="  width:100%;
-                  height:500px;
-                  background-color: #D70018;
-                  position:relative;"> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                 Unde, saepe magnam earum eaque, iure accusantium quo eligendi quas quae,
-                 ab doloribus. Laboriosam fugiat consectetur corrupti neque quis impedit quisquam
-                 praesentium.</p>
-
-               </div>
-
-               </p>
-
-
-
-
-
-                  <button  style="cursor: pointer; " id="btn__more" onclick="btnMore()"> Xem thêm
-
-
-                  </button> -->
-
-
-        </div>
-        <div class="content" id="reviews">
-            <h1>Đánh giá của khách hàng</h1>
-
-
-            <div class="container__rating">
-
-                <div class="container__rating__left">
-
-                    <h6>5/5</h6>
-
-                    <div class="rating">
-
-                        <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                        </svg>
-                        <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                        </svg>
-                        <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                        </svg>
-                        <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                        </svg>
-                        <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
-                        </svg>
-                    </div>
-
-                    <p><strong>7</strong> đánh giá và nhận xét </p>
-
+            <div class="section__titles category__titles ">
+                <div class="section__title detail-btn active" data-id="description">
+                    <span class="dot"></span>
+                    <h1 class="primary__title">Mô tả</h1>
                 </div>
-
-                <div class="container__rating__right">
-
-                    <table>
-
-                        <tr>
-                            <td>5
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                </svg>
-                            </td>
-
-                            <td><input type="range" min="0" max="100" value="100" disabled></td>
-                            <td><h6>7 đánh giá</h6></td>
-                        </tr>
-                        <tr>
-                            <td>4
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                </svg>
-                            </td>
-                            <td><input type="range" min="0" max="100" value="0" disabled></td>
-                            <td><h6>0 đánh giá</h6></td>
-                        </tr>
-                        <tr>
-                            <td>3
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                </svg>
-                            </td>
-                            <td><input type="range" min="0" max="100" value="0" disabled></td>
-                            <td><h6>0 đánh giá</h6></td>
-                        </tr>
-                        <tr>
-                            <td>2
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                </svg>
-                            </td>
-                            <td><input type="range" min="0" max="100" value="0" disabled></td>
-                            <td><h6>0 đánh giá</h6></td>
-                        </tr>
-                        <tr>
-                            <td>1
-                                <svg>
-                                    <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
-                                </svg>
-                            </td>
-                            <td><input type="range" min="0" max="100" value="0" disabled></td>
-                            <td><h6>0 đánh giá</h6></td>
-                        </tr>
-                    </table>
-
-                </div>
-
             </div>
 
-            <h6 style="position: relative; bottom:280px; left: 235px;">Bạn đánh giá sao sản phẩm này</h6>
-
-            <button class="button__rating" style="position: relative; bottom:250px; left: 235px;">Đánh giá ngay
-
-
-            </button>
-
-            <div class="container__feedback">
-
-                <% List<Review> listreview =  ReviewDAO.getReview(request.getParameter("idProduct")); %>
-                <% for (int i = 0; i < listreview.size() ; i++) { %>
-
-                <div class="container__feedback__name">
-
-                    <div class="container__name__image" style="display: flex;align-items: center; ">
-                        <img class="container__feedback__name--border"
-                             src="<%=UserDAO.getUserById(listreview.get(i).getId_user()).getImg()%>"
-                             alt="">
-                        <h6> <%=UserDAO.getUserById(listreview.get(i).getId_user()).getName()%></h6>
-                    </div>
-
-                    <h6> <%=listreview.get(i).getReview_date()%></h6>
+            <div class="section__titles">
+                <div class="section__title detail-btn" data-id="reviews">
+                    <span class="dot"></span>
+                    <h1 class="primary__title">Đánh giá</h1>
                 </div>
+            </div>
 
-                <div class="container__feedback__title">
+            <div class="section__titles">
+                <div class="section__title detail-btn" data-id="shipping">
+                    <span class="dot"></span>
+                    <h1 class="primary__title">Chi tiết vận chuyển</h1>
+                </div>
+            </div>
+        </div>
 
-                    <h6 style="display: flex;">Đánh giá
+        <div class="detail__content">
+            <div class="content active" id="description">
+
+                <h2>Đặc điểm nổi bật</h2>
+                <ul>
+                    <li>Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị</li>
+                    <li>Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo</li>
+                    <li>Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C</li>
+                    <li>Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp</li>
+                </ul>
+                <h2>Pin sạc dự phòng Anker PowerSlim 10000mAh PD A1244 – Mỏng nhẹ và nhanh chóng</h2>
+                <ul>
+                    <li>Các sản phẩm pin sạc dự phòng Anker luôn là lựa chọn hàng đầu của nhiều người dùng về chất lượng
+                        cũng như kiểu dáng.
+                    </li>
+                    <li><span style="color:#D70018;font-weight: 200;">Pin sạc dự phòng </span>Anker PowerSlim 10000mAh PD
+                        A1244 với kiểu dáng mỏng nhẹ số 1 thế giới, hỗ trợ sạc 3 chế độ,…
+                    </li>
+                    <li>chính là một phụ kiện vô cùng hợp lý.</li>
+
+                </ul>
+                <h2>Kiểu dáng mỏng nhẹ hàng đầu với nguồn sức mạnh to lớn 10000mAh</h2>
+                <p>Pin sạc dự phòng Anker PowerSlim 10000mAh PD A1244 có kiểu dáng giống với tên gọi “PowerSlim” của mình –
+                    mỏng nhẹ
+
+                    <span id="dots">...</span></p>
+
+
+                <img style="width:100% ;height: 495.23px; object-fit: cover; "
+                     src="<%=ProductDAO.getProductById(request.getParameter("idProduct")).getImg()%>"
+                     alt="">
+
+                <p>Hỗ trợ 3 chế độ sạc và công nghệ PD tiết kiệm thời gian sạc
+                    Pin sạc dự phòng Anker PowerSlim 10000mAh PD A1244 cung cấp <br> cho người dùng 3 chế độ sạc bao gồm sạc
+                    nhanh 20W USB-C,sạc 12W USB-A cùng công nghệ PowerIQ, cuối cùng là sạc nhỏ giọt<br> Trickle-Charging phù
+                    hợp với những thiết bị có dòng sạc thấp.</p>
+                <!--
+
+                     <br>
+
+
+
+                     <div id="more" style="position: relative;" >
+
+                      <p style="  width:100%;
+                      height:500px;
+                      background-color: #D70018;
+                      position:relative;"> Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                     Unde, saepe magnam earum eaque, iure accusantium quo eligendi quas quae,
+                     ab doloribus. Laboriosam fugiat consectetur corrupti neque quis impedit quisquam
+                     praesentium.</p>
+
+                   </div>
+
+                   </p>
+
+
+
+
+
+                      <button  style="cursor: pointer; " id="btn__more" onclick="btnMore()"> Xem thêm
+
+
+                      </button> -->
+
+
+            </div>
+            <div class="content" id="reviews">
+                <h1>Đánh giá của khách hàng</h1>
+
+
+                <div class="container__rating">
+
+                    <div class="container__rating__left">
+
+                        <h6>5/5</h6>
+
                         <div class="rating">
 
                             <svg>
@@ -728,56 +623,167 @@
                                 <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
                             </svg>
                         </div>
-                    </h6>
 
-                    <h6><strong>Nhận xét:</strong> <%=listreview.get(i).getContent()%></h6>
+                        <p><strong>7</strong> đánh giá và nhận xét </p>
+
+                    </div>
+
+                    <div class="container__rating__right">
+
+                        <table>
+
+                            <tr>
+                                <td>5
+                                    <svg>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                    </svg>
+                                </td>
+
+                                <td><input type="range" min="0" max="100" value="100" disabled></td>
+                                <td><h6>7 đánh giá</h6></td>
+                            </tr>
+                            <tr>
+                                <td>4
+                                    <svg>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                    </svg>
+                                </td>
+                                <td><input type="range" min="0" max="100" value="0" disabled></td>
+                                <td><h6>0 đánh giá</h6></td>
+                            </tr>
+                            <tr>
+                                <td>3
+                                    <svg>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                    </svg>
+                                </td>
+                                <td><input type="range" min="0" max="100" value="0" disabled></td>
+                                <td><h6>0 đánh giá</h6></td>
+                            </tr>
+                            <tr>
+                                <td>2
+                                    <svg>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                    </svg>
+                                </td>
+                                <td><input type="range" min="0" max="100" value="0" disabled></td>
+                                <td><h6>0 đánh giá</h6></td>
+                            </tr>
+                            <tr>
+                                <td>1
+                                    <svg>
+                                        <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                    </svg>
+                                </td>
+                                <td><input type="range" min="0" max="100" value="0" disabled></td>
+                                <td><h6>0 đánh giá</h6></td>
+                            </tr>
+                        </table>
+
+                    </div>
+
                 </div>
-                <%}%>
 
+                <h6 style="position: relative; bottom:280px; left: 235px;">Bạn đánh giá sao sản phẩm này</h6>
+
+                <button class="button__rating" style="position: relative; bottom:250px; left: 235px;">Đánh giá ngay
+                </button>
+
+                <div class="input_textarea">
+                    <textarea type="text" class="input_review" placeholder="Write a comment" v-model="newItem" @keyup.enter="addItem()"></textarea>
+                    <button id="buttonreivew" onclick="addItem()" class='primaryContained float-right' type="submit">Gửi</button>
+                </div>
+
+                <div class="container__feedback">
+
+                    <% List<Review> listreview =  ReviewDAO.getReview(request.getParameter("idProduct")); %>
+                    <% for (int i = 0; i < listreview.size() ; i++) { %>
+
+                    <div class="container__feedback__name">
+
+                        <div class="container__name__image" style="display: flex;align-items: center; ">
+                            <img class="container__feedback__name--border"
+                                 src="<%=UserDAO.getUserById(listreview.get(i).getId_user()).getImg()%>"
+                                 alt="">
+                            <h6> <%=UserDAO.getUserById(listreview.get(i).getId_user()).getName()%></h6>
+                        </div>
+
+                        <h6> <%=listreview.get(i).getReview_date()%></h6>
+                    </div>
+
+                    <div class="container__feedback__title">
+
+                        <h6 style="display: flex;">Đánh giá
+                            <div class="rating">
+
+                                <svg>
+                                    <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="image/images/sprite.svg#icon-star-empty"></use>
+                                </svg>
+                            </div>
+                        </h6>
+
+                        <h6><strong>Nhận xét:</strong> <%=listreview.get(i).getContent()%></h6>
+                    </div>
+                    <%}%>
+
+                </div>
+            </div>
+            <div class="content" id="shipping">
+                <h3>Chính sách trả hàng</h3>
+                <p>Bạn có thể trả lại hầu hết các mặt hàng mới,
+                    chưa mở trong vòng 30 ngày kể từ ngày giao hàng để được hoàn tiền đầy đủ.
+                    Chúng tôi cũng sẽ thanh toán chi phí vận chuyển trả lại nếu việc trả lại là
+                    do lỗi của chúng tôi (bạn nhận được một mặt hàng không chính xác hoặc bị lỗi, v.v.).</p>
+                <p>Bạn sẽ nhận được tiền hoàn lại trong vòng bốn tuần kể từ khi
+                    đưa gói hàng của mình cho người gửi trả hàng, tuy nhiên, trong nhiều trường hợp,
+                    bạn sẽ nhận được tiền hoàn lại nhanh chóng hơn. Khoảng thời gian này bao gồm thời gian
+                    vận chuyển để chúng tôi nhận được hàng trả lại của bạn từ người gửi hàng (5 đến 10 ngày làm việc),
+                    thời gian chúng tôi xử lý đơn hàng trả lại của bạn khi chúng tôi nhận được hàng (3 đến 5 ngày làm việc)
+                    và thời gian ngân hàng của bạn để xử lý yêu cầu hoàn lại tiền của chúng tôi (5 đến 10 ngày làm việc).
+                </p>
+                <p>Nếu bạn cần trả lại một mặt hàng, chỉ cần đăng
+                    nhập vào tài khoản của bạn, xem đơn đặt hàng bằng liên kết
+                    'Hoàn tất đơn đặt hàng' trong menu Tài khoản của tôi và nhấp
+                    vào nút Trả lại (các) Mặt hàng. Chúng tôi sẽ thông báo cho bạn
+                    qua e-mail về khoản tiền hoàn lại của bạn sau khi chúng tôi đã
+                    nhận và xử lý mặt hàng bị trả lại.
+                </p>
+                <h3>Vận chuyển</h3>
+                <p>Chúng tôi có thể gửi đến hầu như bất kỳ địa chỉ
+                    nào trên thế giới. Lưu ý rằng có những hạn chế đối
+                    với một số sản phẩm và một số sản phẩm không thể được
+                    vận chuyển đến các điểm đến quốc tế.</p>
+                <p>Khi bạn đặt hàng, chúng tôi sẽ ước tính ngày vận chuyển
+                    và giao hàng cho bạn dựa trên sự sẵn có của các mặt hàng
+                    của bạn và các tùy chọn giao hàng mà bạn chọn. Tùy thuộc
+                    vào nhà cung cấp dịch vụ vận chuyển mà bạn chọn, ước tính
+                    ngày giao hàng có thể xuất hiện trên trang báo giá vận chuyển.
+                </p>
+                <p>Cũng xin lưu ý rằng phí vận chuyển cho nhiều
+                    mặt hàng chúng tôi bán dựa trên trọng lượng.
+                    Trọng lượng của bất kỳ mục nào như vậy có thể
+                    được tìm thấy trên trang chi tiết của nó. Để phản
+                    ánh chính sách của các công ty vận chuyển mà chúng
+                    tôi sử dụng, tất cả các trọng lượng sẽ được làm tròn thành pound tiếp theo.
+                </p>
             </div>
         </div>
-        <div class="content" id="shipping">
-            <h3>Chính sách trả hàng</h3>
-            <p>Bạn có thể trả lại hầu hết các mặt hàng mới,
-                chưa mở trong vòng 30 ngày kể từ ngày giao hàng để được hoàn tiền đầy đủ.
-                Chúng tôi cũng sẽ thanh toán chi phí vận chuyển trả lại nếu việc trả lại là
-                do lỗi của chúng tôi (bạn nhận được một mặt hàng không chính xác hoặc bị lỗi, v.v.).</p>
-            <p>Bạn sẽ nhận được tiền hoàn lại trong vòng bốn tuần kể từ khi
-                đưa gói hàng của mình cho người gửi trả hàng, tuy nhiên, trong nhiều trường hợp,
-                bạn sẽ nhận được tiền hoàn lại nhanh chóng hơn. Khoảng thời gian này bao gồm thời gian
-                vận chuyển để chúng tôi nhận được hàng trả lại của bạn từ người gửi hàng (5 đến 10 ngày làm việc),
-                thời gian chúng tôi xử lý đơn hàng trả lại của bạn khi chúng tôi nhận được hàng (3 đến 5 ngày làm việc)
-                và thời gian ngân hàng của bạn để xử lý yêu cầu hoàn lại tiền của chúng tôi (5 đến 10 ngày làm việc).
-            </p>
-            <p>Nếu bạn cần trả lại một mặt hàng, chỉ cần đăng
-                nhập vào tài khoản của bạn, xem đơn đặt hàng bằng liên kết
-                'Hoàn tất đơn đặt hàng' trong menu Tài khoản của tôi và nhấp
-                vào nút Trả lại (các) Mặt hàng. Chúng tôi sẽ thông báo cho bạn
-                qua e-mail về khoản tiền hoàn lại của bạn sau khi chúng tôi đã
-                nhận và xử lý mặt hàng bị trả lại.
-            </p>
-            <h3>Vận chuyển</h3>
-            <p>Chúng tôi có thể gửi đến hầu như bất kỳ địa chỉ
-                nào trên thế giới. Lưu ý rằng có những hạn chế đối
-                với một số sản phẩm và một số sản phẩm không thể được
-                vận chuyển đến các điểm đến quốc tế.</p>
-            <p>Khi bạn đặt hàng, chúng tôi sẽ ước tính ngày vận chuyển
-                và giao hàng cho bạn dựa trên sự sẵn có của các mặt hàng
-                của bạn và các tùy chọn giao hàng mà bạn chọn. Tùy thuộc
-                vào nhà cung cấp dịch vụ vận chuyển mà bạn chọn, ước tính
-                ngày giao hàng có thể xuất hiện trên trang báo giá vận chuyển.
-            </p>
-            <p>Cũng xin lưu ý rằng phí vận chuyển cho nhiều
-                mặt hàng chúng tôi bán dựa trên trọng lượng.
-                Trọng lượng của bất kỳ mục nào như vậy có thể
-                được tìm thấy trên trang chi tiết của nó. Để phản
-                ánh chính sách của các công ty vận chuyển mà chúng
-                tôi sử dụng, tất cả các trọng lượng sẽ được làm tròn thành pound tiếp theo.
-            </p>
-        </div>
     </div>
-</div>
-</section>
+    </section>
+
+
 
 <!-- Related Products -->
 <section class="section related__products">
