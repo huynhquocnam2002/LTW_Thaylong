@@ -38,7 +38,7 @@ public class ChangeInfoUserServlet extends HttpServlet {
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String gender = request.getParameter("gender");
-        String bday=request.getParameter("birthDay").equals("")?"null":"'"+Util.reverseDate(request.getParameter("birthDay"))+"'";
+        String bday=request.getParameter("birthDay").equals("")?"null":Util.reverseDate(request.getParameter("birthDay"))+"";
 
         Part filePart = request.getPart("avatar");
         String img = "image/user/user_" + id + ".png";

@@ -525,7 +525,7 @@
                                                                 <input type="radio" name="gender" id="female" value="nu"
                                                                        class="gt"><%}%>
                                                                 <label for="female">Nữ</label>
-                                                                <%if (user.getGender().equalsIgnoreCase("UKN")) {%>
+                                                                <%if (user.getGender().equalsIgnoreCase("Ẩn")) {%>
                                                                 <input type="radio" name="gender" id="unset" value="ukn"
                                                                        class="gt" checked><%} else {%>
                                                                 <input type="radio" name="gender" id="unset" value="ukn"
@@ -594,7 +594,7 @@
                                                             <input type="hidden" name="orderId"
                                                                    value="<%=a.getOrderID()%>">
                                                             <input type="hidden" name="anmId" value="<%=a.getId()%>">
-                                                            <button>Xem chi tiết đơn hàng</button>
+<%--                                                            <button>Xem chi tiết đơn hàng</button>--%>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -638,7 +638,7 @@
                                                                     </p>
                                                                 </div>
                                                                 <div class="use">
-                                                                    <p> Chi tiết ></p>
+<%--                                                                    <p> Chi tiết ></p>--%>
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -665,7 +665,7 @@
                                                                     </p>
                                                                 </div>
                                                                 <div class="use">
-                                                                    <p> Chi tiết ></p>
+<%--                                                                    <p> Chi tiết ></p>--%>
                                                                 </div>
                                                             </div>
                                                             <%}%>
@@ -705,7 +705,7 @@
                                                                     </p>
                                                                 </div>
                                                                 <div class="use">
-                                                                    <p> Chi tiết ></p>
+<%--                                                                    <p> Chi tiết ></p>--%>
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -732,7 +732,7 @@
                                                                     </p>
                                                                 </div>
                                                                 <div class="use">
-                                                                    <p> Chi tiết ></p>
+<%--                                                                    <p> Chi tiết ></p>--%>
                                                                 </div>
                                                             </div>
                                                             <%}%>
@@ -772,7 +772,7 @@
                                                                     </p>
                                                                 </div>
                                                                 <div class="use">
-                                                                    <p> Chi tiết ></p>
+<%--                                                                    <p> Chi tiết ></p>--%>
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -799,7 +799,7 @@
                                                                     </p>
                                                                 </div>
                                                                 <div class="use">
-                                                                    <p> Chi tiết ></p>
+<%--                                                                    <p> Chi tiết ></p>--%>
                                                                 </div>
                                                             </div>
                                                             <%}%>
@@ -834,7 +834,7 @@
                                                                     </p>
                                                                 </div>
                                                                 <div class="use">
-                                                                    <p> Chi tiết ></p>
+<%--                                                                    <p> Chi tiết ></p>--%>
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -856,7 +856,7 @@
                                                                     </p>
                                                                 </div>
                                                                 <div class="use">
-                                                                    <p> Chi tiết ></p>
+<%--                                                                    <p> Chi tiết ></p>--%>
                                                                 </div>
                                                             </div>
                                                             <%}%>
@@ -892,7 +892,7 @@
                                                                     </p>
                                                                 </div>
                                                                 <div class="use">
-                                                                    <p> Chi tiết ></p>
+<%--                                                                    <p> Chi tiết ></p>--%>
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -915,7 +915,7 @@
                                                                     </p>
                                                                 </div>
                                                                 <div class="use">
-                                                                    <p> Chi tiết ></p>
+<%--                                                                    <p> Chi tiết ></p>--%>
                                                                 </div>
                                                             </div>
                                                             <%}%>

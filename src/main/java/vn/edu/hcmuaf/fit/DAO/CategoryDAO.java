@@ -96,8 +96,7 @@ public class CategoryDAO {
         PreparedStatement sta= db.getStatement("select * from category where id=?");
         sta.setString(1, id);
         ResultSet rs= sta.executeQuery();
-        if (rs.next()) return true;
-        return false;
+        return rs.next();
     }
 
     // lay danh sách sản phẩm theo danh mục

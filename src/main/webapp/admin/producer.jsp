@@ -32,37 +32,16 @@
                         class="other-filter-select filter-select"
                 >
                     <option value="0" class="other-filter-option" selected>
-                        Sắp xếp
+                        ---Sắp xếp---
                     </option>
                     <option value="decrease-price" class="other-filter-option">
-                        Giá giảm dần
+                        Tên: A -> Z
                     </option>
                     <option value="increase-price" class="other-filter-option">
-                        Giá tăng dần
-                    </option>
-                    <option
-                            value="decrease-quantity"
-                            class="other-filter-option"
-                    >
-                        Số lượng giảm dần
-                    </option>
-                    <option
-                            value="increase-quantity"
-                            class="other-filter-option"
-                    >
-                        Số lượng tăng dần
-                    </option>
-                    <option value="" class="other-filter-option">
-                        Lọc theo tao
+                        Tên: Z -> A
                     </option>
                 </select>
                 <button class="reset-filter-button">Đặt lại</button>
-            </div>
-            <div class="manage-orders-tools-container">
-                <p>Đã chọn: <span class="quantity">0</span></p>
-                <button class="tool-button delete-button" disabled>
-                    Hủy kích hoạt
-                </button>
             </div>
         </div>
     </div>
@@ -71,8 +50,7 @@
             <div class="table-row-div table-row-div-head-table">
                 <table class="manage-order-table-head">
                     <tr class="table-row head-table">
-                        <th>
-                            <input type="checkbox" name="check_all" class="check-all"/>
+                        <th style="width: 0%">
                         </th>
                         <th>Mã NSX</th>
                         <th>Ảnh</th>
@@ -86,10 +64,7 @@
                 <%for (Producer p : producer) {%>
                 <table class="manage-order-table">
                     <tr class="row-table row-table-main product-row">
-                        <td>
-                            <div class="id-check-product-div">
-                                <input type="checkbox" name="is-check" class="is-check"/>
-                            </div>
+                        <td style="width: 0%">
                         </td>
                         <td class="order-id-col">
                             <div class="order-id-div">
@@ -112,7 +87,7 @@
                         </td>
                         <td class="product-status-col">
                             <div class="product-status-div">
-                                <%if (p.getStatus() == 0) {%>
+                                <%if (p.getStatus() == -1) {%>
                                 <p class="delete-p status active-status">Đã ẩn</p>
                                 <%} else {%>
                                 <p class="delete-p status">Đã ẩn</p>
@@ -126,7 +101,7 @@
                         </td>
                         <td class="proceed">
                             <div class="proceed-div">
-                                <p class="edit-proceed">Chỉnh sửa</p>
+                                <a href="InfoProducerServlet?id=<%=p.getId()%>"><p class="edit-proceed">Chỉnh sửa</p></a>
                             </div>
                         </td>
                     </tr>
@@ -141,7 +116,7 @@
 <div class="right-tab add-new-producer add-tab">
     <h1 class="tab-name">Thêm nhà sản xuất mới</h1>
     <div class="right-tab-container">
-        <form action="" onsubmit="return false">
+        <form action="/AddProducerServlet" method="post" enctype="multipart/form-data" >
             <table class="add-new-product-table">
                 <tr class="table-row">
                     <td class="label-col">
@@ -149,7 +124,7 @@
                     </td>
                     <td class="input-col">
                         <input
-                                type="text"
+                                type="text" required
                                 name="name"
                                 id="new-producer-name"
                                 class="new-product-name-input input-field"
@@ -158,22 +133,19 @@
                 </tr>
                 <tr class="table-row">
                     <td class="label-col">
-                        <label for="new-producer-status">Trạng thái NSX:</label>
+                        <label for="new-producer-status">Trạng thái:</label>
                     </td>
                     <td class="input-col">
                         <select
                                 name="status"
                                 id="new-producer-status"
-                                class="new-product-status-input input-field"
-                        >
+                                class="new-product-status-input input-field">
                             <option value="-1" class="new-category-status-option">
                                 Đã ẩn
                             </option>
-                            <option
-                                    value="1"
+                            <option value="1"
                                     class="new-category-status-option"
-                                    selected
-                            >
+                                    selected>
                                 Đang hoạt động
                             </option>
                         </select>
@@ -184,9 +156,10 @@
                         <label for="new-producer-imgs">Thêm hình ảnh:</label>
                     </td>
                     <td class="input-col">
+                        <img src="" alt="" id="image-producer-demo" style="display: none; width: 200px; height: auto">
                         <input
-                                type="file"
-                                name="producer"
+                                type="file" accept="image/*" required
+                                name="img"
                                 id="new-producer-imgs"
                                 class="new-product-detail-input input-field"
                         />
@@ -195,7 +168,6 @@
                 <tr class="table-row">
                     <td class="label-col"></td>
                     <td class="input-col">
-                        <button class="cancel-button">Trở lại</button>
                         <button class="confirm-button">Xác nhận</button>
                     </td>
                 </tr>
@@ -203,4 +175,22 @@
         </form>
     </div>
 </div>
+<script>
+    let image_producer_input = document.querySelector('#new-producer-imgs')
+    let image_producer_demo = document.querySelector('#image-producer-demo')
+    image_producer_input.onchange = function () {
+        readURL(image_producer_input, image_producer_demo)
+    }
 
+    function readURL(input, img) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                img.src = e.target.result;
+            }
+            img.style.display = 'inline';
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

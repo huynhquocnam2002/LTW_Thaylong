@@ -144,7 +144,7 @@
         </div>
       </div>
     </li>
-    <li class="list-tab-li history-li">
+    <li class="list-tab-li history-li" style="display: none">
       <div class="tab-li-container">
         <div class="tab-li-container-name left-menu-item">
           <i class="icon-tab fa-solid fa-clock-rotate-left"></i>

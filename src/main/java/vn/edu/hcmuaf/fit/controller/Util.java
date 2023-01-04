@@ -121,25 +121,10 @@ public class Util {
         return id;
     }
 
-
-
-
-
     public static void main(String[] args) {
-//        Date d1 = new Date(2022, 11, 27);
-//        Date d2 = new Date(2023, 1, 11);
-//        System.out.println(d1);
-//        Calendar c1 = Calendar.getInstance();
-//        Calendar c2 = Calendar.getInstance();
-//        c1.setTime(d1);
-//        c2.setTime(d2);
-//
-//        System.out.println(d1.compareTo(d2));
-//        LocalDateTime now = LocalDateTime.now();
-//        System.out.println((c2.getTime().getTime() - c1.getTime().getTime()) / (1000 * 60 * 60 * 24));
-//        System.out.println((-new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth()).getTime() + d2.getTime()) / (24 * 3600 * 1000));
-
-
+        Date now = new Date();
+        String time = now.getYear()+"-"+now.getMonth()+"-"+now.getDate()+" "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
+        System.out.println(time);
     }
 
     public static void uploadImage(Part filePart, String imgLink) throws IOException {

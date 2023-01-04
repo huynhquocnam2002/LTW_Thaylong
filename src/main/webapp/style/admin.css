@@ -998,9 +998,6 @@ body{
     text-align: center;
     margin-top: 0.5em;
 }
-#admin-content #rightContainer .manage-vouchers select{
-    display: none;
-}
 #admin-content #rightContainer .manage-vouchers .discount-div .product-unit-price{
     width: 6rem;
     text-align: right;

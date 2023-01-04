@@ -1,27 +1,8 @@
 let list_icon_up = document.querySelectorAll('#admin-content #leftContainer .icon-up')
 let list_extend_button = document.querySelectorAll('#admin-content #rightContainer .row-table-end .show-all-type-product')
-let list_checkbox_all_product = document.querySelectorAll('#admin-content #rightContainer .check-all')
-let list_checkbox_product = document.querySelectorAll('#admin-content #rightContainer .is-check')
-let list_checkbox_main_product = document.querySelectorAll('#admin-content #rightContainer .row-table-main .is-check')
-let list_checkbox_child_product = document.querySelectorAll('#admin-content #rightContainer .row-table-child .is-check')
 let list_product_tab = document.querySelectorAll('#admin-content #rightContainer .manage-products-flex-tab')
 let list_product_tab_head = document.querySelectorAll('#admin-content #rightContainer .flex-manage-products .flex-item')
-let list_edit_button = document.querySelectorAll('#admin-content #rightContainer .manage-products .edit-button')
-let list_edit_ok_button = document.querySelectorAll('#admin-content #rightContainer .manage-products .ok-button')
-let list_edit_proceed_button = document.querySelectorAll('#admin-content #rightContainer .manage-products .edit-proceed')
-let list_accept_proceed_button = document.querySelectorAll('#admin-content #rightContainer .manage-products .accept-proceed')
-let list_delete_proceed_button = document.querySelectorAll('#admin-content #rightContainer .manage-products .delete-proceed')
-let list_add_type_proceed_button = document.querySelectorAll('#admin-content #rightContainer .manage-products .add-type-proceed')
-let list_quantity_type_of_product = document.querySelectorAll('#admin-content #rightContainer .row-table-end .quantity-type')
-let list_quantity_product_in_tab = document.querySelectorAll('#admin-content #rightContainer .flex-item span.quantity')
-let quantity_checked_product = document.querySelector('#admin-content #rightContainer .manage-products .manage-products-filter-container .quantity')
-let quantity_checked_order = document.querySelector('#admin-content #rightContainer .manage-orders .manage-orders-filter-container .quantity')
 let list_copy_button = document.querySelectorAll('#admin-content #rightContainer .copy-icon')
-let tool_selling_button = document.querySelector('#admin-content #rightContainer .manage-products .tool-button.selling-button')
-let tool_stop_selling_button = document.querySelector('#admin-content #rightContainer .manage-products .tool-button.stop-selling-button')
-let tool_delete_button = document.querySelector('#admin-content #rightContainer .manage-products .tool-button.delete-button')
-let list_product_tool_button = document.querySelectorAll('#admin-content #rightContainer .manage-products .tool-button')
-let list_order_tool_button = document.querySelectorAll('#admin-content #rightContainer .manage-orders .tool-button')
 let search_product_button = document.querySelector('#admin-content #rightContainer .manage-products .input-filter .id-product-filter-div button .search-icon').parentElement
 let search_order_button = document.querySelector('#admin-content #rightContainer .manage-orders .input-filter .id-order-filter-div button .search-icon').parentElement
 let search_product_input = document.querySelector('#admin-content #rightContainer .manage-products .input-filter .id-product-filter-div .id-product-filter').parentElement
@@ -32,7 +13,6 @@ let sort_filter_input = document.querySelector('#admin-content #rightContainer .
 let reset_filter_button = document.querySelector('#admin-content #rightContainer .manage-products .reset-filter-button')
 let list_left_menu_item = document.querySelectorAll('#admin-content #leftContainer .list-tab .list-tab-li .left-menu-item')
 let list_right_tab_item = document.querySelectorAll('#admin-content #rightContainer .right-tab')
-let change_info_home_button = document.querySelector('#admin-content #rightContainer .info-table tr td .change-info')
 let list_orders_tab = document.querySelectorAll('#admin-content #rightContainer .manage-orders .manage-orders-flex-tab')
 let list_users_tab = document.querySelectorAll('#admin-content #rightContainer .manage-users .manage-orders-flex-tab')
 let list_vouchers_tab = document.querySelectorAll('#admin-content #rightContainer .manage-vouchers .manage-vouchers-flex-tab')
@@ -47,6 +27,18 @@ let search_category_bt = document.querySelector("#rightContainer > div.right-tab
 let search_category_input = document.querySelector("#rightContainer > div.right-tab.manage-categorys > div.manage-orders-filter-container > div > div > div > input")
 let filter_category = document.querySelector("#rightContainer > div.right-tab.manage-categorys > div.manage-orders-filter-container > div > div > select")
 let reset_category =document.querySelector("#rightContainer > div.right-tab.manage-categorys > div.manage-orders-filter-container > div > div > button")
+let search_producer_input = document.querySelector("#rightContainer > div.right-tab.manage-producer > div.manage-orders-filter-container > div > div.input-filter > div > input")
+let search_producer_bt = document.querySelector("#rightContainer > div.right-tab.manage-producer > div.manage-orders-filter-container > div > div.input-filter > div > button")
+let sort_producer_input = document.querySelector("#rightContainer > div.right-tab.manage-producer > div.manage-orders-filter-container > div > div.input-filter > select")
+let reset_producer = document.querySelector("#rightContainer > div.right-tab.manage-producer > div.manage-orders-filter-container > div > div.input-filter > button")
+let search_user_input = document.querySelector("#rightContainer > div.right-tab.manage-users > div.manage-orders-filter-container > div > div.input-filter > div > input")
+let search_user_bt = document.querySelector("#rightContainer > div.right-tab.manage-users > div.manage-orders-filter-container > div > div.input-filter > div > button")
+let sort_user = document.querySelector("#rightContainer > div.right-tab.manage-users > div.manage-orders-filter-container > div > div.input-filter > select.other-filter-select.filter-select")
+let reset_user = document.querySelector("#rightContainer > div.right-tab.manage-users > div.manage-orders-filter-container > div > div.input-filter > button")
+let search_voucher_input = document.querySelector("#rightContainer > div.right-tab.manage-vouchers > div.manage-orders-filter-container > div > div > div > input")
+let search_voucher_bt = document.querySelector("#rightContainer > div.right-tab.manage-vouchers > div.manage-orders-filter-container > div > div > div > button")
+let sort_voucher = document.querySelector("#rightContainer > div.right-tab.manage-vouchers > div.manage-orders-filter-container > div > div > select")
+let reset_voucher = document.querySelector("#rightContainer > div.right-tab.manage-vouchers > div.manage-orders-filter-container > div > div > button")
 
 
 //show list child in left menu admin
@@ -236,6 +228,36 @@ function run() {
         findCategory(this.value)
     }
 
+    //search producer
+    search_producer_bt.onclick = function () {
+        let parent = search_category_bt.parentElement
+        let input_text = parent.querySelector('.id-order-filter').value
+        findProducer(input_text)
+    }
+    search_producer_input.onkeyup = function () {
+        findProducer(this.value)
+    }
+
+    //search user
+    search_user_bt.onclick = function () {
+        let parent = search_user_bt.parentElement
+        let input_text = parent.querySelector('.id-order-filter').value
+        findUser(input_text)
+    }
+    search_user_input.onkeyup = function () {
+        findUser(this.value)
+    }
+
+    //search voucher
+    search_voucher_bt.onclick = function () {
+        let parent = search_voucher_bt.parentElement
+        let input_text = parent.querySelector('.id-order-filter').value
+        findVoucher(input_text)
+    }
+    search_voucher_input.onkeyup = function () {
+        findVoucher(this.value)
+    }
+
     price_filter_input.onchange = filterByPrice
 
     //category filter
@@ -259,8 +281,26 @@ function run() {
     //sort category
     filter_category.onchange = sortCategory
 
+    //sort producer
+    sort_producer_input.onchange = sortProducer
+
+    //sort user
+    sort_user.onchange = sortUser
+
     //reset category
     reset_category.onclick = resetCategoryFilter
+
+    //reset producer
+    reset_producer.onclick = resetProducerFilter
+
+    //reset user
+    reset_user.onclick = resetUserFilter
+
+    //sort voucher
+    sort_voucher.onchange = sortVoucher
+
+    //reset voucher
+    reset_voucher.onclick = resetVoucher
 
 }
 
@@ -290,6 +330,29 @@ function resetCategoryFilter(){
     sortCategory()
     search_category_bt.click()
 }
+
+function resetProducerFilter(){
+    sort_producer_input.value = '0'
+    search_producer_input.value = ''
+    sortProducer()
+    search_producer_bt.click()
+}
+
+function resetUserFilter(){
+    sort_user.value = '0'
+    search_user_input.value = ''
+    sortUser()
+    search_user_bt.click()
+}
+
+function resetVoucher(){
+    sort_voucher.value = '0'
+    search_voucher_input.value = ''
+    sortVoucher()
+    search_voucher_bt.click()
+}
+
+
 
 function filterByPrice() {
     let input = document.querySelector('#admin-content #rightContainer .manage-products .price-filter-select')
@@ -712,6 +775,165 @@ function sortCategory() {
 
 }
 
+function sortProducer() {
+    let input_sort = document.querySelector("#rightContainer > div.right-tab.manage-producer > div.manage-orders-filter-container > div > div.input-filter > select").value
+    let container = document.querySelector('#admin-content #rightContainer .manage-producer .table-row-div-order')
+    let list = document.querySelectorAll('#admin-content #rightContainer .manage-producer .table-row-div-order .manage-order-table')
+    let arr = []
+    for (let i of list) {
+        arr.push(i)
+    }
+    switch (input_sort) {
+        case '0':
+            arr.sort((a, b) => {
+                return a.querySelector('.row-table-main .order-id .id-span').innerText.localeCompare(b.querySelector('.row-table-main .order-id .id-span').innerText);
+            })
+            for (let i of arr) {
+                container.appendChild(i)
+            }
+            break
+        case 'decrease-price':
+            arr.sort((a, b) => {
+                return a.querySelector('.row-table-main .product-unit-price').innerText.localeCompare(b.querySelector('.row-table-main .product-unit-price').innerText);
+            })
+            for (let i of arr) {
+                container.appendChild(i)
+            }
+            break
+        case 'increase-price':
+            arr.sort((a, b) => {
+                return -a.querySelector('.row-table-main .product-unit-price').innerText.localeCompare(b.querySelector('.row-table-main .product-unit-price').innerText);
+            })
+            for (let i of arr) {
+                container.appendChild(i)
+            }
+            break
+    }
+
+}
+
+function sortUser() {
+    let input_sort = document.querySelector("#rightContainer > div.right-tab.manage-users > div.manage-orders-filter-container > div > div.input-filter > select.other-filter-select.filter-select").value
+    let container = document.querySelector('#admin-content #rightContainer .manage-users .active-order-tab .table-row-div-order')
+    let list = document.querySelectorAll('#admin-content #rightContainer .manage-users .active-order-tab .table-row-div-order .manage-order-table')
+    let arr = []
+    for (let i of list) {
+        arr.push(i)
+    }
+    switch (input_sort) {
+        case '0':
+            arr.sort((a, b) => {
+                return a.querySelector('.row-table-main .product-id .id-span').innerText.localeCompare(b.querySelector('.row-table-main .product-id .id-span').innerText);
+            })
+            for (let i of arr) {
+                container.appendChild(i)
+            }
+            break
+        case 'decrease-price':
+            arr.sort((a, b) => {
+                return a.querySelector('.row-table-main .user-name').innerText.localeCompare(b.querySelector('.row-table-main .user-name').innerText);
+            })
+            for (let i of arr) {
+                container.appendChild(i)
+            }
+            break
+        case 'increase-price':
+            arr.sort((a, b) => {
+                return -a.querySelector('.row-table-main .user-name').innerText.localeCompare(b.querySelector('.row-table-main .user-name').innerText);
+            })
+            for (let i of arr) {
+                container.appendChild(i)
+            }
+            break
+        case 'decrease-quantity':
+            arr.sort((a, b) =>
+                new Date(a.querySelector('.row-table-main .update-date-col .product-update-date').innerText).getTime() - new Date(b.querySelector('.row-table-main .update-date-col .product-update-date').innerText).getTime()
+            )
+            for (let i of arr) {
+                container.appendChild(i)
+            }
+            break
+        case 'increase-quantity':
+            arr.sort((a, b) =>
+                -new Date(a.querySelector('.row-table-main .update-date-col .product-update-date').innerText).getTime() + new Date(b.querySelector('.row-table-main .update-date-col .product-update-date').innerText).getTime()
+            )
+            for (let i of arr) {
+                container.appendChild(i)
+            }
+            break
+    }
+
+}
+
+function sortVoucher() {
+    let input_sort = document.querySelector("#rightContainer > div.right-tab.manage-vouchers > div.manage-orders-filter-container > div > div > select").value
+    let container = document.querySelector('#admin-content #rightContainer .manage-vouchers .active-voucher-tab .table-row-div-order')
+    let list = document.querySelectorAll('#admin-content #rightContainer .manage-vouchers .active-voucher-tab .table-row-div-order .manage-order-table')
+    let arr = []
+    for (let i of list) {
+        arr.push(i)
+    }
+    switch (input_sort) {
+        case '0':
+            arr.sort((a, b) => {
+                return a.querySelector('.row-table-main .product-id .id-span').innerText.localeCompare(b.querySelector('.row-table-main .product-id .id-span').innerText);
+            })
+            for (let i of arr) {
+                container.appendChild(i)
+            }
+            break
+        case 'decrease-price':
+            arr.sort((a, b) =>
+                -parseInt(a.querySelector('.row-table-main .discount-div p').innerText) + parseInt(b.querySelector('.row-table-main .discount-div p').innerText)
+            )
+            for (let i of arr) {
+                container.appendChild(i)
+            }
+            break
+        case 'increase-price':
+            arr.sort((a, b) =>
+                parseInt(a.querySelector('.row-table-main .discount-div p').innerText) - parseInt(b.querySelector('.row-table-main .discount-div p').innerText)
+            )
+            for (let i of arr) {
+                container.appendChild(i)
+            }
+            break
+        case 'decrease-quantity':
+            arr.sort((a, b) =>
+                new Date(a.querySelector('.row-table-main .update-date-col .update-date-div.start p').innerText).getTime() - new Date(b.querySelector('.row-table-main .update-date-col .update-date-div.start p').innerText).getTime()
+            )
+            for (let i of arr) {
+                container.appendChild(i)
+            }
+            break
+        case 'increase-quantity':
+            arr.sort((a, b) =>
+                -new Date(a.querySelector('.row-table-main .update-date-col .update-date-div.start p').innerText).getTime() + new Date(b.querySelector('.row-table-main .update-date-col .update-date-div.start p').innerText).getTime()
+            )
+            for (let i of arr) {
+                container.appendChild(i)
+            }
+            break
+        case '5':
+            arr.sort((a, b) =>
+                new Date(a.querySelector('.row-table-main .update-date-col .update-date-div.end p').innerText).getTime() - new Date(b.querySelector('.row-table-main .update-date-col .update-date-div.end p').innerText).getTime()
+            )
+            for (let i of arr) {
+                container.appendChild(i)
+            }
+            break
+        case '6':
+            arr.sort((a, b) =>
+                -new Date(a.querySelector('.row-table-main .update-date-col .update-date-div.end p').innerText).getTime() + new Date(b.querySelector('.row-table-main .update-date-col .update-date-div.end p').innerText).getTime()
+            )
+            for (let i of arr) {
+                container.appendChild(i)
+            }
+            break
+    }
+
+}
+
 function findProductByNameOrId(input_text) {
     let manage_products = document.querySelector('.manage-products')
     let list_product = manage_products.querySelectorAll('.active-product-tab .table-row-div-product .row-table-main')
@@ -735,6 +957,54 @@ function findCategory(input_text) {
         if (i.querySelector('.order-id') != null) {
             let name = i.querySelector('p.product-unit-price').innerHTML.toLowerCase()
             let id = i.querySelector('.order-id .id-span').innerHTML
+            if (name.indexOf(input_text.toLowerCase()) == -1 && id.indexOf(input_text) == -1) {
+                i.classList.add('search-hide')
+            } else {
+                i.classList.remove('search-hide')
+            }
+        }
+    }
+}
+
+function findProducer(input_text) {
+    let manage_products = document.querySelector('.manage-producer')
+    let list_product = manage_products.querySelectorAll('.table-row-div-order table.manage-order-table')
+    for (let i of list_product) {
+        if (i.querySelector('.order-id') != null) {
+            let name = i.querySelector('p.product-unit-price').innerHTML.toLowerCase()
+            let id = i.querySelector('.order-id .id-span').innerHTML
+            if (name.indexOf(input_text.toLowerCase()) == -1 && id.indexOf(input_text) == -1) {
+                i.classList.add('search-hide')
+            } else {
+                i.classList.remove('search-hide')
+            }
+        }
+    }
+}
+
+function findUser(input_text) {
+    let manage_products = document.querySelector('.manage-users')
+    let list_product = manage_products.querySelectorAll('.active-order-tab .table-row-div-order table.manage-order-table')
+    for (let i of list_product) {
+        if (i.querySelector('.user-name') != null) {
+            let name = i.querySelector('p.user-name').innerText.toLowerCase()
+            let id = i.querySelector('.product-id .id-span').innerText
+            if (name.indexOf(input_text.toLowerCase()) == -1 && id.indexOf(input_text) == -1) {
+                i.classList.add('search-hide')
+            } else {
+                i.classList.remove('search-hide')
+            }
+        }
+    }
+}
+
+function findVoucher(input_text) {
+    let manage_products = document.querySelector('.manage-vouchers')
+    let list_product = manage_products.querySelectorAll('.active-voucher-tab .table-row-div-order table.manage-order-table')
+    for (let i of list_product) {
+        if (i.querySelector('.name-block') != null) {
+            let name = i.querySelector('.name-block p').innerText.toLowerCase()
+            let id = i.querySelector('.product-id .id-span').innerText
             if (name.indexOf(input_text.toLowerCase()) == -1 && id.indexOf(input_text) == -1) {
                 i.classList.add('search-hide')
             } else {

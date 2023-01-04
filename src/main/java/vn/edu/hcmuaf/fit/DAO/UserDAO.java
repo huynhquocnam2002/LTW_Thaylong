@@ -65,10 +65,24 @@ public class UserDAO {
     }
 
     public static boolean activeUser(User u) throws SQLException, ClassNotFoundException {
+        changeStatus(u.getId(), 1);
+        return true;
+    }
+
+    public static void lock(String id) throws SQLException, ClassNotFoundException {
+        changeStatus(id, -1);
+    }
+
+    public static void unlock(String id) throws SQLException, ClassNotFoundException {
+        changeStatus(id, 1);
+    }
+
+    public static void changeStatus(String id, int status) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
-        PreparedStatement sta = db.getStatement("update user set status=1 where id=?");
-        sta.setString(1, u.getId());
-        return sta.execute();
+        PreparedStatement sta = db.getStatement("update user set status=? where id=?");
+        sta.setInt(1, status);
+        sta.setString(2, id);
+        sta.executeUpdate();
     }
 
     public static boolean changeInfoUser(String userId, String name, String email, String phone, String gender, String bday, String img) throws SQLException, ClassNotFoundException {

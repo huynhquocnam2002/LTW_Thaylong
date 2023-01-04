@@ -41,98 +41,24 @@
                         <i class="search-icon fa-solid fa-magnifying-glass"></i>
                     </button>
                 </div>
-                <select
-                        name="price-filter"
-                        class="price-filter-select filter-select"
-                >
-                    <option value="0" class="price-filter-option">Giá</option>
-                    <option value="1" class="price-filter-option">
-                        < 500.000 VND
-                    </option>
-                    <option value="2" class="price-filter-option">
-                        500.000 - <1.000.000 VND
-                    </option>
-                    <option value="3" class="price-filter-option">
-                        1.000.000 - <2.000.000 VND
-                    </option>
-                    <option value="4" class="price-filter-option">
-                        2.000.000 - <3.000.000 VND
-                    </option>
-                    <option value="5" class="price-filter-option">
-                        >3.000.000 VND
-                    </option>
-                </select>
-                <select
-                        name="category-filter"
-                        class="category-filter-select filter-select"
-                >
-                    <option value="0" class="category-filter-option" selected>
-                        Danh mục
-                    </option>
-                    <option value="Ốp lưng" class="category-filter-option">
-                        Ốp lưng
-                    </option>
-                    <option value="Sạc" class="category-filter-option">
-                        Sạc
-                    </option>
-                    <option value="" class="category-filter-option">
-                        danh mục 3
-                    </option>
-                    <option value="" class="category-filter-option">
-                        danh mục 4
-                    </option>
-                    <option value="" class="category-filter-option">
-                        danh mục 5
-                    </option>
-                    <option value="" class="category-filter-option">
-                        danh mục 6
-                    </option>
-                    <option value="" class="category-filter-option">
-                        danh mục 7
-                    </option>
-                    <option value="" class="category-filter-option">
-                        danh mục 8
-                    </option>
-                    <option value="" class="category-filter-option">
-                        danh mục 9
-                    </option>
-                </select>
-                <select
-                        name="other-filter"
-                        class="other-filter-select filter-select"
-                >
+                <select name="other-filter" class="other-filter-select filter-select">
                     <option value="0" class="other-filter-option" selected>
-                        Sắp xếp
+                        ---Sắp xếp---
                     </option>
                     <option value="decrease-price" class="other-filter-option">
-                        Giá giảm dần
+                        Tên: A -> Z
                     </option>
                     <option value="increase-price" class="other-filter-option">
-                        Giá tăng dần
+                        Tên: Z -> A
                     </option>
-                    <option
-                            value="decrease-quantity"
-                            class="other-filter-option"
-                    >
-                        Số lượng giảm dần
+                    <option value="decrease-quantity" class="other-filter-option">
+                        Cũ -> Mới
                     </option>
-                    <option
-                            value="increase-quantity"
-                            class="other-filter-option"
-                    >
-                        Số lượng tăng dần
-                    </option>
-                    <option value="" class="other-filter-option">
-                        Lọc theo tao
+                    <option value="increase-quantity" class="other-filter-option">
+                        Mới -> Cũ
                     </option>
                 </select>
                 <button class="reset-filter-button">Đặt lại</button>
-            </div>
-            <div class="manage-orders-tools-container">
-                <p>Đã chọn: <span class="quantity">0</span></p>
-                <button class="tool-button delete-button" disabled>
-                    Hủy
-                </button>
             </div>
         </div>
     </div>
@@ -142,8 +68,8 @@
             <div class="table-row-div table-row-div-head-table">
                 <table class="manage-order-table-head">
                     <tr class="table-row head-table">
-                        <th>
-                            <input type="checkbox" name="check_all" class="check-all"/>
+                        <th style="width: 0%;">
+
                         </th>
                         <th>Khách hàng</th>
                         <th>Số ĐT</th>
@@ -157,10 +83,7 @@
                 <%for (User u : users) {%>
                 <table class="manage-order-table">
                     <tr class="row-table row-table-main product-row">
-                        <td>
-                            <div class="id-check-product-div">
-                                <input type="checkbox" name="is-check" class="is-check"/>
-                            </div>
+                        <td style="width: 0%">
                         </td>
                         <td class="user-name-col">
                             <div class="product-name-container">
@@ -217,10 +140,10 @@
                         </td>
                         <td class="proceed">
                             <div class="proceed-div">
-                                <%if (u.getStatus() == 0) {%>
-                                <p class="unlock">Mở khóa</p>
+                                <%if (u.getStatus() == -1) {%>
+                                <a href="/UnlockUserServlet?id=<%=u.getId()%>"><p class="unlock">Mở khóa</p></a>
                                 <%} else {%>
-                                <p class="lock">Khóa tài khoản</p>
+                                <a href="/LockUserServlet?id=<%=u.getId()%>"><p class="lock">Khóa tài khoản</p></a>
                                 <%}%>
                             </div>
                         </td>
@@ -272,8 +195,7 @@
             <div class="table-row-div table-row-div-head-table">
                 <table class="manage-order-table-head">
                     <tr class="table-row head-table">
-                        <th>
-                            <input type="checkbox" name="check_all" class="check-all"/>
+                        <th style="width: 0%">
                         </th>
                         <th>Khách hàng</th>
                         <th>Số ĐT</th>
@@ -287,10 +209,7 @@
                 <%for (User u: actived){%>
                 <table class="manage-order-table">
                     <tr class="row-table row-table-main product-row">
-                        <td>
-                            <div class="id-check-product-div">
-                                <input type="checkbox" name="is-check" class="is-check"/>
-                            </div>
+                        <td style="width: 0%">
                         </td>
                         <td class="user-name-col">
                             <div class="product-name-container">
@@ -334,7 +253,7 @@
                         </td>
                         <td class="proceed">
                             <div class="proceed-div">
-                                <p class="lock">Khóa tài khoản</p>
+                                <a href="/LockUserServlet?id=<%=u.getId()%>"><p class="lock">Khóa tài khoản</p></a>
                             </div>
                         </td>
                     </tr>
@@ -385,8 +304,7 @@
             <div class="table-row-div table-row-div-head-table">
                 <table class="manage-order-table-head">
                     <tr class="table-row head-table">
-                        <th>
-                            <input type="checkbox" name="check_all" class="check-all"/>
+                        <th style="width: 0%">
                         </th>
                         <th>Khách hàng</th>
                         <th>Số ĐT</th>
@@ -400,10 +318,7 @@
                 <%for (User u: unactived){%>
                 <table class="manage-order-table">
                     <tr class="row-table row-table-main product-row">
-                        <td>
-                            <div class="id-check-product-div">
-                                <input type="checkbox" name="is-check" class="is-check"/>
-                            </div>
+                        <td style="width: 0%">
                         </td>
                         <td class="user-name-col">
                             <div class="product-name-container">
@@ -445,7 +360,7 @@
                         </td>
                         <td class="proceed">
                             <div class="proceed-div">
-                                <p class="lock">Khóa tài khoản</p>
+                                <a href="/LockUserServlet?id=<%=u.getId()%>"><p class="lock">Khóa tài khoản</p></a>
                             </div>
                         </td>
                     </tr>
@@ -496,12 +411,7 @@
             <div class="table-row-div table-row-div-head-table">
                 <table class="manage-order-table-head">
                     <tr class="table-row head-table">
-                        <th>
-                            <input
-                                    type="checkbox"
-                                    name="check_all"
-                                    class="check-all"
-                            />
+                        <th style="width: 0%">
                         </th>
                         <th>Khách hàng</th>
                         <th>Số ĐT</th>
@@ -515,10 +425,7 @@
                 <%for (User u: locked){%>
                 <table class="manage-order-table">
                     <tr class="row-table row-table-main product-row">
-                        <td>
-                            <div class="id-check-product-div">
-                                <input type="checkbox" name="is-check" class="is-check"/>
-                            </div>
+                        <td style="width: 0%">
                         </td>
                         <td class="user-name-col">
                             <div class="product-name-container">
@@ -560,7 +467,7 @@
                         </td>
                         <td class="proceed">
                             <div class="proceed-div">
-                                <p class="unlock">Mở khóa</p>
+                                <a href="/UnlockUserServlet?id=<%=u.getId()%>"><p class="unlock">Mở khóa</p></a>
                             </div>
                         </td>
                     </tr>
