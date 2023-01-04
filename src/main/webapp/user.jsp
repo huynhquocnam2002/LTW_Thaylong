@@ -525,7 +525,7 @@
                                                                 <input type="radio" name="gender" id="female" value="nu"
                                                                        class="gt"><%}%>
                                                                 <label for="female">Nữ</label>
-                                                                <%if (user.getGender().equalsIgnoreCase("UKN")) {%>
+                                                                <%if (user.getGender().equalsIgnoreCase("Ẩn")) {%>
                                                                 <input type="radio" name="gender" id="unset" value="ukn"
                                                                        class="gt" checked><%} else {%>
                                                                 <input type="radio" name="gender" id="unset" value="ukn"

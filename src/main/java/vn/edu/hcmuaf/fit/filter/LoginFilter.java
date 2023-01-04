@@ -11,7 +11,7 @@ import vn.edu.hcmuaf.fit.model.User;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebFilter(filterName = "LoginFilter", urlPatterns = {"/UserServlet", "/AnnouncementServlet", "/ChangeInfoUserServlet", "/VerifyRegisterServlet", "/WelcomeAdminServlet", "/ChangePassServlet", "/AdminServlet", "/ModifyProductServlet", "/StopSellProductServlet", "/AddOptionServlet", "/InfoOptionServlet","/InfoCategoryServlet","/AddCategoryServlet","/AddProducerServlet","/InfoProducerServlet","/LockUserServlet","/UnlockUserServlet","/AddVoucherServlet","/InfoVoucherServlet","/ActiveVoucherServlet","/UnactiveVoucherServlet"})
+@WebFilter(filterName = "LoginFilter", urlPatterns = {"/UserServlet", "/AnnouncementServlet", "/ChangeInfoUserServlet", "/VerifyRegisterServlet", "/WelcomeAdminServlet", "/ChangePassServlet", "/AdminServlet", "/ModifyProductServlet", "/StopSellProductServlet", "/AddOptionServlet", "/InfoOptionServlet","/InfoCategoryServlet","/AddCategoryServlet","/AddProducerServlet","/InfoProducerServlet","/LockUserServlet","/UnlockUserServlet","/AddVoucherServlet","/InfoVoucherServlet","/ActiveVoucherServlet","/UnactiveVoucherServlet","/PayServlet"})
 public class LoginFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }

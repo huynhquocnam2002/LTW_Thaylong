@@ -91,7 +91,7 @@ public class User {
 
     public String getGender() {
         if (gender.equals("nam")) return "Nam";
-        if (gender.equals("nu")) return "Nữ";
+        if (gender.equals("nu")) return "Nu";
         return "Ẩn";
     }
 

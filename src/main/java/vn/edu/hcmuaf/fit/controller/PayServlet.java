@@ -30,13 +30,6 @@ public class PayServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            request.getRequestDispatcher("LoginServlet").forward(request, response);
-        } else {
-            request.getRequestDispatcher("/").forward(request, response);
-        }
-
 
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
