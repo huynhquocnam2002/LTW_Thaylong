@@ -1,4 +1,5 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.UserDAO" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +44,7 @@
             <div class="form">
                 <form action="/VerifyRegisterServlet" method="post">
                     <div class="fiel_text">
-                        <%User user= (User) session.getAttribute("user");%>
+                        <%User user=UserDAO.getUserBySessionID((String) session.getAttribute("user"));%>
                         <label for="name" class="form-label"> đã gửi mã 6 chữ số đến email <%=user.getEmail()%></label> <br>
 
                     </div>

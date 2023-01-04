@@ -7,6 +7,14 @@ public class Address {
     private String phone_number;
     private String address;
 
+    public Address(String id, String id_user, String name_receiver, String phone_number, String address) {
+        this.id = id;
+        this.id_user = id_user;
+        this.name_receiver = name_receiver;
+        this.phone_number = phone_number;
+        this.address = address;
+    }
+
     public String getId() {
         return id;
     }

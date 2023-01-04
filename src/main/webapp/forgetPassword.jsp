@@ -95,7 +95,7 @@
 
                     <div class="two-a">
                         <p class="left" href="">Chưa có mã xác nhận</p>
-                        <a class="right" href="/ChangePassServlet">gửi mã</a>
+                        <a class="right" href="/ForgetPassServlet">gửi mã</a>
                     </div>
                 </form>
             </div>

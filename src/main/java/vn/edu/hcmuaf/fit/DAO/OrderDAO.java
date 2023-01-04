@@ -26,6 +26,22 @@ public class OrderDAO {
         return res;
     }
 
+    public static List<Order> getOrderByUserId(String userId) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        List<Order> res = new ArrayList<Order>();
+        PreparedStatement sta = db.getStatement("select orders.id ,status_order.name, delivery_address.id,orders.order_date, orders.id_user, orders.notes, orders.amount from orders, delivery_address,status_order where orders.id_user=? and status_order.id=orders.id_status_order and delivery_address.id=orders.id_delivery_address");
+        sta.setString(1, userId);
+        ResultSet rs = sta.executeQuery();
+        while (rs.next()) {
+            Order o = new Order(rs.getString(1), rs.getString(5), rs.getString(2), rs.getString(3), rs.getString(6), rs.getDate(4));
+            o.setAmount(rs.getLong(7));
+            Map<Product, Integer> map = getProductOrderNoOption(o.getId());
+            o.addProduct(map);
+            res.add(o);
+        }
+        return res;
+    }
+
     public static Map<Product, Integer> getProductOrder(String orderId) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
         Map<Product, Integer> res = new HashMap<Product, Integer>();
@@ -35,6 +51,19 @@ public class OrderDAO {
         while (rs.next()) {
             Product product= new Product(rs.getString(1), rs.getString(2), rs.getLong(3), rs.getString(5));
             product.setOptionName(rs.getString(6));
+            res.put(product, rs.getInt(4));
+        }
+        return res;
+    }
+
+    public static Map<Product, Integer> getProductOrderNoOption(String orderId) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        Map<Product, Integer> res = new HashMap<Product, Integer>();
+        PreparedStatement sta = db.getStatement("select product.id,product.name, product.unit_price, product_order.quantity, product.img from orders, product_order, product where product.id=product_order.id_product and orders.id=? and orders.id=product_order.id_order");
+        sta.setString(1, orderId);
+        ResultSet rs = sta.executeQuery();
+        while (rs.next()) {
+            Product product= new Product(rs.getString(1), rs.getString(2), rs.getLong(3), rs.getString(5));
             res.put(product, rs.getInt(4));
         }
         return res;
@@ -97,7 +126,7 @@ public class OrderDAO {
 
     public static long getTurnover() throws SQLException, ClassNotFoundException {
         DataDB db= new DataDB();
-        PreparedStatement sta= db.getStatement("SELECT SUM(pr.UNIT_PRICE*p.QUANTITY) from product pr, product_order p, orders o WHERE p.ID_PRODUCT=pr.ID and o.ID_STATUS_ORDER='SO4' and o.ID=p.ID_ORDER;");
+        PreparedStatement sta= db.getStatement("SELECT SUM(pr.UNIT_PRICE*p.QUANTITY) from product pr, product_order p, orders o WHERE p.ID_PRODUCT=pr.ID and o.ID_STATUS_ORDER='SO3' and o.ID=p.ID_ORDER;");
         ResultSet rs= sta.executeQuery();
         if (rs.next())
             return rs.getLong(1);
@@ -114,15 +143,13 @@ public class OrderDAO {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-//        List<Order> list= getOrders("djnf");
-//        System.out.println(list.size());
-//        for (Order o: list){
-//            System.out.println(o);
-//        }
-//        System.out.println();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date();
-        System.out.println(formatter.format(date));
+        List<Order> list= getOrderByUserId("U1");
+        System.out.println(list.size());
+        for (Order o: list){
+            System.out.println(o);
+        }
+        System.out.println();
+
     }
 
     public static void changeStatusOrder(String id, String status) throws SQLException, ClassNotFoundException {
@@ -130,6 +157,7 @@ public class OrderDAO {
         PreparedStatement sta = db.getStatement("update orders set id_status_order=? where id=?");
         sta.setString(1, status);
         sta.setString(2, id);
+        System.out.println(status);
         sta.executeUpdate();
     }
 
@@ -142,5 +170,26 @@ public class OrderDAO {
             return rs.getString(1);
         return null;
 
+    }
+
+    public static boolean containId(String id) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        PreparedStatement sta = db.getStatement("select * from orders where id=?");
+        sta.setString(1, id);
+        ResultSet rs= sta.executeQuery();;
+        return rs.next();
+    }
+
+    public static void add(Order o) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        PreparedStatement sta = db.getStatement("insert into orders values (?,?,?,?,?,?,?);");
+        sta.setString(1, o.getId());
+        sta.setString(2, o.getUserId());
+        sta.setString(3, o.getStatus());
+        sta.setString(4, o.getDeliveryAddressId());
+        sta.setLong(5, o.getAmount());
+        sta.setString(6, o.getNote());
+        sta.setString(7, o.getDateString());
+        sta.executeUpdate();
     }
 }

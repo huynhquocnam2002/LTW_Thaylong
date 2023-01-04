@@ -1,4 +1,7 @@
-<%--
+<%@ page import="vn.edu.hcmuaf.fit.model.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.UserDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Cart" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 12/9/2022
@@ -31,7 +34,9 @@
 
     <title>JC Phone Shop</title>
 </head>
-
+<%User user= UserDAO.getUserBySessionID((String) session.getAttribute("user"));
+    Order order = (Order) request.getAttribute("order");
+%>
 <body>
 <!-- Header -->
 <!-- Header_top -->
@@ -62,13 +67,13 @@
                     </div>
                     <ul class="nav__list">
                         <li class="nav__item">
-                            <a href="#header" class="nav__link scroll-link">Trang chủ</a>
+                            <a href="index.jsp" class="nav__link scroll-link">Trang chủ</a>
                         </li>
                         <li class="nav__item">
-                            <a href="#category" class="nav__link scroll-link">Sản phẩm</a>
+                            <a href="index.jsp#product" class="nav__link scroll-link">Sản phẩm</a>
                         </li>
                         <li class="nav__item_seach">
-                            <input class="input_seach"  id="input_seach" type="text" placeholder="seach...">
+                            <input class="input_seach" id="input_seach" type="text" placeholder="seach...">
                             <div class="nav__icons">
                                 <a href="#" class="icon__item" id="icon__item_seach">
                                     <svg class="icon__search">
@@ -80,8 +85,8 @@
                         <li class="nav__item">
 
                             <div class="nav__item_hotro">
-                                <a  href="#hotro" class="nav__link scroll-link">HOTLINE HỖ TRỢ</a> <br>
-                                <a  href="#hotro" class="nav__link scroll-link">0999.999.999</a>
+                                <a href="#hotro" class="nav__link scroll-link">HOTLINE HỖ TRỢ</a> <br>
+                                <a href="#hotro" class="nav__link scroll-link">0797.74.76.76</a>
                             </div>
                         </li>
 
@@ -89,28 +94,45 @@
                 </div>
 
                 <div class="nav__icons">
-                    <a href="/html/user.html" class="icon__item">
-                        <svg class="icon__user">
-                            <use xlink:href="./images/sprite.svg#icon-user"></use>
-                        </svg>
+                    <a href="/UserServlet" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
+                        <img src="<%=user.getImg()%>"
+                             style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%" alt="img">
                     </a>
                     <div class="nav__item_user" id="nav__item_user">
-                        <a  href="#login" class="nav__link scroll-link">Hello Minh Thuận</a> <br>
-                        <!-- <a  href="#register" class="nav__link scroll-link">Đăng Ký</a><br> -->
-                        <a  href="" class="nav__link scroll-link">Thành Viên</a>
+                        <a href="#" class="nav__link scroll-link" style="line-height: 2">Hello <%=user.getName()%>
+                        </a> <br>
+                        <a href="#"
+                           class="nav__link scroll-link"><%=user.getStatus() == 1 ? "Thành viên" : user.getStatus() == -1 ? "Đã khóa" : "Chưa kích hoạt"%>
+                        </a>
                     </div>
                 </div>
 
                 <div class="nav__icons" id="nav__item_giohang">
-                    <a href="/html/cart.html" class="icon__item">
+                    <a href="cart.jsp" class="icon__item">
                         <svg class="icon__cart">
                             <use xlink:href="./images/sprite.svg#icon-shopping-basket"></use>
                         </svg>
-                        <span id="cart__total">4</span>
+                        <span id="cart__total">0</span>
                     </a>
-                    <a href="/html/cart.html" class="nav__link_giohang">Giỏ Hàng</a>
+                    <a href="cart.jsp" class="nav__link_giohang">Giỏ Hàng</a>
                 </div>
             </nav>
+        </div>
+    </div>
+    <div class="page__title-area">
+        <div class="container">
+            <div class="page__title-container">
+                <ul class="page__titles">
+                    <li>
+                        <a href="/">
+                            <svg>
+                                <use xlink:href="./images/sprite.svg#icon-home"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="page__title">User</li>
+                </ul>
+            </div>
         </div>
     </div>
 </header>
@@ -147,42 +169,26 @@
                     <ul>
                         <li>
                             Tên Khách hàng
-                            <span>Đỗ Phú Nguyên Chương</span>
+                            <span><%=request.getAttribute("name")%></span>
                         </li>
                         <li>
                             Địa chỉ
-                            <span>Dh Nông Lâm HCM, TP Thủ Đức</span>
+                            <span><%=request.getAttribute("address")%></span>
                         </li>
                         <li>
                             Số điện thoại
-                            <span>0792.95.25.49</span>
-                        </li>
-                        <li>
-                            Email
-                            <span>20130212@st.hcmuaf.edu.vn</span>
+                            <span><%=request.getAttribute("phone")%></span>
                         </li>
                         <li>
                             Tổng tiền
-                            <span class="new__price">900.000VNĐ</span>
-                        </li>
-                        <li>
-                            Vận chuyển
-                            <span>Freeship</span>
-                        </li>
-                        <li>
-                            Phương thức thanh toán
-                            <span >chuyển khoản</span>
+                            <span class="new__price"><%=request.getAttribute("amount")%></span>
                         </li>
                         <li>
                             Mã số đơn hàng
-                            <span>JC0000099</span>
-                        </li>
-                        <li>
-                            Đã thanh toán
-                            <span class="new__price">-900.000 VNĐ</span>
+                            <span><%=request.getAttribute("idorder")%></span>
                         </li>
                     </ul>
-                    <a href="/phone_nam/homelogin.html">Tiếp Tục Mua Hàng </a>
+                    <a href="/">Tiếp Tục Mua Hàng </a>
 
                 </div>
             </div>
