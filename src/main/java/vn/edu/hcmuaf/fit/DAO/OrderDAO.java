@@ -7,10 +7,8 @@ import vn.edu.hcmuaf.fit.model.Product;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class OrderDAO {
 
@@ -110,19 +108,22 @@ public class OrderDAO {
     public static int getNumCompletedOrders() throws SQLException, ClassNotFoundException {
         DataDB db= new DataDB();
         PreparedStatement sta= db.getStatement("SELECT count(id) from orders where ID_STATUS_ORDER=?");
-        sta.setString(1,"SO4");
+        sta.setString(1,"SO3");
         ResultSet rs= sta.executeQuery();
         rs.next();
         return rs.getInt(1);
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        List<Order> list= getOrders("djnf");
-        System.out.println(list.size());
-        for (Order o: list){
-            System.out.println(o);
-        }
-        System.out.println();
+//        List<Order> list= getOrders("djnf");
+//        System.out.println(list.size());
+//        for (Order o: list){
+//            System.out.println(o);
+//        }
+//        System.out.println();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        System.out.println(formatter.format(date));
     }
 
     public static void changeStatusOrder(String id, String status) throws SQLException, ClassNotFoundException {
@@ -131,5 +132,16 @@ public class OrderDAO {
         sta.setString(1, status);
         sta.setString(2, id);
         sta.executeUpdate();
+    }
+
+    public static String getImgOrder(String id) throws SQLException, ClassNotFoundException {
+        DataDB db= new DataDB();
+        PreparedStatement sta= db.getStatement("select p.img from product_order po, product p where po.id_product=p.id and po.id_order=?");
+        sta.setString(1, id);
+        ResultSet rs= sta.executeQuery();
+        if (rs.next())
+            return rs.getString(1);
+        return null;
+
     }
 }

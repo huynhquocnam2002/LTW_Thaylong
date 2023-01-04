@@ -287,13 +287,6 @@
                 <table class="manage-order-table">
                     <tr class="row-table row-table-main product-row">
                         <td>
-                            <div class="id-check-product-div">
-                                <input
-                                        type="checkbox"
-                                        name="is-check"
-                                        class="is-check"
-                                />
-                            </div>
                         </td>
                         <td class="order-id-col">
                             <div class="order-id-div">
@@ -411,11 +404,6 @@
                 <table class="manage-order-table-head">
                     <tr class="table-row head-table">
                         <th>
-                            <input
-                                    type="checkbox"
-                                    name="check_all"
-                                    class="check-all"
-                            />
                         </th>
                         <th>Mã đơn hàng</th>
                         <th>Người đặt</th>
@@ -551,11 +539,6 @@
                 <table class="manage-order-table-head">
                     <tr class="table-row head-table">
                         <th>
-                            <input
-                                    type="checkbox"
-                                    name="check_all"
-                                    class="check-all"
-                            />
                         </th>
                         <th>Mã đơn hàng</th>
                         <th>Người đặt</th>
@@ -688,11 +671,6 @@
                 <table class="manage-order-table-head">
                     <tr class="table-row head-table">
                         <th>
-                            <input
-                                    type="checkbox"
-                                    name="check_all"
-                                    class="check-all"
-                            />
                         </th>
                         <th>Mã đơn hàng</th>
                         <th>Người đặt</th>
@@ -824,11 +802,6 @@
                 <table class="manage-order-table-head">
                     <tr class="table-row head-table">
                         <th>
-                            <input
-                                    type="checkbox"
-                                    name="check_all"
-                                    class="check-all"
-                            />
                         </th>
                         <th>Mã đơn hàng</th>
                         <th>Người đặt</th>

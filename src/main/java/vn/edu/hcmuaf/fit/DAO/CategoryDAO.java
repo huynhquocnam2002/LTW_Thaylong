@@ -3,6 +3,7 @@ package vn.edu.hcmuaf.fit.DAO;
 import vn.edu.hcmuaf.fit.DB.DBConnect;
 import vn.edu.hcmuaf.fit.DB.DataDB;
 import vn.edu.hcmuaf.fit.model.Category;
+import vn.edu.hcmuaf.fit.model.Product;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class CategoryDAO {
     public static List<Category> getCategory() throws SQLException, ClassNotFoundException {
@@ -93,8 +95,7 @@ public class CategoryDAO {
         PreparedStatement sta= db.getStatement("select * from category where id=?");
         sta.setString(1, id);
         ResultSet rs= sta.executeQuery();
-        if (rs.next()) return true;
-        return false;
+        return rs.next();
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {

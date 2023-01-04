@@ -7,6 +7,8 @@ import vn.edu.hcmuaf.fit.model.Voucher;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -80,10 +82,71 @@ public class VoucherDAO {
         return res;
     }
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        List<Voucher> vouchers= getVouchers("U1");
-        for (Voucher v: vouchers){
-            System.out.println(v);
-        }
+    public static void addVoucher(Voucher voucher) throws SQLException, ClassNotFoundException {
+        DataDB db= new DataDB();
+        PreparedStatement sta = db.getStatement("insert into voucher values (?,?,?,?,?,?,?,?,?)");
+        sta.setString(1,voucher.getId());
+        sta.setString(2, voucher.getType());
+        sta.setString(3, voucher.getName());
+        sta.setLong(4, voucher.getDiscount());
+        sta.setLong(5, voucher.getMinPrice());
+        sta.setDate(6, new java.sql.Date(voucher.getStartDate().getYear(), voucher.getStartDate().getMonth(), voucher.getStartDate().getDate()));
+        sta.setDate(7, new java.sql.Date(voucher.getEndDate().getYear(), voucher.getEndDate().getMonth(), voucher.getEndDate().getDate()));
+        sta.setInt(8, voucher.getStatus());
+        sta.setString(9, voucher.getDescription());
+        sta.executeUpdate();
+    }
+
+    public static void changeInfo(Voucher voucher) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        PreparedStatement sta = db.getStatement("update voucher set id_type=?, name=?, discount=?, min_price=?, start_date=?, end_date=?, status=?, description=? where id=?");
+        sta.setString(9,voucher.getId());
+        sta.setString(1, voucher.getType());
+        sta.setString(2, voucher.getName());
+        sta.setLong(3, voucher.getDiscount());
+        sta.setLong(4, voucher.getMinPrice());
+        sta.setDate(5, new java.sql.Date(voucher.getStartDate().getYear(), voucher.getStartDate().getMonth(), voucher.getStartDate().getDate()));
+        sta.setDate(6, new java.sql.Date(voucher.getEndDate().getYear(), voucher.getEndDate().getMonth(), voucher.getEndDate().getDate()));
+        sta.setInt(7, voucher.getStatus());
+        sta.setString(8, voucher.getDescription());
+        sta.executeUpdate();
+    }
+
+    public static boolean containID(String id) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        PreparedStatement sta = db.getStatement("select * from voucher where id=?");
+        sta.setString(1, id);
+        ResultSet rs= sta.executeQuery();
+        return rs.next();
+    }
+
+    public static Voucher getVoucher(String id) throws SQLException, ClassNotFoundException {
+        DataDB db= new DataDB();
+        PreparedStatement sta= db.getStatement("select * from voucher where id=?");
+        sta.setString(1, id);
+        ResultSet rs= sta.executeQuery();
+        if (rs.next()) return new Voucher(rs.getString(1), rs.getString(2), rs.getString(3),rs.getLong(4), rs.getLong(5), rs.getDate(6), rs.getDate(7), rs.getInt(8), rs.getString(9));
+        return null;
+    }
+
+    public static void changeStatus(String id, int status) throws SQLException, ClassNotFoundException {
+        DataDB db= new DataDB();
+        PreparedStatement sta= db.getStatement("update voucher set status=? where id=?");
+        sta.setInt(1, status);
+        sta.setString(2, id);
+        sta.executeUpdate();
+    }
+
+    public static void active(String id) throws SQLException, ClassNotFoundException {
+        changeStatus(id,1);
+    }
+
+    public static void unactive(String id) throws SQLException, ClassNotFoundException {
+        changeStatus(id,0);
+    }
+
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, ParseException {
+        Date d= new SimpleDateFormat("yyyy-MM-dd").parse("2023-1-4");
+        System.out.println(d);
     }
 }

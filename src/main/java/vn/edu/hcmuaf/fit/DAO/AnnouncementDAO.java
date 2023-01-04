@@ -67,4 +67,25 @@ public class AnnouncementDAO {
         }
         return res;
     }
+
+    public static boolean containID(String id) throws SQLException, ClassNotFoundException {
+        DataDB db= new DataDB();
+        PreparedStatement sta= db.getStatement("select * from announcement where id=?");
+        sta.setString(1, id);
+        ResultSet rs=sta.executeQuery();
+        return rs.next();
+    }
+
+    public static void addAnnouncement(Announcement a) throws SQLException, ClassNotFoundException {
+        DataDB db= new DataDB();
+        PreparedStatement sta = db.getStatement("insert into announcement values (?,?,?,?,?,?,?)");
+        sta.setString(1, a.getId());
+        sta.setString(2, a.getOrderID());
+        sta.setString(3, a.getName());
+        sta.setString(4, a.getImg());
+        sta.setString(5, a.getContent());
+        sta.setString(6, a.getTime());
+        sta.setInt(7, 0);
+        sta.executeUpdate();
+    }
 }
