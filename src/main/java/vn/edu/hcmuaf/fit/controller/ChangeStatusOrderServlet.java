@@ -5,7 +5,9 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.hcmuaf.fit.DAO.AnnouncementDAO;
 import vn.edu.hcmuaf.fit.DAO.OrderDAO;
+import vn.edu.hcmuaf.fit.DAO.UserDAO;
 import vn.edu.hcmuaf.fit.model.Announcement;
+import vn.edu.hcmuaf.fit.model.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -69,7 +71,17 @@ public class ChangeStatusOrderServlet extends HttpServlet {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+        User user=null;
+        try {
+            user = UserDAO.getUserBySessionID((String) request.getSession().getAttribute("user"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        if (user.getRole()==1)
         response.sendRedirect("/AdminServlet");
+        else response.sendRedirect("/UserServlet");
     }
 
     @Override

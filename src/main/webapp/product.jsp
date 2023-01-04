@@ -400,16 +400,14 @@
             <p>Chọn màu để xem giá và chi nhánh có hàng</p>
             <div style="display: flex">
             <% List<Option> listoption = OptionDAO.getOptions(ProductDAO.getProductById(request.getParameter("idProduct")));
-                for (Option op : listoption) {
-                    String kindoption = "Đen";
-                    if (Integer.parseInt(op.getValue()) != 1) {
-                        kindoption = "Trang";
-                    }
+                System.out.println(listoption.size());
+            for (Option op : listoption) {
+                    String kindoption = op.getValue();
             %>
             <div class="product__item">
 
                 <img
-                        src="<%=ProductDAO.getProductById(request.getParameter("idProduct")).getImg()%>"
+                        src="<%=op.getImg()%>"
                         alt="" style="width: 33px; height: 35px; object-fit: cover;">
 
                 <div class="product__title__item">

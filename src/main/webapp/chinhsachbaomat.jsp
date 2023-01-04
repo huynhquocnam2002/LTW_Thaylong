@@ -3,6 +3,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Chinhsachbaomat" %>
 <%@ page import="vn.edu.hcmuaf.fit.DAO.FooterDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.UserDAO" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -110,7 +111,7 @@
           </div>
           <%
           } else {
-            User user = (User) session.getAttribute("user");
+            User user = UserDAO.getUserBySessionID((String) session.getAttribute("user"))
           %>
           <div class="nav__icons">
             <a href="UserServlet" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
