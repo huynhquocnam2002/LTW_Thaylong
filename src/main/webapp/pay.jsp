@@ -412,68 +412,69 @@
 
     </main>
 
+
     <!-- Footer -->
     <footer id="footer" class="section footer">
         <div class="container">
             <div class="footer__top">
                 <div class="footer-top__box">
                     <h3>BỔ SUNG</h3>
-                    <a href="/phone_nam/htmlfooter/nhanhieu.html">Nhãn hiệu</a>
-                    <a href="/phone_nam/htmlfooter/phieuquatang.html">Phiếu quà tặng</a>
-                    <a href="/phone_nam/htmlfooter/chinhanh.html">Chi nhánh</a>
+                    <a href="nhanhieu">Nhãn hiệu</a>
+                    <a href="phieuquatang">Phiếu quà tặng</a>
+                    <a href="chinhanh">Chi nhánh</a>
                     <a href="#">Đặc biệt</a>
-                    <a href="/phone_nam/htmlfooter/sodoweb.html">Sơ đồ trang Web</a>
+                    <a href="sodoweb">Sơ đồ trang Web</a>
                 </div>
                 <div class="footer-top__box">
                     <h3>THÔNG TIN</h3>
-                    <a href="/phone_nam/htmlfooter/vechungtoi.html">Về chúng tôi</a>
-                    <a href="/phone_nam/htmlfooter/chinhsachbaomat.html">Chính sách bảo mật</a>
-                    <a href="/phone_nam/htmlfooter/dieukhoanvadieukien.html">Các điều khoản và điều kiện</a>
-                    <a href="/phone_nam/htmlfooter/lienhechungtoi.html">Liên hệ chúng tôi</a>
-                    <a href="/phone_nam/htmlfooter/sodoweb.html">Sơ đồ trang Web</a>
+                    <a href="vechungtoi">Về chúng tôi</a>
+                    <a href="chinhsachbaomat">Chính sách bảo mật</a>
+                    <a href="dieukhoanvadieukien">Các điều khoản và điều kiện</a>
+                    <a href="lienhechungtoi">Liên hệ chúng tôi</a>
+                    <a href="sodoweb">Sơ đồ trang Web</a>
                 </div>
                 <div class="footer-top__box">
                     <h3>TÀI KHOẢN CỦA TÔI</h3>
-                    <a href="/html/user.html">Tài khoản của tôi</a>
-                    <a href="/html/user.html">Lịch sử đơn hàng</a>
-                    <a href="/html/cart.html">Danh sách mong muốn</a>
-                    <a href="#">Cung cấp thông tin</a>
-                    <a href="/html/homelogin.html">Quay lại</a>
+                    <a href="UserServlet">Tài khoản của tôi</a>
+                    <a href="UserServlet">Lịch sử đơn hàng</a>
+                    <a href="/">Danh sách mong muốn</a>
+                    <a href="/">Cung cấp thông tin</a>
+                    <a href="/">Quay lại</a>
                 </div>
                 <div class="footer-top__box">
                     <h3>CONTACT US</h3>
                     <div>
-                    <span>
-                      <svg>
-                        <use xlink:href="./images/sprite.svg#icon-location"></use>
-                      </svg>
-                    </span>
+            <span>
+              <svg>
+                <use xlink:href="image/images/sprite.svg#icon-location"></use>
+              </svg>
+            </span>
                         <a
                                 href="https://www.google.com/maps/dir/10.8840587,106.7833045/t%C3%B2a+b5+ktx+khu+b+%C4%91hqg+tphcm/@10.8838766,106.7809145,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3174d890227de92d:0x99150888f275361b!2m2!1d106.7829712!2d10.8839777">
                             Tòa B5, KTX_B ĐHQG TPHCM, Linh Trung, Thủ Đức, TPHCM</a>
                     </div>
                     <div>
-                    <span>
-                      <svg>
-                        <use xlink:href="./images/sprite.svg#icon-envelop"></use>
-                      </svg>
-                    </span>
+            <span>
+              <svg>
+                <use xlink:href="image/images/sprite.svg#icon-envelop"></use>
+              </svg>
+            </span>
                         JC-PHONEcompany@gmail.com
                     </div>
                     <div>
-                    <span>
-                      <svg>
-                        <use xlink:href="./images/sprite.svg#icon-phone"></use>
-                      </svg>
-                    </span>
+            <span>
+              <svg>
+                <use xlink:href="image/images/sprite.svg#icon-phone"></use>
+              </svg>
+            </span>
                         08.999.999.99
                     </div>
                     <div>
-                    <span>
-                      <svg>
-                        <use xlink:href="./images/sprite.svg#icon-paperplane"></use>
-                      </svg>
-                    </span>
+            <span>
+              <svg>
+                <use xlink:href="image/images/sprite.svg#icon-paperplane"></use>
+              </svg>
+            </span>
                         TOÀN VIỆT NAM
                     </div>
                 </div>
@@ -489,7 +490,7 @@
         </div>
         </div>
     </footer>
-
+    <!-- End Footer -->
 
     <script>
 

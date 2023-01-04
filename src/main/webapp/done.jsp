@@ -1,4 +1,5 @@
-<%--
+<%@ page import="vn.edu.hcmuaf.fit.DAO.UserDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.User" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 12/9/2022
@@ -41,7 +42,7 @@
             <nav class="nav">
                 <div class="nav__hamburger">
                     <svg>
-                        <use xlink:href="./images/sprite.svg#icon-menu"></use>
+                        <use xlink:href="image/images/sprite.svg#icon-menu"></use>
                     </svg>
                 </div>
 
@@ -56,7 +57,7 @@
                         <span class="nav__category">PHONE</span>
                         <a href="#" class="close__toggle">
                             <svg>
-                                <use xlink:href="./images/sprite.svg#icon-cross"></use>
+                                <use xlink:href="image/images/sprite.svg#icon-cross"></use>
                             </svg>
                         </a>
                     </div>
@@ -67,53 +68,182 @@
                         <li class="nav__item">
                             <a href="#category" class="nav__link scroll-link">Sản phẩm</a>
                         </li>
-                        <li class="nav__item_seach">
-                            <input class="input_seach"  id="input_seach" type="text" placeholder="seach...">
-                            <div class="nav__icons">
-                                <a href="#" class="icon__item" id="icon__item_seach">
-                                    <svg class="icon__search">
-                                        <use xlink:href="./images/sprite.svg#icon-search"></use>
-                                    </svg>
-                                </a>
-                            </div>
+                        <li >
+                            <form action="DanhmucSeachServlet" method="post" class="nav__item_seach">
+                                <input class="input_seach" id="input_seach" type="text" name="input_seach" placeholder="seach...">
+
+                                <div class="nav__icons">
+                                    <button  class="icon__item" id="icon__item_seach" type="submit" name="btnseach" value="Go">
+                                        <svg class="icon__search">
+                                            <use xlink:href="image/images/sprite.svg#icon-search"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </form>
                         </li>
                         <li class="nav__item">
 
                             <div class="nav__item_hotro">
-                                <a  href="#hotro" class="nav__link scroll-link">HOTLINE HỖ TRỢ</a> <br>
-                                <a  href="#hotro" class="nav__link scroll-link">0999.999.999</a>
+                                <a href="#hotro" class="nav__link scroll-link">HOTLINE HỖ TRỢ</a> <br>
+                                <a href="#hotro" class="nav__link scroll-link">0999.999.999</a>
                             </div>
                         </li>
 
                     </ul>
                 </div>
-
+                <%if (session.getAttribute("user") == null) {%>
                 <div class="nav__icons">
-                    <a href="/html/user.html" class="icon__item">
+                    <a href="LoginServlet" class="icon__item">
                         <svg class="icon__user">
-                            <use xlink:href="./images/sprite.svg#icon-user"></use>
+                            <use xlink:href="image/images/sprite.svg#icon-user"></use>
                         </svg>
                     </a>
+
                     <div class="nav__item_user" id="nav__item_user">
-                        <a  href="#login" class="nav__link scroll-link">Hello Minh Thuận</a> <br>
-                        <!-- <a  href="#register" class="nav__link scroll-link">Đăng Ký</a><br> -->
-                        <a  href="" class="nav__link scroll-link">Thành Viên</a>
+                        <a href="LoginServlet" class="nav__link scroll-link">Đăng Nhập /</a>
+                        <a href="RegisterServlet" class="nav__link scroll-link">Đăng Ký</a><br>
+                        <a href="" class="nav__link scroll-link">Thành Viên</a>
                     </div>
                 </div>
+                <%
+                } else {
+                    User user = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
+                %>
+                <div class="nav__icons">
+                    <a href="UserServlet" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
+                        <img src="<%=user.getImg()%>"
+                             style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%" alt="img">
 
-                <div class="nav__icons" id="nav__item_giohang">
-                    <a href="/html/cart.html" class="icon__item">
-                        <svg class="icon__cart">
-                            <use xlink:href="./images/sprite.svg#icon-shopping-basket"></use>
-                        </svg>
-                        <span id="cart__total">4</span>
                     </a>
-                    <a href="/html/cart.html" class="nav__link_giohang">Giỏ Hàng</a>
+
+                    <div class="nav__item_user" style="font-size: 1.2rem" id="nav__item_user1">
+                        <a href="UserServlet" class="nav__link scroll-link"
+                           style="line-height: 2"><%=user.getName()%>
+                        </a><br>
+                        <a href="" class="nav__link scroll-link">Thành Viên</a>
+                    </div>
+                </div>
+                <%}%>
+
+                <%
+                    int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
+                %>
+                <div class="nav__icons" id="nav__item_giohang">
+                    <a href="giohang" class="icon__item">
+                        <svg class="icon__cart">
+                            <use xlink:href="image/images/sprite.svg#icon-shopping-basket"></use>
+                        </svg>
+
+                        <span id="cart__total"><%=numOfCartItems%></span>
+                    </a>
+                    <a href="giohang" class="nav__link_giohang">Giỏ Hàng</a>
                 </div>
             </nav>
         </div>
     </div>
 </header>
+<!-- Header_danhmuc -->
+<header id="Header_danhmuc" class="Header_danhmuc">
+    <div class="navigation_danhmuc">
+        <div class="container">
+            <nav class="nav">
+                <div class="nav__hamburger">
+                    <svg>
+                        <use xlink:href="image/images/sprite.svg#icon-menu"></use>
+                    </svg>
+                </div>
+
+                <ul class="nav__list" id="nav__list_DANHMUC">
+                    <% List<Category> list = CategoryDAO.getCategoryHeader();%>
+                    <% for (int i = 0; i < list.size(); i++) {%>
+
+                    <div class="nav__icons_danhmuc">
+                        <a href="DanhmucServlet?idcategory=<%=list.get(i).getId()%>" class="icon__item">
+                            <img class="icon__itemdanhmuc" src="<%=list.get(i).getImg()%>"></img>
+                        </a>
+                        <li class="nav__item">
+                            <a href="DanhmucServlet?idcategory=<%=list.get(i).getId()%>" class="scroll-linkDANHMUC"><%=list.get(i).getName()%></a>
+                        </li>
+                    </div>
+
+                    <% }%>
+                    <div class="nav__icons_danhmuc">
+                        <a href="#sectiondanhmuc2" class="icon__item">
+                            <img class="icon__itemdanhmuc" src="image/icon/khac.jpg"></img>
+                        </a>
+                        <li class="nav__item">
+                            <a href="#sectiondanhmuc2" class="scroll-linkDANHMUC">PHỤ KIỆN KHÁC</a>
+                        </li>
+                    </div>
+
+                </ul>
+
+            </nav>
+        </div>
+    </div>
+
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="glide" id="glide_1">
+            <div class="glide__track" data-glide-el="track">
+                <ul class="glide__slides">
+                    <li class="glide__slide">
+                        <div class="hero__center">
+                            <div class="hero__left">
+                                <span class="">Nguồn cảm hứng năm 2022</span>
+                                <h1 class="">PIN DỰ PHÒNG DÀNH CHO BẠN!</h1>
+                                <p>Mẫu Sạc Dự Phòng Bán Chạy nhất của năm</p>
+                                <a href="/phone_chuong/product.html">
+                                    <button class="hero__btn">MUA NGAY</button>
+                                </a>
+                            </div>
+                            <div class="hero__right">
+                                <div class="hero__img-container">
+                                    <img class="banner_01" src="image/images/sacduphong1.png" alt="banner2"/>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="glide__slide">
+                        <div class="hero__center">
+                            <div class="hero__left">
+                                <span>Nguồn cảm hứng năm 2022</span>
+                                <h1>ARIPODS 2 CHÍNH HÃNG APPLE</h1>
+                                <p>Giảm Ngay 30% Khi Mua Hàng Trước Ngày 22/12/2022</p>
+                                <a href="/phone_chuong/product.html">
+                                    <button class="hero__btn">MUA NGAY</button>
+                                </a>
+                            </div>
+                            <div class="hero__right">
+                                <img class="banner_02" src="image/images/tainghe6.png" alt="banner2"/>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="glide__bullets" data-glide-el="controls[nav]">
+                <button class="glide__bullet" data-glide-dir="=0"></button>
+                <button class="glide__bullet" data-glide-dir="=1"></button>
+            </div>
+
+            <div class="glide__arrows" data-glide-el="controls">
+                <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
+                    <svg>
+                        <use xlink:href="image/images/sprite.svg#icon-arrow-left2"></use>
+                    </svg>
+                </button>
+                <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
+                    <svg>
+                        <use xlink:href="image/images/sprite.svg#icon-arrow-right2"></use>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- End Header -->
+
 <div class="block-breadcrumbs">
 
     <div class="prefix">
@@ -233,68 +363,69 @@
     </section>
 </main>
 
+
 <!-- Footer -->
 <footer id="footer" class="section footer">
     <div class="container">
         <div class="footer__top">
             <div class="footer-top__box">
                 <h3>BỔ SUNG</h3>
-                <a href="/phone_nam/htmlfooter/nhanhieu.html">Nhãn hiệu</a>
-                <a href="/phone_nam/htmlfooter/phieuquatang.html">Phiếu quà tặng</a>
-                <a href="/phone_nam/htmlfooter/chinhanh.html">Chi nhánh</a>
+                <a href="nhanhieu">Nhãn hiệu</a>
+                <a href="phieuquatang">Phiếu quà tặng</a>
+                <a href="chinhanh">Chi nhánh</a>
                 <a href="#">Đặc biệt</a>
-                <a href="/phone_nam/htmlfooter/sodoweb.html">Sơ đồ trang Web</a>
+                <a href="sodoweb">Sơ đồ trang Web</a>
             </div>
             <div class="footer-top__box">
                 <h3>THÔNG TIN</h3>
-                <a href="/phone_nam/htmlfooter/vechungtoi.html">Về chúng tôi</a>
-                <a href="/phone_nam/htmlfooter/chinhsachbaomat.html">Chính sách bảo mật</a>
-                <a href="/phone_nam/htmlfooter/dieukhoanvadieukien.html">Các điều khoản và điều kiện</a>
-                <a href="/phone_nam/htmlfooter/lienhechungtoi.html">Liên hệ chúng tôi</a>
-                <a href="/phone_nam/htmlfooter/sodoweb.html">Sơ đồ trang Web</a>
+                <a href="vechungtoi">Về chúng tôi</a>
+                <a href="chinhsachbaomat">Chính sách bảo mật</a>
+                <a href="dieukhoanvadieukien">Các điều khoản và điều kiện</a>
+                <a href="lienhechungtoi">Liên hệ chúng tôi</a>
+                <a href="sodoweb">Sơ đồ trang Web</a>
             </div>
             <div class="footer-top__box">
                 <h3>TÀI KHOẢN CỦA TÔI</h3>
-                <a href="/html/user.html">Tài khoản của tôi</a>
-                <a href="/html/user.html">Lịch sử đơn hàng</a>
-                <a href="/html/cart.html">Danh sách mong muốn</a>
-                <a href="#">Cung cấp thông tin</a>
-                <a href="/phone_nam/homelogin.html">Quay lại</a>
+                <a href="UserServlet">Tài khoản của tôi</a>
+                <a href="UserServlet">Lịch sử đơn hàng</a>
+                <a href="/">Danh sách mong muốn</a>
+                <a href="/">Cung cấp thông tin</a>
+                <a href="/">Quay lại</a>
             </div>
             <div class="footer-top__box">
                 <h3>CONTACT US</h3>
                 <div>
-              <span>
-                <svg>
-                  <use xlink:href="./images/sprite.svg#icon-location"></use>
-                </svg>
-              </span>
+            <span>
+              <svg>
+                <use xlink:href="image/images/sprite.svg#icon-location"></use>
+              </svg>
+            </span>
                     <a
                             href="https://www.google.com/maps/dir/10.8840587,106.7833045/t%C3%B2a+b5+ktx+khu+b+%C4%91hqg+tphcm/@10.8838766,106.7809145,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3174d890227de92d:0x99150888f275361b!2m2!1d106.7829712!2d10.8839777">
                         Tòa B5, KTX_B ĐHQG TPHCM, Linh Trung, Thủ Đức, TPHCM</a>
                 </div>
                 <div>
-              <span>
-                <svg>
-                  <use xlink:href="./images/sprite.svg#icon-envelop"></use>
-                </svg>
-              </span>
+            <span>
+              <svg>
+                <use xlink:href="image/images/sprite.svg#icon-envelop"></use>
+              </svg>
+            </span>
                     JC-PHONEcompany@gmail.com
                 </div>
                 <div>
-              <span>
-                <svg>
-                  <use xlink:href="./images/sprite.svg#icon-phone"></use>
-                </svg>
-              </span>
+            <span>
+              <svg>
+                <use xlink:href="image/images/sprite.svg#icon-phone"></use>
+              </svg>
+            </span>
                     08.999.999.99
                 </div>
                 <div>
-              <span>
-                <svg>
-                  <use xlink:href="./images/sprite.svg#icon-paperplane"></use>
-                </svg>
-              </span>
+            <span>
+              <svg>
+                <use xlink:href="image/images/sprite.svg#icon-paperplane"></use>
+              </svg>
+            </span>
                     TOÀN VIỆT NAM
                 </div>
             </div>
@@ -310,7 +441,6 @@
     </div>
     </div>
 </footer>
-
 <!-- End Footer -->
 
 <!-- Go To -->

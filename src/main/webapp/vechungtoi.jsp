@@ -5,6 +5,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Category" %>
 <%@ page import="vn.edu.hcmuaf.fit.DAO.CategoryDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Cart" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.UserDAO" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +39,7 @@
 
 
 
-   
+
   <!-- Header -->
   <!-- Header_top -->
   <header id="header" class="header">
@@ -103,22 +104,22 @@
 
             <div class="nav__item_user" id="nav__item_user">
               <a href="/LoginServlet" class="nav__link scroll-link">Đăng Nhập /</a>
-              <a href="register.jsp" class="nav__link scroll-link">Đăng Ký</a><br>
+              <a href="RegisterServlet" class="nav__link scroll-link">Đăng Ký</a><br>
               <a href="" class="nav__link scroll-link">Thành Viên</a>
             </div>
           </div>
           <%
           } else {
-            User user = (User) session.getAttribute("user");
+            User user = UserDAO.getUserBySessionID((String)session.getAttribute("user"));
           %>
           <div class="nav__icons">
-            <a href="user.jsp" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
+            <a href="UserServlet" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
               <img src="<%=user.getImg()%>"
                    style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%" alt="img">
             </a>
 
             <div class="nav__item_user" style="font-size: 1.2rem" id="nav__item_user1">
-              <a href="user.jsp" class="nav__link scroll-link"
+              <a href="UserServlet" class="nav__link scroll-link"
                  style="line-height: 2"><%=user.getName()%>
               </a><br>
               <a href="" class="nav__link scroll-link">Thành Viên</a>
@@ -128,7 +129,7 @@
 
           <%
             if (session.getAttribute("user") != null) {
-              User u = (User) session.getAttribute("user");
+              User user = UserDAO.getUserBySessionID((String)session.getAttribute("user"));
               int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
           %>
           <div class="nav__icons" id="nav__item_giohang">
@@ -162,11 +163,11 @@
             <% for (int i = 0; i < list.size(); i++) {%>
             <%--    --%>
             <div class="nav__icons_danhmuc">
-              <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="icon__item">
+              <a href="DanhmucServlet?idcategory=<%=list.get(i).getId()%>" class="icon__item">
                 <img class="icon__itemdanhmuc" src="<%=list.get(i).getImg()%>"></img>
               </a>
               <li class="nav__item">
-                <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="scroll-linkDANHMUC"><%=list.get(i).getName()%></a>
+                <a href="DanhmucServlet?idcategory=<%=list.get(i).getId()%>" class="scroll-linkDANHMUC"><%=list.get(i).getName()%></a>
               </li>
             </div>
 
@@ -242,33 +243,34 @@
 
   <!-- End Main -->
 
+
   <!-- Footer -->
   <footer id="footer" class="section footer">
     <div class="container">
       <div class="footer__top">
         <div class="footer-top__box">
           <h3>BỔ SUNG</h3>
-          <a href="nhanhieu.jsp">Nhãn hiệu</a>
-          <a href="phieuquatang.jsp">Phiếu quà tặng</a>
-          <a href="chinhanh.jsp">Chi nhánh</a>
+          <a href="nhanhieu">Nhãn hiệu</a>
+          <a href="phieuquatang">Phiếu quà tặng</a>
+          <a href="chinhanh">Chi nhánh</a>
           <a href="#">Đặc biệt</a>
-          <a href="sodoweb.jsp">Sơ đồ trang Web</a>
+          <a href="sodoweb">Sơ đồ trang Web</a>
         </div>
         <div class="footer-top__box">
           <h3>THÔNG TIN</h3>
-          <a href="vechungtoi.jsp">Về chúng tôi</a>
-          <a href="chinhsachbaomat.jsp">Chính sách bảo mật</a>
-          <a href="dieukhoanvadieukien.jsp">Các điều khoản và điều kiện</a>
-          <a href="lienhechungtoi.jsp">Liên hệ chúng tôi</a>
-          <a href="sodoweb.jsp">Sơ đồ trang Web</a>
+          <a href="vechungtoi">Về chúng tôi</a>
+          <a href="chinhsachbaomat">Chính sách bảo mật</a>
+          <a href="dieukhoanvadieukien">Các điều khoản và điều kiện</a>
+          <a href="lienhechungtoi">Liên hệ chúng tôi</a>
+          <a href="sodoweb">Sơ đồ trang Web</a>
         </div>
         <div class="footer-top__box">
           <h3>TÀI KHOẢN CỦA TÔI</h3>
-          <a href="/css/login.css">Tài khoản của tôi</a>
-          <a href="/css/login.css">Lịch sử đơn hàng</a>
-          <a href="/css/login.css">Danh sách mong muốn</a>
-          <a href="#">Cung cấp thông tin</a>
-          <a href="index.jsp">Quay lại</a>
+          <a href="UserServlet">Tài khoản của tôi</a>
+          <a href="UserServlet">Lịch sử đơn hàng</a>
+          <a href="/">Danh sách mong muốn</a>
+          <a href="/">Cung cấp thông tin</a>
+          <a href="/">Quay lại</a>
         </div>
         <div class="footer-top__box">
           <h3>CONTACT US</h3>

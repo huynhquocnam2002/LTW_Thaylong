@@ -1,14 +1,16 @@
 package vn.edu.hcmuaf.fit.controller;
 
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
-import javax.mail.Session;
 import java.io.IOException;
 
-@WebServlet(name = "DanhmucServlet", value = "/DanhmucServlet")
-public class DanhmucServlet extends HttpServlet {
+@WebServlet(name = "DanhmucSeachServlet", value = "/DanhmucSeachServlet")
+public class DanhmucSeachServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -27,7 +29,7 @@ public class DanhmucServlet extends HttpServlet {
 
                     System.out.println("vooo");
                     System.out.println(txt);
-                    request.getRequestDispatcher("danhmuc_seach.jsp").forward(request, response);
+                    request.getRequestDispatcher("SeachTxt.jsp").forward(request, response);
                     System.out.println("done !");
                 } catch (Exception e){
                         e.printStackTrace();
