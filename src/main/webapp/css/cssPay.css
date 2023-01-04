@@ -25,13 +25,18 @@ Reset
   margin: 0;
   padding: 0;
   /* box-sizing: inherit; */
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  /*font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;*/
 }
 
 html {
   font-size: 62.5%;
   box-sizing: border-box;
   scroll-behavior: smooth;
+}
+
+body{
+
+  font-family: "Archivo", sans-serif;
 }
 
 body,

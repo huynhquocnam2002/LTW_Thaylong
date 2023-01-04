@@ -85,15 +85,18 @@
                         <li class="nav__item">
                             <a href="#category" class="nav__link scroll-link">Sản phẩm</a>
                         </li>
-                        <li class="nav__item_seach">
-                            <input class="input_seach" id="input_seach" type="text" placeholder="seach...">
-                            <div class="nav__icons">
-                                <a href="#" class="icon__item" id="icon__item_seach">
-                                    <svg class="icon__search">
-                                        <use xlink:href="image/images/sprite.svg#icon-search"></use>
-                                    </svg>
-                                </a>
-                            </div>
+                        <li >
+                            <form action="DanhmucServlet" method="post" class="nav__item_seach">
+                                <input class="input_seach" id="input_seach" type="text" name="input_seach" placeholder="seach...">
+
+                                <div class="nav__icons">
+                                    <button  class="icon__item" id="icon__item_seach" type="submit" name="btnseach" value="Go">
+                                        <svg class="icon__search">
+                                            <use xlink:href="image/images/sprite.svg#icon-search"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </form>
                         </li>
                         <li class="nav__item">
 
@@ -107,14 +110,14 @@
                 </div>
                 <%if (session.getAttribute("user") == null) {%>
                 <div class="nav__icons">
-                    <a href="/LoginServlet" class="icon__item">
+                    <a href="LoginServlet" class="icon__item">
                         <svg class="icon__user">
                             <use xlink:href="image/images/sprite.svg#icon-user"></use>
                         </svg>
                     </a>
 
                     <div class="nav__item_user" id="nav__item_user">
-                        <a href="/LoginServlet" class="nav__link scroll-link">Đăng Nhập /</a>
+                        <a href="LoginServlet" class="nav__link scroll-link">Đăng Nhập /</a>
                         <a href="register.jsp" class="nav__link scroll-link">Đăng Ký</a><br>
                         <a href="" class="nav__link scroll-link">Thành Viên</a>
                     </div>
@@ -124,13 +127,14 @@
                     User user = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
                 %>
                 <div class="nav__icons">
-                    <a href="/UserServlet" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
+                    <a href="UserServlet" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
                         <img src="<%=user.getImg()%>"
                              style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%" alt="img">
+
                     </a>
 
                     <div class="nav__item_user" style="font-size: 1.2rem" id="nav__item_user1">
-                        <a href="/UserServlet" class="nav__link scroll-link"
+                        <a href="UserServlet" class="nav__link scroll-link"
                            style="line-height: 2"><%=user.getName()%>
                         </a><br>
                         <a href="" class="nav__link scroll-link">Thành Viên</a>
@@ -144,14 +148,14 @@
                         int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
                 %>
                 <div class="nav__icons" id="nav__item_giohang">
-                    <a href="cart.jsp" class="icon__item">
+                    <a href="CartServlet" class="icon__item">
                         <svg class="icon__cart">
                             <use xlink:href="image/images/sprite.svg#icon-shopping-basket"></use>
                         </svg>
 
                         <span id="cart__total"><%=numOfCartItems%></span>
                     </a>
-                    <a href="cart.jsp" class="nav__link_giohang">Giỏ Hàng</a>
+                    <a href="CartServlet" class="nav__link_giohang">Giỏ Hàng</a>
                 </div>
                 <%}%>
             </nav>
@@ -174,11 +178,11 @@
                     <% for (int i = 0; i < list.size(); i++) {%>
 
                     <div class="nav__icons_danhmuc">
-                        <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="icon__item">
+                        <a href="DanhmucServlet?idcategory=<%=list.get(i).getId()%>" class="icon__item">
                             <img class="icon__itemdanhmuc" src="<%=list.get(i).getImg()%>"></img>
                         </a>
                         <li class="nav__item">
-                            <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="scroll-linkDANHMUC"><%=list.get(i).getName()%></a>
+                            <a href="DanhmucServlet?idcategory=<%=list.get(i).getId()%>" class="scroll-linkDANHMUC"><%=list.get(i).getName()%></a>
                         </li>
                     </div>
 
@@ -302,11 +306,11 @@
 
                     <%for(int i =0 ; i< (rsCategory.size()/2+1) ; i++){%>
                     <div class="nav__icons_danhmuc1">
-                        <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>" class="icon__item1">
+                        <a href="DanhmucServlet?idcategory=<%=rsCategory.get(i).getId()%>" class="icon__item1">
                             <img class="icon__itemdanhmuc" src="<%= rsCategory.get(i).getImg()%>"></img>
                         </a>
                         <li class="nav__item">
-                            <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>" class="scroll-linkDANHMUC"><%= rsCategory.get(i).getName()%></a>
+                            <a href="DanhmucServlet?idcategory=<%=rsCategory.get(i).getId()%>" class="scroll-linkDANHMUC"><%= rsCategory.get(i).getName()%></a>
                         </li>
                     </div>
 
@@ -317,11 +321,11 @@
                 <ul class="nav__list" id="nav__list_DANHMUC1">
                     <%for(int i =rsCategory.size()/2+1 ; i< (rsCategory.size()) ; i++){%>
                     <div class="nav__icons_danhmuc1">
-                        <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>" class="icon__item1">
+                        <a href="DanhmucServlet?idcategory=<%=rsCategory.get(i).getId()%>" class="icon__item1">
                             <img class="icon__itemdanhmuc" src="<%= rsCategory.get(i).getImg()%>"></img>
                         </a>
                         <li class="nav__item">
-                            <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>" class="scroll-linkDANHMUC"><%= rsCategory.get(i).getName()%></a>
+                            <a href="DanhmucServlet?idcategory=<%=rsCategory.get(i).getId()%>" class="scroll-linkDANHMUC"><%= rsCategory.get(i).getName()%></a>
                         </li>
                     </div>
                     <%}%>
@@ -397,7 +401,7 @@
                                     <ul>
                                         <li>
                                             <a data-tip="Quick View" data-place="left"
-                                               href="product.jsp?idProduct=<%=pr.getId()%>">
+                                               href="Product?idProduct=<%=pr.getId()%>">
                                                 <svg>
                                                     <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                                 </svg>
@@ -513,7 +517,7 @@
                         <ul>
                             <li>
                                 <a data-tip="Quick View" data-place="left"
-                                   href="product.jsp?idProduct=<%=pr.getId()%>">
+                                   href="Product?idProduct=<%=pr.getId()%>">
                                     <svg>
                                         <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                     </svg>
@@ -575,7 +579,7 @@
                         <ul>
                             <li>
                                 <a data-tip="Quick View" data-place="left"
-                                   href="product.jsp?idProduct=<%=pr.getId()%>">
+                                   href="Product?idProduct=<%=pr.getId()%>">
                                     <svg>
                                         <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                     </svg>
@@ -637,7 +641,7 @@
                         <ul>
                             <li>
                                 <a data-tip="Quick View" data-place="left"
-                                   href="product.jsp?idProduct=<%=pr.getId()%>">
+                                   href="Product?idProduct=<%=pr.getId()%>">
                                     <svg>
                                         <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                     </svg>
@@ -699,7 +703,7 @@
                         <ul>
                             <li>
                                 <a data-tip="Quick View" data-place="left"
-                                   href="product.jsp?idProduct=<%=pr.getId()%>">
+                                   href="Product?idProduct=<%=pr.getId()%>">
                                     <svg>
                                         <use xlink:href="image/images/sprite.svg#icon-eye"></use>
                                     </svg>
@@ -1047,19 +1051,19 @@
         <div class="footer__top">
             <div class="footer-top__box">
                 <h3>BỔ SUNG</h3>
-                <a href="/image/htmlfooter/nhanhieu.html">Nhãn hiệu</a>
-                <a href="/image/htmlfooter/phieuquatang.html">Phiếu quà tặng</a>
-                <a href="/image/htmlfooter/chinhanh.html">Chi nhánh</a>
+                <a href="nhanhieu.jsp">Nhãn hiệu</a>
+                <a href="phieuquatang.jsp">Phiếu quà tặng</a>
+                <a href="chinhanh.jsp">Chi nhánh</a>
                 <a href="#">Đặc biệt</a>
-                <a href="/image/htmlfooter/sodoweb.html">Sơ đồ trang Web</a>
+                <a href="sodoweb.jsp">Sơ đồ trang Web</a>
             </div>
             <div class="footer-top__box">
                 <h3>THÔNG TIN</h3>
-                <a href="/image/htmlfooter/vechungtoi.html">Về chúng tôi</a>
-                <a href="/image/htmlfooter/chinhsachbaomat.html">Chính sách bảo mật</a>
-                <a href="/image/htmlfooter/dieukhoanvadieukien.html">Các điều khoản và điều kiện</a>
-                <a href="/image/htmlfooter/lienhechungtoi.html">Liên hệ chúng tôi</a>
-                <a href="/image/htmlfooter/sodoweb.html">Sơ đồ trang Web</a>
+                <a href="vechungtoi.jsp">Về chúng tôi</a>
+                <a href="chinhsachbaomat.jsp">Chính sách bảo mật</a>
+                <a href="dieukhoanvadieukien.jsp">Các điều khoản và điều kiện</a>
+                <a href="lienhechungtoi.jsp">Liên hệ chúng tôi</a>
+                <a href="sodoweb.jsp">Sơ đồ trang Web</a>
             </div>
             <div class="footer-top__box">
                 <h3>TÀI KHOẢN CỦA TÔI</h3>
@@ -1067,7 +1071,7 @@
                 <a href="/css/login.css">Lịch sử đơn hàng</a>
                 <a href="/css/login.css">Danh sách mong muốn</a>
                 <a href="#">Cung cấp thông tin</a>
-                <a href="/html/home.html">Quay lại</a>
+                <a href="/">Quay lại</a>
             </div>
             <div class="footer-top__box">
                 <h3>CONTACT US</h3>

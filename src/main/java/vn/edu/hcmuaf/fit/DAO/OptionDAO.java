@@ -55,8 +55,8 @@ public class OptionDAO {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        Product p=ProductDAO.getProductById("PR1");
-        for (Option pr: getOptions(p)){
+        Product p = ProductDAO.getProductById("PR1");
+        for (Option pr : getOptions(p)) {
             System.out.println(pr);
         }
     }

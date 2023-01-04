@@ -17,7 +17,7 @@
 <body>
 <!-- icon back -->
 <div class="container">
-    <a href="index.jsp">
+    <a href="/">
         <img class="homelogin" src="image/icon/back7.png" alt=""
         /></a>
 </div>
@@ -85,8 +85,8 @@
             </div>
         </div>
         <div class="two-a">
-            <a class="left" href="forgetPassword.jsp">Quên mật khẩu?</a>
-            <a class="right" href="register.jsp">Tạo tài khoản</a>
+            <a class="left" href="ForgetPassServlet">Quên mật khẩu?</a>
+            <a class="right" href="RegisterServlet">Tạo tài khoản</a>
         </div>
         <div>
             <div class="or">

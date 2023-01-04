@@ -14,6 +14,7 @@ public class LogoutServlet extends HttpServlet {
         session.removeAttribute("user");
         session.removeAttribute("cart");
         request.getRequestDispatcher("login.jsp").forward(request,response);
+        request.getSession().removeAttribute("cart");
     }
 
     @Override

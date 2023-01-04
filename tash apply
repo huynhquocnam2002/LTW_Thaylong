@@ -1,0 +1,15 @@
+[33m844d95b[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m HEAD@{0}: commit (merge): Merge branch 'main' of https://github.com/huynhquocnam2002/LTW_Thaylong
+[33mc8dedc5[m HEAD@{1}: reset: moving to HEAD
+[33mc8dedc5[m HEAD@{2}: commit: My message
+[33m6fcc29b[m HEAD@{3}: pull --no-stat -v --progress origin main: Fast-forward
+[33mb52ce5c[m HEAD@{4}: commit: add Project w
+[33ma6a4b9b[m HEAD@{5}: commit: add Project w
+[33m85bcf9b[m HEAD@{6}: commit (merge): Merge branch 'main' of https://github.com/huynhquocnam2002/LTW_Thaylong
+[33mef5f2df[m HEAD@{7}: commit: add Project web
+[33mc9e5e6d[m HEAD@{8}: commit (amend): add Project web
+[33m6555ad4[m HEAD@{9}: commit: add Project web
+[33m43753e6[m HEAD@{10}: commit (merge): fix confict
+[33m2738257[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{11}: checkout: moving from master to main
+[33m2738257[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{12}: commit: add app class
+[33mdc91f97[m HEAD@{13}: commit: add app class
+[33mf9280d8[m HEAD@{14}: commit (initial): Initial commit

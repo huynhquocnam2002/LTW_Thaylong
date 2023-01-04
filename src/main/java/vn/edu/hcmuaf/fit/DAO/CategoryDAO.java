@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -98,7 +99,39 @@ public class CategoryDAO {
         return rs.next();
     }
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        System.out.println(getCategorysObject("jAJSDMKF").getName());
+    // lay danh sách sản phẩm theo danh mục
+    public static Set<Product> getProductsByCatory(String id) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        Set<Product> list = new HashSet<Product>();
+        PreparedStatement sta = db.getStatement("select * from product ,category where  category.ID = product.ID_CATEGORY and category.ID =?");
+        sta.setString(1, id);
+        ResultSet rs = sta.executeQuery();
+        while (rs.next()) {
+            list.add(new Product(rs.getString(1), rs.getString(2), rs.getLong(3),
+                    rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
+                    rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getInt(11), rs.getString(12)));
+        }
+        return list;
     }
+    // lay ten danh muc
+    public static List<String> getnameCatory(String id) throws SQLException, ClassNotFoundException {
+        DataDB db = new DataDB();
+        List<String> list = new ArrayList<String>();
+        PreparedStatement sta = db.getStatement("select NAME from category where  category.ID =?");
+        sta.setString(1, id);
+        ResultSet rs = sta.executeQuery();
+
+        while (rs.next()) {
+            list.add(rs.getString(1));
+        }
+
+        System.out.println(list.get(0));
+        return list;
+    }
+
+
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        System.out.println(getProductsByCatory("1"));
+    }
+
 }
