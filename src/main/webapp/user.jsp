@@ -65,10 +65,10 @@
                     </div>
                     <ul class="nav__list">
                         <li class="nav__item">
-                            <a href="index.jsp" class="nav__link scroll-link">Trang chủ</a>
+                            <a href="/" class="nav__link scroll-link">Trang chủ</a>
                         </li>
                         <li class="nav__item">
-                            <a href="index.jsp#product" class="nav__link scroll-link">Sản phẩm</a>
+                            <a href="/#product" class="nav__link scroll-link">Sản phẩm</a>
                         </li>
                         <li class="nav__item_seach">
                             <input class="input_seach" id="input_seach" type="text" placeholder="seach...">
@@ -106,13 +106,13 @@
                 </div>
 
                 <div class="nav__icons" id="nav__item_giohang">
-                    <a href="cart.jsp" class="icon__item">
+                    <a href="giohang" class="icon__item">
                         <svg class="icon__cart">
                             <use xlink:href="./images/sprite.svg#icon-shopping-basket"></use>
                         </svg>
                         <span id="cart__total"><%=((Cart) session.getAttribute("cart")).getSize()%></span>
                     </a>
-                    <a href="cart.jsp" class="nav__link_giohang">Giỏ Hàng</a>
+                    <a href="giohang" class="nav__link_giohang">Giỏ Hàng</a>
                 </div>
             </nav>
         </div>
@@ -174,7 +174,7 @@
                         </div>
                     </div>
                     <div>
-                        <a href="/index.jsp">
+                        <a href="/">
                             <a href="/LogoutServlet">
                                 <button class="DangXuat">Đăng Xuất</button>
                             </a>
@@ -974,27 +974,27 @@
         <div class="footer__top">
             <div class="footer-top__box">
                 <h3>BỔ SUNG</h3>
-                <a href="nhanhieu.jsp">Nhãn hiệu</a>
-                <a href="phieuquatang.jsp">Phiếu quà tặng</a>
-                <a href="chinhanh.jsp">Chi nhánh</a>
+                <a href="nhanhieu">Nhãn hiệu</a>
+                <a href="phieuquatang">Phiếu quà tặng</a>
+                <a href="chinhanh">Chi nhánh</a>
                 <a href="#">Đặc biệt</a>
-                <a href="sodoweb.jsp">Sơ đồ trang Web</a>
+                <a href="sodoweb">Sơ đồ trang Web</a>
             </div>
             <div class="footer-top__box">
                 <h3>THÔNG TIN</h3>
-                <a href="vechungtoi.jsp">Về chúng tôi</a>
-                <a href="chinhsachbaomat.jsp">Chính sách bảo mật</a>
-                <a href="dieukhoanvadieukien.jsp">Các điều khoản và điều kiện</a>
-                <a href="lienhechungtoi.jsp">Liên hệ chúng tôi</a>
-                <a href="sodoweb.jsp">Sơ đồ trang Web</a>
+                <a href="vechungtoi">Về chúng tôi</a>
+                <a href="chinhsachbaomat">Chính sách bảo mật</a>
+                <a href="dieukhoanvadieukien">Các điều khoản và điều kiện</a>
+                <a href="lienhechungtoi">Liên hệ chúng tôi</a>
+                <a href="sodoweb">Sơ đồ trang Web</a>
             </div>
             <div class="footer-top__box">
                 <h3>TÀI KHOẢN CỦA TÔI</h3>
-                <a href="/css/login.css">Tài khoản của tôi</a>
-                <a href="/css/login.css">Lịch sử đơn hàng</a>
-                <a href="/css/login.css">Danh sách mong muốn</a>
-                <a href="#">Cung cấp thông tin</a>
-                <a href="index.jsp">Quay lại</a>
+                <a href="UserServlet">Tài khoản của tôi</a>
+                <a href="UserServlet">Lịch sử đơn hàng</a>
+                <a href="/">Danh sách mong muốn</a>
+                <a href="/">Cung cấp thông tin</a>
+                <a href="/">Quay lại</a>
             </div>
             <div class="footer-top__box">
                 <h3>CONTACT US</h3>
@@ -1045,7 +1045,6 @@
     </div>
     </div>
 </footer>
-
 <!-- End Footer -->
 
 <script>

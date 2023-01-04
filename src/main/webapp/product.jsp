@@ -13,6 +13,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.DAO.*" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.*" %>
 <%@ page import="java.util.Set" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 
 
 <%--<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>--%>
@@ -93,7 +95,7 @@
                             <a href="#category" class="nav__link scroll-link">Sản phẩm</a>
                         </li>
                         <li >
-                            <form action="DanhmucServlet" method="post" class="nav__item_seach">
+                            <form action="DanhmucSeachServlet" method="post" class="nav__item_seach">
                                 <input class="input_seach" id="input_seach" type="text" name="input_seach" placeholder="seach...">
 
                                 <div class="nav__icons">
@@ -115,7 +117,10 @@
 
                     </ul>
                 </div>
-                <%if (session.getAttribute("user") == null) {%>
+                <%
+                    User user = null;
+                    String id_user = null;
+                    if ( session.getAttribute("user") == null) {%>
                 <div class="nav__icons">
                     <a href="/LoginServlet" class="icon__item">
                         <svg class="icon__user">
@@ -131,7 +136,8 @@
                 </div>
                 <%
                 } else {
-                    User user = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
+                    user = UserDAO.getUserBySessionID((String)session.getAttribute("user"));
+                    id_user = user.getId();
                 %>
                 <div class="nav__icons">
                     <a href="UserServlet" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
@@ -150,18 +156,18 @@
 
                 <%
                     if (session.getAttribute("user") != null) {
-                        User u = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
-                        int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
+                        User u =  UserDAO.getUserBySessionID((String)session.getAttribute("user"));
+                        int numOfCartItems = ((Cart) session.getAttribute("cart")).getSize();
                 %>
                 <div class="nav__icons" id="nav__item_giohang">
-                    <a href="CartServlet" class="icon__item">
+                    <a href="giohang" class="icon__item">
                         <svg class="icon__cart">
                             <use xlink:href="image/images/sprite.svg#icon-shopping-basket"></use>
                         </svg>
 
                         <span id="cart__total"><%=numOfCartItems%></span>
                     </a>
-                    <a href="CartServlet" class="nav__link_giohang">Giỏ Hàng</a>
+                    <a href="giohang" class="nav__link_giohang">Giỏ Hàng</a>
                 </div>
                 <%}%>
             </nav>
@@ -169,6 +175,50 @@
     </div>
 </header>
 <!-- Header_danhmuc -->
+<header id="Header_danhmuc" class="Header_danhmuc">
+    <div class="navigation_danhmuc">
+        <div class="container">
+            <nav class="nav">
+                <div class="nav__hamburger">
+                    <svg>
+                        <use xlink:href="image/images/sprite.svg#icon-menu"></use>
+                    </svg>
+                </div>
+
+                <ul class="nav__list" id="nav__list_DANHMUC">
+                    <% List<Category> list = CategoryDAO.getCategoryHeader();%>
+                    <% for (int i = 0; i < list.size(); i++) {%>
+                    <%--    --%>
+                    <div class="nav__icons_danhmuc">
+                        <a href="DanhmucServlet?idcategory=<%=list.get(i).getId()%>" class="icon__item">
+                            <img class="icon__itemdanhmuc" src="<%=list.get(i).getImg()%>"></img>
+                        </a>
+                        <li class="nav__item">
+                            <a href="DanhmucServlet?idcategory=<%=list.get(i).getId()%>" class="scroll-linkDANHMUC">
+                                <%=list.get(i).getName()%></a>
+                        </li>
+                    </div>
+
+                    <% }%>
+                    <div class="nav__icons_danhmuc">
+                        <a href="#sectiondanhmuc2" class="icon__item">
+                            <img class="icon__itemdanhmuc" src="image/icon/khac.jpg"></img>
+                        </a>
+                        <li class="nav__item">
+                            <a href="#sectiondanhmuc2" class="scroll-linkDANHMUC">PHỤ KIỆN KHÁC</a>
+                        </li>
+                    </div>
+
+                </ul>
+
+            </nav>
+        </div>
+    </div>
+
+
+    <!-- Hero -->
+</header>
+<!-- End Header -->
 
 
 <!-- Phần main chi tiết sản phẩm-->
@@ -348,7 +398,14 @@
             </h3>
 
             <p>Chọn màu để xem giá và chi nhánh có hàng</p>
-
+            <div style="display: flex">
+            <% List<Option> listoption = OptionDAO.getOptions(ProductDAO.getProductById(request.getParameter("idProduct")));
+                for (Option op : listoption) {
+                    String kindoption = "Đen";
+                    if (Integer.parseInt(op.getValue()) != 1) {
+                        kindoption = "Trang";
+                    }
+            %>
             <div class="product__item">
 
                 <img
@@ -356,39 +413,13 @@
                         alt="" style="width: 33px; height: 35px; object-fit: cover;">
 
                 <div class="product__title__item">
-                    <strong>Đen</strong>
-
-                    <span>900.000<u>đ</u></span>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="input-counter">
-
-
-                <span>Số lượng:</span>
-                <div>
-                    <button class="minus-btn" onclick="minus()">
-                        <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-minus"></use>
-                        </svg>
-                    </button>
-                    <input type="text" value="1" class="counter-btn" id="amount">
-                    <button class="plus-btn" onclick="plus()">
-                        <svg>
-                            <use xlink:href="image/images/sprite.svg#icon-plus"></use>
-                        </svg>
-                    </button>
+                    <strong><%=kindoption%></strong>
+                    <span><%=op.getPrice()%><u>đ</u></span>
                 </div>
             </div>
+     <%}%>
 
-            <%--    Tang giam so luong         --%>
-            <%--            js--%>
-
-
+            </div>
 
             </li>
 
@@ -411,7 +442,7 @@
 
                 <li>
                     <span>Loại sản phẩm:</span>
-                    <a href="#"><%= CategoryDAO.getCategorysObject(request.getParameter("idProduct")).getName()%> </a>
+                    <a href="#"><%=CategoryDAO.getCategorysObject(request.getParameter("idProduct")).getName()%> </a>
 
                 </li>
                 <li>
@@ -530,70 +561,7 @@
 
         <div class="detail__content">
             <div class="content active" id="description">
-
-                <h2>Đặc điểm nổi bật</h2>
-                <ul>
-                    <li>Công nghệ sạc nhanh PD 20W hỗ trợ sạc nhanh cho các thiết bị</li>
-                    <li>Thiết kế mỏng và nhỏ gọn, trọng lượng dễ dàng mang theo</li>
-                    <li>Sạc đồng thời hai thiết bị thông qua công USB-A và USB-C</li>
-                    <li>Chế độ sạc nhỏ giọt Trickle-Charging cho các thiết bị cần dòng sạc thấp</li>
-                </ul>
-                <h2>Pin sạc dự phòng Anker PowerSlim 10000mAh PD A1244 – Mỏng nhẹ và nhanh chóng</h2>
-                <ul>
-                    <li>Các sản phẩm pin sạc dự phòng Anker luôn là lựa chọn hàng đầu của nhiều người dùng về chất lượng
-                        cũng như kiểu dáng.
-                    </li>
-                    <li><span style="color:#D70018;font-weight: 200;">Pin sạc dự phòng </span>Anker PowerSlim 10000mAh PD
-                        A1244 với kiểu dáng mỏng nhẹ số 1 thế giới, hỗ trợ sạc 3 chế độ,…
-                    </li>
-                    <li>chính là một phụ kiện vô cùng hợp lý.</li>
-
-                </ul>
-                <h2>Kiểu dáng mỏng nhẹ hàng đầu với nguồn sức mạnh to lớn 10000mAh</h2>
-                <p>Pin sạc dự phòng Anker PowerSlim 10000mAh PD A1244 có kiểu dáng giống với tên gọi “PowerSlim” của mình –
-                    mỏng nhẹ
-
-                    <span id="dots">...</span></p>
-
-
-                <img style="width:100% ;height: 495.23px; object-fit: cover; "
-                     src="<%=ProductDAO.getProductById(request.getParameter("idProduct")).getImg()%>"
-                     alt="">
-
-                <p>Hỗ trợ 3 chế độ sạc và công nghệ PD tiết kiệm thời gian sạc
-                    Pin sạc dự phòng Anker PowerSlim 10000mAh PD A1244 cung cấp <br> cho người dùng 3 chế độ sạc bao gồm sạc
-                    nhanh 20W USB-C,sạc 12W USB-A cùng công nghệ PowerIQ, cuối cùng là sạc nhỏ giọt<br> Trickle-Charging phù
-                    hợp với những thiết bị có dòng sạc thấp.</p>
-                <!--
-
-                     <br>
-
-
-
-                     <div id="more" style="position: relative;" >
-
-                      <p style="  width:100%;
-                      height:500px;
-                      background-color: #D70018;
-                      position:relative;"> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                     Unde, saepe magnam earum eaque, iure accusantium quo eligendi quas quae,
-                     ab doloribus. Laboriosam fugiat consectetur corrupti neque quis impedit quisquam
-                     praesentium.</p>
-
-                   </div>
-
-                   </p>
-
-
-
-
-
-                      <button  style="cursor: pointer; " id="btn__more" onclick="btnMore()"> Xem thêm
-
-
-                      </button> -->
-
-
+                <%=ProductDAO.getProductById(request.getParameter("idProduct")).getDetail()%>
             </div>
             <div class="content" id="reviews">
                 <h1>Đánh giá của khách hàng</h1>
@@ -688,16 +656,23 @@
 
                 <button class="button__rating" style="position: relative; bottom:250px; left: 235px;">Đánh giá ngay
                 </button>
-
-                <div class="input_textarea">
-                    <textarea type="text" class="input_review" placeholder="Write a comment" v-model="newItem" @keyup.enter="addItem()"></textarea>
+                    <%  SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+                        Date d= new Date();
+//                        f.format(d);
+                    %>
+                <form action="commentServerlet" method="post" class="input_textarea">
+                    <textarea type="text" class="input_review" name="name" placeholder="Write a comment" v-model="newItem" @keyup.enter="addItem()"></textarea>
+                    <input type="hidden" name="idpro" value="<%=request.getParameter("idProduct")%>">
+                    <input type="hidden" name="iduser" value="<%=id_user%>">
+                    <input type="hidden" name="datename" value="<%=f.format(d)%>">
+                    <input type="hidden" name="linkrequet" value="Product?idProduct=<%=request.getParameter("idProduct")%>">
                     <button id="buttonreivew" onclick="addItem()" class='primaryContained float-right' type="submit">Gửi</button>
-                </div>
+                </form>
 
                 <div class="container__feedback">
 
-                    <% List<Review> listreview =  ReviewDAO.getReview(request.getParameter("idProduct")); %>
-                    <% for (int i = 0; i < listreview.size() ; i++) { %>
+                    <% List<Review> listreview = ReviewDAO.getReview(request.getParameter("idProduct")); %>
+                    <% for (int i = 0; i < listreview.size(); i++) { %>
 
                     <div class="container__feedback__name">
 
@@ -798,7 +773,7 @@
         <div class="glide" id="glide_3">
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides latest-center">
-                    <%for( Product pr : listconection){%>
+                    <%for (Product pr : listconection) {%>
                     <li class="glide__slide">
                         <div class="product">
                             <div class="product__header">
@@ -829,7 +804,8 @@
                                 <div class="product__price">
                                     <h4><%=pr.getPrice()%> VNĐ</h4>
                                 </div>
-                                <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=
+                <%=System.currentTimeMillis()%>">
                                     <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
                                 </a>
                             </div>
@@ -842,7 +818,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                    <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=
+                <%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                         <svg>
                                             <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
@@ -892,7 +869,7 @@
     <% Set<Product> listnew = ProductDAO.getProductsnew(request.getParameter("idProduct"));%>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides latest-center">
-               <% for (Product pr: listnew){%>
+               <% for (Product pr : listnew) {%>
                     <li class="glide__slide">
                         <div class="product">
                             <div class="product__header">
@@ -923,7 +900,8 @@
                                 <div class="product__price">
                                     <h4><%=pr.getPrice()%> VNĐ</h4>
                                 </div>
-                                <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=
+                <%=System.currentTimeMillis()%>">
                                     <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
                                 </a>
                             </div>
@@ -936,7 +914,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                    <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=
+                <%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                         <svg>
                                             <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                         </svg>
@@ -1040,32 +1019,33 @@
 
 <!-- End Main -->
 
+
 <!-- Footer -->
 <footer id="footer" class="section footer">
     <div class="container">
         <div class="footer__top">
             <div class="footer-top__box">
                 <h3>BỔ SUNG</h3>
-                <a href="nhanhieu.jsp">Nhãn hiệu</a>
-                <a href="phieuquatang.jsp">Phiếu quà tặng</a>
-                <a href="chinhanh.jsp">Chi nhánh</a>
+                <a href="nhanhieu">Nhãn hiệu</a>
+                <a href="phieuquatang">Phiếu quà tặng</a>
+                <a href="chinhanh">Chi nhánh</a>
                 <a href="#">Đặc biệt</a>
-                <a href="sodoweb.jsp">Sơ đồ trang Web</a>
+                <a href="sodoweb">Sơ đồ trang Web</a>
             </div>
             <div class="footer-top__box">
                 <h3>THÔNG TIN</h3>
-                <a href="vechungtoi.jsp">Về chúng tôi</a>
-                <a href="chinhsachbaomat.jsp">Chính sách bảo mật</a>
-                <a href="dieukhoanvadieukien.jsp">Các điều khoản và điều kiện</a>
-                <a href="lienhechungtoi.jsp">Liên hệ chúng tôi</a>
-                <a href="sodoweb.jsp">Sơ đồ trang Web</a>
+                <a href="vechungtoi">Về chúng tôi</a>
+                <a href="chinhsachbaomat">Chính sách bảo mật</a>
+                <a href="dieukhoanvadieukien">Các điều khoản và điều kiện</a>
+                <a href="lienhechungtoi">Liên hệ chúng tôi</a>
+                <a href="sodoweb">Sơ đồ trang Web</a>
             </div>
             <div class="footer-top__box">
                 <h3>TÀI KHOẢN CỦA TÔI</h3>
-                <a href="/css/login.css">Tài khoản của tôi</a>
-                <a href="/css/login.css">Lịch sử đơn hàng</a>
-                <a href="/css/login.css">Danh sách mong muốn</a>
-                <a href="#">Cung cấp thông tin</a>
+                <a href="UserServlet">Tài khoản của tôi</a>
+                <a href="UserServlet">Lịch sử đơn hàng</a>
+                <a href="/">Danh sách mong muốn</a>
+                <a href="/">Cung cấp thông tin</a>
                 <a href="/">Quay lại</a>
             </div>
             <div class="footer-top__box">

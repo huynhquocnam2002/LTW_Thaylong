@@ -86,7 +86,7 @@
                             <a href="#category" class="nav__link scroll-link">Sản phẩm</a>
                         </li>
                         <li >
-                            <form action="DanhmucServlet" method="post" class="nav__item_seach">
+                            <form action="DanhmucSeachServlet" method="post" class="nav__item_seach">
                                 <input class="input_seach" id="input_seach" type="text" name="input_seach" placeholder="seach...">
 
                                 <div class="nav__icons">
@@ -118,7 +118,7 @@
 
                     <div class="nav__item_user" id="nav__item_user">
                         <a href="LoginServlet" class="nav__link scroll-link">Đăng Nhập /</a>
-                        <a href="register.jsp" class="nav__link scroll-link">Đăng Ký</a><br>
+                        <a href="RegisterServlet" class="nav__link scroll-link">Đăng Ký</a><br>
                         <a href="" class="nav__link scroll-link">Thành Viên</a>
                     </div>
                 </div>
@@ -346,19 +346,19 @@
                             <div class="Flashsale-phukien">Phụ Kiện</div>
                             <div class="Flashsale-title">Flash Sale</div>
                         </div>
-                        <div class="Flashsale-time">
-                            <ul class="Flashsale-time_list">
-                                <li class="Flashsale-time_list_cham">Bắt đầu sau</li>
-                                <li class="Flashsale-time_list_cham">:</li>
-                                <li class="Flashsale-time_list_time">00</li>
-                                <li class="Flashsale-time_list_cham">:</li>
-                                <li class="Flashsale-time_list_time">36</li>
-                                <li class="Flashsale-time_list_cham">:</li>
-                                <li class="Flashsale-time_list_time">29</li>
-                                <li class="Flashsale-time_list_cham">:</li>
-                                <li class="Flashsale-time_list_time">57</li>
-                            </ul>
-                        </div>
+<%--                        <div class="Flashsale-time">--%>
+<%--                            <ul class="Flashsale-time_list">--%>
+<%--                                <li class="Flashsale-time_list_cham">Bắt đầu sau</li>--%>
+<%--                                <li class="Flashsale-time_list_cham">:</li>--%>
+<%--                                <li class="Flashsale-time_list_time">00</li>--%>
+<%--                                <li class="Flashsale-time_list_cham">:</li>--%>
+<%--                                <li class="Flashsale-time_list_time">36</li>--%>
+<%--                                <li class="Flashsale-time_list_cham">:</li>--%>
+<%--                                <li class="Flashsale-time_list_time">29</li>--%>
+<%--                                <li class="Flashsale-time_list_cham">:</li>--%>
+<%--                                <li class="Flashsale-time_list_time">57</li>--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
                     </div>
                     <div class="glide__track" data-glide-el="track">
                         <ul class="glide__slides latest-center">
@@ -1048,26 +1048,26 @@
         <div class="footer__top">
             <div class="footer-top__box">
                 <h3>BỔ SUNG</h3>
-                <a href="nhanhieu.jsp">Nhãn hiệu</a>
-                <a href="phieuquatang.jsp">Phiếu quà tặng</a>
-                <a href="chinhanh.jsp">Chi nhánh</a>
+                <a href="nhanhieu">Nhãn hiệu</a>
+                <a href="phieuquatang">Phiếu quà tặng</a>
+                <a href="chinhanh">Chi nhánh</a>
                 <a href="#">Đặc biệt</a>
-                <a href="sodoweb.jsp">Sơ đồ trang Web</a>
+                <a href="sodoweb">Sơ đồ trang Web</a>
             </div>
             <div class="footer-top__box">
                 <h3>THÔNG TIN</h3>
-                <a href="vechungtoi.jsp">Về chúng tôi</a>
-                <a href="chinhsachbaomat.jsp">Chính sách bảo mật</a>
-                <a href="dieukhoanvadieukien.jsp">Các điều khoản và điều kiện</a>
-                <a href="lienhechungtoi.jsp">Liên hệ chúng tôi</a>
-                <a href="sodoweb.jsp">Sơ đồ trang Web</a>
+                <a href="vechungtoi">Về chúng tôi</a>
+                <a href="chinhsachbaomat">Chính sách bảo mật</a>
+                <a href="dieukhoanvadieukien">Các điều khoản và điều kiện</a>
+                <a href="lienhechungtoi">Liên hệ chúng tôi</a>
+                <a href="sodoweb">Sơ đồ trang Web</a>
             </div>
             <div class="footer-top__box">
                 <h3>TÀI KHOẢN CỦA TÔI</h3>
-                <a href="/css/login.css">Tài khoản của tôi</a>
-                <a href="/css/login.css">Lịch sử đơn hàng</a>
-                <a href="/css/login.css">Danh sách mong muốn</a>
-                <a href="#">Cung cấp thông tin</a>
+                <a href="UserServlet">Tài khoản của tôi</a>
+                <a href="UserServlet">Lịch sử đơn hàng</a>
+                <a href="/">Danh sách mong muốn</a>
+                <a href="/">Cung cấp thông tin</a>
                 <a href="/">Quay lại</a>
             </div>
             <div class="footer-top__box">
