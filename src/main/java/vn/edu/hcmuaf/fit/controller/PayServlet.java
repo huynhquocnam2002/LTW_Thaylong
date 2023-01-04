@@ -5,10 +5,8 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.hcmuaf.fit.DAO.OrderDAOImpl;
 import vn.edu.hcmuaf.fit.DAO.Product_OrderImpl;
-import vn.edu.hcmuaf.fit.model.Cart;
-import vn.edu.hcmuaf.fit.model.Order;
+import vn.edu.hcmuaf.fit.model.*;
 import vn.edu.hcmuaf.fit.model.Product;
-import vn.edu.hcmuaf.fit.model.Products_Order;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -26,11 +24,18 @@ public class PayServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            request.getRequestDispatcher("LoginServlet").forward(request, response);
+        } else {
+            request.getRequestDispatcher("/").forward(request, response);
+        }
 
 
         request.setCharacterEncoding("utf-8");

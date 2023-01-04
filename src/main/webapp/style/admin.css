@@ -17,68 +17,56 @@
     --yellow: #ffcc00;
     --green: #5ac50d;
     --blue: rgb(56, 10, 223);
-    --red: rgb(255, 0, 0);
+    --red: rgb(255,0,0);
 }
-
-body {
+body{
     margin: 0;
     font-family: "Archivo", sans-serif;
 }
-
 /*content*/
 /*left-content*/
-#admin-content {
+#admin-content{
     color: var(--black2);
     font-size: 15px;
     background-color: var(--primaryColor);
 }
-
-#admin-content ul {
+#admin-content ul{
     padding-inline-start: 10px;
 }
-
-#admin-content button {
+#admin-content button{
     background-color: var(--button);
     color: white;
 }
-
-#admin-content .container {
+#admin-content .container{
     width: 1200px;
     overflow: auto;
     margin: 0 auto;
 }
-
-#admin-content .flex {
+#admin-content .flex{
     display: flex;
     margin-top: 1rem;
 }
-
-#admin-content .quantity {
+#admin-content .quantity{
     color: var(--grey);
     margin-left: 5px;
 }
-
-#admin-content i {
+#admin-content i{
     color: var(--grey);
 }
-
-#admin-content .id-text {
+#admin-content .id-text{
     display: inline-block;
     font-size: 0.8em;
     margin: 0;
 }
-
-#admin-content .copy-icon:hover {
+#admin-content .copy-icon:hover{
     cursor: pointer;
 }
-
-#admin-content .flex-item:hover {
+#admin-content .flex-item:hover{
     cursor: pointer;
     color: var(--buttonHover);
 }
-
 /*content-left*/
-#admin-content .container #leftContainer {
+#admin-content .container #leftContainer{
     float: left;
     margin-right: 20px;
     width: 17%;
@@ -86,73 +74,59 @@ body {
     border-radius: 5px;
     min-height: 34rem;
 }
-
-#admin-content .container #leftContainer .list-tab {
+#admin-content .container #leftContainer .list-tab{
     list-style-type: none;
 }
-
-#admin-content .container #leftContainer .list-tab .list-tab-li {
+#admin-content .container #leftContainer .list-tab .list-tab-li{
 }
-
-#admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container-name:hover {
+#admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container-name:hover{
     color: var(--buttonHover);
     cursor: pointer;
 }
-
-#admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container .tab-li-container-name {
+#admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container .tab-li-container-name{
     display: inline-block;
     width: 85%;
 }
-
-#admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container .icon-up-down {
+#admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container .icon-up-down{
     display: inline-block;
     float: right;
     width: 15%;
 }
-
 #admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container .icon-up-down:hover .icon-down,
-#admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container .icon-up-down:hover .icon-up {
+#admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container .icon-up-down:hover .icon-up{
     color: var(--buttonHover);
     cursor: pointer;
 }
-
 #admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container:hover .icon-tab,
-#admin-content .container #leftContainer .list-tab .tab-li-container:hover .li-container-text {
+#admin-content .container #leftContainer .list-tab .tab-li-container:hover .li-container-text{
     color: var(--buttonHover);
     cursor: pointer;
 }
-
-#admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container {
+#admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container{
     width: 95%;
     margin: 0 8% 0 2%;
     font-size: 1em;
 }
-
-#admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container .icon-tab {
-    margin: 0 5px;
+#admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container .icon-tab{
+    margin:0 5px;
     color: var(--grey);
 }
-
-#admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container .li-container-text {
+#admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container .li-container-text{
     display: inline-block;
 }
-
-#admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container .icon-up {
+#admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container .icon-up{
     display: none;
 }
-
 #admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container .icon-down,
-#admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container .icon-up {
+#admin-content .container #leftContainer .list-tab .list-tab-li .tab-li-container .icon-up{
     float: right;
     margin: 20px 10px auto 0;
 }
-
-#admin-content .container #leftContainer .list-tab .list-tab-li .list-child {
+#admin-content .container #leftContainer .list-tab .list-tab-li .list-child{
     list-style-type: none;
 }
-
-#admin-content .container #leftContainer .list-tab .list-tab-li .list-child .list-child-item {
-    padding: 10px 0 10px 20px;
+#admin-content .container #leftContainer .list-tab .list-tab-li .list-child .list-child-item{
+    padding:10px 0 10px 20px;
     width: 80%;
     margin: 0 8% 0 2%;
     font-size: 0.9em;
@@ -161,51 +135,42 @@ body {
     display: none;
     border-radius: 5px;
 }
-
-#admin-content .container #leftContainer .list-tab .list-tab-li .list-child .list-child-item:hover {
+#admin-content .container #leftContainer .list-tab .list-tab-li .list-child .list-child-item:hover{
     color: var(--buttonHover);
     cursor: pointer;
 }
-
-#admin-content .container #leftContainer .list-tab .list-tab-li .list-child .list-child-item.tab-active {
+#admin-content .container #leftContainer .list-tab .list-tab-li .list-child .list-child-item.tab-active{
     color: var(--active);
     background-color: var(--primaryColor);
 }
-
-#admin-content .container #leftContainer .list-tab .list-tab-li.tab-active .tab-li-container .li-container-text {
+#admin-content .container #leftContainer .list-tab .list-tab-li.tab-active .tab-li-container .li-container-text{
     color: var(--active);
 }
-
-#admin-content .container #leftContainer .list-tab .list-tab-li.tab-active .tab-li-container .icon-tab {
+#admin-content .container #leftContainer .list-tab .list-tab-li.tab-active .tab-li-container .icon-tab{
     color: var(--active);
 }
 
 /*right-content*/
-#admin-content .container #rightContainer {
+#admin-content .container #rightContainer{
     float: right;
     width: 80%;
 }
-
-#admin-content .container #rightContainer .right-tab {
+#admin-content .container #rightContainer .right-tab{
     display: none;
     min-height: 34rem;
     margin-bottom: 2rem;
 }
-
-#admin-content .container #rightContainer .right-tab.active-right-tab {
+#admin-content .container #rightContainer .right-tab.active-right-tab{
     display: block;
 }
-
-#admin-content .container #rightContainer .right-tab.active-right-tab.hide {
+#admin-content .container #rightContainer .right-tab.active-right-tab.hide{
     display: none;
 }
-
-#admin-content #rightContainer .right-tab .tab-name {
+#admin-content #rightContainer .right-tab .tab-name{
     color: black;
     margin-bottom: 0.2rem;
 }
-
-#admin-content #rightContainer .right-tab-container {
+#admin-content #rightContainer .right-tab-container{
     background-color: var(--white);
     border-radius: 0.5em;
     min-height: 28.5rem;
@@ -217,46 +182,36 @@ body {
     margin-bottom: 1.2rem;
     font-size: 1em;
 }
-
-#admin-content #rightContainer .home-tab .home-container form {
+#admin-content #rightContainer .home-tab .home-container form{
     width: 60%;
     display: inline-block;
 }
-
-#admin-content #rightContainer .home-tab .home-container .info-table {
+#admin-content #rightContainer .home-tab .home-container .info-table{
     padding: 2rem 0 0 2rem;
     width: 100%;
 }
-
-#admin-content #rightContainer .home-tab .home-container .info-table .table-row {
+#admin-content #rightContainer .home-tab .home-container .info-table .table-row{
     padding: 2rem;
     height: 2.7rem;
-
-
 }
-
-#admin-content #rightContainer .home-tab .home-container .info-table .table-row .label-input {
+#admin-content #rightContainer .home-tab .home-container .info-table .table-row .label-input{
     width: 30%;
     horiz-align: right;
     text-align: right;
 }
-
-#admin-content #rightContainer .home-tab .home-container .info-table .table-row .label-input label {
+#admin-content #rightContainer .home-tab .home-container .info-table .table-row .label-input label{
     margin-right: 1.5rem;
 }
-
-#admin-content #rightContainer .home-tab .home-container .info-table .table-row .input-field {
+#admin-content #rightContainer .home-tab .home-container .info-table .table-row .input-field{
     width: 65%;
 }
-
-#admin-content #rightContainer .home-tab .home-container .info-table .table-row .input-field .input-info-admin {
+#admin-content #rightContainer .home-tab .home-container .info-table .table-row .input-field .input-info-admin{
     border: 1px solid var(--grey);
     border-radius: 0.3em;
     padding: 0.5em 0.2em;
     width: 90%;
 }
-
-#admin-content #rightContainer .home-tab .home-container .info-table .table-row td button {
+#admin-content #rightContainer .home-tab .home-container .info-table .table-row td button{
     border-radius: 3px;
     border: none;
     padding: 10px;
@@ -265,13 +220,11 @@ body {
     margin-right: 3rem;
     min-width: 4rem;
 }
-
-#admin-content #rightContainer .home-tab .home-container .info-table .table-row td button:hover {
+#admin-content #rightContainer .home-tab .home-container .info-table .table-row td button:hover{
     background-color: var(--buttonHover);
     cursor: pointer;
 }
-
-#admin-content #rightContainer .home-tab .home-container .more-info {
+#admin-content #rightContainer .home-tab .home-container .more-info{
     display: inline-block;
     width: 35%;
     vertical-align: top;
@@ -279,39 +232,32 @@ body {
 }
 
 /*change password tab*/
-#admin-content #rightContainer .change-pass .change-pass-container form {
+#admin-content #rightContainer .change-pass .change-pass-container form{
     width: 70%;
     margin: 2rem auto 0;
     padding-top: 7rem;
 }
-
-#admin-content #rightContainer .change-pass .change-pass-container .change-pass-table {
+#admin-content #rightContainer .change-pass .change-pass-container .change-pass-table{
     width: 100%;
 }
-
-#admin-content #rightContainer .change-pass .change-pass-container .change-pass-table tr {
+#admin-content #rightContainer .change-pass .change-pass-container .change-pass-table tr{
     height: 3rem;
 }
-
-#admin-content #rightContainer .change-pass .change-pass-container .change-pass-table tr td:first-child {
+#admin-content #rightContainer .change-pass .change-pass-container .change-pass-table tr td:first-child{
     width: 28%;
     text-align: right;
     padding-right: 2rem;
 }
-
-#admin-content #rightContainer .change-pass .change-pass-container .change-pass-table tr td:last-child {
+#admin-content #rightContainer .change-pass .change-pass-container .change-pass-table tr td:last-child{
     width: 70%;
 }
-
-#admin-content #rightContainer .change-pass .change-pass-container .change-pass-table tr td:last-child input {
+#admin-content #rightContainer .change-pass .change-pass-container .change-pass-table tr td:last-child input{
     width: 90%;
     padding: 0.5rem 0.3rem;
     border: 1px solid var(--grey);
     border-radius: 0.3em;
-    margin: 10px 0;
 }
-
-#admin-content #rightContainer .change-pass .change-pass-container .change-pass-table .change-pass-buttons td button {
+#admin-content #rightContainer .change-pass .change-pass-container .change-pass-table .change-pass-buttons td button{
     border: none;
     padding: 0.7em;
     font-weight: bold;
@@ -320,23 +266,20 @@ body {
     margin-top: 2rem;
     min-width: 5rem;
 }
-
-#admin-content #rightContainer .change-pass .change-pass-container .change-pass-table .change-pass-buttons td button:hover {
+#admin-content #rightContainer .change-pass .change-pass-container .change-pass-table .change-pass-buttons td button:hover{
     cursor: pointer;
     background-color: var(--buttonHover);
 }
 
 /*manage-product*/
-#admin-content .container #rightContainer .right-tab {
+#admin-content .container #rightContainer .right-tab{
 
 }
-
-#admin-content .container #rightContainer .right-tab .tab-name {
+#admin-content .container #rightContainer .right-tab .tab-name{
     display: inline-block;
     color: black;
 }
-
-#admin-content .container #rightContainer .right-tab .add-new-product {
+#admin-content .container #rightContainer .right-tab .add-new-product{
     float: right;
     border-radius: 3px;
     border: none;
@@ -344,71 +287,59 @@ body {
     font-weight: bold;
     margin-top: 10px;
 }
-
-#admin-content .container #rightContainer .right-tab .add-new-product:hover {
+#admin-content .container #rightContainer .right-tab .add-new-product:hover{
     background-color: var(--buttonHover);
 }
-
-#admin-content .container #rightContainer .right-tab .flex-manage-products {
+#admin-content .container #rightContainer .right-tab .flex-manage-products{
 
 }
-
 #admin-content .container #rightContainer .right-tab .flex-manage-products .flex-item,
-#admin-content .container #rightContainer .right-tab .flex-manage-orders .flex-item {
+#admin-content .container #rightContainer .right-tab .flex-manage-orders .flex-item{
     padding: 0px 5px 5px 0;
     margin-right: 3rem;
 }
-
-#admin-content .container #rightContainer .right-tab .flex-manage-products .flex-item:hover {
+#admin-content .container #rightContainer .right-tab .flex-manage-products .flex-item:hover{
     cursor: pointer;
     color: var(--buttonHover);
 }
-
 #admin-content .container #rightContainer .right-tab .flex-manage-products .flex-item.active-tab p,
-#admin-content .container #rightContainer .right-tab .flex-manage-orders .flex-item.active-tab p {
+#admin-content .container #rightContainer .right-tab .flex-manage-orders .flex-item.active-tab p{
     color: var(--active);
     font-weight: bold;
 }
-
 #admin-content .container #rightContainer .right-tab .flex-manage-products .flex-item.active-tab,
-#admin-content .container #rightContainer .right-tab .flex-manage-orders .flex-item.active-tab {
+#admin-content .container #rightContainer .right-tab .flex-manage-orders .flex-item.active-tab{
     border-bottom: 2px solid var(--active);
 }
-
 #admin-content .container #rightContainer .right-tab .flex-manage-products .flex-item p,
-#admin-content .container #rightContainer .right-tab .flex-manage-orders .flex-item p {
+#admin-content .container #rightContainer .right-tab .flex-manage-orders .flex-item p{
     margin: 0;
 }
 
-#admin-content .container #rightContainer .right-tab .flex-manage-products .flex-item:hover p .quantity {
+#admin-content .container #rightContainer .right-tab .flex-manage-products .flex-item:hover p .quantity{
     color: var(--buttonHover);
 }
-
 #admin-content .container #rightContainer .right-tab .flex-manage-products .flex-item.active-tab p .quantity,
-#admin-content .container #rightContainer .right-tab .flex-manage-orders .flex-item.active-tab p .quantity {
+#admin-content .container #rightContainer .right-tab .flex-manage-orders .flex-item.active-tab p .quantity{
     color: var(--active);
 }
-
 #admin-content .manage-products-filter-container,
-#admin-content .manage-orders-filter-container {
+#admin-content .manage-orders-filter-container{
     width: 100%;
     background-color: var(--white);
     border-radius: 5px;
     margin-top: 15px;
 }
-
 #admin-content .manage-products-filter-container .filter-container,
-#admin-content .manage-orders-filter-container .filter-container {
+#admin-content .manage-orders-filter-container .filter-container{
     padding: 20px;
 }
-
 #admin-content .manage-products-filter-container .filter-container .input-filter,
-#admin-content .manage-orders-filter-container .filter-container .input-filter {
+#admin-content .manage-orders-filter-container .filter-container .input-filter{
     height: 30px;
 }
-
 #admin-content .manage-products-filter-container .filter-container .input-filter .id-product-filter-div,
-#admin-content .manage-orders-filter-container .filter-container .input-filter .id-order-filter-div {
+#admin-content .manage-orders-filter-container .filter-container .input-filter .id-order-filter-div{
     width: 35%;
     height: 100%;
     border-radius: 5px;
@@ -416,23 +347,20 @@ body {
     display: inline-block;
     margin-right: 5px;
 }
-
 #admin-content .manage-products-filter-container .filter-container .input-filter .id-product-filter-div .id-product-filter,
-#admin-content .manage-orders-filter-container .filter-container .input-filter .id-order-filter-div .id-order-filter {
+#admin-content .manage-orders-filter-container .filter-container .input-filter .id-order-filter-div .id-order-filter{
     border: none;
     height: 92%;
     border-radius: 5px;
     width: 83%;
     padding-left: 15px;
 }
-
 #admin-content .manage-products-filter-container .filter-container .input-filter .id-product-filter-div .id-product-filter:focus,
-#admin-content .manage-orders-filter-container .filter-container .input-filter .id-order-filter-div .id-order-filter:focus {
+#admin-content .manage-orders-filter-container .filter-container .input-filter .id-order-filter-div .id-order-filter:focus{
     outline: none;
 }
-
 #admin-content .manage-products-filter-container .filter-container .input-filter .id-product-filter-div button,
-#admin-content .manage-orders-filter-container .filter-container .input-filter .id-order-filter-div button {
+#admin-content .manage-orders-filter-container .filter-container .input-filter .id-order-filter-div button{
     border: none;
     width: 10%;
     height: 95%;
@@ -440,37 +368,31 @@ body {
     background-color: var(--white);
     text-align: center;
 }
-
 #admin-content .manage-products-filter-container .filter-container .input-filter .id-product-filter-div button:hover,
-#admin-content .manage-orders-filter-container .filter-container .input-filter .id-order-filter-div button:hover {
+#admin-content .manage-orders-filter-container .filter-container .input-filter .id-order-filter-div button:hover{
     cursor: pointer;
 }
-
 #admin-content .manage-products-filter-container .filter-container .input-filter select,
-#admin-content .manage-orders-filter-container .filter-container .input-filter select {
+#admin-content .manage-orders-filter-container .filter-container .input-filter select{
     margin-right: 5px;
     border-color: var(--grey);
     height: calc(100% + 2px);
     border-radius: 5px;
 }
-
 #admin-content .manage-products-filter-container .filter-container .input-filter .price-filter-select,
-#admin-content .manage-orders-filter-container .filter-container .input-filter .price-filter-select {
+#admin-content .manage-orders-filter-container .filter-container .input-filter .price-filter-select{
     width: 15%;
 }
-
 #admin-content .manage-products-filter-container .filter-container .input-filter .category-filter-select,
-#admin-content .manage-orders-filter-container .filter-container .input-filter .category-filter-select {
+#admin-content .manage-orders-filter-container .filter-container .input-filter .category-filter-select{
     width: 18%;
 }
-
 #admin-content .manage-products-filter-container .filter-container .input-filter .other-filter-select,
-#admin-content .manage-orders-filter-container .filter-container .input-filter .other-filter-select {
+#admin-content .manage-orders-filter-container .filter-container .input-filter .other-filter-select{
     width: 20%;
 }
-
 #admin-content .manage-products-filter-container .filter-container .input-filter .reset-filter-button,
-#admin-content .manage-orders-filter-container .filter-container .input-filter .reset-filter-button {
+#admin-content .manage-orders-filter-container .filter-container .input-filter .reset-filter-button{
     border: 2px solid var(--active);
     border-radius: 5px;
     height: 100%;
@@ -478,26 +400,22 @@ body {
     background-color: var(--white);
     color: var(--active);
 }
-
 #admin-content .manage-products-filter-container .filter-container .input-filter .reset-filter-button:hover,
 #admin-content .manage-orders-filter-container .filter-container .input-filter .reset-filter-button:hover {
     border-color: var(--buttonHover);
     color: var(--buttonHover);
     cursor: pointer;
 }
-
 #admin-content .manage-products-filter-container .filter-container .manage-products-tools-container,
-#admin-content .manage-orders-filter-container .filter-container .manage-orders-tools-container {
+#admin-content .manage-orders-filter-container .filter-container .manage-orders-tools-container{
     margin-top: 10px;
 }
-
 #admin-content .manage-products-filter-container .filter-container .manage-products-tools-container p,
-#admin-content .manage-orders-filter-container .filter-container .manage-orders-tools-container p {
+#admin-content .manage-orders-filter-container .filter-container .manage-orders-tools-container p{
     display: inline-block;
 }
-
 #admin-content .manage-products-filter-container .filter-container .manage-products-tools-container .tool-button,
-#admin-content .manage-orders-filter-container .filter-container .manage-orders-tools-container .tool-button {
+#admin-content .manage-orders-filter-container .filter-container .manage-orders-tools-container .tool-button{
     border: 2px solid var(--active);
     border-radius: 5px;
     height: 100%;
@@ -507,172 +425,138 @@ body {
     margin-left: 15px;
     cursor: pointer;
 }
-
 #admin-content .manage-products-filter-container .filter-container .manage-products-tools-container .tool-button:disabled,
-#admin-content .manage-orders-filter-container .filter-container .manage-orders-tools-container .tool-button:disabled {
+#admin-content .manage-orders-filter-container .filter-container .manage-orders-tools-container .tool-button:disabled{
     border-color: var(--grey);
     color: var(--grey);
     cursor: unset;
 }
-
-#admin-content .table-manage-product-div {
+#admin-content .table-manage-product-div{
 
 }
-
 #admin-content .table-manage-product-div .table-row-div-product .manage-products-table,
-#admin-content .manage-order-table {
+#admin-content .manage-order-table{
     border-radius: 5px;
     margin-bottom: 1rem;
     background-color: var(--white);
     width: 100%;
 }
-
-#admin-content .table-manage-product-div table {
+#admin-content .table-manage-product-div table{
     width: 100%;
 }
-
 #admin-content .table-manage-product-div table tr td:nth-child(1),
 #admin-content .table-manage-product-div table tr th:nth-child(1),
 #admin-content .table-manage-order-div table tr td:nth-child(1),
-#admin-content .table-manage-order-div table tr th:nth-child(1) {
+#admin-content .table-manage-order-div table tr th:nth-child(1){
     width: 3%;
 }
-
 #admin-content .table-manage-product-div table tr td:nth-child(2),
-#admin-content .table-manage-product-div table tr th:nth-child(2) {
+#admin-content .table-manage-product-div table tr th:nth-child(2){
     width: 30%;
 }
-
 #admin-content .table-manage-order-div table tr td:nth-child(3),
-#admin-content .table-manage-order-div table tr th:nth-child(3) {
+#admin-content .table-manage-order-div table tr th:nth-child(3){
     width: 25%;
 }
-
 #admin-content .table-manage-product-div table tr td:nth-child(3),
-#admin-content .table-manage-product-div table tr th:nth-child(3) {
-    width: 10%;
+#admin-content .table-manage-product-div table tr th:nth-child(3){
+    width: 15%;
 }
-
 #admin-content .table-manage-order-div table tr td:nth-child(2),
-#admin-content .table-manage-order-div table tr th:nth-child(2) {
+#admin-content .table-manage-order-div table tr th:nth-child(2){
     width: 20%;
 }
-
 #admin-content .table-manage-product-div table tr td:nth-child(4),
-#admin-content .table-manage-product-div table tr th:nth-child(4) {
-    width: 8%;
+#admin-content .table-manage-product-div table tr th:nth-child(4){
+    width: 10%;
 }
-
 #admin-content .table-manage-order-div table tr td:nth-child(4),
-#admin-content .table-manage-order-div table tr th:nth-child(4) {
+#admin-content .table-manage-order-div table tr th:nth-child(4){
     width: 10%;
 }
-
 #admin-content .table-manage-product-div table tr td:nth-child(5),
-#admin-content .table-manage-product-div table tr th:nth-child(5) {
-    width: 12%;
+#admin-content .table-manage-product-div table tr th:nth-child(5){
+    width: 17%;
 }
-
 #admin-content .table-manage-order-div table tr td:nth-child(5),
-#admin-content .table-manage-order-div table tr th:nth-child(5) {
+#admin-content .table-manage-order-div table tr th:nth-child(5){
     width: 14%;
 }
-
 #admin-content .table-manage-product-div table tr td:nth-child(6),
-#admin-content .table-manage-product-div table tr th:nth-child(6) {
-    width: 13%;
+#admin-content .table-manage-product-div table tr th:nth-child(6){
+    width: 15%;
 }
-
 #admin-content .table-manage-order-div table tr td:nth-child(6),
-#admin-content .table-manage-order-div table tr th:nth-child(6) {
+#admin-content .table-manage-order-div table tr th:nth-child(6){
     width: 14%;
 }
-
 #admin-content .table-manage-product-div table tr td:nth-child(7),
-#admin-content .table-manage-product-div table tr th:nth-child(7) {
-    width: 13%;
-}
-
-#admin-content .table-manage-order-div table tr td:nth-child(7),
-#admin-content .table-manage-order-div table tr th:nth-child(7) {
-    width: 14%;
-}
-
-#admin-content .table-manage-product-div table tr td:nth-child(8),
-#admin-content .table-manage-product-div table tr th:nth-child(8) {
+#admin-content .table-manage-product-div table tr th:nth-child(7){
     width: 10%;
 }
-
-#admin-content .table-manage-product-div .table-row-div-head-table .manage-products-table .head-table {
+#admin-content .table-manage-order-div table tr td:nth-child(7),
+#admin-content .table-manage-order-div table tr th:nth-child(7){
+    width: 14%;
+}
+#admin-content .table-manage-product-div table tr td:nth-child(8),
+#admin-content .table-manage-product-div table tr th:nth-child(8){
+    width: 10%;
+}
+#admin-content .table-manage-product-div .table-row-div-head-table .manage-products-table .head-table{
     height: 2.5rem;
 }
-
-#admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table .is-check {
+#admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table .is-check{
     margin: 5px auto 0;
     display: block;
 }
-
-#admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table td {
+#admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table td{
     vertical-align: top;
 }
-
-#admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table td > div {
+#admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table td>div{
     padding-top: 10px;
 }
-
-#admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table td p {
+#admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table td p{
     margin: 0 auto;
 }
-
-#admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table .product-name-container {
+#admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table .product-name-container{
     width: 100%;
 }
-
 #admin-content .manage-products-table i,
-#admin-content .manage-order-table i {
+#admin-content .manage-order-table i{
     color: var(--active);
     font-size: 0.7em;
 }
-
-#admin-content .manage-products-table i:hover {
+#admin-content .manage-products-table i:hover{
     cursor: pointer;
 }
-
-#admin-content .manage-orders .manage-order-table .row-table .product-name-col .container-img {
+#admin-content .manage-orders .manage-order-table .row-table .product-name-col .container-img{
     display: inline-block;
 }
-
-#admin-content .manage-orders .manage-order-table .row-table .product-name-col img {
+#admin-content .manage-orders .manage-order-table .row-table .product-name-col img{
     width: 3rem;
 }
-
-#admin-content .manage-orders .manage-order-table .row-table .product-name-col .container-info {
+#admin-content .manage-orders .manage-order-table .row-table .product-name-col .container-info{
     display: inline-block;
 }
-
-#admin-content .manage-products-table .row-table .product-name-container .container-img {
+#admin-content .manage-products-table .row-table .product-name-container .container-img{
     width: 15%;
     height: 15%;
     display: inline-block;
     float: left;
 }
-
-#admin-content .manage-products-table .row-table .product-name-container .container-img img {
+#admin-content .manage-products-table .row-table .product-name-container .container-img img{
     width: 100%;
     border-radius: 5px;
 }
-
-#admin-content .manage-products-table .row-table .product-name-container .container-info {
+#admin-content .manage-products-table .row-table .product-name-container .container-info{
     display: inline-block;
     width: calc(100% - 18% - 10px);
     margin-left: 5px;
 }
-
-#admin-content .manage-products-table .row-table .product-name-container .container-info .name-block {
+#admin-content .manage-products-table .row-table .product-name-container .container-info .name-block{
     width: 100%;
 }
-
-#admin-content .row-table .product-name-container .container-info .name-block .product-name {
+#admin-content   .row-table .product-name-container .container-info .name-block .product-name{
     width: 90%;
     resize: none;
     border: none;
@@ -683,64 +567,94 @@ body {
     float: left;
     color: var(--black);
 }
-
 #admin-content .manage-products-table .row-table .product-name-container .container-info .name-block i.edit-button {
     float: left;
     display: inline-block;
     margin: 6px auto auto 0;
 }
-
 #admin-content .manage-products-table .row-table .ok-button {
     display: none;
 }
-
-#admin-content .manage-products-table .row-table .product-name-container .container-info .id-block {
+#admin-content .manage-products-table .row-table .product-name-container .container-info .id-block{
     width: 100%;
 }
-
-#admin-content .row-table .container-info .id-block .product-id {
+#admin-content .row-table .container-info .id-block .product-id{
     display: inline-block;
     font-size: 0.8em;
     margin: 0;
 }
-
-#admin-content .manage-products-table .row-table .product-type-col .product-type {
+#admin-content .manage-products-table .row-table .product-type-col .product-type{
     text-align: center;
     border: none;
-    width: 4rem;
 }
 
-#admin-content input:focus-visible {
+#rightContainer > div.right-tab.manage-products.active-right-tab > div.manage-all-products-tab.manage-products-flex-tab.active-product-tab > div > div.table-row-div.table-row-div-product > table > tbody > tr.row-table.row-table-main.product-row > td.uint-price-col > div > p{
+    text-align: center;
+}
+
+#rightContainer > div.right-tab.manage-products.active-right-tab > div.manage-all-products-tab.manage-products-flex-tab.active-product-tab > div > div.table-row-div.table-row-div-product > table > tbody > tr.row-table.row-table-main.product-row > td.product-quantity-col > div > input{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+#rightContainer > div.right-tab.manage-products.active-right-tab > div.manage-all-products-tab.manage-products-flex-tab.active-product-tab > div > div.table-row-div.table-row-div-product > table > tbody > tr.row-table.row-table-main.product-row > td.proceed > div p{
+    text-align: center;
+}
+#rightContainer .price-hide{
+    display: none;
+    margin-bottom: 0;
+}
+#rightContainer > div.right-tab.add-new-product.add-tab > div > form > table > tbody > tr:nth-child(11) > td.input-col > button{
+    margin-left: 15rem;
+}
+#rightContainer > div.right-tab.manage-categorys.active-right-tab > div.manage-all-orders-tab.manage-orders-flex-tab.active-order-tab > div > div.table-row-div.table-row-div-order > table > tbody > tr > td.order-id-col > div{
+    margin: auto;
+    width: fit-content;
+}
+#rightContainer > div.right-tab.manage-categorys.active-right-tab > div.manage-all-orders-tab.manage-orders-flex-tab.active-order-tab > div > div.table-row-div.table-row-div-order > table > tbody > tr > td.user-name-col > div > img{
+    display: block;
+    margin: auto;
+}
+#rightContainer > div.right-tab.manage-categorys.active-right-tab > div.manage-all-orders-tab.manage-orders-flex-tab.active-order-tab > div > div.table-row-div.table-row-div-order > table > tbody > tr > td.unit-price-col > div{
+    width: fit-content;
+    margin: auto;
+}
+#rightContainer .proceed-div a{
+    text-decoration: none;
+}
+#admin-content input:focus-visible{
     outline: none;
 }
-
-#admin-content .manage-products-table .row-table .quantity-block .product-quantity {
+#rightContainer > div.right-tab.manage-products > div.manage-all-products-tab.manage-products-flex-tab > div > div.table-row-div.table-row-div-product > table > tbody > tr > td.product-quantity-col > div > input {
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+#rightContainer .search-hide{
+    display: none;
+}
+#admin-content .manage-products-table .row-table .quantity-block .product-quantity{
     background-color: var(--white);
     border: none;
     text-align: right;
     width: 3rem;
 }
-
-#admin-content .manage-products-table .row-table .unit-price-block .product-unit-price {
+#admin-content .manage-products-table .row-table .unit-price-block .product-unit-price{
     background-color: var(--white);
     border: none;
     text-align: right;
     width: 5rem;
 }
-
-#admin-content .manage-products-table .row-table .product-update-date {
+#admin-content .manage-products-table .row-table .product-update-date{
     text-align: center;
 }
-
-#admin-content .manage-products-table .row-table .product-status {
+#admin-content .manage-products-table .row-table .product-status{
     display: none;
 }
-
-#admin-content .manage-products-table .row-table .product-status option {
+#admin-content .manage-products-table .row-table .product-status option{
     text-align: center;
 }
-
-#admin-content .manage-products-table .row-table .product-status-col p {
+#admin-content .manage-products-table .row-table .product-status-col p{
     font-weight: bold;
     text-align: center;
     border-radius: 5px;
@@ -748,211 +662,131 @@ body {
     padding: 5px 10px;
     margin: auto;
 }
-
-#admin-content .row-table .product-status-col .delete-p {
+#admin-content .row-table .product-status-col .delete-p{
     color: var(--red);
     background-color: #ff8080;
 }
-
-#admin-content .row-table .product-status-col .upcoming-p {
+#admin-content .row-table .product-status-col .upcoming-p{
     color: var(--yellow);
     background-color: #ffff7c;
 }
-
-#admin-content .row-table .product-status-col .selling-p {
+#admin-content .row-table .product-status-col .selling-p{
     color: var(--green);
     background-color: #cfffcf;
 }
-
-#admin-content .row-table .product-status-col .stop-selling-p {
+#admin-content .row-table .product-status-col .stop-selling-p{
     color: orange;
     background-color: #fdd182;
 }
-
-#admin-content .row-table .product-status-col .cancel-request {
+#admin-content .row-table .product-status-col .cancel-request{
     color: saddlebrown;
     background-color: #ffe7c3;
 }
 
-#admin-content .manage-products-table .row-table .product-status-col p {
+#admin-content .manage-products-table .row-table .product-status-col p{
     display: none;
 }
-
-#admin-content .manage-products-table .row-table .product-status-col .active-status {
+#admin-content .manage-products-table .row-table .product-status-col .active-status{
     display: block;
 }
-
-#admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table .proceed .proceed-div p {
+#admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table .proceed .proceed-div p{
     color: var(--active);
     margin-bottom: 10px;
 }
-
-#admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table .proceed .proceed-div p.accept-proceed {
+#admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table .proceed .proceed-div p.accept-proceed{
     display: none;
 }
-
-#admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table .proceed .proceed-div p:hover {
+#admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table .proceed .proceed-div p:hover{
     color: var(--buttonHover);
     cursor: pointer;
 }
-
-#admin-content .row-table-end .min-product {
+#admin-content .row-table-end .min-product{
     display: none;
 }
-
-#admin-content .row-table-end .show-all-type-product .icon-up {
+#admin-content .row-table-end .show-all-type-product .icon-up{
     display: none;
 }
-
-#admin-content .row-table-end i {
+#admin-content .row-table-end i{
     color: var(--black2);
 }
-
-#admin-content .row-table-end .show-all-type-product:hover {
+#admin-content .row-table-end .show-all-type-product:hover{
     color: var(--buttonHover);
     cursor: pointer;
 }
-
-#admin-content .row-table-end .show-all-type-product:hover i {
+#admin-content .row-table-end .show-all-type-product:hover i{
     color: var(--buttonHover);
 }
-
-#admin-content .row-table-end td {
+#admin-content .row-table-end td{
     border-top: 1px solid var(--grey3);
 }
-
-#admin-content .row-table-end {
+#admin-content .row-table-end{
     height: 2.5rem;
 }
-
-#admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table-end td {
+#admin-content .table-manage-product-div .table-row-div-product .manage-products-table .row-table-end td{
     vertical-align: inherit;
 }
-
-#admin-content .row-table-child {
+#admin-content .row-table-child{
     display: none;
 }
-
-#admin-content .manage-products-flex-tab .manage-products-table {
+#admin-content .manage-products-flex-tab .manage-products-table{
     border-spacing: 0;
 }
-
+#admin-content .manage-products-table .row-table-child .unit-price-block p{
+    text-align: center;
+}
 #admin-content #rightContainer .manage-products-flex-tab,
 #admin-content #rightContainer .manage-orders-flex-tab,
-#admin-content #rightContainer .manage-vouchers-flex-tab {
+#admin-content #rightContainer .manage-vouchers-flex-tab{
     display: none;
 }
-
 #admin-content #rightContainer .manage-products-flex-tab.active-product-tab,
 #admin-content #rightContainer .manage-orders-flex-tab.active-order-tab,
-#admin-content #rightContainer .manage-vouchers-flex-tab.active-voucher-tab {
+#admin-content #rightContainer .manage-vouchers-flex-tab.active-voucher-tab{
     display: block;
     min-height: 20rem;
 }
-
-#admin-content #rightContainer .right-tab.row-table-main.price-hide,
-#admin-content #rightContainer .right-tab.row-table-main.category-hide,
-#admin-content #rightContainer .right-tab.row-table-end.price-hide,
-#admin-content #rightContainer .right-tab.row-table-end.category-hide {
+#admin-content #rightContainer .right-tab .manage-products-table.price-hide,
+#admin-content #rightContainer .right-tab .manage-products-table.category-hide,
+#admin-content #rightContainer .right-tab .manage-products-table.search-hide{
     display: none;
+    margin-bottom: 0;
+}
+#admin-content #rightContainer .right-tab .row-table-main.price-hide,
+#admin-content #rightContainer .right-tab .row-table-main.category-hide,
+#admin-content #rightContainer .right-tab .row-table-end.price-hide,
+#admin-content #rightContainer .right-tab .row-table-end.category-hide{
+    display: none;
+    margin-bottom: 0;
 }
 
 /*add new product*/
-
-.right-tab .add-new-product .add-tab .active-right-tab {
-
-    width: 1000px;
-}
-
-.right-tab, .right-tab-container {
-
-    width: 1000px;
-
-    display: flex;
-
-    justify-content: space-evenly;
-
-
-}
-
-.right-tab .right-tab-container .right-tab-option {
-
-
-    width: 250px;
-
-    height: 300px;
-
-    border: 1px solid var(--grey);
-
-    margin: 50px 70px 0 0;
-
-    border-radius: 0.5em;
-
-    padding: 0 0 0 10px;
-
-
-}
-
-.input-field {
-
-    border-radius: 0.3em;
-    border: 1px solid var(--grey);
-    padding: 0.5em 0.3em;
+#admin-content #rightContainer .add-tab .right-tab-container form{
     width: 80%;
-    margin: 8px 0;
-
+    margin: 2.5rem auto 0;
 }
-
-right-tab .right-tab-container .right-tab-option .label-col label {
-
-    min-width: 120px;
-
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-#admin-content #rightContainer .add-tab .right-tab-container form {
-    width: 80%;
-    margin: 2.5rem -6.0rem 0;
-}
-
-#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table {
+#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table{
     width: 100%;
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
-
-#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table tr {
+#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table tr{
     height: 2.5rem;
-
 }
-
-#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table tr td:first-child {
+#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table tr td:first-child{
     width: 28%;
     text-align: right;
     padding-right: 1.5rem;
 }
-
-#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table tr td:last-child {
+#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table tr td:last-child{
     width: 70%;
 }
-
-#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table tr td:last-child .input-field {
+#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table tr td:last-child .input-field{
     border-radius: 0.3em;
     border: 1px solid var(--grey);
     padding: 0.5em 0.3em;
     width: 90%;
-
-    margin: 8px 0;
-
 }
-
-#cke_new-product-detail {
-
-    margin: 50px 80px 0 0;
-}
-
-#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table tr td:last-child button {
+#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table tr td:last-child button{
     border-radius: 3px;
     border: none;
     padding: 10px;
@@ -961,17 +795,14 @@ right-tab .right-tab-container .right-tab-option .label-col label {
     margin-right: 3rem;
     min-width: 4rem;
 }
-
-#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table tr td:last-child button:hover {
+#admin-content #rightContainer .add-tab .right-tab-container form .add-new-product-table tr td:last-child button:hover{
     cursor: pointer;
     background-color: var(--buttonHover);
 }
-
-#admin-content #rightContainer .manage-order-table .row-table .order-id-col p {
+#admin-content #rightContainer .manage-order-table .row-table .order-id-col p{
     display: inline-block;
 }
-
-#admin-content #rightContainer .manage-order-table .row-table .product-status-col .status {
+#admin-content #rightContainer .manage-order-table .row-table .product-status-col .status{
     display: none;
     font-weight: bold;
     text-align: center;
@@ -981,273 +812,214 @@ right-tab .right-tab-container .right-tab-option .label-col label {
     margin-right: auto;
     margin-left: auto;
 }
-
-
-#admin-content #rightContainer .manage-order-table .row-table .product-status-col .status.active-status {
+#admin-content #rightContainer .manage-order-table .row-table .product-status-col .status.active-status{
     display: block;
 }
-
-#admin-content #rightContainer .manage-order-table-head {
+#admin-content #rightContainer .manage-order-table-head{
     margin: 0.5rem 0;
     width: 100%;
 }
-
-#admin-content #rightContainer .manage-order-table tr:first-child td {
+#admin-content #rightContainer .manage-order-table tr:first-child td{
     vertical-align: top;
     horiz-align: center;
 }
-
-#admin-content #rightContainer .manage-order-table .row-table-main tr:first-child td > div:first-child {
+#admin-content #rightContainer .manage-order-table .row-table-main tr:first-child td>div:first-child{
     margin: auto;
     width: fit-content;
 }
-
-#admin-content #rightContainer .manage-order-table .row-table-main td:first-child {
+#admin-content #rightContainer .manage-order-table .row-table-main td:first-child{
     vertical-align: middle;
 }
-
-#admin-content #rightContainer .manage-order-table .row-table-main .update-date-col .product-update-date {
+#admin-content #rightContainer .manage-order-table .row-table-main .update-date-col .product-update-date{
     text-align: center;
 }
-
-#admin-content #rightContainer .manage-order-table .row-table-main .proceed p {
+#admin-content #rightContainer .manage-order-table .row-table-main .proceed p{
     text-align: center;
 }
-
-#admin-content #rightContainer .manage-order-table .row-table-main td:first-child div {
+#admin-content #rightContainer .manage-order-table .row-table-main td:first-child div{
     width: fit-content;
     margin: auto;
 }
-
-#admin-content #rightContainer .manage-order-table .row-table-main .user-name-col .product-name-container {
+#admin-content #rightContainer .manage-order-table .row-table-main .user-name-col .product-name-container{
     margin: 0;
 }
-
-#admin-content #rightContainer .manage-order-table tr .proceed .proceed-div p {
+#admin-content #rightContainer .manage-order-table tr .proceed .proceed-div p{
     color: var(--active);
     margin-bottom: 0.7em;
 }
-
-#admin-content #rightContainer .manage-order-table tr .proceed .proceed-div p:hover {
+#admin-content #rightContainer .manage-order-table tr .proceed .proceed-div p:hover{
     color: var(--buttonHover);
     cursor: pointer;
 }
-
-#admin-content #rightContainer .manage-order-table tr .product-type-col {
+#admin-content #rightContainer .manage-order-table tr .product-type-col{
     width: 10%;
 }
-
-#admin-content #rightContainer .manage-order-table tr .product-type-col p {
+#admin-content #rightContainer .manage-order-table tr .product-type-col p{
     text-align: center;
 }
-
-#admin-content #rightContainer .manage-order-table tr .product-quantity-col {
+#admin-content #rightContainer .manage-order-table tr .product-quantity-col{
     width: 14%;
 }
-
-#admin-content #rightContainer .manage-order-table tr .product-quantity-col p {
+#admin-content #rightContainer .manage-order-table tr .product-quantity-col p{
+   text-align: center;
+}
+#admin-content #rightContainer .manage-order-table tr .product-price-col p{
     text-align: center;
 }
-
-#admin-content #rightContainer .manage-order-table tr .product-price-col p {
-    text-align: center;
-}
-
-#admin-content #rightContainer .manage-order-table .row-table-child .product-name-container .container-info {
+#admin-content #rightContainer .manage-order-table .row-table-child .product-name-container .container-info{
     width: 80%;
     vertical-align: top;
 }
-
-#admin-content #rightContainer .manage-order-table .row-table-child .product-name-container .product-name {
+#admin-content #rightContainer .manage-order-table .row-table-child .product-name-container .product-name{
     margin-top: 0.3em;
 }
-
-#admin-content #rightContainer .right-tab .row-table-main .user-name-col img.category-img {
+#admin-content #rightContainer .right-tab .row-table-main .user-name-col img.category-img{
     width: 4rem;
     height: 4rem;
     object-fit: cover;
     border-radius: 50%;
 }
-
-#admin-content #rightContainer .right-tab .row-table-main .user-name-col .input-category-img {
+#admin-content #rightContainer .right-tab .row-table-main .user-name-col .input-category-img{
     display: none;
 }
-
 #admin-content #rightContainer .manage-categorys .manage-order-table-head th:nth-child(3),
-#admin-content #rightContainer .manage-categorys .manage-order-table td:nth-child(3) {
+#admin-content #rightContainer .manage-categorys .manage-order-table td:nth-child(3){
     width: 15%;
 }
-
 #admin-content #rightContainer .manage-categorys .manage-order-table-head th:nth-child(2),
-#admin-content #rightContainer .manage-categorys .manage-order-table td:nth-child(2) {
+#admin-content #rightContainer .manage-categorys .manage-order-table td:nth-child(2){
     width: 15%;
 }
-
 #admin-content #rightContainer .manage-producer .manage-order-table-head th:nth-child(3),
-#admin-content #rightContainer .manage-producer .manage-order-table td:nth-child(3) {
+#admin-content #rightContainer .manage-producer .manage-order-table td:nth-child(3){
     width: 15%;
 }
-
 #admin-content #rightContainer .manage-producer .manage-order-table-head th:nth-child(2),
-#admin-content #rightContainer .manage-producer .manage-order-table td:nth-child(2) {
+#admin-content #rightContainer .manage-producer .manage-order-table td:nth-child(2){
     width: 15%;
 }
-
-#admin-content #rightContainer .right-tab .manage-order-table .unit-price-col .product-unit-price {
+#admin-content #rightContainer .right-tab .manage-order-table .unit-price-col .product-unit-price{
     display: inline-block;
 }
-
-#admin-content #rightContainer .right-tab .manage-order-table .product-status-col .category-status {
+#admin-content #rightContainer .right-tab .manage-order-table .product-status-col .category-status{
     display: none;
 }
-
-#admin-content #rightContainer .right-tab .manage-order-table .accept-proceed {
+#admin-content #rightContainer .right-tab .manage-order-table .accept-proceed{
     display: none;
 }
-
-#admin-content #rightContainer .add-new-category .right-tab-container form {
+#admin-content #rightContainer .add-new-category .right-tab-container form{
     padding-top: 4rem;
 }
-
-#admin-content #rightContainer .add-new-producer .right-tab-container form {
+#admin-content #rightContainer .add-new-producer .right-tab-container form{
     padding-top: 4rem;
 }
-
-#admin-content #rightContainer .change-pass {
+#admin-content #rightContainer .change-pass{
     display: none;
 }
-
-#admin-content #rightContainer .change-pass.show {
+#admin-content #rightContainer .change-pass.show{
     display: block;
 }
-
-#admin-content #rightContainer .manage-users .user-name-col .container-img {
+#admin-content #rightContainer .manage-users .user-name-col .container-img{
     display: inline-block;
     margin-right: 0.5em;
     margin-top: 0.5em;
 }
-
-#admin-content #rightContainer .manage-users .user-name-col .container-info {
+#admin-content #rightContainer .manage-users .user-name-col .container-info{
     display: inline-block;
     vertical-align: top;
 }
-
-#admin-content #rightContainer .manage-users .user-name-col img {
+#admin-content #rightContainer .manage-users .user-name-col img{
     border-radius: 50%;
     width: 4rem;
     height: 4rem;
     object-fit: cover;
 }
-
-#admin-content #rightContainer .manage-users .row-table-end .show-all-type-product {
+#admin-content #rightContainer .manage-users .row-table-end .show-all-type-product{
     text-align: center;
 }
-
-#admin-content #rightContainer .manage-users .user-name-col .container-info .user-name {
+#admin-content #rightContainer .manage-users .user-name-col .container-info .user-name{
     margin-top: 1em;
 }
-
 #admin-content #rightContainer .manage-users .manage-order-table-head th:nth-child(3),
-#admin-content #rightContainer .manage-users .manage-order-table td:nth-child(3) {
+#admin-content #rightContainer .manage-users .manage-order-table td:nth-child(3){
     width: 10%;
 }
-
 #admin-content #rightContainer .manage-users .manage-order-table-head th:nth-child(2),
-#admin-content #rightContainer .manage-users .manage-order-table td:nth-child(2) {
+#admin-content #rightContainer .manage-users .manage-order-table td:nth-child(2){
     width: 25%;
 }
-
-#admin-content #rightContainer .manage-users .number-phone-col .phone-number-p {
+#admin-content #rightContainer .manage-users .number-phone-col .phone-number-p{
     display: inline-block;
 }
-
-#admin-content #rightContainer .manage-vouchers .user-name-col img {
+#admin-content #rightContainer .manage-vouchers .user-name-col img{
     width: 5rem;
     height: 3rem;
 }
-
-#admin-content #rightContainer .manage-vouchers .user-name-col .container-info {
+#admin-content #rightContainer .manage-vouchers .user-name-col .container-info{
     display: inline-block;
     vertical-align: top;
 }
-
-#admin-content #rightContainer .manage-vouchers .user-name-col .container-img {
+#admin-content #rightContainer .manage-vouchers .user-name-col .container-img{
     display: inline-block;
     margin-right: 0.5em;
     margin-top: 0.5em;
 }
-
-#admin-content #rightContainer .manage-vouchers .ok-button {
+#admin-content #rightContainer .manage-vouchers .ok-button{
     display: none;
 }
-
 #admin-content #rightContainer .manage-vouchers .manage-order-table-head th:nth-child(2),
-#admin-content #rightContainer .manage-vouchers .manage-order-table td:nth-child(2) {
+#admin-content #rightContainer .manage-vouchers .manage-order-table td:nth-child(2){
     width: 30%;
 }
-
 #admin-content #rightContainer .manage-vouchers .manage-order-table-head th:nth-child(3),
-#admin-content #rightContainer .manage-vouchers .manage-order-table td:nth-child(3) {
+#admin-content #rightContainer .manage-vouchers .manage-order-table td:nth-child(3){
     width: 12%;
 }
-
 #admin-content #rightContainer .manage-vouchers .manage-order-table-head th:nth-child(4),
-#admin-content #rightContainer .manage-vouchers .manage-order-table td:nth-child(4) {
+#admin-content #rightContainer .manage-vouchers .manage-order-table td:nth-child(4){
     width: 14%;
 }
-
 #admin-content #rightContainer .manage-vouchers .manage-order-table-head th:nth-child(5),
-#admin-content #rightContainer .manage-vouchers .manage-order-table td:nth-child(5) {
+#admin-content #rightContainer .manage-vouchers .manage-order-table td:nth-child(5){
     width: 14%;
 }
-
 #admin-content #rightContainer .manage-vouchers .manage-order-table-head th:nth-child(6),
-#admin-content #rightContainer .manage-vouchers .manage-order-table td:nth-child(6) {
+#admin-content #rightContainer .manage-vouchers .manage-order-table td:nth-child(6){
     width: 12%;
 }
-
 #admin-content #rightContainer .manage-vouchers .manage-order-table-head th:nth-child(7),
-#admin-content #rightContainer .manage-vouchers .manage-order-table td:nth-child(7) {
+#admin-content #rightContainer .manage-vouchers .manage-order-table td:nth-child(7){
     width: 12%;
 }
-
-#admin-content #rightContainer .manage-vouchers .manage-order-table input {
+#admin-content #rightContainer .manage-vouchers .manage-order-table input{
     background-color: var(--white);
     border: none;
     border-radius: 0.3em;
     text-align: center;
     margin-top: 0.5em;
 }
-
-#admin-content #rightContainer .manage-vouchers select {
+#admin-content #rightContainer .manage-vouchers select{
     display: none;
 }
-
-#admin-content #rightContainer .manage-vouchers .discount-div .product-unit-price {
+#admin-content #rightContainer .manage-vouchers .discount-div .product-unit-price{
     width: 6rem;
     text-align: right;
 }
-
-#admin-content #rightContainer .manage-vouchers .proceed p {
+#admin-content #rightContainer .manage-vouchers .proceed p{
     margin: 0 0 0.6em 0;
 }
-
-#admin-content #rightContainer .manage-vouchers i {
+#admin-content #rightContainer .manage-vouchers i{
     cursor: pointer;
 }
-
-#admin-content #rightContainer .manage-turnover .input-filter {
+#admin-content #rightContainer .manage-turnover .input-filter{
     height: unset;
 }
-
-#admin-content #rightContainer .manage-turnover .container-img {
+#admin-content #rightContainer .manage-turnover .container-img{
     display: inline-block;
 }
-
-#admin-content #rightContainer .manage-turnover .container-img img {
+#admin-content #rightContainer .manage-turnover .container-img img{
     width: 3rem;
 }
-
-#admin-content #rightContainer .manage-turnover .container-info {
+#admin-content #rightContainer .manage-turnover .container-info{
     display: inline-block;
 }

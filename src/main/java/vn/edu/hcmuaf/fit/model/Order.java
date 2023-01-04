@@ -13,7 +13,7 @@ public class Order {
     private TreeMap<String, Integer> list;
 
 
-    public Order() {
+    public Order(){
 
         this.listPd = new TreeMap<>();
 
@@ -43,7 +43,7 @@ public class Order {
         this.deliveryAddressId = deliveryAddressId;
         this.note = note;
         this.orderDate = orderDate;
-        this.userId = userName;
+        this.userName=userName;
     }
     public Order(String id, String userId, String status, String deliveryAddressId,long amount, String note, Date orderDate ) {
         this.id = id;
@@ -115,11 +115,15 @@ public class Order {
     }
 
     public String getStatus() {
-        if (status.equals("Chờ xác nhận")) return "1";
-        if (status.equals("Chờ lấy hàng")) return "2";
-        if (status.equals("Đang giao")) return "3";
-        if (status.equals("Đã giao")) return "4";
-        else return "5";
+        return this.status;
+    }
+
+    public int getNumStatus(){
+        if (status.equals("Chờ xác nhận")) return 1;
+        if (status.equals("Đang giao")) return 2;
+        if (status.equals("Đã giao")) return 3;
+        if (status.equals("Yêu cầu hủy")) return 4;
+        else return 5;
     }
 
     public void setStatus(String status) {

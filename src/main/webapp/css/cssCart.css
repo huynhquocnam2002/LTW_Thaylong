@@ -540,7 +540,6 @@ h4 {
 
 .nav__item_seach {
   display: flex;
-  width: 37%;
   border: 2px solid rgb(197, 197, 197);
   border-radius: 50px;
   margin: 40px;

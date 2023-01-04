@@ -68,7 +68,7 @@
                             </div>
                             <ul class="nav__list">
                                 <li class="nav__item">
-                                    <a href="#header" class="nav__link scroll-link">Trang chủ</a>
+                                    <a href="/" class="nav__link scroll-link">Trang chủ</a>
                                 </li>
                                 <li class="nav__item">
                                     <a href="#category" class="nav__link scroll-link">Sản phẩm</a>
@@ -106,7 +106,7 @@
 
                             <div class="nav__item_user" id="nav__item_user">
                                 <a href="/LoginServlet" class="nav__link scroll-link">Đăng Nhập /</a>
-                                <a href="register.jsp" class="nav__link scroll-link">Đăng Ký</a><br>
+                                <a href="RegisterServlet" class="nav__link scroll-link">Đăng Ký</a><br>
                                 <a href="" class="nav__link scroll-link">Thành Viên</a>
                             </div>
                         </div>
@@ -115,13 +115,13 @@
                             User user = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
                         %>
                         <div class="nav__icons">
-                            <a href="user.jsp" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
+                            <a href="UserServlet" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
                                 <img src="<%=user.getImg()%>"
                                      style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%" alt="img">
                             </a>
 
                             <div class="nav__item_user" style="font-size: 1.2rem" id="nav__item_user1">
-                                <a href="user.jsp" class="nav__link scroll-link"
+                                <a href="UserServlet" class="nav__link scroll-link"
                                    style="line-height: 2"><%=user.getName()%>
                                 </a><br>
                                 <a href="" class="nav__link scroll-link">Thành Viên</a>
@@ -135,14 +135,14 @@
                                 int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
                         %>
                         <div class="nav__icons" id="nav__item_giohang">
-                            <a href="cart.jsp" class="icon__item">
+                            <a href="CartServlet" class="icon__item">
                                 <svg class="icon__cart">
                                     <use xlink:href="image/images/sprite.svg#icon-shopping-basket"></use>
                                 </svg>
 
                                 <span id="cart__total"><%=numOfCartItems%></span>
                             </a>
-                            <a href="cart.jsp" class="nav__link_giohang">Giỏ Hàng</a>
+                            <a href="CartServlet" class="nav__link_giohang">Giỏ Hàng</a>
                         </div>
                         <%}%>
                     </nav>
@@ -185,8 +185,9 @@
                                 </thead>
                                 <tbody>
                                 <% Product pr;
+                                    double sum =0;
                                     for ( Map.Entry<String, Integer> ds : list.entrySet()){
-                                            pr= ProductDAO.getProductById(ds.getKey());
+                                            pr = ProductDAO.getProductById(ds.getKey());
                                 %>
                                     <tr>
                                         <td class="product__thumbnail">
@@ -201,37 +202,40 @@
                                         </td>
                                         <td class="product__price">
                                             <div class="price">
-                                                <span class="new__price"><%=pr.getPrice()%></span>
+                                                <span class="new__price"><%=pr.getPrice()%> VNĐ</span>
                                             </div>
                                         </td>
                                         <td class="product__quantity">
                                             <div class="input-counter">
                                                 <div>
-                                                    <span class="minus-btn">
+
+                                                    <a class="minus-btn" href="CartServlet?command=minus&idProduct=<%=pr.getId()%>&cartID=<%=Long.parseLong((String) session.getAttribute("cartID"))%>">
                                                         <svg>
                                                             <use xlink:href="./images/sprite.svg#icon-minus"></use>
                                                         </svg>
-                                                    </span>
-                                                    <input type="text" min="1" value="1" max="10" class="counter-btn">
-                                                    <span class="plus-btn">
+                                                    </a>
+                                                    <input  type="text" min="1" value="<%=list.get(ds.getKey())%>" max="100" class="counter-btn" >
+                                                    <a class="plus-btn" href="CartServlet?command=plus&idProduct=<%=pr.getId()%>&cartID=<%=Long.parseLong((String) session.getAttribute("cartID"))%>">
                                                         <svg>
                                                             <use xlink:href="./images/sprite.svg#icon-plus"></use>
                                                         </svg>
-                                                    </span>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="product__subtotal">
                                             <div class="price">
-                                                <span class="new__price"><%=pr.getPrice()%></span>
+                                                <span class="new__price"><%=list.get(ds.getKey())*pr.getPrice()%> VNĐ</span>
                                             </div>
-                                            <a  href="#" class="remove__cart-item">
+                                            <a href="CartServlet?command=delete&idProduct=<%=pr.getId()%>&cartID=<%=Long.parseLong((String) session.getAttribute("cartID"))%>" class="remove__cart-item">
                                                 <svg>
                                                     <use xlink:href="./images/sprite.svg#icon-trash"></use>
                                                 </svg>
                                             </a>
                                         </td>
                                     </tr>
+
+                                <%sum+=list.get(ds.getKey())*pr.getPrice();%>
                                 <%}%>
                                 </tbody>
                             </table>
@@ -239,7 +243,7 @@
 
                         <div class="cart-btns">
                             <div class="continue__shopping">
-                                <a href="/phone_nam/homelogin.html">Tiếp tục mua sắm</a>
+                                <a href="/">Tiếp tục mua sắm</a>
                             </div>
                             <div class="check__shipping">
                                 <input type="checkbox">
@@ -252,7 +256,7 @@
                             <ul>
                                 <li>
                                     Tổng tiền
-                                    <span class="new__price">23.430.768 VNĐ</span>
+                                    <span class="new__price"><%=sum%> VNĐ</span>
                                 </li>
                                 <li>
                                     Vận chuyển
@@ -260,10 +264,10 @@
                                 </li>
                                 <li>
                                     Tổng tiền
-                                    <span class="new__price untilPrice">23.430.768 VNĐ</span>
+                                    <span class="new__price untilPrice"><%=sum%> VNĐ</span>
                                 </li>
                             </ul>
-                            <a href="/PayServlet">Tiến hành thanh toán</a>
+                            <a href="PayServlet">Tiến hành thanh toán</a>
                         </div>
                     </form>
                 </div>
@@ -315,82 +319,82 @@
     </main>
 
     <!-- Footer -->
-    <footer id="footer" class="section footer">
-        <div class="container">
-          <div class="footer__top">
-            <div class="footer-top__box">
-              <h3>BỔ SUNG</h3>
-              <a href="/phone_nam/htmlfooter/nhanhieu.html">Nhãn hiệu</a>
-              <a href="/phone_nam/htmlfooter/phieuquatang.html">Phiếu quà tặng</a>
-              <a href="/phone_nam/htmlfooter/chinhanh.html">Chi nhánh</a>
-              <a href="#">Đặc biệt</a>
-              <a href="/phone_nam/htmlfooter/sodoweb.html">Sơ đồ trang Web</a>
+        <footer id="footer" class="section footer">
+            <div class="container">
+                <div class="footer__top">
+                    <div class="footer-top__box">
+                        <h3>BỔ SUNG</h3>
+                        <a href="nhanhieu.jsp">Nhãn hiệu</a>
+                        <a href="phieuquatang.jsp">Phiếu quà tặng</a>
+                        <a href="chinhanh.jsp">Chi nhánh</a>
+                        <a href="#">Đặc biệt</a>
+                        <a href="sodoweb.jsp">Sơ đồ trang Web</a>
+                    </div>
+                    <div class="footer-top__box">
+                        <h3>THÔNG TIN</h3>
+                        <a href="vechungtoi.jsp">Về chúng tôi</a>
+                        <a href="chinhsachbaomat.jsp">Chính sách bảo mật</a>
+                        <a href="dieukhoanvadieukien.jsp">Các điều khoản và điều kiện</a>
+                        <a href="lienhechungtoi.jsp">Liên hệ chúng tôi</a>
+                        <a href="sodoweb.jsp">Sơ đồ trang Web</a>
+                    </div>
+                    <div class="footer-top__box">
+                        <h3>TÀI KHOẢN CỦA TÔI</h3>
+                        <a href="/css/login.css">Tài khoản của tôi</a>
+                        <a href="/css/login.css">Lịch sử đơn hàng</a>
+                        <a href="/css/login.css">Danh sách mong muốn</a>
+                        <a href="#">Cung cấp thông tin</a>
+                        <a href="/">Quay lại</a>
+                    </div>
+                    <div class="footer-top__box">
+                        <h3>CONTACT US</h3>
+                        <div>
+            <span>
+              <svg>
+                <use xlink:href="image/images/sprite.svg#icon-location"></use>
+              </svg>
+            </span>
+                            <a
+                                    href="https://www.google.com/maps/dir/10.8840587,106.7833045/t%C3%B2a+b5+ktx+khu+b+%C4%91hqg+tphcm/@10.8838766,106.7809145,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3174d890227de92d:0x99150888f275361b!2m2!1d106.7829712!2d10.8839777">
+                                Tòa B5, KTX_B ĐHQG TPHCM, Linh Trung, Thủ Đức, TPHCM</a>
+                        </div>
+                        <div>
+            <span>
+              <svg>
+                <use xlink:href="image/images/sprite.svg#icon-envelop"></use>
+              </svg>
+            </span>
+                            JC-PHONEcompany@gmail.com
+                        </div>
+                        <div>
+            <span>
+              <svg>
+                <use xlink:href="image/images/sprite.svg#icon-phone"></use>
+              </svg>
+            </span>
+                            08.999.999.99
+                        </div>
+                        <div>
+            <span>
+              <svg>
+                <use xlink:href="image/images/sprite.svg#icon-paperplane"></use>
+              </svg>
+            </span>
+                            TOÀN VIỆT NAM
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="footer-top__box">
-              <h3>THÔNG TIN</h3>
-              <a href="/phone_nam/htmlfooter/vechungtoi.html">Về chúng tôi</a>
-              <a href="/phone_nam/htmlfooter/chinhsachbaomat.html">Chính sách bảo mật</a>
-              <a href="/phone_nam/htmlfooter/dieukhoanvadieukien.html">Các điều khoản và điều kiện</a>
-              <a href="/phone_nam/htmlfooter/lienhechungtoi.html">Liên hệ chúng tôi</a>
-              <a href="/phone_nam/htmlfooter/sodoweb.html">Sơ đồ trang Web</a>
+            <div class="footer__bottom">
+                <div class="footer-bottom__box">
+
+                </div>
+                <div class="footer-bottom__box">
+
+                </div>
             </div>
-            <div class="footer-top__box">
-              <h3>TÀI KHOẢN CỦA TÔI</h3>
-              <a href="/html/user.html">Tài khoản của tôi</a>
-              <a href="/html/user.html">Lịch sử đơn hàng</a>
-              <a href="/html/cart.html">Danh sách mong muốn</a>
-              <a href="#">Cung cấp thông tin</a>
-              <a href="/html/homelogin.html">Quay lại</a>
-            </div>  
-            <div class="footer-top__box">
-              <h3>CONTACT US</h3>
-              <div>
-                <span>
-                  <svg>
-                    <use xlink:href="./images/sprite.svg#icon-location"></use>
-                  </svg>
-                </span>
-                <a
-                  href="https://www.google.com/maps/dir/10.8840587,106.7833045/t%C3%B2a+b5+ktx+khu+b+%C4%91hqg+tphcm/@10.8838766,106.7809145,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3174d890227de92d:0x99150888f275361b!2m2!1d106.7829712!2d10.8839777">
-                  Tòa B5, KTX_B ĐHQG TPHCM, Linh Trung, Thủ Đức, TPHCM</a>
-              </div>
-              <div>
-                <span>
-                  <svg>
-                    <use xlink:href="./images/sprite.svg#icon-envelop"></use>
-                  </svg>
-                </span>
-                JC-PHONEcompany@gmail.com
-              </div>
-              <div>
-                <span>
-                  <svg>
-                    <use xlink:href="./images/sprite.svg#icon-phone"></use>
-                  </svg>
-                </span>
-                08.999.999.99
-              </div>
-              <div>
-                <span>
-                  <svg>
-                    <use xlink:href="./images/sprite.svg#icon-paperplane"></use>
-                  </svg>
-                </span>
-                TOÀN VIỆT NAM
-              </div>
             </div>
-          </div>
-        </div>
-        <div class="footer__bottom">
-          <div class="footer-bottom__box">
-    
-          </div>
-          <div class="footer-bottom__box">
-    
-          </div>
-        </div>
-        </div>
-      </footer>
+        </footer>
 
     <!-- End Footer -->
 
@@ -413,141 +417,149 @@
     <script src="../js/index.js"></script>
     <script src="../js/slider.js"></script>
 
-    <script>
-        function addCart(){
+<%--    <script>--%>
+<%--        function addCart(){--%>
 
-        }
-       
-        var products = document.querySelectorAll(".remove__cart-item")
-        function deleteProduct(id) {
-            if (products[id].parentElement.parentElement.className = "newww")
-                products[id].parentElement.parentElement.style.display = "none"
-        }
-        function addProductID() {
-            products = document.querySelectorAll(".remove__cart-item")
-            let count = 0;
-            for (let i of products) {
-                i.id = "product" + count
-                count++
-            }
-        }
-        function addEventDelete() {
-            addProductID()
-            for (let i = 0; i < products.length; i++) {
-                $('#' + products[i].id).click(function () {
-                    deleteProduct(i)
+<%--        }--%>
+<%--       --%>
+<%--        var products = document.querySelectorAll(".remove__cart-item")--%>
+<%--        function deleteProduct(id) {--%>
+<%--            if (products[id].parentElement.parentElement.className = "newww")--%>
+<%--                products[id].parentElement.parentElement.style.display = "none"--%>
+<%--        }--%>
+<%--        function addProductID() {--%>
+<%--            products = document.querySelectorAll(".remove__cart-item")--%>
+<%--            let count = 0;--%>
+<%--            for (let i of products) {--%>
+<%--                i.id = "product" + count--%>
+<%--                count++--%>
+<%--            }--%>
+<%--        }--%>
+<%--        function addEventDelete() {--%>
+<%--            addProductID()--%>
+<%--            for (let i = 0; i < products.length; i++) {--%>
+<%--                $('#' + products[i].id).click(function () {--%>
+<%--                    deleteProduct(i)--%>
+<%--                    updateValue()--%>
+<%--                })--%>
+<%--            }--%>
+<%--        }--%>
+<%--        addEventDelete()--%>
 
-                })
-            }
-        }
-        addEventDelete()
+<%--        //----------------------------------------------------%>
+<%--        var editMode = true--%>
+<%--        let arr_minusBT = document.querySelectorAll('.minus-btn')--%>
+<%--        let arr_plusBT = document.querySelectorAll('.plus-btn')--%>
+<%--        let arr_quantity = document.querySelectorAll('.counter-btn')--%>
+<%--        var total = document.querySelector('.cart__totals .new__price')--%>
+<%--        var arr_price_container2 = document.querySelectorAll('.product__subtotal .price')--%>
+<%--        var arr_unitPrice = []--%>
+<%--        const checkShip = document.querySelector('.check__shipping input')--%>
+<%--        const shipPrice = document.querySelector('.cart__totals .shipPrice')--%>
+<%--        const untilPrice = document.querySelector('.cart__totals .untilPrice')--%>
+<%--        function updateValue() {--%>
+<%--            arr_minusBT = document.querySelectorAll('.minus-btn')--%>
+<%--            arr_plusBT = document.querySelectorAll('.plus-btn')--%>
+<%--            arr_quantity = document.querySelectorAll('.counter-btn')--%>
+<%--            arr_price_container2 = document.querySelectorAll('.product__subtotal .price')--%>
+<%--            unitPrice()--%>
+<%--            minus()--%>
+<%--            plus()--%>
+<%--        }--%>
+<%--        function minus() {--%>
+<%--            for (let i = 0; i < arr_minusBT.length; i++) {--%>
+<%--                arr_minusBT[i].onclick = function () {--%>
+<%--                    if (editMode && parseInt(arr_quantity[i].value) > 0) {--%>
+<%--                        arr_quantity[i].value = parseInt(arr_quantity[i].value) - 1--%>
+<%--                        let value = intToString(arr_quantity[i].value * arr_unitPrice[i])--%>
+<%--                        arr_price_container2[i].innerHTML = `<span class="new__price">` + value + `</span>`--%>
+<%--                        updateTotalPrice()--%>
+<%--                    }--%>
+<%--                }--%>
+<%--            }--%>
+<%--        }--%>
+<%--        function plus() {--%>
+<%--            for (let i = 0; i < arr_plusBT.length; i++) {--%>
+<%--                arr_plusBT[i].onclick = function () {--%>
+<%--                    if (editMode) {--%>
+<%--                        if (!isNaN(arr_quantity[i].value))--%>
+<%--                            arr_quantity[i].value = parseInt(arr_quantity[i].value) + 1--%>
+<%--                        else arr_quantity[i].value = 1--%>
+<%--                        let value = intToString(arr_quantity[i].value * arr_unitPrice[i])--%>
+<%--                        arr_price_container2[i].innerHTML = `<span class="new__price">` + value + `</span>`--%>
+<%--                        updateTotalPrice()--%>
+<%--                    }--%>
+<%--                }--%>
+<%--            }--%>
+<%--        }--%>
+<%--        plus()--%>
+<%--        minus()--%>
+<%--        //--------------------------------------------------------------%>
 
-        //--------------------------------------------------
-        var editMode = true
-        let arr_minusBT = document.querySelectorAll('.minus-btn')
-        let arr_plusBT = document.querySelectorAll('.plus-btn')
-        let arr_quantity = document.querySelectorAll('.counter-btn')
-        var total = document.querySelector('.cart__totals .new__price')
-        var arr_price_container2 = document.querySelectorAll('.product__subtotal .price')
-        var arr_unitPrice = []
-        const checkShip = document.querySelector('.check__shipping input')
-        const shipPrice = document.querySelector('.cart__totals .shipPrice')
-        const untilPrice = document.querySelector('.cart__totals .untilPrice')
-        function updateValue() {
-            arr_minusBT = document.querySelectorAll('.minus-btn')
-            arr_plusBT = document.querySelectorAll('.plus-btn')
-            arr_quantity = document.querySelectorAll('.counter-btn')
-            arr_price_container2 = document.querySelectorAll('.product__subtotal .price')
-            unitPrice()
-            minus()
-            plus()
-        }
-        function minus() {
-            for (let i = 0; i < arr_minusBT.length; i++) {
-                arr_minusBT[i].onclick = function () {
-                    if (editMode && parseInt(arr_quantity[i].value) > 0) {
-                        arr_quantity[i].value = parseInt(arr_quantity[i].value) - 1
-                        let value = intToString(arr_quantity[i].value * arr_unitPrice[i])
-                        arr_price_container2[i].innerHTML = `<span class="new__price">` + value + `</span>`
-                        updateTotalPrice()
-                    }
-                }
-            }
-        }
-        function plus() {
-            for (let i = 0; i < arr_plusBT.length; i++) {
-                arr_plusBT[i].onclick = function () {
-                    if (editMode) {
-                        if (!isNaN(arr_quantity[i].value))
-                            arr_quantity[i].value = parseInt(arr_quantity[i].value) + 1
-                        else arr_quantity[i].value = 1
-                        let value = intToString(arr_quantity[i].value * arr_unitPrice[i])
-                        arr_price_container2[i].innerHTML = `<span class="new__price">` + value + `</span>`
-                        updateTotalPrice()
-                    }
-                }
-            }
-        }
-        plus()
-        minus()
-        //------------------------------------------------------------
+<%--        function stringToInt(str) {--%>
+<%--            let temp = str.substring(0, str.length - 4)--%>
+<%--            temp = temp.replaceAll(".", "")--%>
+<%--            return parseInt(temp)--%>
+<%--        }--%>
+<%--        function intToString(int) {--%>
+<%--            let temp = int.toString();--%>
+<%--            let count = 0--%>
+<%--            let res = ""--%>
+<%--            for (let i = temp.length - 1; i >= 0; i--) {--%>
+<%--                if (count % 3 == 0 && count != 0) res = "." + res--%>
+<%--                res = temp[i] + res--%>
+<%--                count++--%>
+<%--            }--%>
+<%--            return res + " VND"--%>
+<%--        }--%>
 
-        function stringToInt(str) {
-            let temp = str.substring(0, str.length - 4)
-            temp = temp.replaceAll(".", "")
-            return parseInt(temp)
-        }
-        function intToString(int) {
-            let temp = int.toString();
-            let count = 0
-            let res = ""
-            for (let i = temp.length - 1; i >= 0; i--) {
-                if (count % 3 == 0 && count != 0) res = "." + res
-                res = temp[i] + res
-                count++
-            }
-            return res + " VND"
-        }
+<%--        unitPrice()--%>
+<%--        price()--%>
+<%--        function unitPrice() {--%>
+<%--            for (let i = 0; i < arr_price_container2.length; i++) {--%>
+<%--                arr_unitPrice[i] = stringToInt(arr_price_container2[i].innerText) / arr_quantity[i].value--%>
+<%--            }--%>
+<%--        }--%>
+<%--        function price() {--%>
+<%--            for (let i = 0; i < arr_price_container2.length; i++) {--%>
+<%--                arr_quantity[i].onchange = function () {--%>
+<%--                    arr_price_container2[i].value = intToString(arr_quantity[i].value * arr_unitPrice[i])--%>
+<%--                }--%>
+<%--            }--%>
+<%--        }--%>
+<%--        //-=-----------------------------------------%>
 
-        unitPrice()
-        price()
-        function unitPrice() {
-            for (let i = 0; i < arr_price_container2.length; i++) {
-                arr_unitPrice[i] = stringToInt(arr_price_container2[i].innerText) / arr_quantity[i].value
-            }
-        }
-        function price() {
-            for (let i = 0; i < arr_price_container2.length; i++) {
-                arr_quantity[i].onchange = function () {
-                    arr_price_container2[i].value = intToString(arr_quantity[i].value * arr_unitPrice[i])
-                }
-            }
-        }
-        //-=---------------------------------------
+<%--        function totalPrice() {--%>
+<%--            let sum = 0--%>
+<%--            for (let i of arr_price_container2) {--%>
+<%--                sum += stringToInt(i.innerText.trim())--%>
+<%--            }--%>
+<%--            return sum--%>
+<%--        }--%>
+<%--        function updateTotalPrice() {--%>
+<%--            total.innerText = intToString(totalPrice())--%>
+<%--            untilPrice.innerText=total.innerText;--%>
+<%--        }--%>
+<%--        //------------------------------------------------%>
+<%--        checkShip.onchange=function(){--%>
+<%--            if (checkShip.checked) {--%>
+<%--                shipPrice.innerText = "10.000 VND"--%>
+<%--                untilPrice.innerText=intToString(stringToInt(total.innerText.trim())+10000)--%>
+<%--            }--%>
+<%--            else {--%>
+<%--                shipPrice.innerText = "0 VND"--%>
+<%--                untilPrice.innerText=intToString(stringToInt(total.innerText.trim()))--%>
+<%--            }--%>
+<%--        }--%>
+<%--    </script>--%>
+<%--        <scrip>--%>
+<%--            function updatenumber(msp) {--%>
+<%--            var number = document.getElementById("inputnumberchange");--%>
+<%--            $.ajax({--%>
 
-        function totalPrice() {
-            let sum = 0
-            for (let i of arr_price_container2) {
-                sum += stringToInt(i.innerText.trim())
-            }
-            return sum
-        }
-        function updateTotalPrice() {
-            total.innerText = intToString(totalPrice())
-            untilPrice.innerText=total.innerText;
-        }
-        //----------------------------------------------
-        checkShip.onchange=function(){
-            if (checkShip.checked) {
-                shipPrice.innerText = "10.000 VND"
-                untilPrice.innerText=intToString(stringToInt(total.innerText.trim())+10000)
-            }
-            else {
-                shipPrice.innerText = "0 VND"
-                untilPrice.innerText=intToString(stringToInt(total.innerText.trim()))
-            }
-        }
-    </script>
+<%--            })--%>
+<%--            }--%>
+<%--        </scrip>--%>
 </body>
 
 </html>

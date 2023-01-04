@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="nav__logo">
-                    <a href="index.jsp" class="scroll-link">
+                    <a href="/" class="scroll-link">
                         JC SHOP
                     </a>
                 </div>
@@ -482,6 +482,7 @@
                                                             <td>
                                                                 <input type="text" name="name"
                                                                        value="<%=user.getName()%>" required id="ten">
+
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -512,19 +513,19 @@
                                                                 <label for="male">Giới tính:</label>
                                                             </td>
                                                             <td>
-                                                                <%if (user.getGender().equals("nam")) {%>
+                                                                <%if (user.getGender().equalsIgnoreCase("nam")) {%>
                                                                 <input type="radio" name="gender" id="male" value="nam"
                                                                        class="gt" checked><%} else {%>
                                                                 <input type="radio" name="gender" id="male" value="nam"
                                                                        class="gt"><%}%>
                                                                 <label for="male">Nam</label>
-                                                                <%if (user.getGender().equals("nu")) {%>
+                                                                <%if (user.getGender().equalsIgnoreCase("nu")) {%>
                                                                 <input type="radio" name="gender" id="female" value="nu"
                                                                        class="gt" checked><%} else {%>
                                                                 <input type="radio" name="gender" id="female" value="nu"
                                                                        class="gt"><%}%>
                                                                 <label for="female">Nữ</label>
-                                                                <%if (user.getGender().equals("UKN")) {%>
+                                                                <%if (user.getGender().equalsIgnoreCase("UKN")) {%>
                                                                 <input type="radio" name="gender" id="unset" value="ukn"
                                                                        class="gt" checked><%} else {%>
                                                                 <input type="radio" name="gender" id="unset" value="ukn"
@@ -532,6 +533,7 @@
                                                                 <label for="female">Ẩn</label>
                                                             </td>
                                                         </tr>
+
                                                         <tr>
                                                             <td>
                                                                 <label for="birthDay">Ngày sinh:</label>
@@ -560,6 +562,7 @@
                                                 </form>
                                             </div>
                                         </div>
+
                                         <div id="tab3">
                                             <div class="thong_bao_control">
                                                 <form action="/AnnouncementServlet">
@@ -971,34 +974,34 @@
         <div class="footer__top">
             <div class="footer-top__box">
                 <h3>BỔ SUNG</h3>
-                <a href="/phone_nam/htmlfooter/nhanhieu.html">Nhãn hiệu</a>
-                <a href="/phone_nam/htmlfooter/phieuquatang.html">Phiếu quà tặng</a>
-                <a href="/phone_nam/htmlfooter/chinhanh.html">Chi nhánh</a>
+                <a href="nhanhieu.jsp">Nhãn hiệu</a>
+                <a href="phieuquatang.jsp">Phiếu quà tặng</a>
+                <a href="chinhanh.jsp">Chi nhánh</a>
                 <a href="#">Đặc biệt</a>
-                <a href="/phone_nam/htmlfooter/sodoweb.html">Sơ đồ trang Web</a>
+                <a href="sodoweb.jsp">Sơ đồ trang Web</a>
             </div>
             <div class="footer-top__box">
                 <h3>THÔNG TIN</h3>
-                <a href="/phone_nam/htmlfooter/vechungtoi.html">Về chúng tôi</a>
-                <a href="/phone_nam/htmlfooter/chinhsachbaomat.html">Chính sách bảo mật</a>
-                <a href="/phone_nam/htmlfooter/dieukhoanvadieukien.html">Các điều khoản và điều kiện</a>
-                <a href="/phone_nam/htmlfooter/lienhechungtoi.html">Liên hệ chúng tôi</a>
-                <a href="/phone_nam/htmlfooter/sodoweb.html">Sơ đồ trang Web</a>
+                <a href="vechungtoi.jsp">Về chúng tôi</a>
+                <a href="chinhsachbaomat.jsp">Chính sách bảo mật</a>
+                <a href="dieukhoanvadieukien.jsp">Các điều khoản và điều kiện</a>
+                <a href="lienhechungtoi.jsp">Liên hệ chúng tôi</a>
+                <a href="sodoweb.jsp">Sơ đồ trang Web</a>
             </div>
             <div class="footer-top__box">
                 <h3>TÀI KHOẢN CỦA TÔI</h3>
-                <a href="/html/user.html">Tài khoản của tôi</a>
-                <a href="/html/user.html">Lịch sử đơn hàng</a>
-                <a href="/phone_chuong/cart.html">Danh sách mong muốn</a>
+                <a href="/css/login.css">Tài khoản của tôi</a>
+                <a href="/css/login.css">Lịch sử đơn hàng</a>
+                <a href="/css/login.css">Danh sách mong muốn</a>
                 <a href="#">Cung cấp thông tin</a>
-                <a href="/html/homelogin.html">Quay lại</a>
+                <a href="index.jsp">Quay lại</a>
             </div>
             <div class="footer-top__box">
                 <h3>CONTACT US</h3>
                 <div>
             <span>
               <svg>
-                <use xlink:href="./images/sprite.svg#icon-location"></use>
+                <use xlink:href="image/images/sprite.svg#icon-location"></use>
               </svg>
             </span>
                     <a
@@ -1008,7 +1011,7 @@
                 <div>
             <span>
               <svg>
-                <use xlink:href="./images/sprite.svg#icon-envelop"></use>
+                <use xlink:href="image/images/sprite.svg#icon-envelop"></use>
               </svg>
             </span>
                     JC-PHONEcompany@gmail.com
@@ -1016,7 +1019,7 @@
                 <div>
             <span>
               <svg>
-                <use xlink:href="./images/sprite.svg#icon-phone"></use>
+                <use xlink:href="image/images/sprite.svg#icon-phone"></use>
               </svg>
             </span>
                     08.999.999.99
@@ -1024,7 +1027,7 @@
                 <div>
             <span>
               <svg>
-                <use xlink:href="./images/sprite.svg#icon-paperplane"></use>
+                <use xlink:href="image/images/sprite.svg#icon-paperplane"></use>
               </svg>
             </span>
                     TOÀN VIỆT NAM

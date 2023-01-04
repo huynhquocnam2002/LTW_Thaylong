@@ -1,5 +1,3 @@
-
-
 let list_icon_up = document.querySelectorAll('#admin-content #leftContainer .icon-up')
 let list_extend_button = document.querySelectorAll('#admin-content #rightContainer .row-table-end .show-all-type-product')
 let list_checkbox_all_product = document.querySelectorAll('#admin-content #rightContainer .check-all')

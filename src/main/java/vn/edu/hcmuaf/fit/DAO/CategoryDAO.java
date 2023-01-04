@@ -43,9 +43,18 @@ public class CategoryDAO {
         return list;
     }
 
+    public static Category getCategory(String id) throws SQLException, ClassNotFoundException {
+        DataDB db= new DataDB();
+        PreparedStatement sta = db.getStatement("select * from category where id=?");
+        sta.setString(1, id);
+        ResultSet rs= sta.executeQuery();
+        if (rs.next()) return new Category(rs.getString(1), rs.getString(2), rs.getString(3),rs.getInt(4));
+        return null;
+    }
+
     public static Category getCategorysObject(String id) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
-        PreparedStatement sta = db.getStatement("SELECT * FROM category WHERE category.ID=?");
+        PreparedStatement sta = db.getStatement("SELECT category.* FROM category, product WHERE category.ID=product.id_category and product.id=?");
         sta.setString(1, id);
         ResultSet rs = sta.executeQuery();
         while (rs.next()) {
@@ -59,5 +68,36 @@ public class CategoryDAO {
         return null;
     }
 
+    public static void addCategory(Category category) throws SQLException, ClassNotFoundException {
+        DataDB db= new DataDB();
+        PreparedStatement sta = db.getStatement("insert into category values (?,?,?,?)");
+        sta.setString(1, category.getId());
+        sta.setString(2, category.getName());
+        sta.setString(3, category.getImg());
+        sta.setInt(4, category.getStatus());
+        sta.executeUpdate();
+    }
 
+    public static void changeInfo(Category category) throws SQLException, ClassNotFoundException {
+        DataDB db= new DataDB();
+        PreparedStatement sta = db.getStatement("update category set name=?, img=?, status=? where id=?");
+        sta.setString(4, category.getId());
+        sta.setString(1, category.getName());
+        sta.setString(2, category.getImg());
+        sta.setInt(3, category.getStatus());
+        sta.executeUpdate();
+    }
+
+    public static boolean containID(String id) throws SQLException, ClassNotFoundException {
+        DataDB db= new DataDB();
+        PreparedStatement sta= db.getStatement("select * from category where id=?");
+        sta.setString(1, id);
+        ResultSet rs= sta.executeQuery();
+        if (rs.next()) return true;
+        return false;
+    }
+
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        System.out.println(getCategorysObject("jAJSDMKF").getName());
+    }
 }

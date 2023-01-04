@@ -24,6 +24,7 @@
 body {
     margin: 0;
     font-family: "Archivo", sans-serif;
+  background-color: var(--primaryColor);
 }
 
 
@@ -213,11 +214,6 @@ body {
   
     margin: 8px 0;
   }
-  
-  #cke_new-product-detail {
-    margin: 50px 80px 0 0;
-  }
-  
   
   #admin-content
     #rightContainer

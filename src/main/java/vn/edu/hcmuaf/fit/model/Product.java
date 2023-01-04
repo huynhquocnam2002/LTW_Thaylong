@@ -26,6 +26,8 @@ public class Product {
 
     private int status;
 
+    private String optionName;
+
     private List<Option> options = new ArrayList<Option>();
 
 
@@ -160,21 +162,9 @@ public class Product {
         this.ins = ins;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Product)) return false;
-        Product product = (Product) o;
-        return getPrice() == product.getPrice() && getIns() == product.getIns() && getQuantity() == product.getQuantity() && getStatus() == product.getStatus() && Objects.equals(getId(), product.getId()) && Objects.equals(getName(), product.getName()) && Objects.equals(getImg(), product.getImg()) && Objects.equals(getCategory(), product.getCategory()) && Objects.equals(getTag(), product.getTag()) && Objects.equals(getID_product(), product.getID_product()) && Objects.equals(getAdd_date(), product.getAdd_date()) && Objects.equals(getDetail(), product.getDetail());
-    }
+    public String getOptionName() {return this.optionName;}
 
-    public List<Option> getOptions() {
-        return options;
-    }
-
-    public int getNumOfOptions() {
-        return options.size();
-    }
+    public void setOptionName(String optionName){ this.optionName=optionName;}
 
     @Override
     public String toString() {
@@ -193,4 +183,21 @@ public class Product {
                 ", status=" + status +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product product = (Product) o;
+        return getPrice() == product.getPrice() && getIns() == product.getIns() && getQuantity() == product.getQuantity() && getStatus() == product.getStatus() && Objects.equals(getId(), product.getId()) && Objects.equals(getName(), product.getName()) && Objects.equals(getImg(), product.getImg()) && Objects.equals(getCategory(), product.getCategory()) && Objects.equals(getTag(), product.getTag()) && Objects.equals(getID_product(), product.getID_product()) && Objects.equals(getAdd_date(), product.getAdd_date()) && Objects.equals(getDetail(), product.getDetail());
+    }
+
+    public List<Option> getOptions() {
+        return options;
+    }
+
+    public int getNumOfOptions(){
+        return options.size();
+    }
+
 }
