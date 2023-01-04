@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 public class OrderDAO {
-
     public static List<Order> getOrders(String userId) throws SQLException, ClassNotFoundException {
         DataDB db = new DataDB();
         List<Order> res = new ArrayList<Order>();

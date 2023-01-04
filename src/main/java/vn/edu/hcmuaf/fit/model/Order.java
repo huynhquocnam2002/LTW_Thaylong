@@ -7,13 +7,26 @@ public class Order {
     private long amount;
     private Date orderDate;
 
-    private Map<Product, Integer> listPd= new HashMap<Product, Integer>();
+
+    private Map<Product, Integer> listPd = new HashMap<>();
+
+    private TreeMap<String, Integer> list;
 
 
-    public Order(){
+    public Order() {
 
+        this.listPd = new TreeMap<>();
 
     }
+
+    public Order(String userId, String status, String note, String userName, long amount) {
+        this.userId = userId;
+        this.status = status;
+        this.note = note;
+        this.userName = userName;
+        this.amount = amount;
+    }
+
     public Order(String id, String userId, String status, String deliveryAddressId, String note, Date orderDate) {
         this.id = id;
         this.userId = userId;
@@ -30,27 +43,38 @@ public class Order {
         this.deliveryAddressId = deliveryAddressId;
         this.note = note;
         this.orderDate = orderDate;
-        this.userId=userName;
+        this.userId = userName;
     }
+    public Order(String id, String userId, String status, String deliveryAddressId,long amount, String note, Date orderDate ) {
+        this.id = id;
+        this.userId = userId;
+        this.status = status;
+        this.deliveryAddressId = deliveryAddressId;
+        this.amount = amount;
+        this.note = note;
+        this.orderDate = orderDate;
+
+    }
+
 
     public String getUserName() {
         return userName;
     }
 
-    public long computeAmount(){
-        long res=0;
-        for (Map.Entry<Product, Integer> e: listPd.entrySet())
-            res+=e.getKey().getPrice()*e.getValue();
-        this.amount=res;
+    public long computeAmount() {
+        long res = 0;
+        for (Map.Entry<Product, Integer> e : listPd.entrySet())
+            res += e.getKey().getPrice() * e.getValue();
+        this.amount = res;
         return res;
     }
 
-    public void addProduct(Map<Product, Integer> list){
-        this.listPd=list;
+    public void addProduct(Map<Product, Integer> list) {
+        this.listPd = list;
         computeAmount();
     }
 
-    public Map<Product, Integer> getListPd(){
+    public Map<Product, Integer> getListPd() {
         return listPd;
     }
 
@@ -58,6 +82,9 @@ public class Order {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getUserId() {
         return userId;
@@ -87,12 +114,12 @@ public class Order {
         this.amount = amount;
     }
 
-    public int getStatus() {
-        if (status.equals("Chờ xác nhận")) return 1;
-        if (status.equals("Chờ lấy hàng")) return 2;
-        if (status.equals("Đang giao")) return 3;
-        if (status.equals("Đã giao")) return 4;
-        else return 5;
+    public String getStatus() {
+        if (status.equals("Chờ xác nhận")) return "1";
+        if (status.equals("Chờ lấy hàng")) return "2";
+        if (status.equals("Đang giao")) return "3";
+        if (status.equals("Đã giao")) return "4";
+        else return "5";
     }
 
     public void setStatus(String status) {

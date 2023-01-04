@@ -10,7 +10,20 @@ public class Products_Order {
 
     private long amount;
 
+    private String id_Option;
+
+
     public Products_Order(){
+
+    }
+
+    public Products_Order(String id_Order,String id_Product,int quantity,long amount,String id_Option){
+
+        this.id_Order = id_Order;
+        this.id_Product = id_Product;
+        this.quantity = quantity;
+        this.amount = amount;
+        this.id_Option = id_Option;
 
     }
 
@@ -51,6 +64,15 @@ public class Products_Order {
 
     public void setAmount(long amount) {
         this.amount = amount;
+    }
+
+
+    public String getId_Option() {
+        return id_Option;
+    }
+
+    public void setId_Option(String id_Option) {
+        this.id_Option = id_Option;
     }
 
     @Override

@@ -43,13 +43,13 @@
 </head>
 
 <body>
-                <%
-                    Cart cart =(Cart) session.getAttribute("cart");
-                    if(cart ==null){
-                        cart = new Cart();
-                        session.setAttribute("cart",cart);
-                    }
-                %>
+<%
+    Cart cart = (Cart) session.getAttribute("cart");
+    if (cart == null) {
+        cart = new Cart();
+        session.setAttribute("cart", cart);
+    }
+%>
 
 <!-- Header -->
 <!-- Header_top -->
@@ -121,7 +121,7 @@
                 </div>
                 <%
                 } else {
-                    User user = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
+                    User user = UserDAO.getUserBySessionID(session.getAttribute("user") + "");
                 %>
                 <div class="nav__icons">
                     <a href="/UserServlet" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
@@ -140,8 +140,8 @@
 
                 <%
                     if (session.getAttribute("user") != null) {
-                        User u = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
-                        int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
+                        User u = UserDAO.getUserBySessionID(session.getAttribute("user") + "");
+                        int numOfCartItems = ((Cart) session.getAttribute("cart")).getSize();
                 %>
                 <div class="nav__icons" id="nav__item_giohang">
                     <a href="cart.jsp" class="icon__item">
@@ -170,19 +170,19 @@
                 </div>
 
                 <ul class="nav__list" id="nav__list_DANHMUC">
-<%--                <% List<Category> list = CategoryDAO.getCategoryHeader();%>--%>
-<%--                    <% for (int i = 0; i < list.size(); i++) {%>--%>
-<%--&lt;%&ndash;    &ndash;%&gt;--%>
+                    <%--                <% List<Category> list = CategoryDAO.getCategoryHeader();%>--%>
+                    <%--                    <% for (int i = 0; i < list.size(); i++) {%>--%>
+                    <%--&lt;%&ndash;    &ndash;%&gt;--%>
                     <div class="nav__icons_danhmuc">
-<%--                        <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="icon__item">--%>
-<%--                            <img class="icon__itemdanhmuc" src="<%=list.get(i).getImg()%>"></img>--%>
+                        <%--                        <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="icon__item">--%>
+                        <%--                            <img class="icon__itemdanhmuc" src="<%=list.get(i).getImg()%>"></img>--%>
                         </a>
                         <li class="nav__item">
-<%--                            <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="scroll-linkDANHMUC"><%=list.get(i).getName()%></a>--%>
+                            <%--                            <a href="danhmuc_seach.jsp?idcategory=<%=list.get(i).getId()%>" class="scroll-linkDANHMUC"><%=list.get(i).getName()%></a>--%>
                         </li>
                     </div>
 
-<%--                    <% }%>--%>
+                    <%--                    <% }%>--%>
                     <div class="nav__icons_danhmuc">
                         <a href="#sectiondanhmuc2" class="icon__item">
                             <img class="icon__itemdanhmuc" src="image/icon/khac.jpg"></img>
@@ -300,13 +300,15 @@
                 <% List<Category> rsCategory = CategoryDAO.getCategory();%>
                 <ul class="nav__list" id="nav__list_DANHMUC11">
 
-                    <%for(int i =0 ; i< (rsCategory.size()/2+1) ; i++){%>
+                    <%for (int i = 0; i < (rsCategory.size() / 2 + 1); i++) {%>
                     <div class="nav__icons_danhmuc1">
                         <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>" class="icon__item1">
                             <img class="icon__itemdanhmuc" src="<%= rsCategory.get(i).getImg()%>"></img>
                         </a>
                         <li class="nav__item">
-                            <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>" class="scroll-linkDANHMUC"><%= rsCategory.get(i).getName()%></a>
+                            <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>"
+                               class="scroll-linkDANHMUC"><%= rsCategory.get(i).getName()%>
+                            </a>
                         </li>
                     </div>
 
@@ -315,13 +317,15 @@
             </div>
             <div>
                 <ul class="nav__list" id="nav__list_DANHMUC1">
-                    <%for(int i =rsCategory.size()/2+1 ; i< (rsCategory.size()) ; i++){%>
+                    <%for (int i = rsCategory.size() / 2 + 1; i < (rsCategory.size()); i++) {%>
                     <div class="nav__icons_danhmuc1">
                         <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>" class="icon__item1">
                             <img class="icon__itemdanhmuc" src="<%= rsCategory.get(i).getImg()%>"></img>
                         </a>
                         <li class="nav__item">
-                            <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>" class="scroll-linkDANHMUC"><%= rsCategory.get(i).getName()%></a>
+                            <a href="danhmuc_seach.jsp?idcategory=<%=rsCategory.get(i).getId()%>"
+                               class="scroll-linkDANHMUC"><%= rsCategory.get(i).getName()%>
+                            </a>
                         </li>
                     </div>
                     <%}%>
@@ -362,14 +366,15 @@
                     <div class="glide__track" data-glide-el="track">
                         <ul class="glide__slides latest-center">
                             <% Set<Product> flastsale = ProductDAO.getProductsKind("flastsale");%>
-                            <%for(Product pr: flastsale){%>
+                            <%for (Product pr : flastsale) {%>
                             <li class="glide__slide">
                                 <div class="product">
                                     <div class="product__header">
                                         <img src="<%=pr.getImg()%>" alt="product">
                                     </div>
                                     <div class="product__footer">
-                                        <h3><%=pr.getName()%></h3>
+                                        <h3><%=pr.getName()%>
+                                        </h3>
                                         <div class="rating">
                                             <svg>
                                                 <use xlink:href="image/images/sprite.svg#icon-star-full"></use>
@@ -388,7 +393,8 @@
                                             </svg>
                                         </div>
                                         <div class="product__price" style="color: red">
-                                            <h4><%=pr.getPrice()%></h4>
+                                            <h4><%=pr.getPrice()%>
+                                            </h4>
                                         </div>
                                         <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                             <button type="submit" class="product__btn">Thêm vào giỏ hàng</button>
@@ -404,7 +410,8 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                            <a data-tip="Add To Wishlist" data-place="left"
+                                               href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                                 <svg>
                                                     <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                                 </svg>
@@ -441,7 +448,6 @@
         </section>
 
 
-
         <section class="category__section section" id="category">
             <div class="tab__list">
                 <div class="title__container tabs">
@@ -466,7 +472,8 @@
                     </div>
 
                     <div class="section__titles">
-                        <div class="section__title filter-btn" id="salerun" name="salerun" onclick="checkKind('salerun')">
+                        <div class="section__title filter-btn" id="salerun" name="salerun"
+                             onclick="checkKind('salerun')">
                             <span class="dot"></span>
                             <h1 class="primary__title">Bán chạy</h1>
                         </div>
@@ -476,17 +483,18 @@
             </div>
 
 
-
             <% Set<Product> rs = ProductDAO.getProducts();%>
-            <div class="category__container" id="category__container__all" style="display: block;" data-aos="fade-up" data-aos-duration="1200">
+            <div class="category__container" id="category__container__all" style="display: block;" data-aos="fade-up"
+                 data-aos-duration="1200">
                 <div class="category__center">
-                    <%for(Product pr: rs){%>
+                    <%for (Product pr : rs) {%>
                     <div class="product category__products">
                         <div class="product__header">
                             <img src="<%=pr.getImg()%>" alt="product">
                         </div>
                         <div class="product__footer">
-                            <h3><%=pr.getName()%></h3>
+                            <h3><%=pr.getName()%>
+                            </h3>
                             <div class="rating">
                                 <svg>
                                     <use xlink:href="./images/sprite.svg#icon-star-full"></use>
@@ -506,9 +514,13 @@
                             </div>
                             <div class="product__price" style="color: red">
 
-                                <h4><%=pr.getPrice()+" VND"%></h4>
+                                <h4><%=pr.getPrice() + " VND"%>
+                                </h4>
                             </div>
-                            <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                            <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>"
+                               style="opacity: 0;">
+                                <button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button>
+                            </a>
                         </div>
                         <ul>
                             <li>
@@ -520,7 +532,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                <a data-tip="Add To Wishlist" data-place="left"
+                                   href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                     <svg>
                                         <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                     </svg>
@@ -540,37 +553,43 @@
             </div>
 
             <% Set<Product> rshot = ProductDAO.getProductsKind("hot");%>
-            <div class="category__container" id="category__container__hot" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
+            <div class="category__container" id="category__container__hot" style="display: none;" data-aos="fade-up"
+                 data-aos-duration="1200">
                 <div class="category__center">
-                    <%for(Product pr: rshot){%>
+                    <%for (Product pr : rshot) {%>
                     <div class="product category__products">
                         <div class="product__header">
                             <img src="<%=pr.getImg()%>" alt="product">
                         </div>
                         <div class="product__footer">
-                            <h3><%=pr.getName()%></h3>
+                            <h3><%=pr.getName()%>
+                            </h3>
                             <div class="rating">
-<%--                                <svg>--%>
-<%--                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>--%>
-<%--                                </svg>--%>
-<%--                                <svg>--%>
-<%--                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>--%>
-<%--                                </svg>--%>
-<%--                                <svg>--%>
-<%--                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>--%>
-<%--                                </svg>--%>
-<%--                                <svg>--%>
-<%--                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>--%>
-<%--                                </svg>--%>
-<%--                                <svg>--%>
-<%--                                    <use xlink:href="./images/sprite.svg#icon-star-empty"></use>--%>
-<%--                                </svg>--%>
+                                <%--                                <svg>--%>
+                                <%--                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>--%>
+                                <%--                                </svg>--%>
+                                <%--                                <svg>--%>
+                                <%--                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>--%>
+                                <%--                                </svg>--%>
+                                <%--                                <svg>--%>
+                                <%--                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>--%>
+                                <%--                                </svg>--%>
+                                <%--                                <svg>--%>
+                                <%--                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>--%>
+                                <%--                                </svg>--%>
+                                <%--                                <svg>--%>
+                                <%--                                    <use xlink:href="./images/sprite.svg#icon-star-empty"></use>--%>
+                                <%--                                </svg>--%>
                             </div>
                             <div class="product__price" style="color: red">
 
-                                <h4><%=pr.getPrice()+" VND"%></h4>
+                                <h4><%=pr.getPrice() + " VND"%>
+                                </h4>
                             </div>
-                            <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                            <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>"
+                               style="opacity: 0;">
+                                <button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button>
+                            </a>
                         </div>
                         <ul>
                             <li>
@@ -582,7 +601,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                <a data-tip="Add To Wishlist" data-place="left"
+                                   href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                     <svg>
                                         <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                     </svg>
@@ -602,15 +622,17 @@
             </div>
 
             <% Set<Product> rsnew = ProductDAO.getProductsKind("new");%>
-            <div class="category__container" id="category__container__new" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
+            <div class="category__container" id="category__container__new" style="display: none;" data-aos="fade-up"
+                 data-aos-duration="1200">
                 <div class="category__center">
-                    <%for(Product pr: rsnew){%>
+                    <%for (Product pr : rsnew) {%>
                     <div class="product category__products">
                         <div class="product__header">
                             <img src="<%=pr.getImg()%>" alt="product">
                         </div>
                         <div class="product__footer">
-                            <h3><%=pr.getName()%></h3>
+                            <h3><%=pr.getName()%>
+                            </h3>
                             <div class="rating">
                                 <svg>
                                     <use xlink:href="./images/sprite.svg#icon-star-full"></use>
@@ -630,9 +652,13 @@
                             </div>
                             <div class="product__price" style="color: red">
 
-                                <h4><%=pr.getPrice()+" VND"%></h4>
+                                <h4><%=pr.getPrice() + " VND"%>
+                                </h4>
                             </div>
-                            <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                            <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>"
+                               style="opacity: 0;">
+                                <button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button>
+                            </a>
                         </div>
                         <ul>
                             <li>
@@ -644,7 +670,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                <a data-tip="Add To Wishlist" data-place="left"
+                                   href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                     <svg>
                                         <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                     </svg>
@@ -664,15 +691,17 @@
             </div>
 
             <% Set<Product> rssalerun = ProductDAO.getProductsKind("salerun");%>
-            <div class="category__container" id="category__container__salerun" style="display: none;" data-aos="fade-up" data-aos-duration="1200">
+            <div class="category__container" id="category__container__salerun" style="display: none;" data-aos="fade-up"
+                 data-aos-duration="1200">
                 <div class="category__center">
-                    <%for(Product pr: rssalerun){%>
+                    <%for (Product pr : rssalerun) {%>
                     <div class="product category__products">
                         <div class="product__header">
                             <img src="<%=pr.getImg()%>" alt="product">
                         </div>
                         <div class="product__footer">
-                            <h3><%=pr.getName()%></h3>
+                            <h3><%=pr.getName()%>
+                            </h3>
                             <div class="rating">
                                 <svg>
                                     <use xlink:href="./images/sprite.svg#icon-star-full"></use>
@@ -692,9 +721,13 @@
                             </div>
                             <div class="product__price" style="color: red">
 
-                                <h4><%=pr.getPrice()+" VND"%></h4>
+                                <h4><%=pr.getPrice() + " VND"%>
+                                </h4>
                             </div>
-                            <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>" style="opacity: 0;"><button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button></a>
+                            <a href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>"
+                               style="opacity: 0;">
+                                <button type="submit" class="product__btn">THÊM VÀO GIỎ HÀNG</button>
+                            </a>
                         </div>
                         <ul>
                             <li>
@@ -706,7 +739,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a data-tip="Add To Wishlist" data-place="left" href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
+                                <a data-tip="Add To Wishlist" data-place="left"
+                                   href="CartServlet?command=insert&idProduct=<%=pr.getId()%>&cartID=<%=System.currentTimeMillis()%>">
                                     <svg>
                                         <use xlink:href="image/images/sprite.svg#icon-heart-o"></use>
                                     </svg>
@@ -727,7 +761,6 @@
 
 
         </section>
-
 
 
         <!-- Facility Section -->

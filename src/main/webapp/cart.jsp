@@ -263,7 +263,7 @@
                                     <span class="new__price untilPrice">23.430.768 VNĐ</span>
                                 </li>
                             </ul>
-                            <a href="/html/pay.html">Tiến hành thanh toán</a>
+                            <a href="/PayServlet">Tiến hành thanh toán</a>
                         </div>
                     </form>
                 </div>
