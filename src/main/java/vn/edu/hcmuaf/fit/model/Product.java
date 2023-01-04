@@ -30,6 +30,12 @@ public class Product {
 
     private List<Option> options = new ArrayList<Option>();
 
+
+    public Product() {
+
+
+    }
+
     public Product(String id, String name, long price, String img) {
         this.id = id;
         this.name = name;

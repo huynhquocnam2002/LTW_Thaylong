@@ -7,13 +7,26 @@ public class Order {
     private long amount;
     private Date orderDate;
 
-    private Map<Product, Integer> listPd= new HashMap<Product, Integer>();
+
+    private Map<Product, Integer> listPd = new HashMap<>();
+
+    private TreeMap<String, Integer> list;
 
 
     public Order(){
 
+        this.listPd = new TreeMap<>();
 
     }
+
+    public Order(String userId, String status, String note, String userName, long amount) {
+        this.userId = userId;
+        this.status = status;
+        this.note = note;
+        this.userName = userName;
+        this.amount = amount;
+    }
+
     public Order(String id, String userId, String status, String deliveryAddressId, String note, Date orderDate) {
         this.id = id;
         this.userId = userId;
@@ -32,25 +45,36 @@ public class Order {
         this.orderDate = orderDate;
         this.userName=userName;
     }
+    public Order(String id, String userId, String status, String deliveryAddressId,long amount, String note, Date orderDate ) {
+        this.id = id;
+        this.userId = userId;
+        this.status = status;
+        this.deliveryAddressId = deliveryAddressId;
+        this.amount = amount;
+        this.note = note;
+        this.orderDate = orderDate;
+
+    }
+
 
     public String getUserName() {
         return userName;
     }
 
-    public long computeAmount(){
-        long res=0;
-        for (Map.Entry<Product, Integer> e: listPd.entrySet())
-            res+=e.getKey().getPrice()*e.getValue();
-        this.amount=res;
+    public long computeAmount() {
+        long res = 0;
+        for (Map.Entry<Product, Integer> e : listPd.entrySet())
+            res += e.getKey().getPrice() * e.getValue();
+        this.amount = res;
         return res;
     }
 
-    public void addProduct(Map<Product, Integer> list){
-        this.listPd=list;
+    public void addProduct(Map<Product, Integer> list) {
+        this.listPd = list;
         computeAmount();
     }
 
-    public Map<Product, Integer> getListPd(){
+    public Map<Product, Integer> getListPd() {
         return listPd;
     }
 
@@ -58,6 +82,9 @@ public class Order {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getUserId() {
         return userId;
