@@ -6,6 +6,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.DB.DataDB" %>
 <%@ page import="vn.edu.hcmuaf.fit.DAO.ProductDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.DAO.UserDAO" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,9 +36,7 @@
 <body>
         <%
             Cart cart =(Cart) session.getAttribute("cart");
-            if(cart == null){
-                cart = new Cart();
-            }
+            if(cart == null) cart = new Cart();
             TreeMap<String , Integer> list =cart.getList();
         %>
  <!-- Header -->
@@ -113,7 +112,7 @@
                         </div>
                         <%
                         } else {
-                            User user = (User) session.getAttribute("user");
+                            User user = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
                         %>
                         <div class="nav__icons">
                             <a href="UserServlet" style="padding: 0; height: 4rem; width: 4rem" class="icon__item">
@@ -132,7 +131,7 @@
 
                         <%
                             if (session.getAttribute("user") != null) {
-                                User u = (User) session.getAttribute("user");
+                                User u = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
                                 int numOfCartItems= ((Cart) session.getAttribute("cart")).getSize();
                         %>
                         <div class="nav__icons" id="nav__item_giohang">
