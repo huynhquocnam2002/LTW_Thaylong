@@ -55,7 +55,7 @@ public class OptionDAO {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        Product p = ProductDAO.getProductById("PR1");
+        Product p = ProductDAO.getProductById("PR47");
         for (Option pr : getOptions(p)) {
             System.out.println(pr);
         }
@@ -72,4 +72,5 @@ public class OptionDAO {
         sta.setString(6, option.getId());
         sta.executeUpdate();
     }
+
 }
