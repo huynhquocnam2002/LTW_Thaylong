@@ -719,7 +719,9 @@ header>li {
 
 .product-detail__bottom {
 
-  height: 1200px;
+  width: 1214px;
+  padding: 20px 0 0 0;
+  position: relative;
 
 }
 
@@ -2634,7 +2636,8 @@ span.dot::before {
 
 .detail__content {
   position: relative;
-  height: 55rem;
+  height: 150rem;
+  overflow: auto;
 }
 
 .detail__content .content {
@@ -2737,14 +2740,51 @@ span.dot::before {
 
   height: 150px;
 
-
-  position: relative;
-
   bottom: 230px;
 
 
 }
-
+.glide__slide{
+  height: 50rem;
+}
+.input_textarea{
+  display: flex;
+}
+.input_review{
+  width: 80%;
+  border: none;
+  background: #E8E8E8;
+  padding: 5px 10px;
+  height: 7rem;
+  border-radius: 5px 5px 0px 0px;
+  border-bottom: 2px solid #016BA8;
+  transition: all 0.5s;
+  margin-top: 15px;
+  font-size: 2rem;
+  margin: auto;
+}
+#buttonreivew{
+  background: #016ba8;
+  color: #fff;
+  padding: 10px 10px;
+  border: none;
+  margin:auto;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
+  transition: 1s all;
+  font-size: 10px;
+  border-radius: 5px;
+  height: 5rem;
+  width: 15%;
+  margin-left: 10px;
+}
+.section-review{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .container__feedback .container__feedback__name {
   width: 100%;
 
