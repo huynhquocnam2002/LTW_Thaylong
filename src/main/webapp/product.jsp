@@ -175,89 +175,94 @@
     </div>
 </header>
 <!-- Header_danhmuc -->
-<header id="Header_danhmuc" class="Header_danhmuc">
-    <div class="navigation_danhmuc">
-        <div class="container">
-            <nav class="nav">
-                <div class="nav__hamburger">
-                    <svg>
-                        <use xlink:href="image/images/sprite.svg#icon-menu"></use>
-                    </svg>
-                </div>
+<%--<header id="Header_danhmuc" class="Header_danhmuc">--%>
+<%--    <div class="navigation_danhmuc">--%>
+<%--        <div class="container">--%>
+<%--            <nav class="nav">--%>
+<%--                <div class="nav__hamburger">--%>
+<%--                    <svg>--%>
+<%--                        <use xlink:href="image/images/sprite.svg#icon-menu"></use>--%>
+<%--                    </svg>--%>
+<%--                </div>--%>
 
-                <ul class="nav__list" id="nav__list_DANHMUC">
-                    <% List<Category> list = CategoryDAO.getCategoryHeader();%>
-                    <% for (int i = 0; i < list.size(); i++) {%>
-                    <%--    --%>
-                    <div class="nav__icons_danhmuc">
-                        <a href="DanhmucServlet?idcategory=<%=list.get(i).getId()%>" class="icon__item">
-                            <img class="icon__itemdanhmuc" src="<%=list.get(i).getImg()%>"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="DanhmucServlet?idcategory=<%=list.get(i).getId()%>" class="scroll-linkDANHMUC">
-                                <%=list.get(i).getName()%></a>
-                        </li>
-                    </div>
+<%--                <ul class="nav__list" id="nav__list_DANHMUC">--%>
+<%--                    <% List<Category> list = CategoryDAO.getCategoryHeader();%>--%>
+<%--                    <% for (int i = 0; i < list.size(); i++) {%>--%>
+<%--                    &lt;%&ndash;    &ndash;%&gt;--%>
+<%--                    <div class="nav__icons_danhmuc">--%>
+<%--                        <a href="DanhmucServlet?idcategory=<%=list.get(i).getId()%>" class="icon__item">--%>
+<%--                            <img class="icon__itemdanhmuc" src="<%=list.get(i).getImg()%>"></img>--%>
+<%--                        </a>--%>
+<%--                        <li class="nav__item">--%>
+<%--                            <a href="DanhmucServlet?idcategory=<%=list.get(i).getId()%>" class="scroll-linkDANHMUC">--%>
+<%--                                <%=list.get(i).getName()%></a>--%>
+<%--                        </li>--%>
+<%--                    </div>--%>
 
-                    <% }%>
-                    <div class="nav__icons_danhmuc">
-                        <a href="#sectiondanhmuc2" class="icon__item">
-                            <img class="icon__itemdanhmuc" src="image/icon/khac.jpg"></img>
-                        </a>
-                        <li class="nav__item">
-                            <a href="#sectiondanhmuc2" class="scroll-linkDANHMUC">PHỤ KIỆN KHÁC</a>
-                        </li>
-                    </div>
+<%--                    <% }%>--%>
+<%--                    <div class="nav__icons_danhmuc">--%>
+<%--                        <a href="#sectiondanhmuc2" class="icon__item">--%>
+<%--                            <img class="icon__itemdanhmuc" src="image/icon/khac.jpg"></img>--%>
+<%--                        </a>--%>
+<%--                        <li class="nav__item">--%>
+<%--                            <a href="#sectiondanhmuc2" class="scroll-linkDANHMUC">PHỤ KIỆN KHÁC</a>--%>
+<%--                        </li>--%>
+<%--                    </div>--%>
 
-                </ul>
+<%--                </ul>--%>
 
-            </nav>
-        </div>
-    </div>
+<%--            </nav>--%>
+<%--        </div>--%>
+<%--    </div>--%>
 
 
-    <!-- Hero -->
-</header>
+<%--    <!-- Hero -->--%>
+<%--</header>--%>
 <!-- End Header -->
 
 
 <!-- Phần main chi tiết sản phẩm-->
 
+<section class="section address">
+    <div class="container">
+        <div class="block-breadcrumbs">
 
-<div class="block-breadcrumbs">
+            <div class="prefix">
 
-    <div class="prefix">
-
-        <% DataDB data = new DataDB();%>
-
-
-        <ul>
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10.633" viewBox="0 0 12 10.633">
-                <path id="home"
-                      d="M13.2,9.061H12.1v3.965a.6.6,0,0,1-.661.661H8.793V9.721H6.15v3.965H3.507a.6.6,0,0,1-.661-.661V9.061h-1.1c-.4,0-.311-.214-.04-.494L7,3.259a.634.634,0,0,1,.936,0l5.3,5.307c.272.281.356.495-.039.495Z"
-                      transform="translate(-1.471 -3.053)" fill="#d70018"></path>
-            </svg>
-            <li>Trang chủ
-            <li class="item"></li>
-            </li>
-            <li>
-                    <%=CategoryDAO.getCategorysObject(request.getParameter("idProduct")).getName()%>
-            <li class="item"></li>
-            </li>
-
-            <li> <%=ProducerDAO.getProducersOject(request.getParameter("idProduct")).getName()%>
-            <li class="item"></li>
-            </li>
+                <% DataDB data = new DataDB();%>
 
 
+                <ul>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10.633" viewBox="0 0 12 10.633">
+                        <path id="home"
+                              d="M13.2,9.061H12.1v3.965a.6.6,0,0,1-.661.661H8.793V9.721H6.15v3.965H3.507a.6.6,0,0,1-.661-.661V9.061h-1.1c-.4,0-.311-.214-.04-.494L7,3.259a.634.634,0,0,1,.936,0l5.3,5.307c.272.281.356.495-.039.495Z"
+                              transform="translate(-1.471 -3.053)" fill="#d70018"></path>
+                    </svg>
+                    <li>Trang chủ
+                    <li class="item"></li>
+                    </li>
+                    <li>
+                            <%=CategoryDAO.getCategorysObject(request.getParameter("idProduct")).getName()%>
+                    <li class="item"></li>
+                    </li>
 
-            <li><%=ProductDAO.getProductById(request.getParameter("idProduct")).getName()%>
-            </li>
+                    <li> <%=ProducerDAO.getProducersOject(request.getParameter("idProduct")).getName()%>
+                    <li class="item"></li>
+                    </li>
 
 
-        </ul>
+
+                    <li><%=ProductDAO.getProductById(request.getParameter("idProduct")).getName()%>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
     </div>
-</div>
+
+</section>
+
 <h2 id="section__title__product"><%=ProductDAO.getProductById(request.getParameter("idProduct")).getName()%>
 </h2>
 

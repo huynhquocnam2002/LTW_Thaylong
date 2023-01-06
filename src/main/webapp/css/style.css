@@ -1,4 +1,4 @@
-/*
+ /*
 ======================
 Reset
 ======================
@@ -1078,8 +1078,7 @@ ai biết :((
 
 }
 .category__center .category__products:hover .product__footer>a{
-    opacity: 1;
-
+    opacity: 1 !important;
 }
 
 @media only screen and (max-width: 999px) {

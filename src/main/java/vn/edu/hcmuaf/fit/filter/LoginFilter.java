@@ -25,7 +25,7 @@ public class LoginFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
         try {
-            if (session == null || session.getAttribute("user") == null || UserDAO.getUserBySessionID((String) session.getAttribute("user")) == null) {
+            if (session == null || session.getAttribute("user") == null || UserDAO.getUserBySessionID((String) session.getAttribute("user")) == null || UserDAO.getUserBySessionID((String) session.getAttribute("user")).getStatus() == -1) {
                 res.sendRedirect("login.jsp"); // No logged-in user found, so redirect to login page.
             } else {
                 res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.

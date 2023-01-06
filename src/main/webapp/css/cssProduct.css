@@ -680,13 +680,9 @@ header>li {
 }
 
 .block-breadcrumbs {
-  width: 1214.09px;
 
-  height: 30px;
 
   margin: auto;
-
-  transform: translateX(-6%);
 
 
 }
@@ -954,7 +950,7 @@ header>li {
 
   background-color: white;
 
-  border: 0.5px solid #0f0f0fc4;
+  border: 0.5px solid red;
 
   border-radius: 4px;
 
@@ -965,6 +961,7 @@ header>li {
   font-weight: 200;
 
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: red;
 }
 
 .product-detail__center .button__pay:hover {
@@ -1415,6 +1412,7 @@ span.dot::before {
 
 .product__footer .product__price {
   padding-bottom: 1rem;
+  color: red;
 }
 
 .product__footer h3 {
@@ -1427,9 +1425,12 @@ span.dot::before {
   text-transform: uppercase;
   width: 100%;
   padding: 1.4rem 0;
-  border: 1px solid var(--black);
+  border: 1px solid red;
   color: var(--black);
   cursor: pointer;
+  color: red;
+  background-color: white;
+  border-radius: 50px 50px;
 }
 
 .product__btn:focus {
@@ -1437,8 +1438,8 @@ span.dot::before {
 }
 
 .product__btn:hover {
-  background-color: var(--black);
-  color: var(--primaryColor);
+  background-color: #dc4040;
+  color: white;
 
 }
 

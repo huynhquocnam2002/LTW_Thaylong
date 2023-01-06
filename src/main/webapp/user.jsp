@@ -36,6 +36,7 @@
 
 <body>
 <%
+    if(session.getAttribute("cart") == null) session.setAttribute("cart", new Cart());
     User user = UserDAO.getUserBySessionID(session.getAttribute("user")+"");
 %>
 <header id="header" class="header">
